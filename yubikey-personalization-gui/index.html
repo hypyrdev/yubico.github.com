@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubikey-personalization-gui : Qt based Cross-Platform YubiKey Personalization Tool" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubikey-personalization-gui</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-personalization-gui">View on GitHub</a>
+
+          <h1 id="project_title">yubikey-personalization-gui</h1>
+          <h2 id="project_tagline">Qt based Cross-Platform YubiKey Personalization Tool</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Yubico/yubikey-personalization-gui/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Yubico/yubikey-personalization-gui/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+      <ul>
+        <li><a href="releases.html">Releases</a></li>
+        <li><a href="news.html">Release Notes</a></li>
+      </ul>
+
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The YubiKey Personalization Tool is a Qt based Cross-Platform utility
+designed to facilitate re-configuration of YubiKeys on Windows, Linux
+and MAC platforms. The tool provides a same simple step-by-step
+approach to make configuration of YubiKeys easy to follow and
+understand, while still being powerful enough to exploit all
+functionality both of the YubiKey 1 and YubiKey 2 generation of
+keys. The tool provides the same functionality and user interface on
+Windows, Linux and MAC platforms.</p></div>
+<div class="paragraph"><p>The Cross-Platform YubiKey Personalization Tool provides the following
+main functions:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Programming the YubiKey in "Yubico OTP" mode
+</p>
+</li>
+<li>
+<p>
+Programming the YubiKey in "OATH-HOTP" mode
+</p>
+</li>
+<li>
+<p>
+Programming the YubiKey in "Static Password" mode
+</p>
+</li>
+<li>
+<p>
+Programming the YubiKey in "Challenge-Response" mode
+</p>
+</li>
+<li>
+<p>
+Programming the NDEF feature of the YubiKey NEO
+</p>
+</li>
+<li>
+<p>
+Testing the challenge-response functionality of a YubiKey
+</p>
+</li>
+<li>
+<p>
+Deleting the configuration of a YubiKey
+</p>
+</li>
+<li>
+<p>
+Checking type and firmware version of the YubiKey
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_from_git">Building from Git</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>You may check out the sources using Git with the following command:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  $ git clone git://github.com/Yubico/yubikey-personalization-gui.git</tt></pre>
+</div></div>
+<div class="paragraph"><p>This will create a directory <em>yubikey-personalization-gui</em>. Enter the
+directory:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  $ cd yubikey-personalization-gui</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dependencies">Dependencies</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>yubikey-personalization-gui depends on version 1.12.0 or higher of
+libykpers.</p></div>
+<div class="paragraph"><p>When building on Windows you will need binary releases of libykpers
+and libyubikey, these can be downloaded from
+<a href="http://code.google.com/p/yubikey-personalization/">http://code.google.com/p/yubikey-personalization/</a>, the dlls
+libykpers-1-1.dll and libyubikey-0.dll should then be placed in
+libs/win32 and libs/win64 respectively.</p></div>
+<div class="paragraph"><p>When building on MAC or Linux you will need sourcecode from yubico-c
+and yubikey-personalization. This can be downloaded from
+<a href="http://code.google.com/p/yubikey-personalization/">http://code.google.com/p/yubikey-personalization/</a> and
+<a href="http://code.google.com/p/yubico-c/">http://code.google.com/p/yubico-c/</a> and should be placed unpacked in
+deps/libyubikey and deps/libykpers. You also need libusb.h
+from <a href="http://sourceforge.net/projects/libusb/files/libusb-1.0/">http://sourceforge.net/projects/libusb/files/libusb-1.0/</a>
+placed in deps/libusb-1.0.</p></div>
+<div class="paragraph"><p>You will need QT Creator and libusb-1.0 development files.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  $ sudo apt-get install libusb-1.0-0-dev qtcreator</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_command_line_build">Command-line build</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Run these commands:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  $ qmake &amp;&amp; make</tt></pre>
+</div></div>
+<div class="paragraph"><p>An alternative way of building is to let pkg-config find the dependencies,
+in that case you need development files for libyubikey and libykpers.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  $ sudo apt-get install libyubikey-dev libykpers-1-dev
+  $ qmake "CONFIG += debian" &amp;&amp; make</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cross_compiling_from_linux">Cross Compiling from Linux</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The project can be cross compiled from linux for osX and windows. As
+a first step you need a cross-compiler chain for that OS, for windows
+you want mingw-w64 and for osX you can follow directions at
+<a href="https://github.com/Tatsh/xchain/">https://github.com/Tatsh/xchain/</a>.</p></div>
+<div class="paragraph"><p>Then you need unpacked qt binaries for that platform, fetchable
+from <a href="http://qt-project.org/">http://qt-project.org/</a>.</p></div>
+<div class="paragraph"><p>You can then do (for windows):
+TARGET_ARCH=i686-w64-mingw32 QTDIR=&lt;qt location&gt; qmake \
+  -spec win32-g+<tt>-4.6 "CONFIG</tt>=cross"</p></div>
+<div class="paragraph"><p>or (for osX):
+TARGET_ARCH=x86_64-apple-darwin11 OSX_SDK=&lt;osx sdk location&gt; \
+  QT_LIBDIR=&lt;qt libs&gt; QT_PLUGINDIR=&lt;qt plugins&gt; qmake -spec macx-g++ \
+  "CONFIG +=cross"</p></div>
+<div class="paragraph"><p>Note that you need to point QT_LIBDIR and QT_PLUGINDIR at the
+/Library/Frameworks directory of the unpacked distribution.</p></div>
+<div class="paragraph"><p>To build installers you can add build_installer to the CONFIG variable
+for qmake. This requires makensis to be in path for windows and
+genisoimage and dmg (from libhfs-dmg) for mac.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_opening_the_project_in_qt_designer">Opening the project in Qt designer</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Locate the qtcreator executable file and click on it to open the Qt
+Designer.</p></div>
+<div class="paragraph"><p>To open the project in Qt Designer, select "File" &gt; "Open File or
+Project" from the tool bar, navigate to the project folder, select
+YKPersonalisation.pro file and click on the "Open" button.</p></div>
+<div class="paragraph"><p>To set the path of the "Build" diractory select "Projects" &gt; "Build
+Settings" Browse project folder path.</p></div>
+<div class="sect2">
+<h3 id="_building">Building</h3>
+<div class="paragraph"><p>To generate the build system, select "Build" &gt; "Clean Project
+YKPersonalization" option from the tool bar. Then select "Build" &gt;
+"Run qmake" option from the tool bar.</p></div>
+<div class="paragraph"><p>To build the project, select "Build" &gt; "Build Project
+YKPersonalization" option from the tool bar.</p></div>
+<div class="paragraph"><p>Based on your platform, the successful build will create a "YubiKey
+Personalization Tool" executable file into the respective build
+folder. The build creates a "YKPersonalization.exe" file on Windows,
+"YubiKey Personalization Tool.sh" file on Linux and "YubiKey
+Personalization Tool.app" file on MAC.</p></div>
+<div class="paragraph"><p>Example on Linux:
+To run the YubiKey Personalization Tool, open the command shell and
+execute the following command:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  $ build/release/yubikey-personalization-gui</tt></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_questions">Questions?</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Talk to &lt;<a href="mailto:yubico-devel@googlegroups.com">yubico-devel@googlegroups.com</a>&gt;.</p></div>
+</div>
+</div>
+</div></body></html>
