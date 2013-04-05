@@ -1,0 +1,56 @@
+---
+versions: ["1.0.2a", "1.0.2b", "1.0.3a", "1.0.3b", "1.0.3c", "1.0.4", "1.0.4a", "1.0.4b", "1.0.4c", "1.0.4d"]
+#The above line is automatically updated by running 'make release', it MUST remain on line 2 of this file.
+---
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubico-c: libyubikey releases" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
+
+    <title>yubico-c releases</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Yubico/yubico-c">View on GitHub</a>
+
+          <h1 id="project_title">yubico-c</h1>
+          <h2 id="project_tagline">Library for decrypting and parsing YubiKey One-Time Passwords (OTP), written in C.</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Releases</h1>
+        <dl>
+          {% for version in page.versions reversed %}
+          <dt>libyubikey-{{ version }}</dt>
+            <dd><a href="releases/libyubikey-{{ version }}.tar.gz">libyubikey-{{ version }}.tar.gz</a></dd>
+            <dd><a href="releases/libyubikey-{{ version }}.tar.gz.sig">libyubikey-{{ version }}.tar.gz.sig</a></dd>
+          {% endfor %}
+        </dl>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">yubico-c maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
