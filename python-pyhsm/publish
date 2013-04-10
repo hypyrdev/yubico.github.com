@@ -13,6 +13,12 @@ cd "$(dirname "$0")"
 			echo "<dd><a href=\"releases/python-pyhsm-$version.tar.gz\">python-pyhsm-$version.tar.gz</a></dd>"; \
 			echo "<dd><a href=\"releases/python-pyhsm-$version.tar.gz.sig\">python-pyhsm-$version.tar.gz.sig</a></dd>"; \
 		done <<< "$lines"; \
+			lines=$(ls -r1v releases/pyhsm*.tar.gz | sed 's/.\{1,\}-\(.\{1,\}\)\.tar.gz/\1/'); \
+		while read -r version; do \
+			echo "<dt>pyhsm $version</dt>"; \
+			echo "<dd><a href=\"releases/pyhsm-$version.tar.gz\">pyhsm-$version.tar.gz</a></dd>"; \
+			echo "<dd><a href=\"releases/pyhsm-$version.tar.gz.sig\">pyhsm-$version.tar.gz.sig</a></dd>"; \
+		done <<< "$lines"; \
 	else \
 		echo "$line"; \
 	fi ; \
