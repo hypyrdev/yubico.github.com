@@ -4,7 +4,29 @@ set -e
 
 cd "$(dirname "$0")"
 
-versions=$(ls -1v releases/*.tar.gz | sed 's/.\{1,\}-\(.\{1,\}\)\.tar.gz/\1/' \
-	| paste -sd ',' - | sed 's/,/, /g' | sed 's/\([0-9.]\{1,\}\)/"\1"/g')
-sed -i -e "2s/\[.*\]/[$versions]/" releases.html
+
+(cat releases.html.in | while read line; do \
+	if [[ "$line" =~ "{{RELEASES}}" ]]; then \
+		lines=$(ls -r1v releases/python-pyhsm*.tar.gz | sed 's/.\{1,\}-\(.\{1,\}\)\.tar.gz/\1/'); \
+		while read -r version; do \
+			echo "<dt>python-pyhsm $version</dt>"; \
+			echo "<dd><a href=\"releases/python-pyhsm-$version.tar.gz\">python-pyhsm-$version.tar.gz</a></dd>"; \
+			echo "<dd><a href=\"releases/python-pyhsm-$version.tar.gz.sig\">python-pyhsm-$version.tar.gz.sig</a></dd>"; \
+		done <<< "$lines"; \
+	else \
+		echo "$line"; \
+	fi ; \
+done) >> releases.html
+
+releases=""
+
+lines=$(ls -1v releases/python-pyhsm*.tar.gz | sed 's/.\{1,\}-\(.\{1,\}\)\.tar.gz/\1/')
+while read -r version; do
+	releases="$releases\n<dt>pyhsm $version</dt>"
+	releases="$releases\n<dd><a href=\"releases/pyhsm-$version.tar.gz\">pyhsm-$version.tar.gz</a></dd>"
+	releases="$releases\n<dd><a href=\"releases/pyhsm-$version.tar.gz.sig\">pyhsm-$version.tar.gz.sig</a></dd>\n"
+done <<< "$lines"
+
+#echo -e "$releases"
+
 git add releases.html
