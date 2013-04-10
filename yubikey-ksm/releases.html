@@ -1,0 +1,56 @@
+---
+versions: ["1.0", "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "1.9", "1.10", "1.11", "1.12"]
+#The above line is automatically updated by running 'make release', it MUST remain on line 2 of this file.
+---
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Yubikey-ksm : YubiKey Key Storage Module releases" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
+
+    <title>Yubikey-ksm releases</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-ksm">View on GitHub</a>
+
+          <h1 id="project_title">Yubikey-ksm</h1>
+          <h2 id="project_tagline">YubiKey Key Storage Module</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Releases</h1>
+        <dl>
+          {% for version in page.versions reversed %}
+          <dt>yubikey-ksm {{ version }}</dt>
+            <dd><a href="releases/yubikey-ksm-{{ version }}.tgz">yubikey-ksm-{{ version }}.tgz</a></dd>
+            <dd><a href="releases/yubikey-ksm-{{ version }}.tgz.sig">yubikey-ksm-{{ version }}.tgz.sig</a></dd>
+          {% endfor %}
+        </dl>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Yubikey-ksm maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
