@@ -16,7 +16,7 @@ cd "$(dirname "$0")"
 	else \
 		echo "$line"; \
 	fi ; \
-done) >> releases.html
+done) > releases.html
 
 releases=""
 
