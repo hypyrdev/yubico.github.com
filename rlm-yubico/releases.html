@@ -1,0 +1,56 @@
+---
+versions: ["0.5.1", "0.5.2", "0.5.3"]
+#The above line is automatically updated by running 'make release', it MUST remain on line 2 of this file.
+---
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="rlm_yubico: FreeRADIUS module for using YubiKeys for authentication" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
+
+    <title>rlm_yubico releases</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Yubico/rlm-yubico">View on GitHub</a>
+
+          <h1 id="project_title">rlm_yubico</h1>
+          <h2 id="project_tagline">FreeRADIUS module for using YubiKeys for authentication</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Releases</h1>
+        <dl>
+          {% for version in page.versions reversed %}
+          <dt>rlm_yubico {{ version }}</dt>
+            <dd><a href="releases/rlm_yubico-{{ version }}.tar.gz">rlm_yubico-{{ version }}.tar.gz</a></dd>
+            <dd><a href="releases/rlm_yubico-{{ version }}.tar.gz.sig">rlm_yubico-{{ version }}.tar.gz.sig</a></dd>
+          {% endfor %}
+        </dl>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">rlm_yubico maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
