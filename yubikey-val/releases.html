@@ -1,0 +1,56 @@
+---
+versions: ["1.1", "2.0", "2.1", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7", "2.8", "2.9", "2.10", "2.11", "2.12", "2.13", "2.14", "2.15", "2.16", "2.18", "2.19", "2.20", "2.21", "2.22"]
+#The above line is automatically updated by running 'make release', it MUST remain on line 2 of this file.
+---
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Yubikey-val : YubiKey Validation Server releases" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Yubikey-val releases</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-val">View on GitHub</a>
+
+          <h1 id="project_title">Yubikey-val</h1>
+          <h2 id="project_tagline">YubiKey Validation Server</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Releases</h1>
+        <dl>
+          {% for version in page.versions reversed %}
+          <dt>yubikey-val {{ version }}</dt>
+            <dd><a href="releases/yubikey-val-{{ version }}.tgz">yubikey-val-{{ version }}.tgz</a></dd>
+            <dd><a href="releases/yubikey-val-{{ version }}.tgz.sig">yubikey-val-{{ version }}.tgz.sig</a></dd>
+          {% endfor %}
+        </dl>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
