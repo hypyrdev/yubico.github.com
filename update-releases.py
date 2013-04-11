@@ -65,5 +65,7 @@ def main():
     output.write(content)
     output.close()
 
+    os.system('git add releases.html')
+
 if __name__ == '__main__':
     main()
