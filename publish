@@ -35,7 +35,7 @@ PUBLISH_SCRIPT="$PROJECT/publish"
 
 if [ -f $PUBLISH_SCRIPT ]; then
 	echo "Running $PUBLISH_SCRIPT..."
-	$PUBLISH_SCRIPT
+	(cd $PROJECT; ./publish)
 fi
 
 git commit -m "$PROJECT $VERSION"
