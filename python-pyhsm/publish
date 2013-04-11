@@ -1,38 +1,60 @@
-#!/bin/bash
+#!/usr/bin/python
 
-set -e
+import os
+from distutils.version import LooseVersion
 
-cd "$(dirname "$0")"
+SUFFIXES = ['tar', 'gz', 'sig', 'tgz']
+
+RELEASE_TEMPLATE = """
+<dt>{name}-{version}</dt>
+<dd>
+  <a href="releases/{name}-{version}.tar.gz">
+    {name}-{version}.tar.gz</a>
+</dd>
+<dd>
+  <a href="releases/{name}-{version}.tar.gz.sig">
+    {name}-{version}.tar.gz.sig</a>
+</dd>
+"""
 
 
-(cat releases.html.in | while read line; do \
-	if [[ "$line" =~ "{{RELEASES}}" ]]; then \
-		lines=$(ls -r1v releases/python-pyhsm*.tar.gz | sed 's/.\{1,\}-\(.\{1,\}\)\.tar.gz/\1/'); \
-		while read -r version; do \
-			echo "<dt>python-pyhsm $version</dt>"; \
-			echo "<dd><a href=\"releases/python-pyhsm-$version.tar.gz\">python-pyhsm-$version.tar.gz</a></dd>"; \
-			echo "<dd><a href=\"releases/python-pyhsm-$version.tar.gz.sig\">python-pyhsm-$version.tar.gz.sig</a></dd>"; \
-		done <<< "$lines"; \
-			lines=$(ls -r1v releases/pyhsm*.tar.gz | sed 's/.\{1,\}-\(.\{1,\}\)\.tar.gz/\1/'); \
-		while read -r version; do \
-			echo "<dt>pyhsm $version</dt>"; \
-			echo "<dd><a href=\"releases/pyhsm-$version.tar.gz\">pyhsm-$version.tar.gz</a></dd>"; \
-			echo "<dd><a href=\"releases/pyhsm-$version.tar.gz.sig\">pyhsm-$version.tar.gz.sig</a></dd>"; \
-		done <<< "$lines"; \
-	else \
-		echo "$line"; \
-	fi ; \
-done) > releases.html
+def version_rec(part):
+    split = part.rsplit('.', 1)
+    if len(split) == 2 and split[1] in SUFFIXES:
+        part = version_rec(split[0])
+    return part
 
-releases=""
 
-lines=$(ls -1v releases/python-pyhsm*.tar.gz | sed 's/.\{1,\}-\(.\{1,\}\)\.tar.gz/\1/')
-while read -r version; do
-	releases="$releases\n<dt>pyhsm $version</dt>"
-	releases="$releases\n<dd><a href=\"releases/pyhsm-$version.tar.gz\">pyhsm-$version.tar.gz</a></dd>"
-	releases="$releases\n<dd><a href=\"releases/pyhsm-$version.tar.gz.sig\">pyhsm-$version.tar.gz.sig</a></dd>\n"
-done <<< "$lines"
+def version(name):
+    parts = name.rsplit('-', 1)
+    if len(parts) == 2:
+        return version_rec(parts[1])
+    return version_rec(parts[0])
 
-#echo -e "$releases"
 
-git add releases.html
+def name(file):
+    return file.rsplit('-', 1)[0]
+
+
+def main():
+    files = os.listdir('releases')
+    files = [file for file in files if file.endswith('.sig') and
+             file[:-4] in files]
+    files.sort(key=lambda s: LooseVersion(version(s)))
+    files.reverse()
+
+    releases = ""
+
+    for file in files:
+        releases += RELEASE_TEMPLATE.format(name=name(file),
+                                            version=version(file))
+
+    template = open('releases.html.in', 'r').read()
+    content = template.replace('{{RELEASES}}', releases)
+
+    output = open('releases.html', 'w')
+    output.write(content)
+    output.close()
+
+if __name__ == '__main__':
+    main()
