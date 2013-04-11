@@ -3,10 +3,11 @@
 import os
 from distutils.version import LooseVersion
 
-SUFFIXES = ['tar', 'gz', 'sig', 'tgz']
+SUFFIXES = ['tar', 'gz', 'sig', 'tgz', 'zip']
+CLASSIFIERS = ['win32', 'win64']
 
 RELEASE_TEMPLATE = """
-<dt>{name}-{version}</dt>
+<dt>{name}</dt>
 <dd>
   <a href="releases/{filename}">{filename}</a>
 </dd>
@@ -16,18 +17,27 @@ RELEASE_TEMPLATE = """
 """
 
 
-def version_rec(part):
+def remove_suffixes(part):
     split = part.rsplit('.', 1)
     if len(split) == 2 and split[1] in SUFFIXES:
-        part = version_rec(split[0])
+        part = remove_suffixes(split[0])
     return part
 
 
-def version(name):
-    parts = name.rsplit('-', 1)
-    if len(parts) == 2:
-        return version_rec(parts[1])
-    return version_rec(parts[0])
+def remove_classifier(part):
+    split = part.rsplit('-', 1)
+    if len(split) == 2 and split[1] in CLASSIFIERS:
+        return split[0], split[1]
+    return part, None
+
+
+def version(filename):
+    part = remove_suffixes(filename)
+    part, classifier = remove_classifier(part)
+    version = part.rsplit('-', 1)[1]
+    if classifier:
+        return '%s-%s' % (version, classifier)
+    return version
 
 
 def name(file):
@@ -47,8 +57,7 @@ def main():
 
     for file in files:
         releases += RELEASE_TEMPLATE.format(filename=file[:-4],
-                                            name=name(file),
-                                            version=version(file))
+                                            name=remove_suffixes(file))
 
     content = template.replace('{{RELEASES}}', releases)
 
