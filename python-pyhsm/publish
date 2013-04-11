@@ -8,12 +8,10 @@ SUFFIXES = ['tar', 'gz', 'sig', 'tgz']
 RELEASE_TEMPLATE = """
 <dt>{name}-{version}</dt>
 <dd>
-  <a href="releases/{name}-{version}.tar.gz">
-    {name}-{version}.tar.gz</a>
+  <a href="releases/{filename}">{filename}</a>
 </dd>
 <dd>
-  <a href="releases/{name}-{version}.tar.gz.sig">
-    {name}-{version}.tar.gz.sig</a>
+  <a href="releases/{filename}.sig">{filename}.sig</a>
 </dd>
 """
 
@@ -46,7 +44,8 @@ def main():
     releases = ""
 
     for file in files:
-        releases += RELEASE_TEMPLATE.format(name=name(file),
+        releases += RELEASE_TEMPLATE.format(filename=file[:-4],
+                                            name=name(file),
                                             version=version(file))
 
     template = open('releases.html.in', 'r').read()
