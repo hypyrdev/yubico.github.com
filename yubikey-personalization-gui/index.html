@@ -113,24 +113,17 @@ directory:</p></div>
 <div class="sect1">
 <h2 id="_dependencies">Dependencies</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>yubikey-personalization-gui depends on version 1.12.0 or higher of
+<div class="paragraph"><p>yubikey-personalization-gui depends on version 1.13.0 or higher of
 libykpers.</p></div>
-<div class="paragraph"><p>When building on Windows you will need binary releases of libykpers
-and libyubikey, these can be downloaded from
-<a href="http://code.google.com/p/yubikey-personalization/">http://code.google.com/p/yubikey-personalization/</a>, the dlls
-libykpers-1-1.dll and libyubikey-0.dll should then be placed in
-libs/win32 and libs/win64 respectively.</p></div>
-<div class="paragraph"><p>When building on MAC or Linux you will need sourcecode from yubico-c
-and yubikey-personalization. This can be downloaded from
-<a href="http://code.google.com/p/yubikey-personalization/">http://code.google.com/p/yubikey-personalization/</a> and
-<a href="http://code.google.com/p/yubico-c/">http://code.google.com/p/yubico-c/</a> and should be placed unpacked in
-deps/libyubikey and deps/libykpers. You also need libusb.h
-from <a href="http://sourceforge.net/projects/libusb/files/libusb-1.0/">http://sourceforge.net/projects/libusb/files/libusb-1.0/</a>
-placed in deps/libusb-1.0.</p></div>
-<div class="paragraph"><p>You will need QT Creator and libusb-1.0 development files.</p></div>
+<div class="paragraph"><p>When building on Windows and mac you will need a binary buikd of libykpers,
+that can be downloaded from <a href="http://code.google.com/p/yubikey-personalization/">http://code.google.com/p/yubikey-personalization/</a>,
+the contents should then be places in libs/win32, libs/win64 and libs/macx
+respectively.</p></div>
+<div class="paragraph"><p>For building on linux pkg-config is used to find these dependencies.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  $ sudo apt-get install libusb-1.0-0-dev qtcreator</tt></pre>
+<pre><tt>  $ sudo apt-get install libusb-1.0-0-dev qt4-qmake libykpers-1-dev \
+      libyubikey-dev</tt></pre>
 </div></div>
 </div>
 </div>
@@ -142,13 +135,6 @@ placed in deps/libusb-1.0.</p></div>
 <div class="content">
 <pre><tt>  $ qmake &amp;&amp; make</tt></pre>
 </div></div>
-<div class="paragraph"><p>An alternative way of building is to let pkg-config find the dependencies,
-in that case you need development files for libyubikey and libykpers.</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>  $ sudo apt-get install libyubikey-dev libykpers-1-dev
-  $ qmake "CONFIG += debian" &amp;&amp; make</tt></pre>
-</div></div>
 </div>
 </div>
 <div class="sect1">
@@ -156,19 +142,12 @@ in that case you need development files for libyubikey and libykpers.</p></div>
 <div class="sectionbody">
 <div class="paragraph"><p>The project can be cross compiled from linux for osX and windows. As
 a first step you need a cross-compiler chain for that OS, for windows
-you want mingw-w64 and for osX you can follow directions at
-<a href="https://github.com/Tatsh/xchain/">https://github.com/Tatsh/xchain/</a>.</p></div>
+you want mingw-w64.</p></div>
 <div class="paragraph"><p>Then you need unpacked qt binaries for that platform, fetchable
 from <a href="http://qt-project.org/">http://qt-project.org/</a>.</p></div>
 <div class="paragraph"><p>You can then do (for windows):
 TARGET_ARCH=i686-w64-mingw32 QTDIR=&lt;qt location&gt; qmake \
   -spec win32-g+<tt>-4.6 "CONFIG</tt>=cross"</p></div>
-<div class="paragraph"><p>or (for osX):
-TARGET_ARCH=x86_64-apple-darwin11 OSX_SDK=&lt;osx sdk location&gt; \
-  QT_LIBDIR=&lt;qt libs&gt; QT_PLUGINDIR=&lt;qt plugins&gt; qmake -spec macx-g++ \
-  "CONFIG +=cross"</p></div>
-<div class="paragraph"><p>Note that you need to point QT_LIBDIR and QT_PLUGINDIR at the
-/Library/Frameworks directory of the unpacked distribution.</p></div>
 <div class="paragraph"><p>To build installers you can add build_installer to the CONFIG variable
 for qmake. This requires makensis to be in path for windows and
 genisoimage and dmg (from libhfs-dmg) for mac.</p></div>
