@@ -4,12 +4,13 @@ set -e
 
 PROJECT="$1"
 VERSION="$2"
-shift
-shift
 
 if [ "$PROJECT" == "" ] || [ "$VERSION" == "" ]; then
 	echo "Usage: publish.sh <PROJECT> <VERSION> [ARTIFACT]..."
 	exit 1
+else
+	shift
+	shift
 fi
 
 DIR="$(dirname "$0")"
