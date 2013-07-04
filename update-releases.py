@@ -4,7 +4,7 @@ import os
 from distutils.version import LooseVersion
 
 SUFFIXES = ['tar', 'gz', 'sig', 'tgz', 'zip']
-CLASSIFIERS = ['win32', 'win64']
+CLASSIFIERS = ['win32', 'win64', 'mac']
 
 RELEASE_TEMPLATE = """
 <dt>{name}</dt>
