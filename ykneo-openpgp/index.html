@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="ykneo-openpgp : OpenPGP Javacard applet for the YubiKey NEO" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>ykneo-openpgp</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Yubico/ykneo-openpgp">View on GitHub</a>
+
+          <h1 id="project_title">ykneo-openpgp</h1>
+          <h2 id="project_tagline">OpenPGP Javacard applet for the YubiKey NEO</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Yubico/ykneo-openpgp/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Yubico/ykneo-openpgp/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+      <ul>
+        <li><a href="releases.html">Releases</a></li>
+      </ul>
+
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>This project implement the OpenPGP card functionality used on the
+YubiKey NEO device that is sold by Yubico.  This project is relatively
+unmodified from the upstream project on which this project is based:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>http://sourceforge.net/p/javacardopenpgp/
+Author: Joeri de Ruiter</tt></pre>
+</div></div>
+<div class="paragraph"><p>The initial modifications we have made compared to the upstream
+project are minor, but we reserve the right to make other
+changes/improvements that are specific to the YubiKey NEO hardware.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_license">License</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The upstream project was released under the GPLv2+ and our fork uses
+the same license.  All of our changes are released under the same
+license.  See the file LICENSE for more information.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building">Building</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>It is possible to build the project using proprietary NXP Java Card
+tools.</p></div>
+<div class="paragraph"><p>Another way to build the project is with Eclipse and eclipse-jcde.</p></div>
+<div class="paragraph"><p>First install Eclipse following instructions on:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>http://www.eclipse.org/</tt></pre>
+</div></div>
+<div class="paragraph"><p>On Debian/Ubuntu systems Eclipse is packaged and can be installed from
+the command line:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>apt-get install eclipse</tt></pre>
+</div></div>
+<div class="paragraph"><p>Start Eclipse once to make sure it creates a $HOME/.eclipse/
+directory.  Then quit Eclipse.</p></div>
+<div class="paragraph"><p>Download the eclipse-jcde-0.2.zip file from</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>http://eclipse-jcde.sourceforge.net/</tt></pre>
+</div></div>
+<div class="paragraph"><p>and unpack it like this:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ cd ~/.eclipse/*/
+$ unzip /path/to/eclipse-jcde-0.2.zip</tt></pre>
+</div></div>
+<div class="paragraph"><p>The path to unpack the file into depends on your Eclipse installation,
+on my Debien Wheezy system the directory was called
+~/.eclipse/org.eclipse.platform_3.8_155965261/</p></div>
+<div class="paragraph"><p>Start Eclipse again and confirm that you have a new top-level menu
+called "Java Card".</p></div>
+<div class="paragraph"><p>You then need to install the Java Card Development Kit version 2.2.2,
+download it from:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javame-419430.html#java_card_kit-2.2.2-oth-JPR</tt></pre>
+</div></div>
+<div class="paragraph"><p>Unpack it into a new directory called for example "jckit" like this:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ mkdir jckit
+$ cd jckit
+$ unzip /path/to/java_card_kit-2_2_2-linux.zip
+$ cd java_card_kit-2_2_2/
+$ unzip java_card_kit-2_2_2-rr-bin-linux-do.zip</tt></pre>
+</div></div>
+<div class="paragraph"><p>Then in Eclipse select the "Preferences" menu under "Java Card" and
+point the "Java Card Home" directory to
+/path/to/jckit/java_card_kit-2_2_2 replacing /path/to as appropriate.</p></div>
+<div class="paragraph"><p>After that the project can be imported into the workspace.
+Right-click in the "Project Explorer" window and select "Import".
+Under "General" select "Existing Projects into Workspace".  As the
+root directory point the directory holding this file.  You need to
+select "Copy projects into workspace".</p></div>
+<div class="paragraph"><p>To build the .cap file, expand and right click on the "openpgpcard"
+sub-directory and select "Java Card Tools" and then "Convert".  The
+CAP file will be available in your Eclipse workspace as:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>javacardopenpgp/bin/openpgpcard/javacard/openpgpcard.cap</tt></pre>
+</div></div>
+<div class="paragraph"><p>For loading the applet onto the card first make sure the YubiKey NEO
+is in the HID/CCID or CCID mode, using ykpers from the YubiKey
+Personalization tool:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>http://code.google.com/p/yubikey-personalization/
+https://github.com/Yubico/yubikey-personalization</tt></pre>
+</div></div>
+<div class="paragraph"><p>For example:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>sudo ykpersonalize -m82</tt></pre>
+</div></div>
+<div class="paragraph"><p>Then install the gpshell tool from Global Platform:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>http://sourceforge.net/projects/globalplatform/</tt></pre>
+</div></div>
+<div class="paragraph"><p>The projects that are needed is the GlobalPlatform Library 6.0.0,
+GPShell 1.4.4, and gppcscconnectionplugin which doesn&#8217;t seem to be
+available in any released tarball so you have to get it from
+Subversion.</p></div>
+<div class="paragraph"><p>You need to whitelist the device in /etc/libccid_Info.plist.</p></div>
+<div class="paragraph"><p>When the CAP file has been built and is available in the path shown
+above, you may use the gpshell tool to load it:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ gpshell gpinstall.txt</tt></pre>
+</div></div>
+</div>
+</div>
+</div></body></html>
