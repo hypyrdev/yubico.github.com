@@ -3,7 +3,7 @@
 import os
 from distutils.version import LooseVersion
 
-SUFFIXES = ['tar', 'gz', 'sig', 'tgz', 'zip', 'cap']
+SUFFIXES = ['tar', 'gz', 'sig', 'tgz', 'zip', 'cap', 'apk']
 CLASSIFIERS = ['win32', 'win64', 'mac']
 
 RELEASE_TEMPLATE = """
