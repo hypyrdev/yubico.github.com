@@ -1,0 +1,48 @@
+#!/usr/bin/perl
+
+# Copyright (C) 2013 Simon Josefsson
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+use strict;
+use LWP::Simple;
+
+my %categories = ('YubiKey Low-level Library' =>
+		  ["https://raw.github.com/Yubico/yubico-c/master/BLURB",
+		   "https://raw.github.com/Yubico/yubico-j/master/BLURB"]);
+my $html;
+
+foreach my $category (keys %categories) {
+    my @blurbs = @{$categories{$category}};
+    $html .= "<h2>$category</h2>\n\n";
+    $html .= "<p><table>\n<tr><th>Project name</th><th>License</th>" .
+	"<th>Description</th></tr>\n\n";
+    foreach my $blurb (@blurbs) {
+	my $content = get($blurb);
+	my $license = $1 if $content =~ m,License: (.+),g;
+	my $project = $1 if $content =~ m,Project: (.+),g;
+	my $summary = $1 if $content =~ m,Summary: (.+),g;
+	die "could not parse blurb: $content"
+	    if !$project || !$summary || !$license;
+	$html .= "<tr><td><a href=\"$project/\">$project</a></td>\n";
+	$html .= "<td><a href=\"http://spdx.org/licenses/$license\">" .
+	    "$license</a></td>\n";
+	$html .= "<td>$summary</td></tr>\n\n";
+    }
+    $html .= "</table></p>\n";
+}
+
+my $indexhtml = do { local $/; <> };
+$indexhtml =~ s/REPLACEME/$html/g;
+print $indexhtml;

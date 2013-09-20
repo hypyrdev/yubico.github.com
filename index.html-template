@@ -104,21 +104,7 @@
 
 	</table></p>
 
-<h2>YubiKey Low-level Library</h2>
-
-<p><table>
-<tr><th>Project name</th><th>License</th><th>Description</th></tr>
-
-<tr><td><a href="yubico-c/">yubico-c</a></td>
-<td><a href="http://spdx.org/licenses/BSD-2-Clause">BSD-2-Clause</a></td>
-<td>C library for manipulating Yubico YubiKey One-Time Passwords (OTPs)</td></tr>
-
-<tr><td><a href="yubico-j/">yubico-j</a></td>
-<td><a href="http://spdx.org/licenses/BSD-2-Clause">BSD-2-Clause</a></td>
-<td>Java low-level library for Yubico YubiKey One-Time Passwords (OTPs)</td></tr>
-
-</table></p>
-
+REPLACEME
 
 	<h2>YubiHSM projects</h2>
 
