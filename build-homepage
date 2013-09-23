@@ -18,6 +18,40 @@
 use strict;
 use LWP::Simple;
 
+use File::Basename;
+use File::Temp qw/tempfile/;
+
+sub build_projects_page {
+	my $project = shift;
+	my $summary = shift;
+	my $dir = shift;
+	my $content = get("https://raw.github.com/Yubico/$project/master/README");
+	my ($temphandle,$temp) = tempfile();
+	print $temphandle $content;
+	close $temphandle;
+	open(ASCII, "asciidoc -o- -s $temp |") or die "failed to open asciidoc";
+	my $massaged_content;
+	while(<ASCII>) {
+		$massaged_content .= $_;
+	}
+	close ASCII;
+	unlink $temp;
+	my $template = "project-index.html-template";
+	if(-f "$dir/$project/$template") {
+		$template = "$dir/$project/$template";
+	}
+	open(TEMPL, "$template") or die "failed to open project template";
+	open(OUT, ">", "$dir/$project/index.html") or die "failed to open output file";
+	while(<TEMPL>) {
+		s/PROJECT_NAME/$project/;
+		s/PROJECT_SUMMARY/$summary/;
+		s/PROJECT_CONTENT/$massaged_content/;
+		print(OUT $_);
+	}
+	close TEMPL;
+	close OUT;
+}
+
 my %categories = ('YubiKey Low-level Library' =>
 		  ["https://raw.github.com/Yubico/yubico-c/master/BLURB",
 		   "https://raw.github.com/Yubico/yubico-j/master/BLURB"]);
@@ -39,6 +73,7 @@ foreach my $category (keys %categories) {
 	$html .= "<td><a href=\"http://spdx.org/licenses/$license\">" .
 	    "$license</a></td>\n";
 	$html .= "<td>$summary</td></tr>\n\n";
+	build_projects_page($project, $summary, dirname($0));
     }
     $html .= "</table></p>\n";
 }
