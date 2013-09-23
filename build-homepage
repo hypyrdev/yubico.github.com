@@ -21,6 +21,12 @@ use LWP::Simple;
 use File::Basename;
 use File::Temp qw/tempfile/;
 
+my %categories = ('YubiKey Low-level Library' =>
+		  ["https://raw.github.com/Yubico/yubico-c/master/BLURB",
+		   "https://raw.github.com/Yubico/yubico-j/master/BLURB"],
+                  'YubiKey NEO' =>
+		  ["https://raw.github.com/Yubico/yubico-bitcoin-java/master/BLURB"]);
+
 sub build_projects_page {
 	my $project = shift;
 	my $summary = shift;
@@ -52,9 +58,6 @@ sub build_projects_page {
 	close OUT;
 }
 
-my %categories = ('YubiKey Low-level Library' =>
-		  ["https://raw.github.com/Yubico/yubico-c/master/BLURB",
-		   "https://raw.github.com/Yubico/yubico-j/master/BLURB"]);
 my $html;
 
 foreach my $category (keys %categories) {

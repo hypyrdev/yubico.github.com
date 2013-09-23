@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubico-bitcoin-java : Java client library for communicating with the ykneo-bitcoin applet for the  YubiKey NEO" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubico-bitcoin-java</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Yubico/yubico-bitcoin-java">View on GitHub</a>
+
+          <h1 id="project_title">yubico-bitcoin-java</h1>
+          <h2 id="project_tagline">Java client library for communicating with the ykneo-bitcoin applet for the  YubiKey NEO</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+      <ul>
+        <li><a href="http://search.maven.org/#browse%7C-1435754429">Releases</a></li>
+      </ul>
+
+<div class="sect1">
+<h2 id="_yubico_bitcoin_java">Yubico-bitcoin-java</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Java client library for communicating with the ykneo-bitcoin applet for the
+YubiKey NEO.</p></div>
+<div class="paragraph"><p>This library exposes the Bitcoin BIP32 functionality that ykneo-bitcoin
+provides. It can be used to implement YubiKey NEO support for bitcoin wallets.</p></div>
+<div class="paragraph"><p>This project consists of the following modules:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+yubico-bitcoin-java-core:
+    This is the main API and common utility classes.
+</p>
+</li>
+<li>
+<p>
+yubico-bitcoin-java-pcsc:
+    A smartcard implementation of YkneoBitcoin, communicating with the YubiKey
+    NEO over USB using PC/SC.
+</p>
+</li>
+<li>
+<p>
+yubico-bitcoin-java-android:
+    An Android implementation of YkneoBitcoin, communicating with the YubiKey
+    NEO over NFC.
+</p>
+</li>
+<li>
+<p>
+yubico-bitcoin-java-soft:
+    A software implementation of YkneoBitcoin for testing purposes, that
+    doesn&#8217;t use a YubiKey NEO at all.
+</p>
+</li>
+<li>
+<p>
+yubico-bitcoin-java-examples:
+    Sample code for working with YkneoBitcoin.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using">Using</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The easiest way to use this project is by adding it as a maven dependency to
+your project:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&lt;dependency&gt;
+  &lt;groupId&gt;com.yubico.bitcoin&lt;/groupId&gt;
+  &lt;artifactId&gt;yubico-bitcoin-java-soft&lt;/artifactId&gt;
+  &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building">Building</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This project uses maven (<a href="http://maven.apache.org/">http://maven.apache.org/</a>) for building and dependency
+management. To build, run:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>mvn clean package</tt></pre>
+</div></div>
+<div class="paragraph"><p>Or, to build and install into your local maven repository:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>mvn clean install</tt></pre>
+</div></div>
+</div>
+</div>
+
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubico-bitcoin-java maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>
