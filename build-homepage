@@ -27,6 +27,7 @@ my %categories = ('YubiKey Low-level Library' =>
                   'YubiKey NEO' =>
 		  ["https://raw.github.com/Yubico/yubico-bitcoin-java/master/BLURB",
 		   "https://raw.github.com/Yubico/yubioath-android/master/BLURB",
+		   "https://raw.github.com/Yubico/ykneo-oath/master/BLURB",
 		   "https://raw.github.com/Yubico/yubitotp-android/master/BLURB"]);
 
 sub build_projects_page {
