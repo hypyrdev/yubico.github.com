@@ -117,33 +117,6 @@ REPLACEME
 
 	</table></p>
 
-	<h2>YubiKey NEO</h2>
-
-      <p><table>
-	<tr><th>Project name</th><th>Description</th></tr>
-
-	<tr><td><a href="ykneo-ccid-tools/">
-	  ykneo-ccid-tools</a></td>
-	  <td>YubiKey NEO CCID Tools</td></tr>
-
-	<tr><td><a href="yubioath-android/">
-	  yubioath-android</a></td>
-	  <td>YubiKey NEO OATH Android app</td></tr>
-
-	<tr><td><a href="https://github.com/Yubico/yubitotp-android">
-	  yubitotp-android</a></td>
-	  <td>YubiKey NEO TOTP Android app</td></tr>
-
-	<tr><td><a href="ykneo-openpgp/">
-	  ykneo-openpgp</a></td>
-	  <td>YubiKey NEO OpenPGP app</td></tr>
-
-  <tr><td><a href="ykneo-oath/">
-        ykneo-oath</a></td>
-    <td>YubiKey NEO OATH app</td></tr>
-
-	</table></p>
-
 	<h2>YubiKey Integration</h2>
 
       <p><table>
