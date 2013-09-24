@@ -29,7 +29,8 @@ my %categories = ('YubiKey Low-level Library' =>
 		   "https://raw.github.com/Yubico/yubico-bitcoin-python/master/BLURB",
 		   "https://raw.github.com/Yubico/yubioath-android/master/BLURB",
 		   "https://raw.github.com/Yubico/ykneo-oath/master/BLURB",
-		   "https://raw.github.com/Yubico/yubitotp-android/master/BLURB"]);
+		   "https://raw.github.com/Yubico/yubitotp-android/master/BLURB",
+		   "https://raw.github.com/Yubico/ykneo-openpgp/master/BLURB"]);
 
 sub build_projects_page {
 	my $project = shift;
