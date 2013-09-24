@@ -73,16 +73,19 @@ foreach my $category (keys %categories) {
 	"<th>Description</th></tr>\n\n";
     foreach my $blurb (@blurbs) {
 	my $content = get($blurb);
+	my $homepage = $1 if $content =~ m,Homepage: (.+),g;
 	my $license = $1 if $content =~ m,License: (.+),g;
 	my $project = $1 if $content =~ m,Project: (.+),g;
 	my $summary = $1 if $content =~ m,Summary: (.+),g;
 	die "could not parse blurb: $content"
 	    if !$project || !$summary || !$license;
-	$html .= "<tr><td><a href=\"$project/\">$project</a></td>\n";
+	$html .= "<tr><td><a href=\"$homepage\">$project</a></td>\n";
 	$html .= "<td><a href=\"http://spdx.org/licenses/$license\">" .
 	    "$license</a></td>\n";
 	$html .= "<td>$summary</td></tr>\n\n";
-	build_projects_page($project, $summary, dirname($0));
+	if($homepage =~ m,opensource\.yubico\.com,) {
+		build_projects_page($project, $summary, dirname($0));
+	}
     }
     $html .= "</table></p>\n";
 }
