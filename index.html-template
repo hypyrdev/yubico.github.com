@@ -88,22 +88,6 @@
 
 	</table></p>
 
-	<h2>YubiKey Personalization</h2>
-
-      <p><table>
-	<tr><th>Project name</th><th>Description</th></tr>
-
-	<tr><td><a href="yubikey-personalization/">
-	  yubikey-personalization</a></td>
-	  <td>YubiKey Personalization library (ykpers)
-	    and command-line tools</td></tr>
-
-	<tr><td><a href="yubikey-personalization-gui/">
-	  yubikey-personalization-gui</a></td>
-	  <td>YubiKey Personalization GUI</td></tr>
-
-	</table></p>
-
 REPLACEME
 
 	<h2>YubiHSM projects</h2>
