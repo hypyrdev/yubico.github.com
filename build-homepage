@@ -30,8 +30,7 @@ my %categories = ('YubiKey Low-level Library' =>
 		   "https://raw.github.com/Yubico/yubioath-android/master/BLURB",
 		   "https://raw.github.com/Yubico/ykneo-oath/master/BLURB",
 		   "https://raw.github.com/Yubico/yubitotp-android/master/BLURB",
-		   "https://raw.github.com/Yubico/ykneo-openpgp/master/BLURB",
-		   "https://raw.github.com/Yubico/ykneo-ccid-tools/master/BLURB"],
+		   "https://raw.github.com/Yubico/ykneo-openpgp/master/BLURB"],
 	          'YubiKey Personalization' =>
 	          ["https://raw.github.com/Yubico/yubikey-personalization/master/BLURB",
 		   "https://raw.github.com/Yubico/yubikey-personalization-gui/master/BLURB",
