@@ -64,9 +64,9 @@ closed interval.</p></div>
 follows.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ ./configure
-$ make check
-$ sudo make install</tt></pre>
+<pre><tt>./configure
+make check
+sudo make install</tt></pre>
 </div></div>
 <div class="paragraph"><p>Another way to build the package is with a hand written short
 makefile, invoke using <em>make -f simple.mk check</em>.  This is usually not
@@ -77,6 +77,8 @@ information.</p></div>
 <div class="sect1">
 <h2 id="_building_from_version_controlled_sources">Building from version controlled sources</h2>
 <div class="sectionbody">
+<div class="paragraph"><p>Warning!  This is only for developers and if you don&#8217;t understand what
+you are doing, you should download the release files instead.</p></div>
 <div class="paragraph"><p>You may check out the sources using GIT with the following command:</p></div>
 <div class="literalblock">
 <div class="content">
@@ -87,9 +89,10 @@ information.</p></div>
 <div class="content">
 <pre><tt>cd yubico-c</tt></pre>
 </div></div>
-<div class="paragraph"><p>You need to have autoconf, automake and libtool installed if you want
-to use the normal ./configure based approach.  Use simple.mk if you
-don&#8217;t want this step.  Generate the build system using:</p></div>
+<div class="paragraph"><p>Recent versions of autoconf, automake and libtool must be installed,
+if you want to use the normal ./configure based approach.  Use
+simple.mk if you don&#8217;t want this step.</p></div>
+<div class="paragraph"><p>Generate the build system:</p></div>
 <div class="literalblock">
 <div class="content">
 <pre><tt>autoreconf --install</tt></pre>

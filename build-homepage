@@ -34,7 +34,8 @@ my %categories = ('YubiKey Low-level Library' =>
 		   "https://raw.github.com/Yubico/ykneo-ccid-tools/master/BLURB"],
 	          'YubiKey Personalization' =>
 	          ["https://raw.github.com/Yubico/yubikey-personalization/master/BLURB",
-		   "https://raw.github.com/Yubico/yubikey-personalization-gui/master/BLURB"]);
+		   "https://raw.github.com/Yubico/yubikey-personalization-gui/master/BLURB",
+		   "https://raw.github.com/Yubico/libykneomgr/master/BLURB"]);
 
 sub build_projects_page {
 	my $project = shift;
