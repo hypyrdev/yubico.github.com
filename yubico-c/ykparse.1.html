@@ -1,0 +1,116 @@
+<!-- Creator     : groff version 1.22.1 -->
+<!-- CreationDate: Tue Nov 26 14:39:07 2013 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>YKPARSE</title>
+
+</head>
+<body>
+
+<h1 align="center">YKPARSE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">ykparse &minus;
+decrypt and show information inside a YubiKey OTP</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>ykparse</b>
+<i>AESKEY TOKEN</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The ykparse
+tool decrypt and display information inside a YubiKey
+OTP.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><b>AESKEY</b></p></td>
+<td width="2%"></td>
+<td width="66%">
+
+
+<p style="margin-top: 1em">The 16&minus;character
+AES&minus;128 key to use in hex.</p></td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="9%">
+
+
+<p><b>TOKEN</b></p></td>
+<td width="2%"></td>
+<td width="66%">
+
+
+<p>The modhex encoded One&minus;Time Password (OTP).</p></td>
+<td width="12%">
+</td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Typical usage
+of the tool is as follows (be careful with linewrapping of
+the manpage).</p>
+
+<p style="margin-left:22%;">ykparse
+ecde18dbe76fbd0c33330f1c354871db
+dteffujedcflcindvdbrblehecuitvjkjevvehjd</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">YubiKeys can be
+obtained from Yubico: http://www.yubico.com/</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!-- Creator     : groff version 1.22.1 -->
+<!-- CreationDate: Tue Nov 26 14:39:06 2013 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>MODHEX</title>
+
+</head>
+<body>
+
+<h1 align="center">MODHEX</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">modhex &minus;
+convert data to/from modhex encoding</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>modhex [</b>
+<i>&minus;d</i> <b>] [</b> <i>&minus;h</i> <b>]</b> DATA</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The modhex tool
+encode/decode modhex data to binary and hex.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The string DATA
+is the data to convert.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;d</b></p></td>
+<td width="8%"></td>
+<td width="66%">
+
+
+<p>Decode data (the default is to encode data)</p></td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;h</b></p></td>
+<td width="8%"></td>
+<td width="66%">
+
+
+<p>Use hex encoding for all non&minus;modhex data.</p></td>
+<td width="12%">
+</td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">ModHex encode
+ASCII&minus;string &quot;test&quot;:</p>
+
+<p style="margin-left:22%;">modhex test</p>
+
+<p style="margin-left:11%;">Decode ModHex data
+&quot;ifhgieif&quot; into ASCII string:</p>
+
+<p style="margin-left:22%;">modhex &minus;d ifhgieif</p>
+
+<p style="margin-left:11%;">ModHex encode hex&minus;encoded
+data &quot;b565716f&quot;:</p>
+
+<p style="margin-left:22%;">modhex &minus;h b565716f</p>
+
+<p style="margin-left:11%;">Decode ModHex data
+&quot;nghgibhv&quot; and print hex&minus;encode data:</p>
+
+<p style="margin-left:22%;">modhex &minus;d &minus;h
+nghgibhv</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">YubiKeys can be
+obtained from Yubico: http://www.yubico.com/</p>
+<hr>
+</body>
+</html>

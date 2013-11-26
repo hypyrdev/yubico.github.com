@@ -1,0 +1,750 @@
+<!-- Creator     : groff version 1.22.1 -->
+<!-- CreationDate: Tue Nov 26 14:39:33 2013 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ykpersonalize</title>
+
+</head>
+<body>
+
+<h1 align="center">ykpersonalize</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Ticket flags">Ticket flags</a><br>
+<a href="#Configuration flags">Configuration flags</a><br>
+<a href="#OATH-HOTP Mode">OATH-HOTP Mode</a><br>
+<a href="#Challenge-response Mode">Challenge-response Mode</a><br>
+<a href="#Modhex">Modhex</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">ykpersonalize -
+personalize YubiKey OTP tokens</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>ykpersonalize</b>
+[<i>-1</i> | <i>-2</i>] [<i>-sfile</i>] [<i>-ifile</i>]
+[<i>-fformat</i>] [<i>-axxx</i>] [<i>-cxxx</i>]
+[<i>-ooption</i>] [<i>-y</i>] [<i>-v</i>] [<i>-d</i>]
+[<i>-h</i>] [<i>-n</i>] [<i>-t</i>] [<i>-u</i>] [<i>-x</i>]
+[<i>-z</i>] [<i>-m</i>] [<i>-S</i>] [<i>-V</i>]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Set the AES
+key, user ID and other settings in a YubiKey. For the
+complete explanation of the meaning of all parameters, see
+the reference manual: YubiKey manual &lang; URL:
+http://yubico.com/files/YubiKey_manual-2.0.pdf &rang;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="9%">
+
+
+<p><b>&minus;1</b></p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>change the first configuration. This is the default and
+is normally used for true OTP generation. In this
+configuration, the option flag <b>-oappend-cr</b> is set by
+default.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="9%">
+
+
+<p><b>&minus;2</b></p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>change the second configuration. This is for YubiKey II
+only and is then normally used for static key generation. In
+this configuration, the option flags <b>-oappend-cr</b>,
+<b>-ostatic-ticket</b>, <b>-ostrong-pw1</b>,
+<b>-ostrong-pw2</b> and <b>-oman-update</b> are set by
+default.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="9%">
+
+
+<p><b>-z</b></p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>delete configuration in selected slot</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="9%">
+
+
+<p><b>&minus;s</b><i>file</i></p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>save configuration to file instead of key. (if file is
+-, send to stdout)</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="9%">
+
+
+<p><b>&minus;i</b><i>file</i></p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>read configuration from file. (if file is -, read from
+stdin)</p> </td></tr>
+</table>
+
+
+<p style="margin-left:11%;"><b>&minus;f</b><i>format</i></p>
+
+<p style="margin-left:22%;">format to be used with
+<b>-s</b> and <b>-i</b>. Valid options are <b>ycfg</b> and
+<b>legacy</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="7%">
+
+
+<p><b>&minus;a</b><i>xxx</i></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>the secret key, 32 char (40 for OATH-HOTP and HMAC
+challenge-response) hex value (not modhex).</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="7%">
+
+
+<p><b>&minus;c</b><i>xxx</i></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>A 12 char hex value (not modhex) to use as access code
+for programming. NOTE: this does NOT SET the access code,
+that&rsquo;s done with <b>-oaccess</b><i>=</i>.</p></td></tr>
+</table>
+
+
+<p style="margin-left:11%;"><b>&minus;o</b><i>option</i></p>
+
+<p style="margin-left:22%;">change configuration option.
+Possible option arguments are <b><br>
+salt</b>=<i>ssssssss</i></p>
+
+<p style="margin-left:32%;">Salt to be used when deriving
+key from a password. If none is given, a unique random one
+will be generated.</p>
+
+
+<p style="margin-left:22%;"><b>fixed</b>=<i>fffffffffff</i></p>
+
+<p style="margin-left:32%;">The modhex <i>public
+identity</i> of the YubiKey, 0-32 characters long (encoding
+up to 16 bytes). It&rsquo;s possible to give the identity in
+hex as well, just prepend the value with &rsquo;h:&rsquo;.
+The fixed part is emitted before the OTP when the button on
+the YubiKey is pressed. It can be used as an identifier for
+the user, for example.</p>
+
+<p style="margin-left:22%;"><b>uid</b>=<i>uuuuuu</i></p>
+
+<p style="margin-left:32%;">The uid part of the generated
+OTP, also called <i>private identity</i>, in hex. Must be 12
+characters long. The uid is 6 bytes of static data that is
+included (encrypted) in every OTP, and is used to validate
+that an OTP was in fact encrypted with the AES key shared
+between the YubiKey and the validation service. It cannot be
+used to identify the YubiKey as it is only readable to those
+that know the AES key.</p>
+
+
+<p style="margin-left:22%;"><b>access</b>=<i>fffffffffff</i></p>
+
+<p style="margin-left:32%;">New hex access code to set.
+Must be 12 characters long. If an access code is set, it
+will be required for subsequent reprogramming of the
+YubiKey.</p>
+
+<p style="margin-left:22%;"><b>oath-imf</b>=<i>xxx</i></p>
+
+<p style="margin-left:32%;">Set OATH Initial Moving Factor.
+This is the initial counter value for the YubiKey. This
+should be a value between 0 and 1048560, evenly dividable by
+16.</p>
+
+
+<p style="margin-left:22%;">[&minus;]<i>ticket-flag</i></p>
+
+<p style="margin-left:32%;">Set/clear ticket flag, see the
+section &rsquo;Ticket flags&rsquo;</p>
+
+
+<p style="margin-left:22%;">[&minus;]<i>configuration-flag</i></p>
+
+<p style="margin-left:32%;">Set/clear ticket flag, see the
+section &rsquo;Configuration flags&rsquo;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>-y</b></p></td>
+<td width="8%"></td>
+<td width="58%">
+
+
+<p>always commit without prompting</p></td>
+<td width="20%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>-d</b></p></td>
+<td width="8%"></td>
+<td width="58%">
+
+
+<p>dry-run, run without writing a YubiKey</p></td>
+<td width="20%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>-v</b></p></td>
+<td width="8%"></td>
+<td width="58%">
+
+
+<p>Be more verbose</p></td>
+<td width="20%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>-h</b></p></td>
+<td width="8%"></td>
+<td width="58%">
+
+
+<p>Help</p></td>
+<td width="20%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>-V</b></p></td>
+<td width="8%"></td>
+<td width="58%">
+
+
+<p>Version</p></td>
+<td width="20%">
+</td></tr>
+</table>
+
+<p style="margin-left:11%;"><b>YubiKey NEO only</b></p>
+
+<p style="margin-left:22%;"><b>-m mode</b></p>
+
+<p style="margin-left:32%;">set device configuration for
+the YubiKey NEO. It is parsed in the form
+<i>mode:cr_timeout:autoeject_timeout</i> <br>
+where mode is: <br>
+0 HID device only. <br>
+1 CCID device only. <br>
+2 HID/CCID composite device. <br>
+Add 80 to set MODE_FLAG_EJECT, for example: 81 <br>
+cr_timeout is the timeout in seconds for the YubiKey to wait
+on button press for challenge response (default is 15) <br>
+autoeject_timeout is the timeout in seconds before the card
+is automatically ejected in mode 81</p>
+
+<p style="margin-left:22%;"><b>-S</b><i>0605...</i></p>
+
+<p style="margin-left:32%;">set the scanmap to be used with
+the YubiKey NEO. It must be 45 unique bytes as 90
+characters. Leave argument empty to reset to the
+YubiKey&rsquo;s default. The scanmap must be sent in the
+order: <i><br>
+cbdefghijklnrtuvCBDEFGHIJKLNRTUV0123456789!\t\r</i>. <br>
+the default scanmap in the YubiKey is: <i><br>
+06050708090a0b0c0d0e0f111517181986858788898a8b8c8d8e8f <br>
+9195979899271e1f202122232425269e2b28</i> <br>
+an example for simplified us dvorak would be: <i><br>
+0c110b071c180d0a0619130f120e09378c918b879c988d8a869993 <br>
+8f928e89b7271e1f202122232425269e2b28</i> <br>
+or for a french azerty keyboard (digits are shifted):
+<i><br>
+06050708090a0b0c0d0e0f111517181986858788898a8b8c8d8e8f <br>
+9195979899a79e9fa0a1a2a3a4a5a6382b28</i> <br>
+and a turkish example (has a dotless i instead of usual i):
+<i><br>
+06050708090a0b340d0e0f111517181986858788898a8b8c8d8e8f <br>
+9195979899271e1f202122232425269e2b28</i> <br>
+Note that you must remove any whitespace present in these
+examples before using the values.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="22%"></td>
+<td width="9%">
+
+
+<p><b>-n URI</b></p></td>
+<td width="1%"></td>
+<td width="31%">
+
+
+<p>Program NFC NDEF URI</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:22%;"><b>-t text</b></p>
+
+<p style="margin-left:32%;">Program NFC NDEF text</p>
+
+<p style="margin-left:11%;"><b>YubiKey 2.3 and
+above</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="22%"></td>
+<td width="3%">
+
+
+<p><b>-u</b></p></td>
+<td width="7%"></td>
+<td width="68%">
+
+
+<p>Update existing configuration, rather than
+overwriting</p> </td></tr>
+<tr valign="top" align="left">
+<td width="22%"></td>
+<td width="3%">
+
+
+<p><b>-x</b></p></td>
+<td width="7%"></td>
+<td width="68%">
+
+
+<p>Swap configuration slot 1 and 2 inside the YubiKey</p></td></tr>
+</table>
+
+<h2>Ticket flags
+<a name="Ticket flags"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em">[&minus;]<b>tab-first</b></p>
+
+<p style="margin-left:22%;">Send a tab character as the
+first character. This is usually used to move to the next
+input field.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>append-tab1</b></p>
+
+<p style="margin-left:22%;">Send a tab character between
+the fixed part and the one-time password part. This is
+useful if you have the fixed portion equal to the user name
+and two input fields that you navigate between using
+tab.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>append-tab2</b></p>
+
+<p style="margin-left:22%;">Send a tab character as the
+last character.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>append-delay1</b></p>
+
+<p style="margin-left:22%;">Add a half-second delay before
+sending the one-time password part.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>append-delay2</b></p>
+
+<p style="margin-left:22%;">Add a half-second delay after
+sending the one-time password part.</p>
+
+<p style="margin-left:11%;">[&minus;]<b>append-cr</b></p>
+
+<p style="margin-left:22%;">Send a carriage return after
+sending the one-time password part.</p>
+
+<p style="margin-left:11%;"><b>YubiKey 2.0 firmware and
+above</b> <br>
+[&minus;]<b>protect-cfg2</b></p>
+
+<p style="margin-left:22%;">When written to configuration
+1, block later updates to configuration 2. When written to
+configuration 2, prevent configuration 1 from having the
+lock bit set.</p>
+
+<p style="margin-left:11%;"><b>YubiKey 2.1 firmware and
+above</b> <br>
+[&minus;]<b>oath-hotp</b></p>
+
+<p style="margin-left:22%;">Set OATH-HOTP mode rather than
+YubiKey mode. In this mode, the token functions according to
+the OATH-HOTP standard.</p>
+
+<p style="margin-left:11%;"><b>YubiKey 2.2 firmware and
+above</b> <br>
+[&minus;]<b>chal-resp</b></p>
+
+<p style="margin-left:22%;">Set challenge-response
+mode.</p>
+
+<h2>Configuration flags
+<a name="Configuration flags"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em">[&minus;]<b>send-ref</b>
+Send a reference string of all 16 modhex characters before
+the fixed part. This can not be combined with the
+<b>-ostrong-pw2</b> flag. <br>
+[&minus;]<b>pacing-10ms</b></p>
+
+<p style="margin-left:22%;">Add a 10ms delay between key
+presses.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>pacing-20ms</b></p>
+
+<p style="margin-left:22%;">Add a 20ms delay between key
+presses.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>static-ticket</b></p>
+
+<p style="margin-left:22%;">Output a fixed string rather
+than a one-time password. The password is still based on the
+AES key and should be hard to guess and impossible to
+remember.</p>
+
+<p style="margin-left:11%;"><b>YubiKey 1.x firmware
+only</b> <br>
+[&minus;]<b>ticket-first</b></p>
+
+<p style="margin-left:22%;">Send the one-time password
+rather than the fixed part first.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>allow-hidtrig</b></p>
+
+<p style="margin-left:22%;">Allow trigger through
+HID/keyboard by pressing caps-, num or scroll-lock twice.
+Not recommended for security reasons.</p>
+
+<p style="margin-left:11%;"><b>YubiKey 2.0 firmware and
+above</b> <br>
+[&minus;]<b>short-ticket</b></p>
+
+<p style="margin-left:22%;">Limit the length of the static
+string to max 16 digits. This flag only makes sense with the
+<b>-ostatic-ticket</b> option. When <b>-oshort-ticket</b> is
+used without <b>-ostatic-ticket</b> it will program the
+YubiKey in &quot;scan-code mode&quot;, in this mode the key
+sends the contents of fixed, uid and key as raw keyboard
+scancodes. For example, by using the fixed string
+<i>h:8b080f0f122c9a12150f079e</i> in this mode it will send
+<i>Hello World!</i> on a qwerty keyboard. This mode sends
+raw scan codes, so output will differ between keyboard
+layouts.</p>
+
+<p style="margin-left:11%;">[&minus;]<b>strong-pw1</b></p>
+
+<p style="margin-left:22%;">Upper-case the two first
+letters of the output string. This is for compatibility with
+legacy systems that enforce both uppercase and lowercase
+characters in a password and does not add any security.</p>
+
+<p style="margin-left:11%;">[&minus;]<b>strong-pw2</b></p>
+
+<p style="margin-left:22%;">Replace the first eight
+characters of the modhex alphabet with the numbers 0 to 7.
+Like <b>-ostrong-pw1</b>, this is intended to support legacy
+systems.</p>
+
+<p style="margin-left:11%;">[&minus;]<b>man-update</b></p>
+
+<p style="margin-left:22%;">Enable user-initiated update of
+the static password. Only makes sense with the
+<b>-ostatic-ticket</b> option.</p>
+
+<p style="margin-left:11%;"><b>YubiKey 2.1 firmware and
+above</b> <br>
+[&minus;]<b>oath-hotp8</b></p>
+
+<p style="margin-left:22%;">When set, generate an 8-digit
+HOTP rather than a 6-digit one.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>oath-fixed-modhex1</b></p>
+
+<p style="margin-left:22%;">When set, the first byte of the
+fixed part is sent as modhex.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>oath-fixed-modhex2</b></p>
+
+<p style="margin-left:22%;">When set, the first two bytes
+of the fixed part is sent as modhex.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>oath-fixed-modhex</b></p>
+
+<p style="margin-left:22%;">When set, the fixed part is
+sent as modhex.</p>
+
+
+<p style="margin-left:11%;"><b>oath-id=m:OOTTUUUUUUUU</b></p>
+
+<p style="margin-left:22%;">Configure OATH token id with a
+provided value. See description of this option under the 2.2
+section for details, but note that a YubiKey 2.1 key
+can&rsquo;t report its serial number and thus a token
+identifier value must be specified.</p>
+
+<p style="margin-left:11%;"><b>YubiKey 2.2 firmware and
+above</b> <br>
+[&minus;]<b>chal-yubico</b></p>
+
+<p style="margin-left:22%;">Yubico OTP challenge-response
+mode.</p>
+
+<p style="margin-left:11%;">[&minus;]<b>chal-hmac</b></p>
+
+<p style="margin-left:22%;">Generate HMAC-SHA1 challenge
+responses.</p>
+
+<p style="margin-left:11%;">[&minus;]<b>hmac-lt64</b></p>
+
+<p style="margin-left:22%;">Calculate HMAC on less than 64
+bytes input. Whatever is in the last byte of the challenge
+is used as end of input marker (backtracking from end of
+payload).</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>chal-btn-trig</b></p>
+
+<p style="margin-left:22%;">The YubiKey will wait for the
+user to press the key (within 15 seconds) before answering
+the challenge.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>serial-btn-visible</b></p>
+
+<p style="margin-left:22%;">The YubiKey will emit its
+serial number if the button is pressed during power-up.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>serial-usb-visible</b></p>
+
+<p style="margin-left:22%;">The YubiKey will indicate its
+serial number in the USB iSerial field.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>serial-api-visible</b></p>
+
+<p style="margin-left:22%;">The YubiKey will allow its
+serial number to be read using an API call.</p>
+
+
+<p style="margin-left:11%;"><b>oath-id[=m:OOTTUUUUUUUU]</b></p>
+
+<p style="margin-left:22%;">Configure OATH token id with a
+provided value, or if used without a value use the standard
+YubiKey token identifier.</p>
+
+<p style="margin-left:22%; margin-top: 1em">The standard
+OATH token id for a Yubico YubiKey is (modhex) OO=ub, TT=he,
+(decimal) UUUUUUUU=serial number.</p>
+
+<p style="margin-left:22%; margin-top: 1em">The reason for
+the decimal serial number is to make it easy for humans to
+correlate the serial number on the back of the YubiKey to an
+entry in a list of associated tokens for example. Other
+encodings can be accomplished using the appropriate
+oath-fixed-modhex options.</p>
+
+<p style="margin-left:22%; margin-top: 1em">Note that the
+YubiKey must be programmed to allow reading its serial
+number, otherwise automatic token id creation is not
+possible.</p>
+
+<p style="margin-left:22%; margin-top: 1em">See section
+&quot;5.3.4 - OATH-HOTP Token Identifier&quot; of the
+YubiKey manual &lang; URL:
+http://yubico.com/files/YubiKey_manual-2.0.pdf &rang; for
+further details.</p>
+
+<p style="margin-left:11%;"><b>YubiKey 2.3 firmware and
+above</b> <br>
+[&minus;]<b>use-numeric-keypad</b></p>
+
+<p style="margin-left:22%;">Send scancodes for numeric
+keypad keypresses when sending digits - helps with some
+keyboard layouts.</p>
+
+<p style="margin-left:11%;">[&minus;]<b>fast-trig</b></p>
+
+<p style="margin-left:22%;">Faster triggering when only
+configuration 1 is available.</p>
+
+
+<p style="margin-left:11%;">[&minus;]<b>allow-update</b></p>
+
+<p style="margin-left:22%;">Allow updating of certain
+parameters in a configuration at a later time.</p>
+
+<p style="margin-left:11%;">[&minus;]<b>dormant</b></p>
+
+<p style="margin-left:22%;">Hides/unhides a configuration
+stored in a YubiKey.</p>
+
+<p style="margin-left:11%;"><b>YubiKey 2.4/3.1 firmware and
+above</b> <br>
+[&minus;]<b>led-inv</b></p>
+
+<p style="margin-left:22%;">Inverts the behaviour of the
+led on the YubiKey.</p>
+
+<h2>OATH-HOTP Mode
+<a name="OATH-HOTP Mode"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">When using
+OATH-HOTP mode, a HMAC key of 160 bits (20 bytes, 40 chars
+of hex) can be supplied with <b>&minus;a</b>.</p>
+
+<h2>Challenge-response Mode
+<a name="Challenge-response Mode"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">In
+<b>CHAL-RESP</b> mode, the token will NOT generate any
+keypresses when the button is pressed (although it is
+perfectly possible to have one slot with a
+keypress-generating configuration, and the other in
+challenge-response mode). Instead, a program capable of
+sending USB HID feature reports to the token must be used to
+send it a challenge, and read the response.</p>
+
+<h2>Modhex
+<a name="Modhex"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Modhex is a way
+of writing hex digits where the &ldquo;digits&rdquo; are
+chosen for being in the same place on most keyboard layouts.
+<br>
+To convert from hex to modhex, you can use</p>
+
+<p style="margin-left:22%;">tr
+&quot;[0123456789abcdef]&quot;
+&quot;[cbdefghijklnrtuv]&quot;</p>
+
+<p style="margin-left:11%;">To convert the other way,
+use</p>
+
+<p style="margin-left:22%;">tr
+&quot;[cbdefghijklnrtuv]&quot;
+&quot;[0123456789abcdef]&quot;</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Report
+ykpersonalize bugs in the issue tracker &lang; URL:
+https://github.com/Yubico/yubikey-personalization/issues
+&rang;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The
+ykpersonalize home page &lang; URL:
+http://yubico.github.io/yubikey-personalization/ &rang;</p>
+
+<p style="margin-left:11%; margin-top: 1em">YubiKeys can be
+obtained from Yubico &lang; URL: http://www.yubico.com/
+&rang; .</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!-- Creator     : groff version 1.22.1 -->
+<!-- CreationDate: Tue Nov 26 14:39:08 2013 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>YKGENERATE</title>
+
+</head>
+<body>
+
+<h1 align="center">YKGENERATE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">ykgenerate
+&minus; construct and encrypt an OTP from given data</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>ykgenerate</b>
+<i>AESKEY YK_INTERNALNAME YK_COUNTER YK_LOW YK_HIGH
+YK_USE</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The ykgenerate
+tool generate OTPs by encrypting given values under the
+given encryption key.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><b>AESKEY</b></p></td>
+<td width="2%"></td>
+<td width="30%">
+
+
+<p style="margin-top: 1em">Hex encoded AES&minus;key.</p></td>
+<td width="48%">
+</td></tr>
+</table>
+
+<p style="margin-left:11%;"><b>YK_INTERNALNAME</b></p>
+
+<p style="margin-left:22%;">Hex encoded internal identity
+(48 bit).</p>
+
+<p style="margin-left:11%;"><b>YK_COUNTER</b></p>
+
+<p style="margin-left:22%;">Hex encoded counter (16
+bit).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="9%">
+
+
+<p><b>YK_LOW</b></p></td>
+<td width="2%"></td>
+<td width="53%">
+
+
+<p>Hex encoded timestamp low (16 bit).</p></td>
+<td width="25%">
+</td></tr>
+</table>
+
+<p style="margin-left:11%;"><b>YK_HIGH</b></p>
+
+<p style="margin-left:22%;">Hex encoded timestamp high
+(8bit).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="9%">
+
+
+<p><b>YK_USE</b></p></td>
+<td width="2%"></td>
+<td width="36%">
+
+
+<p>Hex encoded use (8 bit).</p></td>
+<td width="42%">
+</td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Typical usage
+of the tool is as follows (be careful with linewrapping of
+the manpage).</p>
+
+<p style="margin-left:22%;">ykgenerate
+ecde18dbe76fbd0c33330f1c354871db 8792ebfe26cc 0013 c0a8 00
+10</p>
+
+<p style="margin-left:11%;">The expected output is the
+string &quot;hcfktknicvbcnhbkvigcfhgddhhhrknc&quot;.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">YubiKeys can be
+obtained from Yubico: http://www.yubico.com/</p>
+<hr>
+</body>
+</html>

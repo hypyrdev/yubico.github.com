@@ -1,0 +1,240 @@
+<!-- Creator     : groff version 1.22.1 -->
+<!-- CreationDate: Tue Nov 26 14:39:34 2013 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ykinfo</title>
+
+</head>
+<body>
+
+<h1 align="center">ykinfo</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">ykinfo - Get
+basic information from a YubiKey</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>ykinfo</b>
+[<i>-s</i>] [<i>-m</i>] [<i>-H</i>] [<i>-v</i>] [<i>-t</i>]
+[<i>-p</i>] [<i>-1</i>] [<i>-2</i>] [<i>-q</i>] [<i>-V</i>]
+[<i>-h</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Get basic
+information from a YubiKey. Can get serial number, version
+and current touch level. Can get all parameters at once or
+one at a time. If <b>&minus;q</b> is given only the relevant
+string from the YubiKey is written to screen.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>&minus;s</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em">get the serial number and output
+it.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;m</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>get the serial number and output it as modhex.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;H</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>get the serial number and output it as hex.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;v</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>get the version and output it.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;t</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>get the touch level and output it.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;p</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>get the programming sequence and output it.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;1</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>get the status of slot 1, 1 for programmed and 0 for
+empty</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;2</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>get the status of slot 2, 1 for programmed and 0 for
+empty</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;a</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>get all the information above.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;q</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>modifier, only show the relevant data from the YubiKey,
+no extra information.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;V</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>print tool version and exit</p></td></tr>
+</table>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Output of all
+information from a YubiKey</p>
+
+<p style="margin-left:11%; margin-top: 1em">$ <b>ykinfo
+&minus;s &minus;m &minus;H &minus;v &minus;t &minus;p</b>
+<br>
+serial: 1077254 <br>
+serial_hex: 107006 <br>
+serial_modhex: bcicch <br>
+version: 2.2.3 <br>
+touch_level: 1793 <br>
+programming_sequence: 1 <br>
+$</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Report ykinfo
+bugs in the issue tracker &lang; URL:
+https://github.com/Yubico/yubikey-personalization/issues
+&rang;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The
+ykpersonalize home page &lang; URL:
+http://yubico.github.io/yubikey-personalization/ &rang;</p>
+
+<p style="margin-left:11%; margin-top: 1em">YubiKeys can be
+obtained from Yubico &lang; URL: http://www.yubico.com/
+&rang; .</p>
+<hr>
+</body>
+</html>

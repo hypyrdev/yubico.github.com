@@ -1,0 +1,224 @@
+<!-- Creator     : groff version 1.22.1 -->
+<!-- CreationDate: Tue Nov 26 14:39:34 2013 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ykchalresp</title>
+
+</head>
+<body>
+
+<h1 align="center">ykchalresp</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">ykchalresp -
+Perform challenge-response operation with YubiKey</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>ykchalresp</b>
+[<i>-1</i> | <i>-2</i>] [<i>-H</i>] [<i>-Y</i>] [<i>-N</i>]
+[<i>-x</i>] [<i>-v</i>] [<i>-V</i>] [<i>-h</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Send a
+challenge to a YubiKey, and read the response. The YubiKey
+can be configured with two different C/R modes -- the
+standard one is a 160 bits HMAC-SHA1, and the other is a
+YubiKey OTP mimicing mode, meaning two subsequent calls with
+the same challenge will result in different responses.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>&minus;1</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em">send the challenge to slot 1.
+This is the default.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;2</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>send the challenge to slot 2.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;H</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>send a 64 byte HMAC challenge. This is the default.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;Y</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>send a 6 byte Yubico OTP challenge.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;N</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>non-blocking mode -- abort if the YubiKey is configured
+to require a key press before sending the response.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;x</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>challenge is hex encoded.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;v</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>enable verbose mode.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;V</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>print tool version and exit.</p></td></tr>
+</table>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The YubiKey
+challenge-response operation can be demonstrated using the
+<b>NIST PUB 198 A.2</b> test vector.</p>
+
+<p style="margin-left:11%; margin-top: 1em">First, program
+a YubiKey with the test vector :</p>
+
+<p style="margin-left:22%; margin-top: 1em">$
+<b>ykpersonalize &minus;2 &minus;ochal&minus;resp
+&minus;ochal&minus;hmac &minus;ohmac&minus;lt64 &minus;a
+303132333435363738393a3b3c3d3e3f40414243</b> <br>
+... <br>
+Commit? (y/n) [n]: y <br>
+$</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="89%">
+
+
+<p style="margin-top: 1em">Now, send the NIST test
+challenge to the YubiKey and verify the result matches the
+expected :</p></td></tr>
+</table>
+
+<p style="margin-left:22%; margin-top: 1em">$ <b>ykchalresp
+&minus;2 &rsquo;Sample #2&rsquo;</b> <br>
+0922d3405faa3d194f82a45830737d5cc6c75d24 <br>
+$</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Report
+ykchalresp bugs in the issue tracker &lang; URL:
+https://github.com/Yubico/yubikey-personalization/issues
+&rang;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The
+ykpersonalize home page &lang; URL:
+http://yubico.github.io/yubikey-personalization/ &rang;</p>
+
+<p style="margin-left:11%; margin-top: 1em">YubiKeys can be
+obtained from Yubico &lang; URL: http://www.yubico.com/
+&rang; .</p>
+<hr>
+</body>
+</html>
