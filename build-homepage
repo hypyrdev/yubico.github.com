@@ -84,7 +84,6 @@ sub build_projects_page {
 			print(MAN_OUT $man_html);
 			close(MAN_OUT);
 			$extra_links .= "<li><a href=\"$man.html\">$man</a></li>";
-			warn $man;
 		}
 		if($extra_links) {
 			$extra_links = "<h3>Manual pages</h3><ul>$extra_links</ul>";
