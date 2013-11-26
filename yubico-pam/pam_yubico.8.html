@@ -1,0 +1,236 @@
+<!-- Creator     : groff version 1.22.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>pam_yubico</title>
+
+</head>
+<body>
+
+<h1 align="center">pam_yubico</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">pam_yubico -
+Module for YubiKey authentication</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>pam_yubico</b>
+[...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The module is
+for authentication of YubiKeys, either with online
+validation of OTP, or offline validation with HMAC-SHA1
+challenge-response.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>debug</b>
+Turns on debugging to STDOUT <b><br>
+mode=</b>[<i>client</i>|<i>challenge-response</i>]</p>
+
+<p style="margin-left:22%;">Set the mode of operation,
+client for OTP validation and challenge-response for
+challenge-response validation, client is the default.</p>
+
+
+<p style="margin-left:11%;"><b>authfile=</b><i>file</i></p>
+
+<p style="margin-left:22%;">Set the location of the file
+that holds the mappings of Yubikey token IDs to user names.
+The format is username:first_public_id:second_public_id:...
+default location of the file is
+$HOME/.yubico/authorized_yubikeys.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="7%">
+
+
+<p><b>id=</b><i>id</i></p></td>
+<td width="4%"></td>
+<td width="43%">
+
+
+<p>Set to your client identity.</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:11%;"><b>key=</b><i>key</i></p>
+
+<p style="margin-left:22%;">Set to your client key in
+base64 format. The client key is also known as API key, and
+provides integrity in the communication between the client
+(you) and the validation server. If you want to get one for
+use with the default YubiCloud service, visit this URL: <br>
+&lang; URL: https://upgrade.yubico.com/getapikey/ &rang;</p>
+
+<p style="margin-left:11%;"><b>alwaysok</b></p>
+
+<p style="margin-left:22%;">Set to enable all
+authentication attempts to succeed (aka presentation
+mode).</p>
+
+<p style="margin-left:11%;"><b>try_first_pass</b></p>
+
+<p style="margin-left:22%;">Before prompting the user for
+their password, the module first tries the previous stacked
+module&acute;s password in case that satisfies this module
+as well.</p>
+
+<p style="margin-left:11%;"><b>use_first_pass</b></p>
+
+<p style="margin-left:22%;">The argument use_first_pass
+forces the module to use a previous stacked modules password
+and will never prompt the user - if no password is available
+or the password is not appropriate, the user will be denied
+access.</p>
+
+<p style="margin-left:11%;"><b>url=</b><i>url</i></p>
+
+<p style="margin-left:22%;">Set the URL template to use,
+this is set by calling yubikey_client_set_url_template,
+which defaults to the default in the yubico-c-client
+package. The URL should be set in the format <br>
+&lang; URL:
+https://api.yubico.com/wsapi/2.0/verify?id=%d&amp;otp=%s
+&rang;</p>
+
+<p style="margin-left:11%;"><b>capath=</b><i>path</i></p>
+
+<p style="margin-left:22%;">Specify the path where X509
+certificates are stored. This is required if
+&rsquo;https&rsquo; or &rsquo;ldaps&rsquo; are used in
+&rsquo;url&rsquo; and &rsquo;ldap_uri&rsquo;
+respectively.</p>
+
+<p style="margin-left:11%;"><b>verbose_otp</b></p>
+
+<p style="margin-left:22%;">This argument is used to show
+the OTP (One Time Password) when it is entered, i.e. to
+enable terminal echo of entered characters. You are advised
+to not use this, if you are using two factor authentication
+because that will display your password on the screen. This
+requires the service using the PAM module to display custom
+fields. For example, OpenSSH requires you to configure
+&quot;ChallengeResponseAuthentication no&quot;.</p>
+
+<p style="margin-left:11%;"><b>ldap_uri=</b><i>uri</i></p>
+
+<p style="margin-left:22%;">Specify the LDAP server URI
+(e.g. ldap://localhost).</p>
+
+
+<p style="margin-left:11%;"><b>ldap_server=</b><i>server</i></p>
+
+<p style="margin-left:22%;">Specify the LDAP server host
+(default LDAP port is used). <b>Deprecated. Use ldap_uri
+instead.</b></p>
+
+<p style="margin-left:11%;"><b>ldapdn=</b><i>dn</i></p>
+
+<p style="margin-left:22%;">The dn where the users are
+stored (eg: ou=users,dc=domain,dc=com).</p>
+
+
+<p style="margin-left:11%;"><b>user_attr=</b><i>attr</i></p>
+
+<p style="margin-left:22%;">The LDAP attribute used to
+store user names (eg:cn).</p>
+
+
+<p style="margin-left:11%;"><b>yubi_attr=</b><i>attr</i></p>
+
+<p style="margin-left:22%;">The LDAP attribute used to
+store the Yubikey id.</p>
+
+
+<p style="margin-left:11%;"><b>yubi_attr_prefix=</b><i>prefix</i></p>
+
+<p style="margin-left:22%;">The prefix of the LDAP
+attribute&rsquo;s value, in case of a generic attribute,
+used to store several types of ids.</p>
+
+
+<p style="margin-left:11%;"><b>token_id_length=</b><i>length</i></p>
+
+<p style="margin-left:22%;">Length of ID prefixing the OTP
+(this is 12 if using the YubiCloud).</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:22%; margin-top: 1em">auth sufficient
+pam_yubico.so id=16 debug <br>
+auth required pam_yubico.so mode=challenge-response</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Report
+yubico-pam bugs in the issue tracker &lang; URL:
+https://github.com/Yubico/yubico-pam/issues/ &rang;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The yubico-pam
+home page &lang; URL:
+http://opensource.yubico.com/yubico-pam/ &rang;</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>ykpamcfg</b>(1),
+<b>pam</b>(7)</p>
+
+<p style="margin-left:11%; margin-top: 1em">YubiKeys can be
+obtained from Yubico &lang; URL: https://www.yubico.com/
+&rang; .</p>
+<hr>
+</body>
+</html>

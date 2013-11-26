@@ -100,34 +100,6 @@ REPLACEME
 	  <td>YubiHSM Python package</td></tr>
 
 	</table></p>
-
-	<h2>YubiKey Integration</h2>
-
-      <p><table>
-	<tr><th>Project name</th><th>Description</th></tr>
-
-	<tr><td><a href="yubico-pam/">
-	  yubico-pam</a></td>
-	  <td>YubiKey PAM module</td></tr>
-
-	<tr><td><a href="rlm_yubico/">
-	  rlm_yubico</a></td>
-	  <td>YubiKey FreeRadius plugin</td></tr>
-
-	<tr><td><a href="yubiauth/">
-	  yubiauth</a></td>
-	  <td>Authentication backend</td></tr>
-
-	<tr><td><a href="https://github.com/Yubico/yubix">
-	  yubix</a></td>
-	  <td>YubiX virtual appliance</td></tr>
-
-	<tr><td><a href="https://github.com/Yubico/yubico-windows-auth">
-	  yubico-windows-auth</a></td>
-	  <td>Windows stand-alone login</td></tr>
-
-	</table></p>
-
 	</section>
     </div>
 

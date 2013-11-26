@@ -1,0 +1,348 @@
+<!-- Creator     : groff version 1.22.1 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ykpamcfg</title>
+
+</head>
+<body>
+
+<h1 align="center">ykpamcfg</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#ACTIONS">ACTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">ykpamcfg -
+Manage user settings for the Yubico PAM module.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>ykpamcfg</b>
+[<i>-1</i> | <i>-2</i>] [<i>-A</i>] [<i>-p</i>] [<i>-i</i>]
+[<i>-v</i>] [<i>-h</i>]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>&minus;1</b></p></td>
+<td width="8%"></td>
+<td width="50%">
+
+
+<p style="margin-top: 1em">use slot 1. This is the
+default.</p> </td>
+<td width="28%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;2</b></p></td>
+<td width="8%"></td>
+<td width="50%">
+
+
+<p>use slot 2.</p></td>
+<td width="28%">
+</td></tr>
+</table>
+
+<p style="margin-left:11%;"><b>&minus;A</b>
+<i>action</i></p>
+
+<p style="margin-left:22%;">choose action to perform. See
+ACTIONS below.</p>
+
+<p style="margin-left:11%;"><b>&minus;p</b> <i>path</i></p>
+
+<p style="margin-left:22%;">specify output file for,
+default is ~/.yubico/challenge</p>
+
+<p style="margin-left:11%;"><b>&minus;i</b>
+<i>iterations</i></p>
+
+<p style="margin-left:22%;">number of iterations to use for
+pbkdf2 of expected response</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;v</b></p></td>
+<td width="8%"></td>
+<td width="30%">
+
+
+<p>enable verbose mode.</p></td>
+<td width="48%">
+</td></tr>
+</table>
+
+<h2>ACTIONS
+<a name="ACTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>add_hmac_chalresp</b></p>
+
+<p style="margin-left:22%;">The PAM module can utilize the
+HMAC-SHA1 Challenge-Response mode found in YubiKeys starting
+with version 2.2 for <b>offline authentication</b>. This
+action creates the initial state information with the C/R to
+be issued at the next logon.</p>
+
+<p style="margin-left:22%; margin-top: 1em">The utility
+currently outputs the state information to a file in the
+current user&rsquo;s home directory
+(<i>~/.yubico/challenge-123456</i> for a YubiKey with serial
+number API readout enabled, and <i>~/.yubico/challenge</i>
+for one without).</p>
+
+<p style="margin-left:22%; margin-top: 1em">The PAM module
+supports a system wide directory for these state files (in
+case the user&rsquo;s home directories are encrypted), but
+in a system wide directory, the &rsquo;challenge&rsquo; part
+should be replaced with the username. Example :
+<i>/var/yubico/challenges/alice-123456</i>.</p>
+
+<p style="margin-left:22%; margin-top: 1em">To use the
+system-wide mode, you currently have to move the generated
+state files manually and configure the PAM module
+accordingly.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">First, program
+a YubiKey for challenge response on Slot 2 :</p>
+
+<p style="margin-left:22%; margin-top: 1em">$
+<b>ykpersonalize &minus;2 &minus;ochal-resp
+&minus;ochal-hmac &minus;ohmac-lt64
+&minus;oserial-api-visible</b> <br>
+... <br>
+Commit? (y/n) [n]: y <br>
+$</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="89%">
+
+
+<p style="margin-top: 1em">Now, set the current user to
+require this YubiKey for logon :</p></td></tr>
+</table>
+
+<p style="margin-left:22%; margin-top: 1em">$ <b>ykpamcfg
+&minus;2 &minus;v</b> <br>
+... <br>
+Stored initial challenge and expected response in
+&rsquo;/home/alice/.yubico/challenge-123456&rsquo;. <br>
+$</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="89%">
+
+
+<p style="margin-top: 1em">Then, configure authentication
+with PAM for example like this (<i>make a backup first</i>)
+:</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="89%">
+
+
+<p style="margin-top: 1em"><i>/etc/pam.d/common-auth</i>
+(from Ubuntu 10.10) :</p></td></tr>
+</table>
+
+<p style="margin-left:22%; margin-top: 1em">auth required
+pam_unix.so nullok_secure try_first_pass</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="22%"></td>
+<td width="-4%"></td>
+<td width="8%">
+
+
+<p>auth</p></td>
+<td width="8%"></td>
+<td width="8%"></td>
+<td width="69%"></td>
+<td width="-11%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="22%"></td>
+<td width="-4%"></td>
+<td width="8%">
+
+
+<p>[success=1 new_authtok_reqd=ok ignore=ignore
+default=die]</p> </td>
+<td width="8%"></td>
+<td width="8%"></td>
+<td width="69%"></td>
+<td width="-11%">
+
+
+<p>pam_yubico.so mode=challenge-response</p></td></tr>
+<tr valign="top" align="left">
+<td width="22%"></td>
+<td width="-4%"></td>
+<td width="8%">
+
+
+<p>auth</p></td>
+<td width="8%"></td>
+<td width="8%"></td>
+<td width="69%"></td>
+<td width="-11%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="22%"></td>
+<td width="-4%"></td>
+<td width="8%">
+
+
+<p>requisite</p></td>
+<td width="8%"></td>
+<td width="8%">
+
+
+<p>pam_deny.so</p></td>
+<td width="69%"></td>
+<td width="-11%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="22%"></td>
+<td width="-4%"></td>
+<td width="8%">
+
+
+<p>auth</p></td>
+<td width="8%"></td>
+<td width="8%"></td>
+<td width="69%"></td>
+<td width="-11%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="22%"></td>
+<td width="-4%"></td>
+<td width="8%">
+
+
+<p>required</p></td>
+<td width="8%"></td>
+<td width="8%">
+
+
+<p>pam_permit.so</p></td>
+<td width="69%"></td>
+<td width="-11%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="22%"></td>
+<td width="-4%"></td>
+<td width="8%">
+
+
+<p>auth</p></td>
+<td width="8%"></td>
+<td width="8%"></td>
+<td width="69%"></td>
+<td width="-11%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="22%"></td>
+<td width="-4%"></td>
+<td width="8%">
+
+
+<p>optional</p></td>
+<td width="8%"></td>
+<td width="8%">
+
+
+<p>pam_ecryptfs.so unwrap</p></td>
+<td width="69%"></td>
+<td width="-11%">
+</td></tr>
+</table>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Report ykpamcfg
+bugs in the issue tracker &lang; URL:
+https://github.com/Yubico/yubico-pam/issues &rang;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The yubico-pam
+home page &lang; URL:
+http://opensource.yubico.com/yubico-pam/ &rang;</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>pam_yubico</b>(8)</p>
+
+<p style="margin-left:11%; margin-top: 1em">YubiKeys can be
+obtained from Yubico &lang; URL: https://www.yubico.com/
+&rang; .</p>
+<hr>
+</body>
+</html>

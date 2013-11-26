@@ -36,7 +36,13 @@ my %categories = ('YubiKey Low-level Library' =>
 	          ["https://raw.github.com/Yubico/yubikey-personalization/master/BLURB",
 		   "https://raw.github.com/Yubico/yubikey-personalization-gui/master/BLURB",
 		   "https://raw.github.com/Yubico/libykneomgr/master/BLURB",
-	           "https://raw.github.com/Yubico/yubikey-neo-manager/master/BLURB"]);
+	           "https://raw.github.com/Yubico/yubikey-neo-manager/master/BLURB"],
+	          'YubiKey Integration' =>
+	          ["https://raw.github.com/Yubico/yubico-pam/master/BLURB",
+		   "https://raw.github.com/Yubico/rlm-yubico/master/BLURB",
+		   "https://raw.github.com/Yubico/yubiauth/master/BLURB",
+		   "https://raw.github.com/Yubico/yubix/master/BLURB",
+		   "https://raw.github.com/Yubico/yubico-windows-auth/master/BLURB"]);
 
 sub build_projects_page {
 	my $project = shift;
@@ -60,24 +66,27 @@ sub build_projects_page {
 	}
 	my $makefile = get("https://raw.github.com/Yubico/$project/master/Makefile.am");
 	if($makefile) {
-		if($makefile =~ m/dist_man\d_MANS = (.+)/) {
-			foreach my $man (split(/\s/, $1)) {
-				my $man_content = get("https://raw.github.com/Yubico/$project/master/$man");
-				my ($man_temphandle,$man_temp) = tempfile();
-				print $man_temphandle $man_content;
-				close $man_temphandle;
-				open(GROFF, "groff -man -T html $man_temp |");
-				my $man_html = '';
-				while(<GROFF>) {
-					$man_html .= $_;
-				}
-				close GROFF;
-				unlink $man_temp;
-				open(MAN_OUT, ">", "$dir/$project/$man.html");
-				print(MAN_OUT $man_html);
-				close(MAN_OUT);
-				$extra_links .= "<li><a href=\"$man.html\">$man</a></li>";
+		my $mans = join(' ', ($makefile =~ m/dist_man\d_MANS = (.+)/g));
+		foreach my $man (split(/\s/, $mans)) {
+			my $man_content = get("https://raw.github.com/Yubico/$project/master/$man");
+			my ($man_temphandle,$man_temp) = tempfile();
+			print $man_temphandle $man_content;
+			close $man_temphandle;
+			open(GROFF, "groff -man -T html $man_temp |");
+			my $man_html = '';
+			while(<GROFF>) {
+				next if m/CreationDate/;
+				$man_html .= $_;
 			}
+			close GROFF;
+			unlink $man_temp;
+			open(MAN_OUT, ">", "$dir/$project/$man.html");
+			print(MAN_OUT $man_html);
+			close(MAN_OUT);
+			$extra_links .= "<li><a href=\"$man.html\">$man</a></li>";
+			warn $man;
+		}
+		if($extra_links) {
 			$extra_links = "<h3>Manual pages</h3><ul>$extra_links</ul>";
 		}
 	}

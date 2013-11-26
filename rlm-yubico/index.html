@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="rlm-yubico : FreeRADIUS module for using YubiKeys for authentication" />
 
-    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
 
     <title>rlm-yubico</title>
   </head>
@@ -30,101 +31,107 @@
 
           <h1 id="project_title">rlm-yubico</h1>
           <h2 id="project_tagline">FreeRADIUS module for using YubiKeys for authentication</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/Yubico/rlm-yubico/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/Yubico/rlm-yubico/tarball/master">Download this project as a tar.gz file</a>
-            </section>
         </header>
     </div>
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-<h1>rlm_yubico</h1>
+      <ul>
+        <li><a href="releases.html">Releases</a></li>
+      </ul>
 
-<ul>
-  <li><a href="releases.html">Releases</a></li>
-</ul>
-
-<p>FreeRADIUS module for using YubiKeys for authentication.</p>
-
-<h2>Introduction</h2>
-
-<p>This is a rlm_perl based module for FreeRadius that allows adding
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph"><p>FreeRADIUS module for using YubiKeys for authentication.</p></div>
+<div class="paragraph"><p>This is a rlm_perl based module for FreeRadius that allows adding
 authentication by YubiKey OTP (One Time Password). It works in addition
-to existing authentication methods, such as username and password. A 
+to existing authentication methods, such as username and password. A
 YubiKey OTP can be passed by appending it either to the username or the
-password. When possible, rlm_yubico will use an Access-Challenge response 
-to query the user for an OTP if one is required but not provided.</p>
-
-<h2>Installation</h2>
-
-<ul>
-<li>Run 'make install'</li>
-<li>Edit /etc/freeradius/modules/perl:
-
-<ul>
-<li>Set module = /usr/share/rlm_yubico/rlm_yubico.pl</li>
-</ul>
+password. When possible, rlm_yubico will use an Access-Challenge response
+to query the user for an OTP if one is required but not provided.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Run <em>make install</em>
+</p>
 </li>
-<li>Edit /etc/freeradius/sites-available/default:
-
-<ul>
-<li>Add "perl" (without quotes) to a line by itself in the "authorize" 
-section. It needs to occur early on, at least before "files".</li>
-<li>Add "perl" to a line by itself in the "post-auth" section.</li>
-</ul>
+<li>
+<p>
+Edit /etc/freeradius/modules/perl:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Set module = /usr/share/rlm_yubico/rlm_yubico.pl
+</p>
 </li>
-<li>Edit /etc/freeradius/dictionary:
-
-<ul>
-<li>Add the following line:
-$INCLUDE        /usr/share/rlm_yubico/dictionary</li>
-</ul>
+</ul></div>
 </li>
-</ul><h2>Configuration</h2>
-
-<p>Place configuration in /etc/yubico/rlm/ykrlm-config.cfg
-Place username -&gt; YubiKey mappings in /etc/yubico/rlm/ykmapping</p>
-
-<p>See the included ykrlm-config.cfg file for a description of available 
-settings.</p>
-
-<p>Any changes to configuration will require a full restart of freeradius 
+<li>
+<p>
+Edit /etc/freeradius/sites-available/default:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Add "perl" (without quotes) to a line by itself in the "authorize"
+     section. It needs to occur early on, at least before "files".
+</p>
+</li>
+<li>
+<p>
+Add "perl" to a line by itself in the "post-auth" section.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Edit /etc/freeradius/dictionary:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Add the following line:
+     $INCLUDE        /usr/share/rlm_yubico/dictionary
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="paragraph"><p>Place configuration in /etc/yubico/rlm/ykrlm-config.cfg
+Place username &#8594; YubiKey mappings in /etc/yubico/rlm/ykmapping</p></div>
+<div class="paragraph"><p>See the included ykrlm-config.cfg file for a description of available
+settings.</p></div>
+<div class="paragraph"><p>Any changes to configuration will require a full restart of freeradius
 to take effect. Even though freeradius supports reloading configuration
-without restarting (by sending a HUP signal), rlm_perl, which is used 
-by rlm_yubico, does not.</p>
-
-<p><strong>NOTE</strong>: When running freeRADIUS (&lt; 2.1.12) on a Debian based system, 
-you need  to preload Perl libraries for rlm_yubico to work. This can 
-be done by running freeRADIUS using the following command (change the 
-version to match your Perl installation):</p>
-
-<p>LD_PRELOAD=/usr/lib/libperl.so.5.10 freeradius</p>
-
-<h2>Dependencies</h2>
-
-<p>rlm_yubico requires the following Perl modules:
+without restarting (by sending a HUP signal), rlm_perl, which is used
+by rlm_yubico, does not.</p></div>
+<div class="paragraph"><p><strong>NOTE</strong>: When running freeRADIUS (&lt; 2.1.12) on a Debian based system,
+you need  to preload Perl libraries for rlm_yubico to work. This can
+be done by running freeRADIUS using the following command (change the
+version to match your Perl installation):</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>LD_PRELOAD=/usr/lib/libperl.so.5.10 freeradius</tt></pre>
+</div></div>
+<div class="paragraph"><p>rlm_yubico requires the following Perl modules:
 AnyEvent::Yubico
 Crypt::CBC
 Digest::
 Error::
-Crypt::Blowfish</p>
+Crypt::Blowfish</p></div>
+<div class="paragraph"><p>FreeRADIUS is also required.</p></div>
+</div></div>
 
-<p>FreeRADIUS is also required.</p>
-      </section>
-    </div>
+</section>
+</div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">rlm-yubico maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
-</html>
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">rlm-yubico maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>
