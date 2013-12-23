@@ -150,6 +150,18 @@ $ sudo apt-get install libpam-yubico</tt></pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_freebsd_ports">FreeBSD ports</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>yubico-pam and the supporting Yubico packages have corresponding FreeBSD ports. To install:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ cd /usr/ports/security/pam_yubico
+$ make install clean</tt></pre>
+</div></div>
+<div class="paragraph"><p>Advanced configuration notes are available at <a href="http://mjslabs.com/yubihow.html">http://mjslabs.com/yubihow.html</a></p></div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_configuration">Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Install it in your PAM setup by adding a line to an appropriate file
