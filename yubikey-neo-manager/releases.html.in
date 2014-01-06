@@ -14,11 +14,11 @@
 </script>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="libykneomgr: Library and command line tool to manage YubiKey NEO" />
+    <meta name="description" content="YubiKey NEO Manager : Graphical user interface to manage YubiKey NEOs" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
 
-    <title>libykneomgr releases</title>
+    <title>YubiKey NEO Manager releases</title>
   </head>
 
   <body>
@@ -26,10 +26,10 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/Yubico/libykneomgr">View on GitHub</a>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-neo-manager">View on GitHub</a>
 
-          <h1 id="project_title">libykneomgr</h1>
-          <h2 id="project_tagline">Library and command line tool to manage YubiKey NEO</h2>
+          <h1 id="project_title">YubiKey NEO Manager</h1>
+          <h2 id="project_tagline">Graphical user interface to manage YubiKey NEOs</h2>
 
         </header>
     </div>
@@ -47,7 +47,7 @@
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">libykneomgr maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p class="copyright">YubiKey NEO Manager maintained by <a href="https://github.com/Yubico">Yubico</a></p>
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
