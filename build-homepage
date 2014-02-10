@@ -47,6 +47,7 @@ my %categories = ('YubiKey Low-level Library' =>
 
 sub build_projects_page {
 	my $project = shift;
+	my $name = shift;
 	my $summary = shift;
 	my $dir = shift;
 	my $content = get("https://raw.github.com/Yubico/$project/master/README");
@@ -94,7 +95,8 @@ sub build_projects_page {
 	open(TEMPL, "$template") or die "failed to open project template";
 	open(OUT, ">", "$dir/$project/index.html") or die "failed to open output file ($dir/$project/index.html)";
 	while(<TEMPL>) {
-		s/PROJECT_NAME/$project/;
+		s/PROJECT_PROJECT/$project/;
+		s/PROJECT_NAME/$name/;
 		s/PROJECT_SUMMARY/$summary/;
 		s/PROJECT_CONTENT/$massaged_content/;
 		s/EXTRA_LINKS/$extra_links/;
@@ -112,19 +114,22 @@ foreach my $category (keys %categories) {
     $html .= "<p><table>\n<tr><th>Project name</th><th>License</th>" .
 	"<th>Description</th></tr>\n\n";
     foreach my $blurb (@blurbs) {
+	my ($homepage, $license, $project, $summary, $name);
 	my $content = get($blurb);
-	my $homepage = $1 if $content =~ m,Homepage: (.+),g;
-	my $license = $1 if $content =~ m,License: (.+),g;
-	my $project = $1 if $content =~ m,Project: (.+),g;
-	my $summary = $1 if $content =~ m,Summary: (.+),g;
+	$homepage = $1 if $content =~ m,Homepage: (.+),g;
+	$license = $1 if $content =~ m,License: (.+),g;
+	$name = $1 if $content =~ m,Name: (.+),g;
+	$project = $1 if $content =~ m,Project: (.+),g;
+	$summary = $1 if $content =~ m,Summary: (.+),g;
 	die "could not parse blurb: $content ($blurb)"
 	    if !$project || !$summary || !$license;
+	$name = $project unless $name;
 	$html .= "<tr><td><a href=\"$homepage\">$project</a></td>\n";
 	$html .= "<td><a href=\"http://spdx.org/licenses/$license\">" .
 	    "$license</a></td>\n";
 	$html .= "<td>$summary</td></tr>\n\n";
 	if($homepage =~ m,opensource\.yubico\.com,) {
-		build_projects_page($project, $summary, dirname($0));
+		build_projects_page($project, $name, $summary, dirname($0));
 	}
     }
     $html .= "</table></p>\n";
