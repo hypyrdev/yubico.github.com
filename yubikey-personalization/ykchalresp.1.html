@@ -1,4 +1,4 @@
-<!-- Creator     : groff version 1.22.1 -->
+<!-- Creator     : groff version 1.22.2 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -46,7 +46,8 @@ Perform challenge-response operation with YubiKey</p>
 
 <p style="margin-left:11%; margin-top: 1em"><b>ykchalresp</b>
 [<i>-1</i> | <i>-2</i>] [<i>-H</i>] [<i>-Y</i>] [<i>-N</i>]
-[<i>-x</i>] [<i>-v</i>] [<i>-V</i>] [<i>-h</i>]</p>
+[<i>-x</i>] [<i>-v</i>] [<i>-6</i>] [<i>-8</i>] [<i>-t</i>]
+[<i>-V</i>] [<i>-h</i>]</p>
 
 <h2>DESCRIPTION
 <a name="DESCRIPTION"></a>
@@ -146,6 +147,42 @@ to require a key press before sending the response.</p></td></tr>
 
 
 <p>enable verbose mode.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;6</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>output the response in OATH format, 6 digits.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;8</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>output the response in OATH format, 8 digits.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="3%">
+
+
+<p><b>&minus;t</b></p></td>
+<td width="8%"></td>
+<td width="78%">
+
+
+<p>use current time as challenge instead of reading
+challenge from command line (as in default TOTP mode,
+seconds since 1970-01-01 00:00:00 / 30 encoded as an 8 byte
+challenge).</p> </td></tr>
 <tr valign="top" align="left">
 <td width="11%"></td>
 <td width="3%">
