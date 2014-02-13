@@ -78,6 +78,7 @@ sub build_projects_page {
 			my $man_html = '';
 			while(<GROFF>) {
 				next if m/CreationDate/;
+        next if m/Creator/;
 				$man_html .= $_;
 			}
 			close GROFF;
