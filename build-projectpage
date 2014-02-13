@@ -1,0 +1,83 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use LWP::Simple;
+use LWP::UserAgent;
+
+use File::Basename;
+use File::Temp qw/tempfile/;
+
+my $dir = dirname($0);
+my $project = shift;
+
+my ($homepage, $license, $summary, $name);
+my $blurb = "https://raw.github.com/Yubico/$project/master/BLURB";
+my $content = get($blurb);
+
+$homepage = $1 if $content =~ m,Homepage: (.+),g;
+$license = $1 if $content =~ m,License: (.+),g;
+$name = $1 if $content =~ m,Name: (.+),g;
+$project = $1 if $content =~ m,Project: (.+),g;
+$summary = $1 if $content =~ m,Summary: (.+),g;
+
+die "could not parse blurb: $content ($blurb)" if !$project || !$summary || !$license;
+$name = $project unless $name;
+
+$content = get("https://raw.github.com/Yubico/$project/master/README");
+my $extra_links = '';
+my $man_links = '';
+my ($temphandle,$temp) = tempfile();
+print $temphandle $content;
+close $temphandle;
+open(my $ascii, "-|", "asciidoc -o- -s $temp") or die "failed to open asciidoc";
+my $massaged_content;
+while(<$ascii>) {
+  $massaged_content .= $_;
+}
+close $ascii;
+unlink $temp;
+my $template = "project-index.html-template";
+if(-f "$dir/$project/$template") {
+  $template = "$dir/$project/$template";
+}
+my $makefile = get("https://raw.github.com/Yubico/$project/master/Makefile.am");
+if($makefile) {
+  my $mans = join(' ', ($makefile =~ m/dist_man\d_MANS = (.+)/g));
+  foreach my $man (split(/\s/, $mans)) {
+    my $man_content = get("https://raw.github.com/Yubico/$project/master/$man");
+    my ($man_temphandle,$man_temp) = tempfile();
+    print $man_temphandle $man_content;
+    close $man_temphandle;
+    open(my $groff, "-|", "groff -man -T html $man_temp");
+    my $man_html = '';
+    while(<$groff>) {
+      next if m/CreationDate/;
+      next if m/Creator/;
+      $man_html .= $_;
+    }
+    close $groff;
+    unlink $man_temp;
+    open(my $man_out, ">", "$dir/$project/$man.html");
+    print($man_out $man_html);
+    close($man_out);
+    $man_links .= "<li><a href=\"$man.html\">$man</a></li>";
+  }
+  if($man_links ne '') {
+    $extra_links = "<h3>Manual pages</h3><ul>$man_links</ul>";
+  }
+}
+
+open(my $templ, "<", "$template") or die "failed to open project template";
+open(my $out, ">", "$dir/$project/index.html") or die "failed to open output file ($dir/$project/index.html)";
+while(<$templ>) {
+  s/PROJECT_PROJECT/$project/;
+  s/PROJECT_NAME/$name/;
+  s/PROJECT_SUMMARY/$summary/;
+  s/PROJECT_CONTENT/$massaged_content/;
+  s/EXTRA_LINKS/$extra_links/;
+  print($out $_);
+}
+close $templ;
+close $templ;
