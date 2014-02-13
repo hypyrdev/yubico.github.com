@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubikey-personalization : YubiKey Personalization cross-platform library and tool" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubikey-personalization</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-personalization">View on GitHub</a>
+
+          <h1 id="project_title">yubikey-personalization</h1>
+          <h2 id="project_tagline">YubiKey Personalization cross-platform library and tool</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div class="paragraph"><p>Maintainer instructions for making releases</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph"><p>The point of this document is to describe all steps required to make a
+proper release of the yubikey-personalization project.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Make sure the doc/ sub-directory uses the latest revision.  Confirm with:
+  cd doc &amp;&amp; git checkout master &amp;&amp; git pull &amp;&amp; git diff
+</p>
+</li>
+<li>
+<p>
+Make sure the version number in configure.ac has been increment in AC_INIT.
+</p>
+</li>
+<li>
+<p>
+Make sure the libtool shared library version has been incremented properly, see <a href="http://www.gnu.org/software/libtool/manual/html_node/Versioning.html">http://www.gnu.org/software/libtool/manual/html_node/Versioning.html</a> Always increment LT_REVISION on every release&#8201;&#8212;&#8201;it makes it possible to have multiple releases installed concurrently which helps testing.
+</p>
+</li>
+<li>
+<p>
+Make sure NEWS describes all changes since the last release.  Use <a href="https://github.com/Yubico/yubikey-personalization/commits/master">https://github.com/Yubico/yubikey-personalization/commits/master</a> to review.
+</p>
+</li>
+<li>
+<p>
+Change the <em>(unreleased)</em> part in NEWS to <em>(released 20XX-YY-ZZ)</em> and commit that with a note <em>Version Q.P</em>.
+</p>
+</li>
+<li>
+<p>
+Run <em>make release</em>.
+</p>
+</li>
+<li>
+<p>
+Prepare Windows &amp; Mac build&#8201;&#8212;&#8201;see ykpers4win.mk and ykpers4mac.mk.
+</p>
+</li>
+<li>
+<p>
+Upload to Debian.
+</p>
+</li>
+<li>
+<p>
+Increment version number in configure.ac and add a NEWS template for the next release.
+</p>
+</li>
+</ul></div>
+</div></div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubikey-personalization maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>
