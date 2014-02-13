@@ -45,67 +45,6 @@ my %categories = ('YubiKey Low-level Library' =>
 		   "https://raw.github.com/Yubico/yubix/master/BLURB",
 		   "https://raw.github.com/Yubico/yubico-windows-auth/master/BLURB"]);
 
-sub build_projects_page {
-	my $project = shift;
-	my $name = shift;
-	my $summary = shift;
-	my $dir = shift;
-	my $content = get("https://raw.github.com/Yubico/$project/master/README");
-	my $extra_links = '';
-	my ($temphandle,$temp) = tempfile();
-	print $temphandle $content;
-	close $temphandle;
-	open(ASCII, "asciidoc -o- -s $temp |") or die "failed to open asciidoc";
-	my $massaged_content;
-	while(<ASCII>) {
-		$massaged_content .= $_;
-	}
-	close ASCII;
-	unlink $temp;
-	my $template = "project-index.html-template";
-	if(-f "$dir/$project/$template") {
-		$template = "$dir/$project/$template";
-	}
-	my $makefile = get("https://raw.github.com/Yubico/$project/master/Makefile.am");
-	if($makefile) {
-		my $mans = join(' ', ($makefile =~ m/dist_man\d_MANS = (.+)/g));
-		foreach my $man (split(/\s/, $mans)) {
-			my $man_content = get("https://raw.github.com/Yubico/$project/master/$man");
-			my ($man_temphandle,$man_temp) = tempfile();
-			print $man_temphandle $man_content;
-			close $man_temphandle;
-			open(GROFF, "groff -man -T html $man_temp |");
-			my $man_html = '';
-			while(<GROFF>) {
-				next if m/CreationDate/;
-        next if m/Creator/;
-				$man_html .= $_;
-			}
-			close GROFF;
-			unlink $man_temp;
-			open(MAN_OUT, ">", "$dir/$project/$man.html");
-			print(MAN_OUT $man_html);
-			close(MAN_OUT);
-			$extra_links .= "<li><a href=\"$man.html\">$man</a></li>";
-		}
-		if($extra_links) {
-			$extra_links = "<h3>Manual pages</h3><ul>$extra_links</ul>";
-		}
-	}
-
-	open(TEMPL, "$template") or die "failed to open project template";
-	open(OUT, ">", "$dir/$project/index.html") or die "failed to open output file ($dir/$project/index.html)";
-	while(<TEMPL>) {
-		s/PROJECT_PROJECT/$project/;
-		s/PROJECT_NAME/$name/;
-		s/PROJECT_SUMMARY/$summary/;
-		s/PROJECT_CONTENT/$massaged_content/;
-		s/EXTRA_LINKS/$extra_links/;
-		print(OUT $_);
-	}
-	close TEMPL;
-	close OUT;
-}
 
 my $html;
 
@@ -130,7 +69,7 @@ foreach my $category (keys %categories) {
 	    "$license</a></td>\n";
 	$html .= "<td>$summary</td></tr>\n\n";
 	if($homepage =~ m,opensource\.yubico\.com,) {
-		build_projects_page($project, $name, $summary, dirname($0));
+    system(dirname($0) . "/build-projectpage $project");
 	}
     }
     $html .= "</table></p>\n";

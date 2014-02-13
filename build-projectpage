@@ -28,6 +28,7 @@ $name = $project unless $name;
 $content = get("https://raw.github.com/Yubico/$project/master/README");
 my $extra_links = '';
 my $man_links = '';
+my $doc_links = '';
 my ($temphandle,$temp) = tempfile();
 print $temphandle $content;
 close $temphandle;
@@ -38,10 +39,6 @@ while(<$ascii>) {
 }
 close $ascii;
 unlink $temp;
-my $template = "project-index.html-template";
-if(-f "$dir/$project/$template") {
-  $template = "$dir/$project/$template";
-}
 my $makefile = get("https://raw.github.com/Yubico/$project/master/Makefile.am");
 if($makefile) {
   my $mans = join(' ', ($makefile =~ m/dist_man\d_MANS = (.+)/g));
@@ -64,11 +61,58 @@ if($makefile) {
     close($man_out);
     $man_links .= "<li><a href=\"$man.html\">$man</a></li>";
   }
-  if($man_links ne '') {
-    $extra_links = "<h3>Manual pages</h3><ul>$man_links</ul>";
+
+  my $docs = join (' ', ($makefile =~ m/EXTRA_DIST = (.+)/));
+  foreach my $doc (split(/\s/, $docs)) {
+    next unless($doc =~ m/^doc\//);
+
+    my $url = "https://raw.github.com/Yubico/$project/master/$doc";
+    my $doc_content = get("https://raw.github.com/Yubico/$project/master/$doc");
+    next unless $doc_content;
+
+    my ($temphandle,$temp) = tempfile();
+    print $temphandle $doc_content;
+    close $temphandle;
+    open(my $ascii, "-|", "asciidoc -o- -s $temp") or die "failed to open asciidoc";
+    my $massaged_content;
+    while(<$ascii>) {
+      $massaged_content .= $_;
+    }
+    close $ascii;
+    unlink $temp;
+
+    my $doc_template = "documentation.html-template";
+    if(-f "$dir/$project/$doc_template") {
+      $doc_template = "$dir/$project/$doc_template";
+    }
+    open(my $doc_templ, "<", $doc_template) or die "failed to open documentation template";
+
+    $doc =~ s/\.asciidoc$//;
+
+    open(my $doc_out, ">", "$dir/$project/$doc.html") or die "failed to open output file ($dir/$project/$doc)";
+    while(<$doc_templ>) {
+      s/PROJECT_PROJECT/$project/;
+      s/PROJECT_NAME/$name/;
+      s/PROJECT_SUMMARY/$summary/;
+      s/PROJECT_CONTENT/$massaged_content/;
+      print($doc_out $_);
+    }
+    close $doc_templ;
+    close $doc_out;
+    $doc_links .= "<li><a href=\"$doc.html\">" . basename($doc) . "</a></li>";
   }
 }
+if($man_links ne '') {
+  $extra_links .= "<h3>Manual pages</h3><ul>$man_links</ul>\n";
+}
+if($doc_links ne '') {
+  $extra_links .= "<h3>Documentation</h3><ul>$doc_links</ul>\n";
+}
 
+my $template = "project-index.html-template";
+if(-f "$dir/$project/$template") {
+  $template = "$dir/$project/$template";
+}
 open(my $templ, "<", "$template") or die "failed to open project template";
 open(my $out, ">", "$dir/$project/index.html") or die "failed to open output file ($dir/$project/index.html)";
 while(<$templ>) {
@@ -80,4 +124,4 @@ while(<$templ>) {
   print($out $_);
 }
 close $templ;
-close $templ;
+close $out;
