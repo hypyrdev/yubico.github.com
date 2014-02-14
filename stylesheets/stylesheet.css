@@ -292,6 +292,22 @@ Full-Width Styles
   border-bottom-right-radius: 2px;
 }
 
+#travis_link {
+  display: block;
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  //z-index: 10;
+  //padding: 10px 50px 10px 10px;
+  font-weight: 700;
+}
+
+#travis_img {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
 #header_wrap {
   background: #212121;
   background: -moz-linear-gradient(top, #373737, #212121);

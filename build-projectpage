@@ -12,7 +12,7 @@ use File::Temp qw/tempfile/;
 my $dir = dirname($0);
 my $project = shift;
 
-my ($homepage, $license, $summary, $name);
+my ($homepage, $license, $summary, $name, $travis);
 my $blurb = "https://raw.github.com/Yubico/$project/master/BLURB";
 my $content = get($blurb);
 
@@ -21,6 +21,7 @@ $license = $1 if $content =~ m,License: (.+),g;
 $name = $1 if $content =~ m,Name: (.+),g;
 $project = $1 if $content =~ m,Project: (.+),g;
 $summary = $1 if $content =~ m,Summary: (.+),g;
+$travis = $1 if $content =~ m,Travis: (.+),g;
 
 die "could not parse blurb: $content ($blurb)" if !$project || !$summary || !$license;
 $name = $project unless $name;
@@ -29,6 +30,7 @@ $content = get("https://raw.github.com/Yubico/$project/master/README");
 my $extra_links = '';
 my $man_links = '';
 my $doc_links = '';
+my $travis_link = '';
 my ($temphandle,$temp) = tempfile();
 print $temphandle $content;
 close $temphandle;
@@ -67,8 +69,11 @@ if($makefile) {
     next unless($doc =~ m/^doc\//);
 
     my $url = "https://raw.github.com/Yubico/$project/master/$doc";
-    my $doc_content = get("https://raw.github.com/Yubico/$project/master/$doc");
-    next unless $doc_content;
+    my $doc_content = get($url);
+    unless($doc_content) {
+      warn "tried to get $url.";
+      next;
+    }
 
     my ($temphandle,$temp) = tempfile();
     print $temphandle $doc_content;
@@ -108,6 +113,9 @@ if($man_links ne '') {
 if($doc_links ne '') {
   $extra_links .= "<h3>Documentation</h3><ul>$doc_links</ul>\n";
 }
+if($travis) {
+  $travis_link = '<a id="travis_link" href="' . $travis . '"><img id="travis_img" src="' . $travis . '.png?branch=master"/></a>';
+}
 
 my $template = "project-index.html-template";
 if(-f "$dir/$project/$template") {
@@ -121,6 +129,7 @@ while(<$templ>) {
   s/PROJECT_SUMMARY/$summary/;
   s/PROJECT_CONTENT/$massaged_content/;
   s/EXTRA_LINKS/$extra_links/;
+  s/PROJECT_TRAVIS_LINK/$travis_link/;
   print($out $_);
 }
 close $templ;
