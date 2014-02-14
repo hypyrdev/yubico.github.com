@@ -41,6 +41,11 @@ while(<$ascii>) {
 }
 close $ascii;
 unlink $temp;
+
+if($travis) {
+  $travis_link = '<a id="travis_link" href="' . $travis . '"><img id="travis_img" src="' . $travis . '.png?branch=master"/></a>';
+}
+
 my $makefile = get("https://raw.github.com/Yubico/$project/master/Makefile.am");
 if($makefile) {
   my $mans = join(' ', ($makefile =~ m/dist_man\d_MANS = (.+)/g));
@@ -100,6 +105,7 @@ if($makefile) {
       s/PROJECT_NAME/$name/;
       s/PROJECT_SUMMARY/$summary/;
       s/PROJECT_CONTENT/$massaged_content/;
+      s/PROJECT_TRAVIS_LINK/$travis_link/;
       print($doc_out $_);
     }
     close $doc_templ;
@@ -112,9 +118,6 @@ if($man_links ne '') {
 }
 if($doc_links ne '') {
   $extra_links .= "<h3>Documentation</h3><ul>$doc_links</ul>\n";
-}
-if($travis) {
-  $travis_link = '<a id="travis_link" href="' . $travis . '"><img id="travis_img" src="' . $travis . '.png?branch=master"/></a>';
 }
 
 my $template = "project-index.html-template";
