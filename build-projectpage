@@ -9,6 +9,9 @@ use LWP::UserAgent;
 use File::Basename;
 use File::Temp qw/tempfile/;
 
+use JSON;
+use MIME::Base64::URLSafe;
+
 my $dir = dirname($0);
 my $project = shift;
 
@@ -68,17 +71,20 @@ if($makefile) {
     close($man_out);
     $man_links .= "<li><a href=\"$man.html\">$man</a></li>";
   }
+}
 
-  my $docs = join (' ', ($makefile =~ m/EXTRA_DIST = (.+)/));
-  foreach my $doc (split(/\s/, $docs)) {
-    next unless($doc =~ m/^doc\//);
-
-    my $url = "https://raw.github.com/Yubico/$project/master/$doc";
-    my $doc_content = get($url);
-    unless($doc_content) {
-      warn "tried to get $url.";
+my $docs_raw = get("https://api.github.com/repos/Yubico/$project/contents/doc");
+if($docs_raw) {
+  my $docs = decode_json($docs_raw);
+  foreach my $doc (@$docs) {
+    my $raw_content = get($doc->{url});
+    unless($raw_content) {
+      warn "tried to get " . $doc->{url} . ".";
       next;
     }
+    my $doc_name = $doc->{path};
+    my $content = decode_json($raw_content);
+    my $doc_content = urlsafe_b64decode($content->{content});
 
     my ($temphandle,$temp) = tempfile();
     print $temphandle $doc_content;
@@ -97,9 +103,9 @@ if($makefile) {
     }
     open(my $doc_templ, "<", $doc_template) or die "failed to open documentation template";
 
-    $doc =~ s/\.asciidoc$//;
+    $doc_name =~ s/\.asciidoc$//;
 
-    open(my $doc_out, ">", "$dir/$project/$doc.html") or die "failed to open output file ($dir/$project/$doc)";
+    open(my $doc_out, ">", "$dir/$project/$doc_name.html") or die "failed to open output file ($dir/$project/$doc_name)";
     while(<$doc_templ>) {
       s/PROJECT_PROJECT/$project/;
       s/PROJECT_NAME/$name/;
@@ -110,7 +116,7 @@ if($makefile) {
     }
     close $doc_templ;
     close $doc_out;
-    $doc_links .= "<li><a href=\"$doc.html\">" . basename($doc) . "</a></li>";
+    $doc_links .= "<li><a href=\"$doc_name.html\">" . basename($doc_name) . "</a></li>";
   }
 }
 if($man_links ne '') {
