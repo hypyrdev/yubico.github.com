@@ -159,21 +159,30 @@ if(-d "$dir/$project/releases/") {
   @release_files = sort { myversioncmp($b, $a) } @release_files;
   foreach my $file (@release_files) {
     my $name = $file;
+    my $nosig = 0;
     $name =~ s/\.tar\.gz$//;
     $name =~ s/\.tgz$//;
     $name =~ s/\.zip$//;
     $name =~ s/\.cap$//;
     $name =~ s/\.apk$//;
+    if($name =~ s/\.exe$//) {
+      $nosig = 1;
+    }
     $release_content .= <<EOH
 
 <dt>${name}</dt>
 <dd>
   <a href="releases/${file}">${file}</a>
 </dd>
+EOH
+    ;
+    unless($nosig) {
+      $release_content .= <<EOH
 <dd>
   <a href="releases/${file}.sig">${file}.sig</a>
 </dd>
 EOH
+    }
   }
 
   my $rel_template = "releases.html-template";
