@@ -15,11 +15,11 @@
 </script>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="yubioath-desktop : YubiOATH Desktop" />
+    <meta name="description" content="Yubico Authenticator : Crossplatform graphical user interface to generate one-time passwords." />
 
     <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
 
-    <title>yubioath-desktop</title>
+    <title>Yubico Authenticator</title>
   </head>
 
   <body>
@@ -29,8 +29,8 @@
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/Yubico/yubioath-desktop">View on GitHub</a>
 
-          <h1 id="project_title">yubioath-desktop</h1>
-          <h2 id="project_tagline">YubiOATH Desktop app</h2>
+          <h1 id="project_title">Yubico Authenticator</h1>
+          <h2 id="project_tagline">Crossplatform graphical user interface to generate one-time passwords.</h2>
         </header>
     </div>
 
@@ -41,12 +41,67 @@
         <li><a href="releases.html">Releases</a></li>
       </ul>
 
-
-<div class="sect1">
-<h2 id="_issues">Issues</h2>
+<div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>Please report any issues/feature-suggestions in the issue tracker
-on github (<a href="https://github.com/Yubico/yubioath-desktop">https://github.com/Yubico/yubioath-desktop</a>)</p></div>
+<div class="paragraph"><p>The Yubico Authenticator is a graphical desktop tool for generating
+Open AuTHentication (OATH) event-based HOTP and time-based TOTP
+one-time password codes, with the help of a Yubikey NEO that protects
+the shared secrets.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_license">License</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Yubico Authenticator is licensed under GPLv3+, see COPYING for
+details.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dependencies">Dependencies</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>To build the Yubico Authenticator you need the following Python
+modules: PySide, PBKDF2, pyscard.  To use it, you need a YubiKey NEO
+with the OATH applet loaded.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_windows_binaries">Building Windows binaries</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>For Windows you will need python, PySide, PyInstaller and Pywin32
+installed (32 or 64-bit versions depending on the architecture of the
+binary your are building).</p></div>
+<div class="paragraph"><p>Clone the git repository and checkout the desired release tag (or
+branch):</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>git clone https://github.com/Yubico/yubioath-desktop.git
+cd yubico-authenticator</tt></pre>
+</div></div>
+<div class="paragraph"><p>To sign the executable, copy the pfx file to yubicoauth.pfx and place
+it in the root of the project folder. You will need signtool.exe (from
+the Windows SDK) either copied into the root as well or in a location
+in your PATH.</p></div>
+<div class="paragraph"><p>Run "pyinstaller.exe -w -i yubico.ico yubicoauthenticator.spec" from
+the main project folder.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_mac_osx_binaries">Building Mac OSX binaries</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Currently we do not have binaries for OSX, contribution is welcome.
+It should be possible via PyInstaller.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_todo">Todo</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Add possibility to change password
+</p>
+</li>
+</ul></div>
 </div>
 </div>
 
@@ -56,7 +111,7 @@ on github (<a href="https://github.com/Yubico/yubioath-desktop">https://github.c
 <!-- FOOTER  -->
 <div id="footer_wrap" class="outer">
 <footer class="inner">
-<p class="copyright">yubioath-desktop maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p class="copyright">Yubico Authenticator maintained by <a href="https://github.com/Yubico">Yubico</a></p>
 <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
 </footer>
 </div></body></html>

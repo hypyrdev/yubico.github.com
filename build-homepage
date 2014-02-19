@@ -35,6 +35,7 @@ my %categories = (
 		"https://raw.github.com/Yubico/yubioath-android/master/BLURB",
 		"https://raw.github.com/Yubico/ykneo-oath/master/BLURB",
 		"https://raw.github.com/Yubico/yubitotp-android/master/BLURB",
+		"https://raw.github.com/Yubico/yubioath-desktop/master/BLURB",
 		"https://raw.github.com/Yubico/ykneo-openpgp/master/BLURB",
 		"https://raw.github.com/Yubico/yubico-piv-tool/master/BLURB", ],
 	'YubiKey Personalization' =>
