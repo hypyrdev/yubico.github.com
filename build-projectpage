@@ -81,47 +81,49 @@ if($man_links ne '') {
 my $docs_raw = get("https://api.github.com/repos/Yubico/$project/contents/doc");
 if($docs_raw) {
   my $docs = decode_json($docs_raw);
-  foreach my $doc (@$docs) {
-    my $raw_content = get($doc->{url});
-    unless($raw_content) {
-      warn "tried to get " . $doc->{url} . ".";
-      next;
-    }
-    my $doc_name = $doc->{path};
-    my $content = decode_json($raw_content);
-    my $doc_content = urlsafe_b64decode($content->{content});
+  if(ref($docs) eq 'ARRAY') {
+    foreach my $doc (@$docs) {
+      my $raw_content = get($doc->{url});
+      unless($raw_content) {
+        warn "tried to get " . $doc->{url} . ".";
+        next;
+      }
+      my $doc_name = $doc->{path};
+      my $content = decode_json($raw_content);
+      my $doc_content = urlsafe_b64decode($content->{content});
 
-    my ($temphandle,$temp) = tempfile();
-    print $temphandle $doc_content;
-    close $temphandle;
-    open(my $ascii, "-|", "asciidoc -o- -s $temp") or die "failed to open asciidoc";
-    my $massaged_content;
-    while(<$ascii>) {
-      $massaged_content .= $_;
-    }
-    close $ascii;
-    unlink $temp;
+      my ($temphandle,$temp) = tempfile();
+      print $temphandle $doc_content;
+      close $temphandle;
+      open(my $ascii, "-|", "asciidoc -o- -s $temp") or die "failed to open asciidoc";
+      my $massaged_content;
+      while(<$ascii>) {
+        $massaged_content .= $_;
+      }
+      close $ascii;
+      unlink $temp;
 
-    my $doc_template = "documentation.html-template";
-    if(-f "$dir/$project/$doc_template") {
-      $doc_template = "$dir/$project/$doc_template";
-    }
-    open(my $doc_templ, "<", $doc_template) or die "failed to open documentation template";
+      my $doc_template = "documentation.html-template";
+      if(-f "$dir/$project/$doc_template") {
+        $doc_template = "$dir/$project/$doc_template";
+      }
+      open(my $doc_templ, "<", $doc_template) or die "failed to open documentation template";
 
-    $doc_name =~ s/\.asciidoc$//;
+      $doc_name =~ s/\.asciidoc$//;
 
-    open(my $doc_out, ">", "$dir/$project/$doc_name.html") or die "failed to open output file ($dir/$project/$doc_name)";
-    while(<$doc_templ>) {
-      s/PROJECT_PROJECT/$project/;
-      s/PROJECT_NAME/$name/;
-      s/PROJECT_SUMMARY/$summary/;
-      s/PROJECT_CONTENT/$massaged_content/;
-      s/PROJECT_TRAVIS_LINK/$travis_link/;
-      print($doc_out $_);
+      open(my $doc_out, ">", "$dir/$project/$doc_name.html") or die "failed to open output file ($dir/$project/$doc_name)";
+      while(<$doc_templ>) {
+        s/PROJECT_PROJECT/$project/;
+        s/PROJECT_NAME/$name/;
+        s/PROJECT_SUMMARY/$summary/;
+        s/PROJECT_CONTENT/$massaged_content/;
+        s/PROJECT_TRAVIS_LINK/$travis_link/;
+        print($doc_out $_);
+      }
+      close $doc_templ;
+      close $doc_out;
+      $doc_links .= "<li><a href=\"$doc_name.html\">" . basename($doc_name) . "</a></li>";
     }
-    close $doc_templ;
-    close $doc_out;
-    $doc_links .= "<li><a href=\"$doc_name.html\">" . basename($doc_name) . "</a></li>";
   }
 }
 if($doc_links ne '') {
