@@ -83,12 +83,13 @@ if($docs_raw) {
   my $docs = decode_json($docs_raw);
   if(ref($docs) eq 'ARRAY') {
     foreach my $doc (@$docs) {
+      my $doc_name = $doc->{path};
+      next unless $doc_name =~ m/asciidoc$/;
       my $raw_content = get($doc->{url});
       unless($raw_content) {
         warn "tried to get " . $doc->{url} . ".";
         next;
       }
-      my $doc_name = $doc->{path};
       my $content = decode_json($raw_content);
       my $doc_content = urlsafe_b64decode($content->{content});
 
