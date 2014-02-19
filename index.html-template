@@ -75,16 +75,6 @@
 
 REPLACEME
 
-	<h2>YubiHSM projects</h2>
-
-      <p><table>
-	<tr><th>Project name</th><th>Description</th></tr>
-
-	<tr><td><a href="python-pyhsm/">
-	  python-pyhsm</a></td>
-	  <td>YubiHSM Python package</td></tr>
-
-	</table></p>
 	</section>
     </div>
 
