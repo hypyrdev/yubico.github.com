@@ -157,6 +157,7 @@ if(-d "$dir/$project/releases/") {
   foreach my $file (@release_files) {
     my $name = $file;
     $name =~ s/\.tar\.gz$//;
+    $name =~ s/\.tgz$//;
     $name =~ s/\.zip$//;
     $name =~ s/\.cap$//;
     $name =~ s/\.apk$//;
