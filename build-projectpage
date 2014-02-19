@@ -156,7 +156,7 @@ if(-d "$dir/$project/releases/") {
   closedir($release_dir);
   @release_files = grep(!/\.sig$/, @release_files);
   @release_files = grep(!/^\./, @release_files);
-  @release_files = sort { myversioncmp(version($b), version($a)) } @release_files;
+  @release_files = sort { myversioncmp($b, $a) } @release_files;
   foreach my $file (@release_files) {
     my $name = $file;
     $name =~ s/\.tar\.gz$//;
