@@ -159,15 +159,12 @@ if(-d "$dir/$project/releases/") {
   @release_files = sort { myversioncmp($b, $a) } @release_files;
   foreach my $file (@release_files) {
     my $name = $file;
-    my $nosig = 0;
     $name =~ s/\.tar\.gz$//;
     $name =~ s/\.tgz$//;
     $name =~ s/\.zip$//;
     $name =~ s/\.cap$//;
     $name =~ s/\.apk$//;
-    if($name =~ s/\.exe$//) {
-      $nosig = 1;
-    }
+    $name =~ s/\.exe$//;
     $release_content .= <<EOH
 
 <dt>${name}</dt>
@@ -176,7 +173,7 @@ if(-d "$dir/$project/releases/") {
 </dd>
 EOH
     ;
-    unless($nosig) {
+    if(-f "$dir/$project/releases/$file.sig") {
       $release_content .= <<EOH
 <dd>
   <a href="releases/${file}.sig">${file}.sig</a>
