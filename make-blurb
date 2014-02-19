@@ -10,7 +10,8 @@ Homepage: http://opensource.yubico.com/%(name)s/
 License: %(license)s
 Name: %(name)s
 Project: %(name)s
-Summary: %(description)s"""
+Summary: %(description)s
+"""
 
 
 def get_license():
