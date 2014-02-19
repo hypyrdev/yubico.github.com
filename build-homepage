@@ -22,7 +22,11 @@ use LWP::Simple;
 use File::Basename;
 use File::Temp qw/tempfile/;
 
-my %categories = ('YubiKey Low-level Library' =>
+my %categories = (
+                  'YubiCloud Servers' =>
+      ["https://raw.github.com/Yubico/yubikey-ksm/master/BLURB",
+       "https://raw.github.com/Yubico/yubikey-val/master/BLURB"],
+                  'YubiKey Low-level Library' =>
 		  ["https://raw.github.com/Yubico/yubico-c/master/BLURB",
 		   "https://raw.github.com/Yubico/yubico-j/master/BLURB"],
                   'YubiKey NEO' =>

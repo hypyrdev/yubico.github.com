@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -14,11 +15,11 @@
 </script>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Yubikey-ksm : YubiKey Key Storage Module" />
+    <meta name="description" content="yubikey-ksm : YubiKey Key Storage Module" />
 
-    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
 
-    <title>Yubikey-ksm</title>
+    <title>yubikey-ksm</title>
   </head>
 
   <body>
@@ -27,50 +28,61 @@
     <div id="header_wrap" class="outer">
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/Yubico/yubikey-ksm">View on GitHub</a>
-
-          <h1 id="project_title">Yubikey-ksm</h1>
+<a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-ksm"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-ksm.png?branch=master"/></a>
+          <h1 id="project_title">yubikey-ksm</h1>
           <h2 id="project_tagline">YubiKey Key Storage Module</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/Yubico/yubikey-ksm/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/Yubico/yubikey-ksm/tarball/master">Download this project as a tar.gz file</a>
-            </section>
         </header>
     </div>
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1>yubikey-ksm</h1>
+      <ul>
+        <li><a href="releases.html">Releases</a></li>
+      </ul>
 
-<ul>
-  <li><a href="releases.html">Releases</a></li>
-</ul>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>The YubiKey Key Storage Module (YK-KSM) provides a AES key storage
+facility for use with a YubiKey validation server.</p></div>
+<div class="paragraph"><p>The YK-KSM is intended to be run on a locked-down server.</p></div>
+<div class="paragraph"><p>This separation allows third parties to keep tight control of the AES
+keys for their YubiKeys, but at the same time allow external
+validation servers (e.g., Yubico&#8217;s) to validate OTPs from these
+YubiKeys.</p></div>
+<div class="paragraph"><p>Releases are available from:</p></div>
+<div class="paragraph"><p><a href="http://yubico.github.io/yubikey-ksm/releases.html">http://yubico.github.io/yubikey-ksm/releases.html</a></p></div>
+<div class="paragraph"><p>The YK-KSM was designed to work with the YubiKey validation server:</p></div>
+<div class="paragraph"><p><a href="http://yubico.github.io/yubikey-val/">http://yubico.github.io/yubikey-val/</a></p></div>
+<div class="paragraph"><p>Documentation is in doc/.</p></div>
+<div class="paragraph"><p>The documentation is also available online at:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>http://github.com/Yubico/yubikey-ksm/wiki</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_development">Development</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>To create a tarball you must have a recent versions of "help2man" and
+"git2cl".</p></div>
+<div class="paragraph"><p>If you&#8217;ve checked out the source tree and the doc/ dir is empty, do</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ git submodule init
+$ git submodule update</tt></pre>
+</div></div>
+</div>
+</div>
 
-<p>The YubiKey Key Storage Module (YK-KSM) provides a AES key storage
-facility for use with a YubiKey validation server.  The YK-KSM is
-intended to be run on a locked-down server.  This separation allows
-third parties to keep tight control of the AES keys for their
-YubiKeys, but at the same time allow external validation servers
-(e.g., Yubico's) to validate OTPs from these YubiKeys.</p>
+</section>
+</div>
 
-<p>The YK-KSM was designed to work with the YubiKey validation server:</p>
-
-<p><a href="../yubikey-val/">yubikey-val</a></p>
-
-<p>The documentation is also available online <a href="http://github.com/Yubico/yubikey-ksm/wiki">here</a>.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Yubikey-ksm maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
-</html>
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubikey-ksm maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>

@@ -1,14 +1,25 @@
+
 <!DOCTYPE html>
 <html>
 
   <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Yubikey-val : YubiKey OTP validation server in PHP" />
+    <meta name="description" content="yubikey-val : YubiKey OTP validation server in PHP" />
 
-    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
 
-    <title>Yubikey-val</title>
+    <title>yubikey-val</title>
   </head>
 
   <body>
@@ -17,47 +28,59 @@
     <div id="header_wrap" class="outer">
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/Yubico/yubikey-val">View on GitHub</a>
-
-          <h1 id="project_title">Yubikey-val</h1>
+<a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-val"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-val.png?branch=master"/></a>
+          <h1 id="project_title">yubikey-val</h1>
           <h2 id="project_tagline">YubiKey OTP validation server in PHP</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/Yubico/yubikey-val/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/Yubico/yubikey-val/tarball/master">Download this project as a tar.gz file</a>
-            </section>
         </header>
     </div>
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-	<h1>yubikey-val</h1>
-<ul>
-  <li><a href="releases.html">Releases</a></li>
-</ul>
+      <ul>
+        <li><a href="releases.html">Releases</a></li>
+      </ul>
 
-        <p>Documentation is in doc/</p>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>The YubiKey Validation Server (YK-VAL) is a server that validates
+Yubikey OTPs.  YK-VAL is written in PHP, for use with web servers such
+as Apache.</p></div>
+<div class="paragraph"><p>The server implements the Yubico API protocol as defined in
+doc/ValidationProtocol*.</p></div>
+<div class="paragraph"><p>This server talks to another service for decrypting the OTPs, to avoid
+storing any AES keys within the validation server. One implementation
+of this service is YKKSM:</p></div>
+<div class="paragraph"><p><a href="https://github.com/Yubico/yubikey-ksm">https://github.com/Yubico/yubikey-ksm</a></p></div>
+<div class="paragraph"><p>Another implementation of a KSM using the YubiHSM hardware is
+Python-PyHSM:</p></div>
+<div class="paragraph"><p><a href="https://github.com/Yubico/python-pyhsm">https://github.com/Yubico/python-pyhsm</a></p></div>
+<div class="paragraph"><p>Note that version 1.x is a minimal centralized server. Version 2.x is
+a replicated system that uses multiple machines.</p></div>
+<div class="paragraph"><p>Releases are available from:</p></div>
+<div class="paragraph"><p><a href="http://yubico.github.com/yubikey-val/releases.html">http://yubico.github.com/yubikey-val/releases.html</a></p></div>
+<div class="paragraph"><p>Documentation is in doc/</p></div>
+<div class="paragraph"><p>If you&#8217;ve checked out the source tree and the doc/ dir is empty, do</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ git submodule init
+$ git submodule update</tt></pre>
+</div></div>
+<div class="paragraph"><p>The documentation is also available online at</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>http://github.com/Yubico/yubikey-val/wiki</tt></pre>
+</div></div>
+</div>
+</div>
 
-<p>If you've checked out the source tree and the doc/ dir is empty, do</p>
+</section>
+</div>
 
-<pre><code>$ git submodule init
-$ git submodule update
-</code></pre>
-
-<p>The documentation is also available online at: <a href="http://github.com/Yubico/yubikey-val/wiki">http://github.com/Yubico/yubikey-val/wiki</a>.</p>
-
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
-</html>
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>

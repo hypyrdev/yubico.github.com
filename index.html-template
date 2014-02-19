@@ -73,21 +73,6 @@
 
 	</table></p>
 
-      <h2>YubiCloud Servers</h2>
-
-      <p><table>
-	<tr><th>Project name</th><th>Description</th></tr>
-
-	<tr><td><a href="yubikey-ksm/">
-	  yubikey-ksm</a></td>
-	  <td>YubiKey Key Storage Module (YK-KSM) PHP server</td></tr>
-
-	<tr><td><a href="yubikey-val/">
-	  yubikey-val</a></td>
-	  <td>YubiKey Validation (YK-VAL) PHP server</td></tr>
-
-	</table></p>
-
 REPLACEME
 
 	<h2>YubiHSM projects</h2>
