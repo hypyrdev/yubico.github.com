@@ -88,8 +88,13 @@ the main project folder.</p></div>
 <div class="sect1">
 <h2 id="_building_mac_osx_binaries">Building Mac OSX binaries</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Currently we do not have binaries for OSX, contribution is welcome.
-It should be possible via PyInstaller.</p></div>
+<div class="paragraph"><p>Install PyInstaller via pip</p></div>
+<div class="paragraph"><p>Run "pyinstaller -w -i yubico.ico yubicoauthenticator.spec" from
+the main project folder.</p></div>
+<div class="paragraph"><p>Codesign the code with:
+codesign -s <em>Developer ID Application</em> /path/to/directory/project.app --deep</p></div>
+<div class="paragraph"><p>Build the package with:
+<a href="http://s.sudre.free.fr/Software/Packages/about.html">http://s.sudre.free.fr/Software/Packages/about.html</a></p></div>
 </div>
 </div>
 <div class="sect1">
@@ -111,11 +116,6 @@ Run "python ui_systray.py"</tt></pre>
 <li>
 <p>
 .deb packaging
-</p>
-</li>
-<li>
-<p>
-OSX .app
 </p>
 </li>
 </ul></div>
