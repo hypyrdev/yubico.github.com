@@ -165,6 +165,7 @@ if(-d "$dir/$project/releases/") {
     $name =~ s/\.cap$//;
     $name =~ s/\.apk$//;
     $name =~ s/\.exe$//;
+    $name =~ s/\.pkg$//;
     $release_content .= <<EOH
 
 <dt>${name}</dt>
