@@ -39,7 +39,6 @@
       <section id="main_content" class="inner">
       <ul>
         <li><a href="releases.html">Releases</a></li>
-        <li><a href="PROTOCOL.html">Protocol specification</a></li>
       </ul>
 EXTRA_LINKS
 PROJECT_CONTENT
