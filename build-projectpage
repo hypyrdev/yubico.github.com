@@ -117,11 +117,11 @@ if($docs_raw) {
 
       open(my $doc_out, ">", "$dir/$project/$doc_name.html") or die "failed to open output file ($dir/$project/$doc_name)";
       while(<$doc_templ>) {
-        s/PROJECT_PROJECT/$project/;
-        s/PROJECT_NAME/$name/;
-        s/PROJECT_SUMMARY/$summary/;
-        s/PROJECT_CONTENT/$massaged_content/;
-        s/PROJECT_TRAVIS_LINK/$travis_link/;
+        s/PROJECT_PROJECT/$project/g;
+        s/PROJECT_NAME/$name/g;
+        s/PROJECT_SUMMARY/$summary/g;
+        s/PROJECT_CONTENT/$massaged_content/g;
+        s/PROJECT_TRAVIS_LINK/$travis_link/g;
         print($doc_out $_);
       }
       close $doc_templ;
@@ -141,12 +141,12 @@ if(-f "$dir/$project/$template") {
 open(my $templ, "<", "$template") or die "failed to open project template";
 open(my $out, ">", "$dir/$project/index.html") or die "failed to open output file ($dir/$project/index.html)";
 while(<$templ>) {
-  s/PROJECT_PROJECT/$project/;
-  s/PROJECT_NAME/$name/;
-  s/PROJECT_SUMMARY/$summary/;
-  s/PROJECT_CONTENT/$massaged_content/;
-  s/EXTRA_LINKS/$extra_links/;
-  s/PROJECT_TRAVIS_LINK/$travis_link/;
+  s/PROJECT_PROJECT/$project/g;
+  s/PROJECT_NAME/$name/g;
+  s/PROJECT_SUMMARY/$summary/g;
+  s/PROJECT_CONTENT/$massaged_content/g;
+  s/EXTRA_LINKS/$extra_links/g;
+  s/PROJECT_TRAVIS_LINK/$travis_link/g;
   print($out $_);
 }
 close $templ;
@@ -193,11 +193,11 @@ EOH
   open(my $rel, "<", "$rel_template") or die "failed to open project template";
   open(my $rel_out, ">", "$dir/$project/releases.html") or die "failed to open output file ($dir/$project/index.html)";
   while(<$rel>) {
-    s/PROJECT_PROJECT/$project/;
-    s/PROJECT_NAME/$name/;
-    s/PROJECT_SUMMARY/$summary/;
-    s/PROJECT_RELEASES/$release_content/;
-    s/PROJECT_TRAVIS_LINK/$travis_link/;
+    s/PROJECT_PROJECT/$project/g;
+    s/PROJECT_NAME/$name/g;
+    s/PROJECT_SUMMARY/$summary/g;
+    s/PROJECT_RELEASES/$release_content/g;
+    s/PROJECT_TRAVIS_LINK/$travis_link/g;
     print($rel_out $_);
   }
   close $rel;
