@@ -59,7 +59,7 @@
 	  yubico-java-client</a></td>
 	  <td>YubiCloud Java client library</td></tr>
 
-	<tr><td><a href="http://code.google.com/p/php-yubico/">
+	<tr><td><a href="https://github.com/Yubico/php-yubico">
 	  php-yubico</a></td>
 	  <td>YubiCloud PHP client library</td></tr>
 

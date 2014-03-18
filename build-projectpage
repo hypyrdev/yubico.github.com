@@ -39,7 +39,7 @@ my $man_links = '';
 my $doc_links = '';
 my $travis_link = '';
 $content = get("https://raw.github.com/Yubico/$project/master/README");
-my ($temphandle,$temp) = tempfile();
+my ($temphandle,$temp) = tempfile("$project.XXXXXX");
 print $temphandle $content;
 close $temphandle;
 open(my $ascii, "-|", "asciidoc -o- -s $temp") or die "failed to open asciidoc";
@@ -59,7 +59,7 @@ if($makefile) {
   my $mans = join(' ', ($makefile =~ m/dist_man\d_MANS = (.+)/g));
   foreach my $man (split(/\s/, $mans)) {
     my $man_content = get("https://raw.github.com/Yubico/$project/master/$man");
-    my ($man_temphandle,$man_temp) = tempfile();
+    my ($man_temphandle,$man_temp) = tempfile("$project-$man.XXXXXX");
     print $man_temphandle $man_content;
     close $man_temphandle;
     open(my $groff, "-|", "groff -man -T html $man_temp");
@@ -100,12 +100,14 @@ if($docs_raw) {
         warn "tried to get " . $url . ".";
         next;
       }
+      $doc_name =~ s/\.asciidoc$//;
+      my $short_name = basename($doc_name);
       my $content = decode_json($raw_content);
       my $doc_content = urlsafe_b64decode($content->{content});
-      my ($temphandle,$temp) = tempfile();
+      my ($temphandle,$temp) = tempfile("$project-$short_name.XXXXXX");
       print $temphandle $doc_content;
       close $temphandle;
-      open(my $ascii, "-|", "asciidoc -o- -s $temp") or die "failed to open asciidoc";
+      open(my $ascii, "-|", "asciidoc -o- -s '$temp'") or die "failed to open asciidoc";
       my $massaged_content;
       while(<$ascii>) {
         $massaged_content .= $_;
@@ -118,9 +120,6 @@ if($docs_raw) {
         $doc_template = "$dir/$project/$doc_template";
       }
       open(my $doc_templ, "<", $doc_template) or die "failed to open documentation template";
-
-      $doc_name =~ s/\.asciidoc$//;
-      my $short_name = basename($doc_name);
 
       open(my $doc_out, ">", "$dir/$project/$doc_name.html") or die "failed to open output file ($dir/$project/$doc_name)";
       while(<$doc_templ>) {
