@@ -80,22 +80,28 @@ if($makefile) {
 if($man_links ne '') {
   $extra_links .= "<h3>Manual pages</h3><ul>$man_links</ul>\n";
 }
-
-my $docs_raw = get("https://api.github.com/repos/Yubico/$project/contents/doc");
+my $docs_url = "https://api.github.com/repos/Yubico/$project/contents/doc";
+if(defined $ENV{YUBICO_GITHUB_TOKEN}) {
+  $docs_url .= "?access_token=" . $ENV{YUBICO_GITHUB_TOKEN};
+}
+my $docs_raw = get($docs_url);
 if($docs_raw) {
   my $docs = decode_json($docs_raw);
   if(ref($docs) eq 'ARRAY') {
     foreach my $doc (@$docs) {
       my $doc_name = $doc->{path};
       next unless $doc_name =~ m/asciidoc$/;
-      my $raw_content = get($doc->{url});
+      my $url = $doc->{url};
+      if(defined $ENV{YUBICO_GITHUB_TOKEN}) {
+        $url .= "&access_token=" . $ENV{YUBICO_GITHUB_TOKEN};
+      }
+      my $raw_content = get($url);
       unless($raw_content) {
-        warn "tried to get " . $doc->{url} . ".";
+        warn "tried to get " . $url . ".";
         next;
       }
       my $content = decode_json($raw_content);
       my $doc_content = urlsafe_b64decode($content->{content});
-
       my ($temphandle,$temp) = tempfile();
       print $temphandle $doc_content;
       close $temphandle;
