@@ -17,6 +17,9 @@ use Sort::Versions;
 my $dir = dirname($0);
 my $project = shift;
 
+# strip trailing /
+$project =~ s/\/$//;
+
 my ($homepage, $license, $summary, $name, $travis);
 my $blurb = "https://raw.github.com/Yubico/$project/master/BLURB";
 my $content = get($blurb);
