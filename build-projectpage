@@ -182,8 +182,8 @@ if($project eq 'yubico-java-client') {
       s/PROJECT_NAME/$name/g;
       s/PROJECT_SUMMARY/$summary/g;
       s/PROJECT_CONTENT/$massaged_content/g;
-      s/EXTRA_LINKS/$extra_links/g;
       s/PROJECT_TRAVIS_LINK/$travis_link/g;
+      s/DOCUMENT_NAME/$sub/g;
       print($out $_);
     }
     close $templ;

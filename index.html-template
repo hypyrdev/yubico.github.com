@@ -46,33 +46,6 @@
       <p>Below is a list of officially supported Yubico projects,
       divided by category.</p>
 
-      <h2>YubiCloud Clients</h2>
-
-      <p><table>
-	<tr><th>Project name</th><th>Description</th></tr>
-
-	<tr><td><a href="yubico-c-client/">
-	  yubico-c-client</a></td>
-	  <td>YubiCloud C client library (libykclient)</td></tr>
-
-	<tr><td><a href="yubico-java-client/">
-	  yubico-java-client</a></td>
-	  <td>YubiCloud Java client library</td></tr>
-
-	<tr><td><a href="https://github.com/Yubico/php-yubico">
-	  php-yubico</a></td>
-	  <td>YubiCloud PHP client library</td></tr>
-
-	<tr><td><a href="yubico-perl-client/">
-	  yubico-perl-client</a></td>
-	  <td>YubiCloud Perl client</td></tr>
-
-	<tr><td><a href="https://github.com/Yubico/yubico-dotnet-client">
-	  yubico-dotnet-client</a></td>
-	  <td>YubiCloud .NET client</td></tr>
-
-	</table></p>
-
 REPLACEME
 
 	</section>

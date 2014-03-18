@@ -52,7 +52,11 @@ my %categories = (
 	'YubiHSM projects' =>
 	["https://raw.github.com/Yubico/python-pyhsm/master/BLURB"],
 	'YubiCloud Clients' =>
-	["https://raw.github.com/Yubico/yubico-java-client/master/BLURB"],
+	["https://raw.github.com/Yubico/yubico-java-client/master/BLURB",
+	"https://raw.github.com/Yubico/yubico-c-client/master/BLURB",
+	"https://raw.github.com/Yubico/php-yubico/master/BLURB",
+	"https://raw.github.com/Yubico/yubico-perl-client/master/BLURB",
+	"https://raw.github.com/Yubico/yubico-dotnet-client/master/BLURB"],
    );
 
 
