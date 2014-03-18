@@ -25,6 +25,13 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/PROJECT_PROJECT/">PROJECT_NAME</a>
+          /
+          <a>Releases</a>
+          </span>
           <a id="forkme_banner" href="https://github.com/Yubico/PROJECT_PROJECT">View on GitHub</a>
 PROJECT_TRAVIS_LINK
           <h1><a id="project_title" href="/PROJECT_PROJECT/">PROJECT_NAME</a></h1>

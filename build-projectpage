@@ -120,6 +120,7 @@ if($docs_raw) {
       open(my $doc_templ, "<", $doc_template) or die "failed to open documentation template";
 
       $doc_name =~ s/\.asciidoc$//;
+      my $short_name = basename($doc_name);
 
       open(my $doc_out, ">", "$dir/$project/$doc_name.html") or die "failed to open output file ($dir/$project/$doc_name)";
       while(<$doc_templ>) {
@@ -128,11 +129,12 @@ if($docs_raw) {
         s/PROJECT_SUMMARY/$summary/g;
         s/PROJECT_CONTENT/$massaged_content/g;
         s/PROJECT_TRAVIS_LINK/$travis_link/g;
+        s/DOCUMENT_NAME/$short_name/g;
         print($doc_out $_);
       }
       close $doc_templ;
       close $doc_out;
-      $doc_links .= "<li><a href=\"$doc_name.html\">" . basename($doc_name) . "</a></li>";
+      $doc_links .= "<li><a href=\"$doc_name.html\">$short_name</a></li>";
     }
   }
 }
