@@ -51,6 +51,8 @@ my %categories = (
 		"https://raw.github.com/Yubico/yubico-windows-auth/master/BLURB"],
 	'YubiHSM projects' =>
 	["https://raw.github.com/Yubico/python-pyhsm/master/BLURB"],
+	'YubiCloud Clients' =>
+	["https://raw.github.com/Yubico/yubico-java-client/master/BLURB"],
    );
 
 

@@ -159,6 +159,38 @@ while(<$templ>) {
 close $templ;
 close $out;
 
+# XXX: hack to build yubico-java-client with this..
+if($project eq 'yubico-java-client') {
+  foreach my $sub (@{["jaas", "v1client", "v2client"]}) {
+    $content = get("https://raw.github.com/Yubico/$project/master/$sub/README");
+    my ($temphandle,$temp) = tempfile("$project.$sub.XXXXXX");
+    print $temphandle $content;
+    close $temphandle;
+    open(my $ascii, "-|", "asciidoc -o- -s $temp") or die "failed to open asciidoc";
+    my $massaged_content;
+    while(<$ascii>) {
+      $massaged_content .= $_;
+    }
+    close $ascii;
+    unlink $temp;
+
+    $template = "$dir/$project/subpage.html-template";
+    open($templ, "<", "$template") or die "failed to open subpage template";
+    open($out, ">", "$dir/$project/$sub.html") or die "failed to open output file ($dir/$project/$sub.html)";
+    while(<$templ>) {
+      s/PROJECT_PROJECT/$project/g;
+      s/PROJECT_NAME/$name/g;
+      s/PROJECT_SUMMARY/$summary/g;
+      s/PROJECT_CONTENT/$massaged_content/g;
+      s/EXTRA_LINKS/$extra_links/g;
+      s/PROJECT_TRAVIS_LINK/$travis_link/g;
+      print($out $_);
+    }
+    close $templ;
+    close $out;
+  }
+}
+
 if(-d "$dir/$project/releases/") {
   my $release_content = '';
   opendir(my $release_dir, "$dir/$project/releases/") or die "failed opening $dir/$project/releases/";
