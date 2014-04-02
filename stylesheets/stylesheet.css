@@ -224,12 +224,12 @@ ul, ol, dl {
 }
 
 ul li {
-  list-style: inside;
+  list-style: outside;
   padding-left: 20px;
 }
 
 ol li {
-  list-style: decimal inside;
+  list-style: decimal outside;
   padding-left: 20px;
 }
 
