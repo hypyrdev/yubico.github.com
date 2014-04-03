@@ -51,7 +51,7 @@ close $ascii;
 unlink $temp;
 
 if($travis) {
-  $travis_link = '<a id="travis_link" href="' . $travis . '"><img id="travis_img" src="' . $travis . '.png?branch=master"/></a>';
+  $travis_link = '<a id="travis_link" href="' . $travis . '"><img id="travis_img" src="' . $travis . '.svg?branch=master"/></a>';
 }
 
 my $makefile = get("https://raw.github.com/Yubico/$project/master/Makefile.am");
