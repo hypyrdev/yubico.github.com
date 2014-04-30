@@ -125,14 +125,23 @@ and will never prompt the user - if no password is available
 or the password is not appropriate, the user will be denied
 access.</p>
 
+<p style="margin-left:11%;"><b>urllist=</b><i>list</i></p>
+
+<p style="margin-left:22%;">List of URL templates to be
+used. This is set by calling ykclient_set_url_bases. The
+list should be in the format <br>
+&lang; URL:
+https://api1.example.com/wsapi/2.0/verify;https://api2.example.com/wsapi/2.0/verify
+&rang;</p>
+
 <p style="margin-left:11%;"><b>url=</b><i>url</i></p>
 
-<p style="margin-left:22%;">Set the URL template to use,
-this is set by calling yubikey_client_set_url_template,
-which defaults to the default in the yubico-c-client
-package. The URL should be set in the format <br>
+<p style="margin-left:22%;">This option should not be used,
+please use the urllist option instead. Set the URL template
+to use, this is set by calling ykclient_set_url_template.
+The URL should be set in the format <br>
 &lang; URL:
-https://api.yubico.com/wsapi/2.0/verify?id=%d&amp;otp=%s
+https://api.example.com/wsapi/2.0/verify?id=%d&amp;otp=%s
 &rang;</p>
 
 <p style="margin-left:11%;"><b>capath=</b><i>path</i></p>
