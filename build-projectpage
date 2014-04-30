@@ -112,6 +112,7 @@ if($docs_raw) {
         next;
       }
       $doc_name =~ s/\.asciidoc$//;
+      $doc_name =~ s/\.txt$//;
       my $short_name = basename($doc_name);
       my $content = decode_json($raw_content);
       my $doc_content = urlsafe_b64decode($content->{content});
