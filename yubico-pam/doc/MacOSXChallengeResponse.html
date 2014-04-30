@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubico-pam : Yubico Pluggable Authentication Module (PAM)" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubico-pam</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/yubico-pam/">yubico-pam</a>
+          /
+          <a>MacOSXChallengeResponse</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubico-pam">View on GitHub</a>
+
+          <h1><a id="project_title" href="/yubico-pam/">yubico-pam</a></h1>
+          <h2 id="project_tagline">Yubico Pluggable Authentication Module (PAM)</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div class="sect1">
+<h2 id="_setting_up_your_yubikey_for_challenge_response_authentication_on_max_os_x">Setting up your YubiKey for challenge response authentication on Max OS X</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This article explains the process to get the challenge-response
+authentication possible with newer YubiKeys working on Mac OS X. Since
+Mac OS X uses PAM like most other Unix/POSIX systems do, most of this
+should apply to other operating systems, too.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_yubico_pam">Getting yubico-pam</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>First you will have to install yubico-pam and its dependencies
+required for challenge-response authentication. Use your
+distribution&#8217;s package manager to get it, or build from source. If
+you&#8217;re on OS X you can use [MacPorts](<a href="http://www.macports.org/">http://www.macports.org/</a>) to
+install yubico-pam:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>sudo port install yubico-pam</tt></pre>
+</div></div>
+<div class="paragraph"><p><strong>Note</strong>: This will probably not work in non-superuser installations
+  of MacPorts, because it needs to place the yubico PAM module into
+  <tt>/usr/lib/pam</tt>.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuring_your_yubikey">Configuring your YubiKey</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The next step would be to set up your YubiKey for challenge-response
+authentication, if you haven&#8217;t done so already. Although this is
+possible with the command line <tt>ykpersonalize</tt> tool, the GUI "YubiKey
+Personalization Tool" is a more comfortable way to do this.</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Plug in your YubiKey and start the YubiKey Personalization Tool
+<strong>Note</strong>: YubiKey Personalization Tool shows whether your YubiKey supports challenge-response in the lower right.
+</p>
+</li>
+<li>
+<p>
+Click Challenge-Response
+</p>
+</li>
+<li>
+<p>
+Select HMAC-SHA1 mode
+Apparently Yubico-OTP mode doesn&#8217;t work with yubico-pam at the moment.
+</p>
+</li>
+<li>
+<p>
+Select the configuration slot you want to use
+(this text assumes slot two, but it should be easy enough to adapt the instructions if you prefer slot 1)
+</p>
+</li>
+<li>
+<p>
+Select whether you want to require pressing the button for authentication
+<strong>Note</strong>: If you enable this, you will have to press the button twice for each authentication with yubico-pam. This is because the PAM module does not only send the challenge on file and checks whether the response matches, but also generates a new challenge-response pair on success.
+</p>
+</li>
+<li>
+<p>
+Use "Variable input" as HMAC-SHA1 mode
+<strong>Warning</strong>: Using "Fixed 64 byte input" for this value made my YubiKey always return the same response regardless of what the challenge was. Since this defies the purpose of challenge-response think twice and test before you use this!
+</p>
+</li>
+<li>
+<p>
+Generate a secret key
+You won&#8217;t need this key again, it&#8217;s sufficient to have it on your YubiKey. Note that the YubiKey Personalization Tool by default logs the key to configuration_log.csv in your home directory. Consider turning this off in the settings before writing or shredding the file after writing.
+</p>
+</li>
+<li>
+<p>
+Click "Write Configuration"
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuring_your_user_account_to_accept_the_yubikey">Configuring your user account to accept the YubiKey</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>After setting up your YubiKey you need to configure your account to
+accept this YubiKey for authentication. To do this, open a terminal
+and run</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt># create the directory where ykpamcfg will store the initial challenge
+mkdir -m0700 -p ~/.yubico
+# get the initial challenge from the YubiKey
+ykpamcfg -2</tt></pre>
+</div></div>
+<div class="paragraph"><p>If you used slot 1 above, replace -2 with -1. If you configured your
+YubiKey to require a button press the LED on the YubiKey will start
+blinking; press the button to send a challenge-response
+response. <tt>ykpamcfg</tt> should finish successfully telling you that it
+stored the initial challenge somewhere inside your home directory:</p></div>
+<div class="paragraph"><p>---
+&gt; Stored initial challenge and expected response in <em>/path/to/your/home/.yubico/challenge-KEYID</em>.
+---</p></div>
+<div class="paragraph"><p>This step will create a file with a challenge and the expected
+response (that can only be generated with the secret key[1]) in your
+home directory. The PAM module will later open this file, read the
+challenge, send it to the connected YubiKey and check whether its
+answer matches the one on file. If it does, it generates a new
+challenge, asks the YubiKey for the correct response for this
+challenge and writes both into the file. This also means that you need
+to keep this file secure from other users (which is why we created the
+.yubico directory in your home with mode 0700).</p></div>
+<div class="paragraph"><p>[1]: This is also the reason why you should avoid having copies of the
+key in other places than your YubiKey!</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuring_your_system_to_use_yubico_pam_for_authentication">Configuring your system to use Yubico PAM for authentication</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Linux, Solaris, OS X and most BSD variants use the [Pluggable
+Authentication Modules
+(PAM)](<a href="http://en.wikipedia.org/wiki/Pluggable_Authentication_Modules">http://en.wikipedia.org/wiki/Pluggable_Authentication_Modules</a>)
+framework to handle authentication. Using PAM you can specify which
+modules are used for authentication of users and which of them are
+required, optional and/or sufficient to authenticate a user. Using PAM
+you can for example set up multiple-factor authentication, by chaining
+multiple required modules.</p></div>
+<div class="paragraph"><p>PAM is configured through files in <tt>/etc/pam.d</tt> on most systems. Each
+file in this directory is used for a specific service, i.e. the file
+<tt>/etc/pam.d/sudo</tt> is used to authenticate users for the <tt>sudo</tt>
+program. Debian, for example, uses include directives in these files
+to have a central place to configure authentication; in this case we
+are not using this on purpose, because challenge-response
+authentication doesn&#8217;t work remotely (e.g. via SSH), so we only want
+to configure it for services we use when on site.</p></div>
+<div class="paragraph"><p>The file format in these files is documented in <tt>man 5 pam.conf</tt>; it
+basically looks like this:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>function-class control-flag module-path arguments</tt></pre>
+</div></div>
+<div class="paragraph"><p>where</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>function-class</tt> is one of <tt>auth</tt>, <tt>account</tt>, <tt>session</tt>, and
+  <tt>password</tt>. Since we only care about authentication with the YubiKey
+  and yubico-pam only handles authentication, we will always be using
+  <tt>auth</tt> here.
+</p>
+</li>
+<li>
+<p>
+<tt>control-flag</tt> is one of <tt>required</tt>, <tt>sufficient</tt>, <tt>optional</tt> and
+  some other values depending on your PAM implementation. If we want
+  to make YubiKey challenge-response mandatory but combined with other
+  methods (e.g. password), we can use <tt>required</tt>, if we want
+  successful challenge-response to be enough to authenticate a user,
+  we can use <tt>sufficient</tt>. <tt>optional</tt> is not really of any use for us
+  in this case.
+</p>
+</li>
+<li>
+<p>
+<tt>module-path</tt> selects the module to be used for this authentication
+  step. This is used as filename in a directory where pam libraries
+  are expected, on OS X e.g. <tt>/usr/lib/pam</tt>, <tt>/usr/lib/security</tt> on
+  some other systems. We want <tt>pam_yubico.so</tt> in this case, which will
+  load <tt>/usr/lib/pam/pam_yubico.so</tt>.
+</p>
+</li>
+<li>
+<p>
+<tt>arguments</tt> are passed to the pam module and can be used to
+  configure its behavior. See "Supported PAM module parameters" in
+  [README](<a href="https://github.com/Yubico/yubico-pam/blob/master/README">https://github.com/Yubico/yubico-pam/blob/master/README</a>)
+  for a list of possible values. Since we want to use
+  challenge-response, we add <tt>mode=challenge-response</tt> and to debug
+  the setup initially also <tt>debug</tt>, separated by spaces. <tt>debug</tt> can
+  safely be removed later.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p><strong>Warning</strong>: If you misconfigure your PAM modules here you might lose
+  your ability to sudo! Always keep a root shell open to be able to
+  revert your changes in case something goes wrong!</p></div>
+<div class="paragraph"><p>So, if we wanted to use the YubiKey to allow us to sudo without typing
+a password, we would add</p></div>
+<div class="paragraph"><p>---
+    auth       sufficient     pam_yubico.so mode=challenge-response debug
+---</p></div>
+<div class="paragraph"><p>To get this working on the loginwindow for local interactive login add
+the pam_yubico.so to the pam.d file authorization as the first
+line. The whole file might look something like this (example taken
+from OS X):</p></div>
+<div class="paragraph"><p>---
+    # sudo: auth account password session
+    auth       sufficient     pam_yubico.so mode=challenge-response debug
+    auth       required       pam_opendirectory.so
+    account    required       pam_permit.so
+    password   required       pam_deny.so
+    session    required       pam_permit.so
+---</p></div>
+<div class="paragraph"><p>If we wanted to require successful challenge-response authentication
+in addition to the usual password, we can change the <tt>sufficient</tt> in
+the line we added to <tt>required</tt>.</p></div>
+<div class="paragraph"><p><strong>Note</strong>: In theory you can configure pretty much any service you use
+  locally to use challenge-response authentication. In practice, I had
+  problems configuring challenge-response into the login window of OS
+  X. Keep a rescue disk or a remote root terminal available when
+  attempting such configurations, just in case something goes wrong
+  and you need to restore the PAM configuration to an old state.</p></div>
+<div class="paragraph"><p><strong>Note #2</strong>: On Debian it started working for me after accidentally
+  getting the file-rights correctly. <tt>755</tt> for <tt>~/.yubico</tt> &amp; <tt>600</tt> for
+  the files therein. Otherwise the module can&#8217;t find, read and/or
+  write to the appropriate files. Your clue is the following debug
+  messages.</p></div>
+<div class="paragraph"><p>---
+    [drop_privs.c:restore_privileges(128)] pam_modutil_drop_priv: -1
+    [pam_yubico.c:do_challenge_response(542)] could not restore privileges
+    [pam_yubico.c:do_challenge_response(664)] Challenge response failed: No such file or directory
+---</p></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubico-pam maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>

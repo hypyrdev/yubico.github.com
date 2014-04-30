@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubico-pam : Yubico Pluggable Authentication Module (PAM)" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubico-pam</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/yubico-pam/">yubico-pam</a>
+          /
+          <a>LocalAuthenticationUsingChallengeResponse</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubico-pam">View on GitHub</a>
+
+          <h1><a id="project_title" href="/yubico-pam/">yubico-pam</a></h1>
+          <h2 id="project_tagline">Yubico Pluggable Authentication Module (PAM)</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div class="sect1">
+<h2 id="_local_authentication_using_challenge_response">Local Authentication Using Challenge Response</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The PAM module can utilize the HMAC-SHA1 Challenge-Response mode found
+in YubiKeys starting with version 2.2 for offline authentication.
+This mode is useful if you don&#8217;t have a stable network connection to
+the YubiCloud.</p></div>
+<div class="paragraph"><p>The ykpamcfg utility currently outputs the state information to a file
+in the current user&#8217;s home directory ("$HOME/.yubico/challenge-123456"
+for a YubiKey with serial number API readout enabled, and
+"$HOME/.yubico/challenge" for one without).</p></div>
+<div class="paragraph"><p>The PAM module supports a system wide directory for these state files
+(in case the user&#8217;s home directories are encrypted), but in a system
+wide directory, the <em>challenge</em> part should be replaced with the
+username.  Example: /var/yubico/challenges/alice-123456.</p></div>
+<div class="paragraph"><p>To use the system-wide mode, you currently have to move the generated
+state files manually and configure the PAM module accordingly.</p></div>
+<div class="paragraph"><p>The following process is tested on Ubuntu 12.04.</p></div>
+<div class="paragraph"><p>First install the package:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ sudo apt-get install libpam-yubico</tt></pre>
+</div></div>
+<div class="paragraph"><p>You will get a question about the PAM configuration line.  Enter this
+line:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>mode=challenge-response</tt></pre>
+</div></div>
+<div class="paragraph"><p>The next question will be about which PAM modules to enable.  Don&#8217;t
+enable anything just yet, because you need to program your YubiKey
+first.</p></div>
+<div class="paragraph"><p>If you have already installed the package or want to reconfigure it,
+you may use this command:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ sudo dpkg-reconfigure libpam-yubico</tt></pre>
+</div></div>
+<div class="paragraph"><p>The next step is to add a challenge-response slot to your YubiKey.  If
+you have a normal YubiKey with OTP functionality on the first slot,
+you could add Challenge-Response on the second slot.  You could have
+CR on the first slot, if you want.</p></div>
+<div class="paragraph"><p>First, program a YubiKey for challenge response on Slot 2:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ ykpersonalize -2 -ochal-resp -ochal-hmac -ohmac-lt64 -oserial-api-visible
+...
+Commit? (y/n) [n]: y
+$</tt></pre>
+</div></div>
+<div class="paragraph"><p>Now, set the current user to require this YubiKey for logon:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ mkdir $HOME/.yubico
+$ ykpamcfg -2 -v
+...
+Stored initial challenge and expected response in '/home/alice/.yubico/challenge-123456'.
+$</tt></pre>
+</div></div>
+<div class="paragraph"><p>If your /home/user folder is encrypted you should move the challenge file in a different path (i.e. /etc/yubico) and then set the right permission for the user to create the files. To do this do as follow:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ mkdir /etc/yubico
+$ chmod +t /etc/yubico
+$ chmod 777 /etc/yubico
+$ mv /home/user/.yubico/challenge-####### /etc/yubico/username-#######
+...
+It is important that you name the file with the username of the user that is going to use the Yubikey</tt></pre>
+</div></div>
+<div class="paragraph"><p>Finally we tell the pam module where to look for the challenge file</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ emacs /etc/pam.d/common-auth
+...
+and edit the following line as follow:
+
+auth    required        pam_yubico.so mode=challenge-response chalresp_path=/etc/yubico</tt></pre>
+</div></div>
+<div class="paragraph"><p>Then back to the PAM configuration step, first make sure you have a
+root terminal available to be able to disable YubiKey login in case of
+issues.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ sudo -s</tt></pre>
+</div></div>
+<div class="paragraph"><p>Then run the "pam-auth-update" command and enable the Yubico PAM
+module.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ sudo pam-auth-update</tt></pre>
+</div></div>
+<div class="paragraph"><p>You should now be able to authenticate using YubiKey
+Challenge-Reseponse together with a password like this:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>jas@latte:~$ sudo -s
+[sudo] password for jas:
+root@latte:~#</tt></pre>
+</div></div>
+<div class="paragraph"><p>Now remove the YubiKey and try again (in a new terminal to avoid sudo
+caching), and you should not be able to login.</p></div>
+<div class="paragraph"><p>For debugging, you can make the PAM configuration line:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>mode=challenge-response debug</tt></pre>
+</div></div>
+<div class="paragraph"><p>and then create a log file:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt># touch /var/run/pam-debug.log
+# chmod go+w /var/run/pam-debug.log</tt></pre>
+</div></div>
+<div class="paragraph"><p>and then tail the file.  For successful logins it should print
+something like this:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>[pam_yubico.c:parse_cfg(721)] called.
+[pam_yubico.c:parse_cfg(722)] flags 32768 argc 2
+[pam_yubico.c:parse_cfg(724)] argv[0]=mode=challenge-response
+[pam_yubico.c:parse_cfg(724)] argv[1]=debug
+[pam_yubico.c:parse_cfg(725)] id=-1
+[pam_yubico.c:parse_cfg(726)] key=(null)
+[pam_yubico.c:parse_cfg(727)] debug=1
+[pam_yubico.c:parse_cfg(728)] alwaysok=0
+[pam_yubico.c:parse_cfg(729)] verbose_otp=0
+[pam_yubico.c:parse_cfg(730)] try_first_pass=0
+[pam_yubico.c:parse_cfg(731)] use_first_pass=0
+[pam_yubico.c:parse_cfg(732)] authfile=(null)
+[pam_yubico.c:parse_cfg(733)] ldapserver=(null)
+[pam_yubico.c:parse_cfg(734)] ldap_uri=(null)
+[pam_yubico.c:parse_cfg(735)] ldapdn=(null)
+[pam_yubico.c:parse_cfg(736)] user_attr=(null)
+[pam_yubico.c:parse_cfg(737)] yubi_attr=(null)
+[pam_yubico.c:parse_cfg(738)] yubi_attr_prefix=(null)
+[pam_yubico.c:parse_cfg(739)] url=(null)
+[pam_yubico.c:parse_cfg(740)] capath=(null)
+[pam_yubico.c:parse_cfg(741)] token_id_length=12
+[pam_yubico.c:parse_cfg(742)] mode=chresp
+[pam_yubico.c:parse_cfg(743)] chalresp_path=(null)
+[pam_yubico.c:pam_sm_authenticate(775)] get user returned: jas
+[pam_yubico.c:do_challenge_response(493)] Loading challenge from file /home/jas/.yubico/challenge-1077187
+[util.c:load_chalresp_state(269)] Challenge: 23001a190724abf46c8022b008ccb65673dd634ecb150613771ec87f37850284d80dd5f8c8e56affb6da2e952b16682160e7f3ac4f816b64126bd9556e5be1, response: 63d4a679ed15335ffd4253e7609963bcdb0834d4, slot: 2
+[pam_yubico.c:do_challenge_response(566)] Got the expected response, generating new challenge (63 bytes).
+[pam_yubico.c:do_challenge_response(629)] Challenge-response success!</tt></pre>
+</div></div>
+<div class="paragraph"><p>and if there is no YubiKey in the machine it will look like this:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>[pam_yubico.c:parse_cfg(721)] called.
+[pam_yubico.c:parse_cfg(722)] flags 32768 argc 2
+[pam_yubico.c:parse_cfg(724)] argv[0]=mode=challenge-response
+[pam_yubico.c:parse_cfg(724)] argv[1]=debug
+[pam_yubico.c:parse_cfg(725)] id=-1
+[pam_yubico.c:parse_cfg(726)] key=(null)
+[pam_yubico.c:parse_cfg(727)] debug=1
+[pam_yubico.c:parse_cfg(728)] alwaysok=0
+[pam_yubico.c:parse_cfg(729)] verbose_otp=0
+[pam_yubico.c:parse_cfg(730)] try_first_pass=0
+[pam_yubico.c:parse_cfg(731)] use_first_pass=0
+[pam_yubico.c:parse_cfg(732)] authfile=(null)
+[pam_yubico.c:parse_cfg(733)] ldapserver=(null)
+[pam_yubico.c:parse_cfg(734)] ldap_uri=(null)
+[pam_yubico.c:parse_cfg(735)] ldapdn=(null)
+[pam_yubico.c:parse_cfg(736)] user_attr=(null)
+[pam_yubico.c:parse_cfg(737)] yubi_attr=(null)
+[pam_yubico.c:parse_cfg(738)] yubi_attr_prefix=(null)
+[pam_yubico.c:parse_cfg(739)] url=(null)
+[pam_yubico.c:parse_cfg(740)] capath=(null)
+[pam_yubico.c:parse_cfg(741)] token_id_length=12
+[pam_yubico.c:parse_cfg(742)] mode=chresp
+[pam_yubico.c:parse_cfg(743)] chalresp_path=(null)
+[pam_yubico.c:pam_sm_authenticate(775)] get user returned: jas
+[pam_yubico.c:do_challenge_response(478)] Failed initializing YubiKey
+[pam_yubico.c:do_challenge_response(640)] Yubikey core error: no yubikey present</tt></pre>
+</div></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubico-pam maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>

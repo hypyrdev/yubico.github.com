@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubico-pam : Yubico Pluggable Authentication Module (PAM)" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubico-pam</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/yubico-pam/">yubico-pam</a>
+          /
+          <a>YubiKeyAndFreeRADIUSwithsinglefactorauthenticationviaPAM</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubico-pam">View on GitHub</a>
+
+          <h1><a id="project_title" href="/yubico-pam/">yubico-pam</a></h1>
+          <h2 id="project_tagline">Yubico Pluggable Authentication Module (PAM)</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div class="sect1">
+<h2 id="_yubico_pam_single_factor_configuration_guide">Yubico PAM Single-factor configuration guide</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Step by Step Guide for Configuration of Yubico PAM module to provide single
+factor YubiKey OTP authentication for RADIUS server.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The purpose of this document is to guide readers through the configuration
+steps to enable single factor authentication using YubiKey and RADIUS server
+on Linux platform. This document assumes that the reader has advance knowledge
+and experience in Linux system administration, particularly how to configure
+PAM authentication mechanism on a Linux platform.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_details">Details</h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites">Prerequisites</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Successful configuration of the Yubico PAM module to support single factor
+authentication for RADIUS requires following prerequisites:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Operating System: Any Unix operating system which supports PAM
+  (Pluggable Authentication Module)
+  (<a href="http://www.kernel.org/pub/linux/libs/pam/">http://www.kernel.org/pub/linux/libs/pam/</a>)
+</p>
+</li>
+<li>
+<p>
+Complier : GNU GCC complier (<a href="http://gcc.gnu.org/">http://gcc.gnu.org/</a>)
+</p>
+</li>
+<li>
+<p>
+FreeRADIUS: FreeRADIUS Version: 1.1.7 or <strong>later</strong>
+  (<a href="http://freeradius.org/download.html">http://freeradius.org/download.html</a>)
+</p>
+</li>
+<li>
+<p>
+Yubico PAM Module: Yubico PAM Module Version 1.8
+  (<a href="http://opensource.yubico.com/yubico-pam/">http://opensource.yubico.com/yubico-pam/</a>)
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration_of_freeradius_server_to_support_pam_authentication">Configuration of FreeRADIUS server to support PAM authentication :</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Edit the radiusd configuration file “/etc/raddb/radiusd.conf” to make
+  following changes:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  * Change user and group to “root” to provide the root privileges to
+    radiusd daemon so that it can call and use pam modules for authentication.
+    NOTE: Generally, it is not a good security practice to assign root
+    privileges to a user for a daemon. However, since use of PAM requires root
+    privileges, this is a mandatory step here.
+  * In “authenticate” section uncomment pam to direct radiusd daemon to use PAM
+    module for authentication</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Edit the client configuration file “/etc/raddb/clients.conf”
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>   Add sample client for testing</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Edit the user configuration file “/etc/raddb/users” to make following change:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>   Change "DEFAULT Auth-Type = System" to "DEFAULT Auth-Type = pam" for using
+   PAM modules for user authentication</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_of_pam_yubico_module">Installation of pam_yubico module :</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Build instructions for pam_yubico are available in the README.
+(<a href="https://github.com/Yubico/yubico-pam/wiki/ReadMe">https://github.com/Yubico/yubico-pam/wiki/ReadMe</a>)</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration_of_pam_yubico_module">Configuration of pam_yubico module :</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Configuration instructions for pam_yubico are also available in the README.
+(<a href="https://github.com/Yubico/yubico-pam/wiki/ReadMe">https://github.com/Yubico/yubico-pam/wiki/ReadMe</a>)</p></div>
+<div class="paragraph"><p><em>Make sure you set your system up for either central authorization mapping,
+or user level mapping, as this will control which users can connect to the
+system using RADIUS.</em></p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration_of_modified_pam_yubico_so_module_at_administrative_level">Configuration of modified pam_yubico.so module at administrative level :</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Append the following line to the beginning of /etc/pam.d/radiusd file:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>   auth required pam_yubico.so id=16 debug authfile=/etc/yubikey_mappings</tt></pre>
+</div></div>
+<div class="paragraph"><p>After the above configuration changes, whenever a user connects to the
+server using any RADIUS client, the PAM authentication interface will pass
+the control to Yubico PAM module.</p></div>
+<div class="paragraph"><p>The Yubico PAM module first checks the presence of authfile argument in PAM
+configuration. If authfile argument is present, it parses the corresponding
+mapping file and verifies the username with corresponding YubiKey PublicID
+as configured in the mapping file.</p></div>
+<div class="paragraph"><p>If valid, the Yubico PAM module extracts the OTP string and sends it to the
+Yubico authentication server or else it reports failure. If authfile argument
+is present but the mapping file is not present at the provided path PAM
+module reports failure. After successful verification of OTP Yubico PAM module
+from the Yubico authentication server, a success code is returned.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_user_level">User Level :</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Although, user level configuration of pam_yubico is possible, this might not
+be a desired configuration option in case of radisud daemon in most enterprise.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration_of_selinux_policy_to_create_exception_for_radiusd_daemon">Configuration of selinux policy to create exception for radiusd daemon :</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Local effective selinux policy must be updated to provide sufficient
+privileges to radiusd daemon on system resources. Please follow the steps below
+to configure effective selinux policy for radiusd daemon:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Start the radiusd daemon
+</p>
+</li>
+<li>
+<p>
+Test the RADIUS authentication with the test case provided in “Testing the
+  configuration” section below
+</p>
+</li>
+<li>
+<p>
+As radiusd daemon doesn’t have sufficient selinux privileges to access the
+  system resources required for using pam modules, the RADIUS authentication
+  will fail.
+</p>
+</li>
+<li>
+<p>
+This will create the logs in either “/var/log/messages” or in
+  “/var/log/audit/audit.log” depending on the selinux configuration.
+</p>
+</li>
+<li>
+<p>
+We can use audit2allow utility to provide selinux privileges to radiusd by
+  using following sequence of commands:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  [root@testsrv ~]# audit2allow -m local -l -i /var/log/messages &gt; local.te
+
+  [root@testsrv ~]# checkmodule -M -m -o local.mod local.te
+
+  [root@testsrv ~]# semodule_package -o local.pp -m local.mod
+
+  [root@testsrv ~]# semodule -i local.pp</tt></pre>
+</div></div>
+<div class="paragraph"><p>For more selinux policy updating information and explanation of above commands
+please visit the following website:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>http://fedora.redhat.com/docs/selinux-faq-fc5/#id2961385</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration_of_freeradius_pam_file">Configuration of FreeRADIUS PAM file :</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>FreeRADIUS server first authorizes presence of user in the configured database
+and then authenticates it.</p></div>
+<div class="paragraph"><p>In a single factor YubiKey authentication, we must provide a PAM mechanism to
+authorize the presence of user.</p></div>
+<div class="paragraph"><p>We are using “pam_listfile.so” PAM module to provide a PAM mechanism to
+authorize the presence of user. For this, we need to provide a file containing
+authorized user names to the “pam_listfile.so” file. This file should contain
+user names with only one user name on each line as follows:</p></div>
+<div class="paragraph"><p>For example:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>   paul</tt></pre>
+</div></div>
+<div class="paragraph"><p>The user_name file must be created/updated manually before configuration of
+Yubico PAM module for RADIUS authentication. Once this file is ready, we need
+to edit the FreeRADIUS PAM configuration file “/etc/pam.d/radiusd” and replace
+its contents with following lines:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  auth    sufficient    pam_yubico.so id=16 debug authfile=/etc/yubikeyid
+  account required      pam_listfile.so onerr=fail item=user sense=allow file=&lt;Absolute path of file containing user names&gt;</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_setup">Test Setup :</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Our test environment is as follows:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Operating System: Fedora release 8 (Werewolf)
+</p>
+</li>
+<li>
+<p>
+FreeRADIUS Server : FreeRADIUS Version 1.1.7 and Version 2.1.3
+</p>
+</li>
+<li>
+<p>
+Yubico PAM: pam_yubico  Version 1.8
+</p>
+</li>
+<li>
+<p>
+"/etc/pam.d/radiusd" file:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>   auth    sufficient   pam_yubico.so id=16 debug authfile=/etc/yubikeyid
+   account required     pam_listfile.so onerr=fail item=user sense=allow file=/etc/yubicousers</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_testing_the_configuration">Testing the configuration :</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>We have tested the pam_yubico configuration on following Linux sever platforms:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Fedora 8:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  * Operating system: Fedora release 8 (Werewolf)
+  * FreeRADIUS Server : FreeRADIUS Version 1.1.7 and Version 2.1.3
+  * Yubico PAM: pam_yubico  Version 1.8</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Fedora 6:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  * Operating system: Fedora Core release 6 (Zod)
+  * FreeRADIUS Server : FreeRADIUS Version 1.1.7 and Version 2.1.3
+  * Yubico PAM: pam_yubico  Version 1.8</tt></pre>
+</div></div>
+<div class="paragraph"><p>To test the RADIUS single factor authentication with YubiKey, we can use
+“radtest” radius client. The command is as follows:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  [root@testsrv ~]# radtest {username} \
+                            {password followed by YubiKey generated OTP} \
+                            {radius-server}:{radius server port} \
+                            {nas-port-number} \
+                            {secret/ppphint/nasname}
+
+  [root@testsrv ~]# radtest test vrkvfefuitvfvgu...ildbdk 127.0.0.1 0 testing123</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_note">Note :</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The FreeRADIUS server version 1.1.3 seems to have problems regarding memory
+management and it may result in Segmentation Fault if configured with Yubico
+PAM module. We recommend using FreeRADIUS server version 1.1.7 or above.</p></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubico-pam maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>
