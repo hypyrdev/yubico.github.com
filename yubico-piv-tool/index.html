@@ -151,6 +151,11 @@ the certificate, for later import, on stdout:</p></div>
 <pre><tt>yubico-piv-tool -s 9a -S '/CN=bar/OU=test/O=example.com/' -P 123456 \
   -a verify -a selfsign</tt></pre>
 </div></div>
+<div class="paragraph"><p>Import a certificate from stdin:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>yubico-pin-tool -s 9a -a import-certificate</tt></pre>
+</div></div>
 <div class="paragraph"><p>Set a random chuid, import a key and import a certificate from a PKCS12
 file with password test, into slot 9c:</p></div>
 <div class="literalblock">
