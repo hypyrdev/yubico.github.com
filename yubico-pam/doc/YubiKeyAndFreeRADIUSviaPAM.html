@@ -97,7 +97,7 @@ FreeRADIUS: FreeRADIUS Version: 1.1.7 <strong>or later</strong>
 <li>
 <p>
 Yubico PAM Module: Yubico PAM Module Version 1.8
-  (<a href="http://opensource.yubico.com/yubico-pam/">http://opensource.yubico.com/yubico-pam/</a>)
+  (<a href="https://developers.yubico.com/yubico-pam/">https://developers.yubico.com/yubico-pam/</a>)
 </p>
 </li>
 </ul></div>
@@ -122,13 +122,13 @@ Edit the radiusd configuration file “/etc/raddb/radiusd.conf” to make
 </ul></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  * Change user and group to “root” to provide the root privileges to
+<pre><code>  * Change user and group to “root” to provide the root privileges to
     radiusd daemon so that it can call and use pam modules for authentication.
     NOTE: Generally, it is not a good security practice to assign root
     privileges to a user for a daemon. However, since use of PAM requires root
     privileges, this is a mandatory step here.
   * In “authenticate” section uncomment pam to direct radiusd daemon to use PAM
-    module for authentication</tt></pre>
+    module for authentication</code></pre>
 </div></div>
 <div class="ulist"><ul>
 <li>
@@ -139,7 +139,7 @@ Edit the client configuration file “/etc/raddb/clients.conf”
 </ul></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  Add sample client for testing</tt></pre>
+<pre><code>  Add sample client for testing</code></pre>
 </div></div>
 <div class="ulist"><ul>
 <li>
@@ -150,8 +150,8 @@ Edit the user configuration file “/etc/raddb/users” to make following change
 </ul></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  Change "DEFAULT Auth-Type = System" to "DEFAULT Auth-Type = pam" for using
-  PAM modules for user authentication</tt></pre>
+<pre><code>  Change "DEFAULT Auth-Type = System" to "DEFAULT Auth-Type = pam" for using
+  PAM modules for user authentication</code></pre>
 </div></div>
 </div>
 </div>
@@ -178,7 +178,7 @@ system using RADIUS.</em></p></div>
 <div class="paragraph"><p>Append the following line to the beginning of /etc/pam.d/radiusd file:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   auth required pam_yubico.so id=16 debug authfile=/etc/yubikey_mappings</tt></pre>
+<pre><code>   auth required pam_yubico.so id=16 debug authfile=/etc/yubikey_mappings</code></pre>
 </div></div>
 <div class="paragraph"><p>After the above configuration changes, whenever a user connects to the
 server using any RADIUS client, the PAM authentication interface will pass
@@ -241,19 +241,19 @@ We can use audit2allow utility to provide selinux privileges to radiusd by
 </ul></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  [root@testsrv ~]# audit2allow -m local -l -i /var/log/messages &gt; local.te
+<pre><code>  [root@testsrv ~]# audit2allow -m local -l -i /var/log/messages &gt; local.te
 
   [root@testsrv ~]# checkmodule -M -m -o local.mod local.te
 
   [root@testsrv ~]# semodule_package -o local.pp -m local.mod
 
-  [root@testsrv ~]# semodule -i local.pp</tt></pre>
+  [root@testsrv ~]# semodule -i local.pp</code></pre>
 </div></div>
 <div class="paragraph"><p>For more selinux policy updating information and explanation of above commands
 please visit the following website:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>http://fedora.redhat.com/docs/selinux-faq-fc5/#id2961385</tt></pre>
+<pre><code>http://fedora.redhat.com/docs/selinux-faq-fc5/#id2961385</code></pre>
 </div></div>
 </div>
 </div>
@@ -285,12 +285,12 @@ Yubico PAM: pam_yubico  Version 1.8
 </ul></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>    auth         required       pam_yubico.so authfile=/etc/yubikeyid id=16 debug
+<pre><code>    auth         required       pam_yubico.so authfile=/etc/yubikeyid id=16 debug
     auth         include        system-auth
     account      required       pam_nologin.so
     account      include        system-auth
     password     include        system-auth
-    session      include        system-auth</tt></pre>
+    session      include        system-auth</code></pre>
 </div></div>
 </div>
 </div>
@@ -338,13 +338,13 @@ Yubico PAM: pam_yubico  Version 1.8
 “radtest” radius client. The command is as follows:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  [root@testsrv ~]# radtest {username} \
+<pre><code>  [root@testsrv ~]# radtest {username} \
                             {password followed by YubiKey generated OTP} \
                             {radius-server}:{radius server port} \
                             {nas-port-number} \
                             {secret/ppphint/nasname}
 
-  [root@testsrv ~]# radtest test test123vrkvit...bekkjc 127.0.0.1 0 testing123</tt></pre>
+  [root@testsrv ~]# radtest test test123vrkvit...bekkjc 127.0.0.1 0 testing123</code></pre>
 </div></div>
 </div>
 </div>

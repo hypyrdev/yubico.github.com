@@ -49,7 +49,7 @@
 <div class="paragraph"><p>Create and login to a fresh Ubuntu 10.04 LTS machine:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   vmbuilder kvm ubuntu \
+<pre><code>   vmbuilder kvm ubuntu \
           --dest /var/lib/libvirt/images/freeradius \
           --proxy http://192.168.1.2/ubuntu \
           --rootsize 10000 \
@@ -65,7 +65,7 @@
           --hostname freeradius \
           --bridge br0 \
           --debug
-   ssh -l root freeradius.local</tt></pre>
+   ssh -l root freeradius.local</code></pre>
 </div></div>
 </div>
 </div>
@@ -74,53 +74,53 @@
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre><tt>   apt-get install build-essential wget
-   apt-get install libpam0g-dev libykclient3 libykclient-dev</tt></pre>
+<pre><code>   apt-get install build-essential wget
+   apt-get install libpam0g-dev libykclient3 libykclient-dev</code></pre>
 </div></div>
 <div class="paragraph"><p>Install PAM module:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   wget http://yubico-pam.googlecode.com/files/pam_yubico-2.4.tar.gz
+<pre><code>   wget http://yubico-pam.googlecode.com/files/pam_yubico-2.4.tar.gz
    tar xfz pam_yubico-2.4.tar.gz
    cd pam_yubico-2.4
    ./configure
    make check install
-   ln -s /usr/local/lib/security/pam_yubico.so /lib/security/</tt></pre>
+   ln -s /usr/local/lib/security/pam_yubico.so /lib/security/</code></pre>
 </div></div>
 <div class="paragraph"><p>Setup PAM debug log file:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   touch /var/run/pam-debug.log
+<pre><code>   touch /var/run/pam-debug.log
    chmod go+w /var/run/pam-debug.log
-   tail -F /var/run/pam-debug.log &amp;</tt></pre>
+   tail -F /var/run/pam-debug.log &amp;</code></pre>
 </div></div>
 <div class="paragraph"><p>Install FreeRadius:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   apt-get install freeradius
-   /etc/init.d/freeradius stop</tt></pre>
+<pre><code>   apt-get install freeradius
+   /etc/init.d/freeradius stop</code></pre>
 </div></div>
 <div class="paragraph"><p>Next we configure FreeRadius.  First add this to /etc/freeradius/users:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   DEFAULT Auth-Type = pam</tt></pre>
+<pre><code>   DEFAULT Auth-Type = pam</code></pre>
 </div></div>
 <div class="paragraph"><p>Then comment out <em>pap</em> and uncomment <em>pam</em> from
 /etc/freeradius/sites-available/default.</p></div>
 <div class="paragraph"><p>Add to the top of /etc/pam.d/radiusd:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   auth sufficient pam_yubico.so id=1 debug authfile=/etc/yubikey_mapping</tt></pre>
+<pre><code>   auth sufficient pam_yubico.so id=1 debug authfile=/etc/yubikey_mapping</code></pre>
 </div></div>
 <div class="paragraph"><p>If you want to use HMAC signing, specify the <em>key=</em> field too, like this:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   auth sufficient pam_yubico.so id=1 key=b64foo debug authfile=/etc/yubikey_mapping</tt></pre>
+<pre><code>   auth sufficient pam_yubico.so id=1 key=b64foo debug authfile=/etc/yubikey_mapping</code></pre>
 </div></div>
 <div class="paragraph"><p>Create a file /etc/yubikey_mapping (ccccccccltnc is Alice&#8217;s YubiKey&#8217;s public ID) :</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   alice:ccccccccltnc</tt></pre>
+<pre><code>   alice:ccccccccltnc</code></pre>
 </div></div>
 <div class="qlist"><ol>
 <li>
@@ -131,13 +131,13 @@ Create a Unix account <em>alice</em>:   XXX should not be necessary
 </ol></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   adduser --disabled-password alice</tt></pre>
+<pre><code>   adduser --disabled-password alice</code></pre>
 </div></div>
 <div class="paragraph"><p>Just press RET and finally <em>y RET</em> on the prompts.</p></div>
 <div class="paragraph"><p>Start radiusd:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   LD_PRELOAD=/lib/libpam.so.0 freeradius -X</tt></pre>
+<pre><code>   LD_PRELOAD=/lib/libpam.so.0 freeradius -X</code></pre>
 </div></div>
 </div>
 </div>
@@ -147,22 +147,22 @@ Create a Unix account <em>alice</em>:   XXX should not be necessary
 <div class="paragraph"><p>Confirm that it works with radtest (use a real OTP from Alice&#8217;s YubiKey) :</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   radtest alice ccccccccltncdjjifceergtnukivgiujhgehgnkrfcef 127.0.0.1 0 testing123</tt></pre>
+<pre><code>   radtest alice ccccccccltncdjjifceergtnukivgiujhgehgnkrfcef 127.0.0.1 0 testing123</code></pre>
 </div></div>
 <div class="paragraph"><p>Output should be like this:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>Sending Access-Request of id 69 to 127.0.0.1 port 1812
+<pre><code>Sending Access-Request of id 69 to 127.0.0.1 port 1812
         User-Name = "alice"
         User-Password = "ccccccccltncdjjifceergtnukivgiujhgehgnkrfcef"
         NAS-IP-Address = 127.0.1.1
         NAS-Port = 0
-rad_recv: Access-Accept packet from host 127.0.0.1 port 1812, id=69, length=20</tt></pre>
+rad_recv: Access-Accept packet from host 127.0.0.1 port 1812, id=69, length=20</code></pre>
 </div></div>
 <div class="paragraph"><p>PAM debug output should be like this:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>[pam_yubico.c:parse_cfg(404)] called.
+<pre><code>[pam_yubico.c:parse_cfg(404)] called.
 [pam_yubico.c:parse_cfg(405)] flags 0 argc 3
 [pam_yubico.c:parse_cfg(407)] argv[0]=id=1
 [pam_yubico.c:parse_cfg(407)] argv[1]=debug
@@ -188,12 +188,12 @@ rad_recv: Access-Accept packet from host 127.0.0.1 port 1812, id=69, length=20</
 [pam_yubico.c:check_user_token(121)] Matched user: alice
 [pam_yubico.c:check_user_token(125)] Authorization token: ccccccccltnc
 [pam_yubico.c:check_user_token(128)] Match user/token as alice/ccccccccltnc
-[pam_yubico.c:pam_sm_authenticate(625)] done. [Success]</tt></pre>
+[pam_yubico.c:pam_sm_authenticate(625)] done. [Success]</code></pre>
 </div></div>
 <div class="paragraph"><p>FreeRadius debug output should be like this:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>rad_recv: Access-Request packet from host 127.0.0.1 port 38575, id=69, length=89
+<pre><code>rad_recv: Access-Request packet from host 127.0.0.1 port 38575, id=69, length=89
         User-Name = "alice"
         User-Password = "ccccccccltncdjjifceergtnukivgiujhgehgnkrfcef"
         NAS-IP-Address = 127.0.1.1
@@ -223,7 +223,7 @@ Finished request 0.
 Going to the next request
 Waking up in 4.9 seconds.
 Cleaning up request 0 ID 69 with timestamp +17
-Ready to process requests.</tt></pre>
+Ready to process requests.</code></pre>
 </div></div>
 </div>
 </div>
@@ -233,22 +233,22 @@ Ready to process requests.</tt></pre>
 <div class="paragraph"><p>Run the command again, with the <em>same</em> OTP :</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>radtest alice ccccccccltncdjjifceergtnukivgiujhgehgnkrfcef 127.0.0.1 0 testing123</tt></pre>
+<pre><code>radtest alice ccccccccltncdjjifceergtnukivgiujhgehgnkrfcef 127.0.0.1 0 testing123</code></pre>
 </div></div>
 <div class="paragraph"><p>Then output should be like this, since the OTP was replayed:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>Sending Access-Request of id 32 to 127.0.0.1 port 1812
+<pre><code>Sending Access-Request of id 32 to 127.0.0.1 port 1812
         User-Name = "alice"
         User-Password = "ccccccccltncdjjifceergtnukivgiujhgehgnkrfcef"
         NAS-IP-Address = 127.0.1.1
         NAS-Port = 0
-rad_recv: Access-Reject packet from host 127.0.0.1 port 1812, id=32, length=20</tt></pre>
+rad_recv: Access-Reject packet from host 127.0.0.1 port 1812, id=32, length=20</code></pre>
 </div></div>
 <div class="paragraph"><p>PAM debug log:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>[pam_yubico.c:parse_cfg(404)] called.
+<pre><code>[pam_yubico.c:parse_cfg(404)] called.
 [pam_yubico.c:parse_cfg(405)] flags 0 argc 3
 [pam_yubico.c:parse_cfg(407)] argv[0]=id=1
 [pam_yubico.c:parse_cfg(407)] argv[1]=debug
@@ -270,12 +270,12 @@ rad_recv: Access-Reject packet from host 127.0.0.1 port 1812, id=32, length=20</
 [pam_yubico.c:pam_sm_authenticate(542)] conv returned: ccccccccltncdjjifceergtnukivgiujhgehgnkrfcef
 [pam_yubico.c:pam_sm_authenticate(558)] OTP: ccccccccltncdjjifceergtnukivgiujhgehgnkrfcef ID: ccccccccltnc
 [pam_yubico.c:pam_sm_authenticate(583)] ykclient return value (2): Yubikey OTP was replayed (REPLAYED_OTP)
-[pam_yubico.c:pam_sm_authenticate(625)] done. [Authentication failure]</tt></pre>
+[pam_yubico.c:pam_sm_authenticate(625)] done. [Authentication failure]</code></pre>
 </div></div>
 <div class="paragraph"><p>FreeRadius debug log:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>rad_recv: Access-Request packet from host 127.0.0.1 port 55170, id=32, length=89
+<pre><code>rad_recv: Access-Request packet from host 127.0.0.1 port 55170, id=32, length=89
         User-Name = "alice"
         User-Password = "ccccccccltncdjjifceergtnukivgiujhgehgnkrfcef"
         NAS-IP-Address = 127.0.1.1
@@ -311,7 +311,7 @@ Sending delayed reject for request 1
 Sending Access-Reject of id 32 to 127.0.0.1 port 55170
 Waking up in 4.9 seconds.
 Cleaning up request 1 ID 32 with timestamp +66
-Ready to process requests.</tt></pre>
+Ready to process requests.</code></pre>
 </div></div>
 </div>
 </div>

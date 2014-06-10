@@ -63,7 +63,7 @@
 <div class="paragraph"><p>Debian/Ubuntu:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  $ sudo apt-get install freeradius</tt></pre>
+<pre><code>  $ sudo apt-get install freeradius</code></pre>
 </div></div>
 </div>
 </div>
@@ -73,10 +73,10 @@
 <div class="paragraph"><p>For testing, add something like:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>client 0.0.0.0/0 {
+<pre><code>client 0.0.0.0/0 {
         secret          = pencil
         shortname       = radius.yubico.com
-}</tt></pre>
+}</code></pre>
 </div></div>
 </div>
 </div>
@@ -92,7 +92,7 @@
 <div class="paragraph"><p>The PAM service is <em>radiusd</em>, and the configuration file is stored in /etc/pam.d/radiusd.  Add something like:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   auth sufficient pam_yubico.so id=16 debug</tt></pre>
+<pre><code>   auth sufficient pam_yubico.so id=16 debug</code></pre>
 </div></div>
 </div>
 </div>
@@ -102,12 +102,12 @@
 <div class="paragraph"><p>As root, run:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   # /usr/sbin/freeradiusd -X</tt></pre>
+<pre><code>   # /usr/sbin/freeradiusd -X</code></pre>
 </div></div>
 <div class="paragraph"><p>Then invoke a test client as follows:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   $ radtest yubico vlrlcingbbkrctguicnijbegfjhrdhccefdthcuifkgr 127.0.0.1 0 pencil</tt></pre>
+<pre><code>   $ radtest yubico vlrlcingbbkrctguicnijbegfjhrdhccefdthcuifkgr 127.0.0.1 0 pencil</code></pre>
 </div></div>
 <div class="paragraph"><p>If you get errors about non-existing user, you may need to create a Unix user <em>yubico</em>.  Whether this should be needed or not depends on PAM configuration.</p></div>
 </div>

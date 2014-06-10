@@ -63,7 +63,7 @@ specialized applications such as NCSA !MyProxy.</p></div>
 <div class="paragraph"><p>The module is working for multi-user systems. The primary mode of
 operation is by doing online validation using a YubiKey validation
 service (such as the YubiCloud, or a private one configured using
-the <em>url</em> parameter).</p></div>
+the <em>urllist</em> parameter).</p></div>
 <div class="paragraph"><p>In version 2.6, offline validation was also made possible through
 the use of HMAC-SHA1 Challenge-Response found in YubiKey 2.2 and
 later. This has introduced a dependency of libykpers-1 from the
@@ -85,7 +85,7 @@ version.</p></div>
 <div class="paragraph"><p>You may check out the sources using Git with the following command:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   $ git clone git@github.com:Yubico/yubico-pam.git yubico-pam</tt></pre>
+<pre><code>   $ git clone git@github.com:Yubico/yubico-pam.git yubico-pam</code></pre>
 </div></div>
 <div class="paragraph"><p>This will create a directory <em>yubico-pam</em>.</p></div>
 <div class="paragraph"><p>Autoconf, automake and libtool must be installed to create a compilable
@@ -93,8 +93,8 @@ source tree.</p></div>
 <div class="paragraph"><p>Generate the build system using:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   $ cd yubico-pam
-   $ autoreconf --install</tt></pre>
+<pre><code>   $ cd yubico-pam
+   $ autoreconf --install</code></pre>
 </div></div>
 </div>
 </div>
@@ -106,30 +106,30 @@ libpam-dev (security/pam_appl.h, libpam.so) installed.  Get the
 ykclient library from:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>https://developers.yubico.com/yubico-c-client/</tt></pre>
+<pre><code>https://developers.yubico.com/yubico-c-client/</code></pre>
 </div></div>
 <div class="paragraph"><p>It in turn requires Curl, which you need to have installed, and
 libyubikey. Get libyubikey from</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>https://developers.yubico.com/yubico-c/</tt></pre>
+<pre><code>https://developers.yubico.com/yubico-c/</code></pre>
 </div></div>
 <div class="paragraph"><p>The new Challenge-Response offline authentication requires libykpers-1
 from the yubikey-personalization project :</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>https://developers.yubico.com/yubikey-personalization/</tt></pre>
+<pre><code>https://developers.yubico.com/yubikey-personalization/</code></pre>
 </div></div>
 <div class="paragraph"><p>The build system uses Autoconf, to set up the build system run:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  ./configure</tt></pre>
+<pre><code>  ./configure</code></pre>
 </div></div>
 <div class="paragraph"><p>Use --without-ldap to disable ldap support.</p></div>
 <div class="paragraph"><p>Then build the code, run the self-test and install the binaries:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  make check install</tt></pre>
+<pre><code>  make check install</code></pre>
 </div></div>
 </div>
 </div>
@@ -149,9 +149,9 @@ can be installed using the following commands on reasonably modern
 Ubuntu platforms :</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ sudo add-apt-repository ppa:yubico/stable
+<pre><code>$ sudo add-apt-repository ppa:yubico/stable
 $ sudo apt-get update
-$ sudo apt-get install libpam-yubico</tt></pre>
+$ sudo apt-get install libpam-yubico</code></pre>
 </div></div>
 <div class="paragraph"><p>See the file /usr/share/doc/libpam-yubico/README.Debian after installing.</p></div>
 </div>
@@ -162,8 +162,8 @@ $ sudo apt-get install libpam-yubico</tt></pre>
 <div class="paragraph"><p>yubico-pam and the supporting Yubico packages have corresponding FreeBSD ports. To install:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ cd /usr/ports/security/pam_yubico
-$ make install clean</tt></pre>
+<pre><code>$ cd /usr/ports/security/pam_yubico
+$ make install clean</code></pre>
 </div></div>
 <div class="paragraph"><p>Advanced configuration notes are available at <a href="http://mjslabs.com/yubihow.html">http://mjslabs.com/yubihow.html</a></p></div>
 </div>
@@ -175,19 +175,19 @@ $ make install clean</tt></pre>
 in /etc/pam.d/:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  auth sufficient pam_yubico.so id=16 debug</tt></pre>
+<pre><code>  auth sufficient pam_yubico.so id=16 debug</code></pre>
 </div></div>
 <div class="paragraph"><p>and move pam_yubico.so into /lib/security/ (or wherever PAM modules
 live in your system) :</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  mv /usr/local/lib/security/pam_yubico.so /lib/security/</tt></pre>
+<pre><code>  mv /usr/local/lib/security/pam_yubico.so /lib/security/</code></pre>
 </div></div>
 <div class="paragraph"><p>For more information, see the project Wiki page.</p></div>
 <div class="paragraph"><p>Supported PAM module parameters are:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  "authfile":   to indicate the location of the file that holds the
+<pre><code>  "authfile":   to indicate the location of the file that holds the
                 mappings of Yubikey token IDs to user names.
 
   "id":         to indicate your client identity.
@@ -217,7 +217,14 @@ live in your system) :</p></div>
                 password is available or the password is not appropriate, the user
                 will be denied access.
 
-  "url":        specify the URL template to use, this is set by calling
+  "urllist":    List  of  URL  templates to be used. This is set by calling
+                ykclient_set_url_bases. The list should be in the format :
+
+                "https://server/wsapi/2.0/verify;https://server/wsapi/2.0/verify"
+
+  "url":        This option should not be used, please use the urllist
+                option instead.
+                Specify the URL template to use, this is set by calling
                 yubikey_client_set_url_template, which defaults to:
 
                 https://api.yubico.com/wsapi/verify?id=%d&amp;otp=%s
@@ -269,14 +276,14 @@ live in your system) :</p></div>
                 "challenge-response" for offline validation using YubiKeys
                 with HMAC-SHA-1 Challenge-Response configurations. See the
                 man-page ykpamcfg(1) for further details on how to configure
-                offline Challenge-Response validation.</tt></pre>
+                offline Challenge-Response validation.</code></pre>
 </div></div>
 <div class="paragraph"><p>If you are using "debug" you may find it useful to create a
 world-writable log file:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  touch /var/run/pam-debug.log
-  chmod go+w /var/run/pam-debug.log</tt></pre>
+<pre><code>  touch /var/run/pam-debug.log
+  chmod go+w /var/run/pam-debug.log</code></pre>
 </div></div>
 </div>
 </div>
@@ -301,14 +308,14 @@ each user you want to allow onto the system using a Yubikey.</p></div>
 <div class="paragraph"><p>The mappings should look like this, one per line:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   &lt;first user name&gt;:&lt;Yubikey token ID1&gt;:&lt;Yubikey token ID2&gt;:….
-   &lt;second user name&gt;:&lt;Yubikey token ID3&gt;:&lt;Yubikey token ID4&gt;:….</tt></pre>
+<pre><code>   &lt;first user name&gt;:&lt;Yubikey token ID1&gt;:&lt;Yubikey token ID2&gt;:….
+   &lt;second user name&gt;:&lt;Yubikey token ID3&gt;:&lt;Yubikey token ID4&gt;:….</code></pre>
 </div></div>
 <div class="paragraph"><p>Now add authfile=/etc/yubikey_mappings to your PAM configuration line, so it
 looks like:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   auth sufficient pam_yubico.so id=16 authfile=/etc/yubikey_mappings</tt></pre>
+<pre><code>   auth sufficient pam_yubico.so id=16 authfile=/etc/yubikey_mappings</code></pre>
 </div></div>
 </div>
 </div>
@@ -320,7 +327,7 @@ directory and places the mapping in that file, the file must have only one
 line:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   &lt;user name&gt;:&lt;Yubikey token ID1&gt;:&lt;Yubikey token ID2&gt;</tt></pre>
+<pre><code>   &lt;user name&gt;:&lt;Yubikey token ID1&gt;:&lt;Yubikey token ID2&gt;</code></pre>
 </div></div>
 <div class="paragraph"><p>This is much the same concept as the SSH authorized_keys file.</p></div>
 </div>
@@ -337,7 +344,7 @@ calculator located here:</p></div>
 characters and listed as:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>Modhex encoded: XXXXXXX</tt></pre>
+<pre><code>Modhex encoded: XXXXXXX</code></pre>
 </div></div>
 <div class="paragraph"><p>Not sure what that last bit meant? Here is how to get a copy of your OTP.</p></div>
 </div>
@@ -360,8 +367,8 @@ Press yubikey button
 <div class="paragraph"><p>It will output an OTP into the shell:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>    $ cccccccgklgcvnkcvnnegrnhgrjkhlkfhdkclfncvlgj
-   bash: cccccccgklgcvnkcvnnegrnhgrjkhlkfhdkclfncvlgj: command not found</tt></pre>
+<pre><code>    $ cccccccgklgcvnkcvnnegrnhgrjkhlkfhdkclfncvlgj
+   bash: cccccccgklgcvnkcvnnegrnhgrjkhlkfhdkclfncvlgj: command not found</code></pre>
 </div></div>
 <div class="paragraph"><p>This can be pasted into the Modhex_Calculator page.</p></div>
 </div>
@@ -375,10 +382,10 @@ information including the OTP and ID of your token to the shell - copy the ID
 into your config file and you should be up and going.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   Yubikey for `youruser':
+<pre><code>   Yubikey for `youruser':
    [pam_yubico.c:pam_sm_authenticate(867)] conv returned 44 bytes
    [pam_yubico.c:pam_sm_authenticate(885)] Skipping first 0 bytes. Length is 44, token_id set to 12 and token OTP always 32.
-   [pam_yubico.c:pam_sm_authenticate(892)] OTP: ccccccclabcabkhbdncicglfltnukadfoifadfhhhhfe ID: cccccclabcab</tt></pre>
+   [pam_yubico.c:pam_sm_authenticate(892)] OTP: ccccccclabcabkhbdncicglfltnukadfoifadfhhhhfe ID: cccccclabcab</code></pre>
 </div></div>
 </div>
 </div>
@@ -404,7 +411,7 @@ authentication will succeed.</p></div>
 logins, add the following to the top of /etc/pam.d/login:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>   auth sufficient pam_yubico.so id=16 debug</tt></pre>
+<pre><code>   auth sufficient pam_yubico.so id=16 debug</code></pre>
 </div></div>
 </div>
 </div>

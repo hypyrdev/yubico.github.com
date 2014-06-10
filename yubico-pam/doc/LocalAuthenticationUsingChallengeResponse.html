@@ -64,13 +64,13 @@ state files manually and configure the PAM module accordingly.</p></div>
 <div class="paragraph"><p>First install the package:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ sudo apt-get install libpam-yubico</tt></pre>
+<pre><code>$ sudo apt-get install libpam-yubico</code></pre>
 </div></div>
 <div class="paragraph"><p>You will get a question about the PAM configuration line.  Enter this
 line:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>mode=challenge-response</tt></pre>
+<pre><code>mode=challenge-response</code></pre>
 </div></div>
 <div class="paragraph"><p>The next question will be about which PAM modules to enable.  Don&#8217;t
 enable anything just yet, because you need to program your YubiKey
@@ -79,7 +79,7 @@ first.</p></div>
 you may use this command:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ sudo dpkg-reconfigure libpam-yubico</tt></pre>
+<pre><code>$ sudo dpkg-reconfigure libpam-yubico</code></pre>
 </div></div>
 <div class="paragraph"><p>The next step is to add a challenge-response slot to your YubiKey.  If
 you have a normal YubiKey with OTP functionality on the first slot,
@@ -88,78 +88,78 @@ CR on the first slot, if you want.</p></div>
 <div class="paragraph"><p>First, program a YubiKey for challenge response on Slot 2:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ ykpersonalize -2 -ochal-resp -ochal-hmac -ohmac-lt64 -oserial-api-visible
+<pre><code>$ ykpersonalize -2 -ochal-resp -ochal-hmac -ohmac-lt64 -oserial-api-visible
 ...
 Commit? (y/n) [n]: y
-$</tt></pre>
+$</code></pre>
 </div></div>
 <div class="paragraph"><p>Now, set the current user to require this YubiKey for logon:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ mkdir $HOME/.yubico
+<pre><code>$ mkdir $HOME/.yubico
 $ ykpamcfg -2 -v
 ...
 Stored initial challenge and expected response in '/home/alice/.yubico/challenge-123456'.
-$</tt></pre>
+$</code></pre>
 </div></div>
 <div class="paragraph"><p>If your /home/user folder is encrypted you should move the challenge file in a different path (i.e. /etc/yubico) and then set the right permission for the user to create the files. To do this do as follow:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ mkdir /etc/yubico
+<pre><code>$ mkdir /etc/yubico
 $ chmod +t /etc/yubico
 $ chmod 777 /etc/yubico
 $ mv /home/user/.yubico/challenge-####### /etc/yubico/username-#######
 ...
-It is important that you name the file with the username of the user that is going to use the Yubikey</tt></pre>
+It is important that you name the file with the username of the user that is going to use the Yubikey</code></pre>
 </div></div>
 <div class="paragraph"><p>Finally we tell the pam module where to look for the challenge file</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ emacs /etc/pam.d/common-auth
+<pre><code>$ emacs /etc/pam.d/common-auth
 ...
 and edit the following line as follow:
 
-auth    required        pam_yubico.so mode=challenge-response chalresp_path=/etc/yubico</tt></pre>
+auth    required        pam_yubico.so mode=challenge-response chalresp_path=/etc/yubico</code></pre>
 </div></div>
 <div class="paragraph"><p>Then back to the PAM configuration step, first make sure you have a
 root terminal available to be able to disable YubiKey login in case of
 issues.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ sudo -s</tt></pre>
+<pre><code>$ sudo -s</code></pre>
 </div></div>
 <div class="paragraph"><p>Then run the "pam-auth-update" command and enable the Yubico PAM
 module.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ sudo pam-auth-update</tt></pre>
+<pre><code>$ sudo pam-auth-update</code></pre>
 </div></div>
 <div class="paragraph"><p>You should now be able to authenticate using YubiKey
 Challenge-Reseponse together with a password like this:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>jas@latte:~$ sudo -s
+<pre><code>jas@latte:~$ sudo -s
 [sudo] password for jas:
-root@latte:~#</tt></pre>
+root@latte:~#</code></pre>
 </div></div>
 <div class="paragraph"><p>Now remove the YubiKey and try again (in a new terminal to avoid sudo
 caching), and you should not be able to login.</p></div>
 <div class="paragraph"><p>For debugging, you can make the PAM configuration line:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>mode=challenge-response debug</tt></pre>
+<pre><code>mode=challenge-response debug</code></pre>
 </div></div>
 <div class="paragraph"><p>and then create a log file:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt># touch /var/run/pam-debug.log
-# chmod go+w /var/run/pam-debug.log</tt></pre>
+<pre><code># touch /var/run/pam-debug.log
+# chmod go+w /var/run/pam-debug.log</code></pre>
 </div></div>
 <div class="paragraph"><p>and then tail the file.  For successful logins it should print
 something like this:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>[pam_yubico.c:parse_cfg(721)] called.
+<pre><code>[pam_yubico.c:parse_cfg(721)] called.
 [pam_yubico.c:parse_cfg(722)] flags 32768 argc 2
 [pam_yubico.c:parse_cfg(724)] argv[0]=mode=challenge-response
 [pam_yubico.c:parse_cfg(724)] argv[1]=debug
@@ -186,12 +186,12 @@ something like this:</p></div>
 [pam_yubico.c:do_challenge_response(493)] Loading challenge from file /home/jas/.yubico/challenge-1077187
 [util.c:load_chalresp_state(269)] Challenge: 23001a190724abf46c8022b008ccb65673dd634ecb150613771ec87f37850284d80dd5f8c8e56affb6da2e952b16682160e7f3ac4f816b64126bd9556e5be1, response: 63d4a679ed15335ffd4253e7609963bcdb0834d4, slot: 2
 [pam_yubico.c:do_challenge_response(566)] Got the expected response, generating new challenge (63 bytes).
-[pam_yubico.c:do_challenge_response(629)] Challenge-response success!</tt></pre>
+[pam_yubico.c:do_challenge_response(629)] Challenge-response success!</code></pre>
 </div></div>
 <div class="paragraph"><p>and if there is no YubiKey in the machine it will look like this:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>[pam_yubico.c:parse_cfg(721)] called.
+<pre><code>[pam_yubico.c:parse_cfg(721)] called.
 [pam_yubico.c:parse_cfg(722)] flags 32768 argc 2
 [pam_yubico.c:parse_cfg(724)] argv[0]=mode=challenge-response
 [pam_yubico.c:parse_cfg(724)] argv[1]=debug
@@ -216,7 +216,7 @@ something like this:</p></div>
 [pam_yubico.c:parse_cfg(743)] chalresp_path=(null)
 [pam_yubico.c:pam_sm_authenticate(775)] get user returned: jas
 [pam_yubico.c:do_challenge_response(478)] Failed initializing YubiKey
-[pam_yubico.c:do_challenge_response(640)] Yubikey core error: no yubikey present</tt></pre>
+[pam_yubico.c:do_challenge_response(640)] Yubikey core error: no yubikey present</code></pre>
 </div></div>
 </div>
 </div>
