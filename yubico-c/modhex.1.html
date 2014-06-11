@@ -1,128 +1,123 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<head>
-<meta name="generator" content="groff -Thtml, see www.gnu.org">
-<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<meta name="Content-Style" content="text/css">
-<style type="text/css">
-       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
-       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
-       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
-       h1      { text-align: center }
-</style>
-<title>MODHEX</title>
 
-</head>
-<body>
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-<h1 align="center">MODHEX</h1>
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
 
-<a href="#NAME">NAME</a><br>
-<a href="#SYNOPSIS">SYNOPSIS</a><br>
-<a href="#DESCRIPTION">DESCRIPTION</a><br>
-<a href="#OPTIONS">OPTIONS</a><br>
-<a href="#EXAMPLES">EXAMPLES</a><br>
-<a href="#SEE ALSO">SEE ALSO</a><br>
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Yubico C low-level Library : C library for manipulating Yubico YubiKey One-Time Passwords (OTPs)" />
 
-<hr>
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
 
+    <title>Yubico C low-level Library</title>
+  </head>
 
-<h2>NAME
-<a name="NAME"></a>
-</h2>
+  <body>
 
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/yubico-c/">Yubico C low-level Library</a>
+          /
+          <a>modhex.1</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubico-c">View on GitHub</a>
 
-<p style="margin-left:11%; margin-top: 1em">modhex &minus;
-convert data to/from modhex encoding</p>
+          <h1><a id="project_title" href="/yubico-c/">Yubico C low-level Library</a></h1>
+          <h2 id="project_tagline">C library for manipulating Yubico YubiKey One-Time Passwords (OTPs)</h2>
+        </header>
+    </div>
 
-<h2>SYNOPSIS
-<a name="SYNOPSIS"></a>
-</h2>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div class="sect1">
+<h2 id="_synopsis">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>modhex</strong> [-d] [-h] <em>DATA</em></p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Encode/decode modhex data <em>DATA</em> to binary and hex.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options">OPTIONS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The string DATA is the data to convert.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>-d</strong>
+</dt>
+<dd>
+<p>
+Decode data (the default is to encode data).
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>-h</strong>
+</dt>
+<dd>
+<p>
+Use hex encoding for all non-modhex data.
+</p>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_examples">EXAMPLES</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>ModHex encode ASCII-string "test":</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>modhex test</code></pre>
+</div></div>
+<div class="paragraph"><p>Decode ModHex data "ifhgieif" into ASCII string:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>modhex -d ifhgieif</code></pre>
+</div></div>
+<div class="paragraph"><p>ModHex encode hex-encoded data "b565716f":</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>modhex -h b565716f</code></pre>
+</div></div>
+<div class="paragraph"><p>Decode ModHex data "nghgibhv" and print hex-encode data:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>modhex -d -h nghgibhv</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_see_also">SEE ALSO</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>YubiKeys can be obtained from Yubico: <a href="http://www.yubico.com/">http://www.yubico.com/</a></p></div>
+</div>
+</div>
 
+</section>
+</div>
 
-<p style="margin-left:11%; margin-top: 1em"><b>modhex [</b>
-<i>&minus;d</i> <b>] [</b> <i>&minus;h</i> <b>]</b> DATA</p>
-
-<h2>DESCRIPTION
-<a name="DESCRIPTION"></a>
-</h2>
-
-
-<p style="margin-left:11%; margin-top: 1em">The modhex tool
-encode/decode modhex data to binary and hex.</p>
-
-<h2>OPTIONS
-<a name="OPTIONS"></a>
-</h2>
-
-
-<p style="margin-left:11%; margin-top: 1em">The string DATA
-is the data to convert.</p>
-
-<table width="100%" border="0" rules="none" frame="void"
-       cellspacing="0" cellpadding="0">
-<tr valign="top" align="left">
-<td width="11%"></td>
-<td width="3%">
-
-
-<p><b>&minus;d</b></p></td>
-<td width="8%"></td>
-<td width="66%">
-
-
-<p>Decode data (the default is to encode data)</p></td>
-<td width="12%">
-</td></tr>
-<tr valign="top" align="left">
-<td width="11%"></td>
-<td width="3%">
-
-
-<p><b>&minus;h</b></p></td>
-<td width="8%"></td>
-<td width="66%">
-
-
-<p>Use hex encoding for all non&minus;modhex data.</p></td>
-<td width="12%">
-</td></tr>
-</table>
-
-<h2>EXAMPLES
-<a name="EXAMPLES"></a>
-</h2>
-
-
-<p style="margin-left:11%; margin-top: 1em">ModHex encode
-ASCII&minus;string &quot;test&quot;:</p>
-
-<p style="margin-left:22%;">modhex test</p>
-
-<p style="margin-left:11%;">Decode ModHex data
-&quot;ifhgieif&quot; into ASCII string:</p>
-
-<p style="margin-left:22%;">modhex &minus;d ifhgieif</p>
-
-<p style="margin-left:11%;">ModHex encode hex&minus;encoded
-data &quot;b565716f&quot;:</p>
-
-<p style="margin-left:22%;">modhex &minus;h b565716f</p>
-
-<p style="margin-left:11%;">Decode ModHex data
-&quot;nghgibhv&quot; and print hex&minus;encode data:</p>
-
-<p style="margin-left:22%;">modhex &minus;d &minus;h
-nghgibhv</p>
-
-<h2>SEE ALSO
-<a name="SEE ALSO"></a>
-</h2>
-
-
-<p style="margin-left:11%; margin-top: 1em">YubiKeys can be
-obtained from Yubico: http://www.yubico.com/</p>
-<hr>
-</body>
-</html>
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">Yubico C low-level Library maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>

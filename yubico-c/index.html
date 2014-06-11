@@ -45,7 +45,7 @@
       <ul>
         <li><a href="releases.html">Releases</a></li>
       </ul>
-<h3>Manual pages</h3><ul><li><a href="modhex.1.html">modhex.1</a></li><li><a href="ykparse.1.html">ykparse.1</a></li><li><a href="ykgenerate.1.html">ykgenerate.1</a></li></ul>
+<h3>Manual pages</h3><ul><li><a href="ykparse.1.html">ykparse.1</a></li><li><a href="ykgenerate.1.html">ykgenerate.1</a></li><li><a href="modhex.1.html">modhex.1</a></li></ul>
 
 <div id="preamble">
 <div class="sectionbody">
@@ -70,9 +70,9 @@ closed interval.</p></div>
 follows.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>./configure
+<pre><code>./configure
 make check
-sudo make install</tt></pre>
+sudo make install</code></pre>
 </div></div>
 <div class="paragraph"><p>Another way to build the package is with a hand written short
 makefile, invoke using <em>make -f simple.mk check</em>.  This is usually not
@@ -88,12 +88,12 @@ you are doing, you should download the release files instead.</p></div>
 <div class="paragraph"><p>You may check out the sources using GIT with the following command:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>git clone git://github.com/Yubico/yubico-c.git</tt></pre>
+<pre><code>git clone git://github.com/Yubico/yubico-c.git</code></pre>
 </div></div>
 <div class="paragraph"><p>This will create a directory <em>yubico-c</em>.  Enter the directory:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>cd yubico-c</tt></pre>
+<pre><code>cd yubico-c</code></pre>
 </div></div>
 <div class="paragraph"><p>Recent versions of autoconf, automake and libtool must be installed,
 if you want to use the normal ./configure based approach.  Use
@@ -101,7 +101,7 @@ simple.mk if you don&#8217;t want this step.</p></div>
 <div class="paragraph"><p>Generate the build system:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>autoreconf --install</tt></pre>
+<pre><code>autoreconf --install</code></pre>
 </div></div>
 <div class="paragraph"><p>Then refer to the user sections above regarding building.</p></div>
 </div>
@@ -118,7 +118,7 @@ and internal data values.</p></div>
 <div class="paragraph"><p>Example usage:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  $ ./modhex test
+<pre><code>  $ ./modhex test
   ifhgieif
   $ ./modhex -d ifhgieif; echo
   test
@@ -202,7 +202,7 @@ and internal data values.</p></div>
     triggered by caps lock: no
     crc: F0B8
     crc check: ok
-  $</tt></pre>
+  $</code></pre>
 </div></div>
 </div>
 </div>
