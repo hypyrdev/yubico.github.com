@@ -57,7 +57,43 @@ if($travis) {
 }
 
 my $makefile = get("https://raw.github.com/Yubico/$project/master/Makefile.am");
-if($makefile) {
+if(-d "$dir/$project/mans") {
+  opendir(my $man_dir, "$dir/$project/mans/");
+  my @man_files = readdir($man_dir);
+  closedir($man_dir);
+  @man_files = grep(/\.txt$/, @man_files);
+  foreach my $file (@man_files) {
+    my $short_name = $file;
+    $file = "$dir/$project/mans/$file";
+    $short_name =~ s/\.txt$//;
+    open(my $ascii, "-|", "asciidoc -o- -s '$file'") or die "failed to open asciidoc";
+    my $massaged_content;
+    while(<$ascii>) {
+      $massaged_content .= $_;
+    }
+    close $ascii;
+
+    my $doc_template = "documentation.html-template";
+    if(-f "$dir/$project/$doc_template") {
+      $doc_template = "$dir/$project/$doc_template";
+    }
+    open(my $doc_templ, "<", $doc_template) or die "failed to open documentation template";
+
+    open(my $doc_out, ">", "$dir/$project/$short_name.html") or die "failed to open output file ($dir/$project/$short_name.html)";
+    while(<$doc_templ>) {
+      s/PROJECT_PROJECT/$project/g;
+      s/PROJECT_NAME/$name/g;
+      s/PROJECT_SUMMARY/$summary/g;
+      s/PROJECT_CONTENT/$massaged_content/g;
+      s/PROJECT_TRAVIS_LINK/$travis_link/g;
+      s/DOCUMENT_NAME/$short_name/g;
+      print($doc_out $_);
+    }
+    close $doc_templ;
+    close $doc_out;
+    $man_links .= "<li><a href=\"$short_name.html\">$short_name</a></li>";
+  }
+} elsif($makefile) {
   my $mans = join(' ', ($makefile =~ m/dist_man\d_MANS = (.+)/g));
   foreach my $man (split(/\s/, $mans)) {
     my $man_content = get("https://raw.github.com/Yubico/$project/master/$man");
