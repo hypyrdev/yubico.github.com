@@ -1,244 +1,253 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<head>
-<meta name="generator" content="groff -Thtml, see www.gnu.org">
-<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<meta name="Content-Style" content="text/css">
-<style type="text/css">
-       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
-       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
-       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
-       h1      { text-align: center }
-</style>
-<title>pam_yubico</title>
 
-</head>
-<body>
-
-<h1 align="center">pam_yubico</h1>
-
-<a href="#NAME">NAME</a><br>
-<a href="#SYNOPSIS">SYNOPSIS</a><br>
-<a href="#DESCRIPTION">DESCRIPTION</a><br>
-<a href="#OPTIONS">OPTIONS</a><br>
-<a href="#EXAMPLES">EXAMPLES</a><br>
-<a href="#BUGS">BUGS</a><br>
-<a href="#SEE ALSO">SEE ALSO</a><br>
-
-<hr>
-
-
-<h2>NAME
-<a name="NAME"></a>
-</h2>
-
-
-<p style="margin-left:11%; margin-top: 1em">pam_yubico -
-Module for YubiKey authentication</p>
-
-<h2>SYNOPSIS
-<a name="SYNOPSIS"></a>
-</h2>
-
-
-
-<p style="margin-left:11%; margin-top: 1em"><b>pam_yubico</b>
-[...]</p>
-
-<h2>DESCRIPTION
-<a name="DESCRIPTION"></a>
-</h2>
-
-
-<p style="margin-left:11%; margin-top: 1em">The module is
-for authentication of YubiKeys, either with online
-validation of OTP, or offline validation with HMAC-SHA1
-challenge-response.</p>
-
-<h2>OPTIONS
-<a name="OPTIONS"></a>
-</h2>
-
-
-<p style="margin-left:11%; margin-top: 1em"><b>debug</b>
-Turns on debugging to STDOUT <b><br>
-mode=</b>[<i>client</i>|<i>challenge-response</i>]</p>
-
-<p style="margin-left:22%;">Set the mode of operation,
-client for OTP validation and challenge-response for
-challenge-response validation, client is the default.</p>
-
-
-<p style="margin-left:11%;"><b>authfile=</b><i>file</i></p>
-
-<p style="margin-left:22%;">Set the location of the file
-that holds the mappings of Yubikey token IDs to user names.
-The format is username:first_public_id:second_public_id:...
-default location of the file is
-$HOME/.yubico/authorized_yubikeys.</p>
-
-<table width="100%" border="0" rules="none" frame="void"
-       cellspacing="0" cellpadding="0">
-<tr valign="top" align="left">
-<td width="11%"></td>
-<td width="7%">
-
-
-<p><b>id=</b><i>id</i></p></td>
-<td width="4%"></td>
-<td width="43%">
-
-
-<p>Set to your client identity.</p></td>
-<td width="35%">
-</td></tr>
-</table>
-
-<p style="margin-left:11%;"><b>key=</b><i>key</i></p>
-
-<p style="margin-left:22%;">Set to your client key in
-base64 format. The client key is also known as API key, and
-provides integrity in the communication between the client
-(you) and the validation server. If you want to get one for
-use with the default YubiCloud service, visit this URL: <br>
-&lang; URL: https://upgrade.yubico.com/getapikey/ &rang;</p>
-
-<p style="margin-left:11%;"><b>alwaysok</b></p>
-
-<p style="margin-left:22%;">Set to enable all
-authentication attempts to succeed (aka presentation
-mode).</p>
-
-<p style="margin-left:11%;"><b>try_first_pass</b></p>
-
-<p style="margin-left:22%;">Before prompting the user for
-their password, the module first tries the previous stacked
-module&acute;s password in case that satisfies this module
-as well.</p>
-
-<p style="margin-left:11%;"><b>use_first_pass</b></p>
-
-<p style="margin-left:22%;">The argument use_first_pass
-forces the module to use a previous stacked modules password
-and will never prompt the user - if no password is available
-or the password is not appropriate, the user will be denied
-access.</p>
-
-<p style="margin-left:11%;"><b>urllist=</b><i>list</i></p>
-
-<p style="margin-left:22%;">List of URL templates to be
-used. This is set by calling ykclient_set_url_bases. The
-list should be in the format <br>
-&lang; URL:
-https://api1.example.com/wsapi/2.0/verify;https://api2.example.com/wsapi/2.0/verify
-&rang;</p>
-
-<p style="margin-left:11%;"><b>url=</b><i>url</i></p>
-
-<p style="margin-left:22%;">This option should not be used,
-please use the urllist option instead. Set the URL template
-to use, this is set by calling ykclient_set_url_template.
-The URL should be set in the format <br>
-&lang; URL:
-https://api.example.com/wsapi/2.0/verify?id=%d&amp;otp=%s
-&rang;</p>
-
-<p style="margin-left:11%;"><b>capath=</b><i>path</i></p>
-
-<p style="margin-left:22%;">Specify the path where X509
-certificates are stored. This is required if
-&rsquo;https&rsquo; or &rsquo;ldaps&rsquo; are used in
-&rsquo;url&rsquo; and &rsquo;ldap_uri&rsquo;
-respectively.</p>
-
-<p style="margin-left:11%;"><b>verbose_otp</b></p>
-
-<p style="margin-left:22%;">This argument is used to show
-the OTP (One Time Password) when it is entered, i.e. to
-enable terminal echo of entered characters. You are advised
-to not use this, if you are using two factor authentication
-because that will display your password on the screen. This
-requires the service using the PAM module to display custom
-fields. For example, OpenSSH requires you to configure
-&quot;ChallengeResponseAuthentication no&quot;.</p>
-
-<p style="margin-left:11%;"><b>ldap_uri=</b><i>uri</i></p>
-
-<p style="margin-left:22%;">Specify the LDAP server URI
-(e.g. ldap://localhost).</p>
-
-
-<p style="margin-left:11%;"><b>ldap_server=</b><i>server</i></p>
-
-<p style="margin-left:22%;">Specify the LDAP server host
-(default LDAP port is used). <b>Deprecated. Use ldap_uri
-instead.</b></p>
-
-<p style="margin-left:11%;"><b>ldapdn=</b><i>dn</i></p>
-
-<p style="margin-left:22%;">The dn where the users are
-stored (eg: ou=users,dc=domain,dc=com).</p>
-
-
-<p style="margin-left:11%;"><b>user_attr=</b><i>attr</i></p>
-
-<p style="margin-left:22%;">The LDAP attribute used to
-store user names (eg:cn).</p>
-
-
-<p style="margin-left:11%;"><b>yubi_attr=</b><i>attr</i></p>
-
-<p style="margin-left:22%;">The LDAP attribute used to
-store the Yubikey id.</p>
-
-
-<p style="margin-left:11%;"><b>yubi_attr_prefix=</b><i>prefix</i></p>
-
-<p style="margin-left:22%;">The prefix of the LDAP
-attribute&rsquo;s value, in case of a generic attribute,
-used to store several types of ids.</p>
-
-
-<p style="margin-left:11%;"><b>token_id_length=</b><i>length</i></p>
-
-<p style="margin-left:22%;">Length of ID prefixing the OTP
-(this is 12 if using the YubiCloud).</p>
-
-<h2>EXAMPLES
-<a name="EXAMPLES"></a>
-</h2>
-
-
-<p style="margin-left:22%; margin-top: 1em">auth sufficient
-pam_yubico.so id=16 debug <br>
-auth required pam_yubico.so mode=challenge-response</p>
-
-<h2>BUGS
-<a name="BUGS"></a>
-</h2>
-
-
-<p style="margin-left:11%; margin-top: 1em">Report
-yubico-pam bugs in the issue tracker &lang; URL:
-https://github.com/Yubico/yubico-pam/issues/ &rang;</p>
-
-<h2>SEE ALSO
-<a name="SEE ALSO"></a>
-</h2>
-
-
-<p style="margin-left:11%; margin-top: 1em">The yubico-pam
-home page &lang; URL:
-https://developers.yubico.com/yubico-pam/ &rang;</p>
-
-
-<p style="margin-left:11%; margin-top: 1em"><b>ykpamcfg</b>(1),
-<b>pam</b>(7)</p>
-
-<p style="margin-left:11%; margin-top: 1em">YubiKeys can be
-obtained from Yubico &lang; URL: https://www.yubico.com/
-&rang; .</p>
-<hr>
-</body>
-</html>
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubico-pam : Yubico Pluggable Authentication Module (PAM)" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubico-pam</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/yubico-pam/">yubico-pam</a>
+          /
+          <a>pam_yubico.8</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubico-pam">View on GitHub</a>
+<a id="travis_link" href="https://travis-ci.org/Yubico/yubico-pam"><img id="travis_img" src="https://travis-ci.org/Yubico/yubico-pam.svg?branch=master"/></a>
+          <h1><a id="project_title" href="/yubico-pam/">yubico-pam</a></h1>
+          <h2 id="project_tagline">Yubico Pluggable Authentication Module (PAM)</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div class="sect1">
+<h2 id="_synopsis">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>pam_yubico</strong> [&#8230;]</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The module is for authentication of YubiKeys, either with online validation of OTP, or offline validation with HMAC-SHA1 challenge-response.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options">OPTIONS</h2>
+<div class="sectionbody">
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>debug</strong>
+</dt>
+<dd>
+<p>
+Turns on debugging to STDOUT
+</p>
+</dd>
+</dl></div>
+<div class="paragraph"><p><strong>mode=</strong>[<em>client</em>|<em>challenge-response</em>]
+Set the mode of operation, client for OTP validation and challenge-response for challenge-response validation, client is the default.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>authfile</strong>=<em>file</em>
+</dt>
+<dd>
+<p>
+Set the location of the file that holds the mappings of Yubikey token IDs to user names.  The format is username:first_public_id:second_public_id:&#8230;  default location of the file is $HOME/.yubico/authorized_yubikeys.
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>id</strong>=<em>id</em>
+</dt>
+<dd>
+<p>
+Set to your client identity.
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>key</strong>=<em>key</em>
+</dt>
+<dd>
+<p>
+Set to your client key in base64 format.  The client key is also known as API key, and provides integrity in the communication between the client (you) and the validation server.  If you want to get one for use with the default YubiCloud service, please go to <a href="https://upgrade.yubico.com/getapikey/">https://upgrade.yubico.com/getapikey/</a>
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>alwaysok</strong>
+</dt>
+<dd>
+<p>
+Set to enable all authentication attempts to succeed (aka presentation mode).
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>try_first_pass</strong>
+</dt>
+<dd>
+<p>
+Before prompting the user for their password, the module first tries the previous stacked module´s password in case that satisfies this module as well.
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>use_first_pass</strong>
+</dt>
+<dd>
+<p>
+The argument use_first_pass forces the module to use a previous stacked modules password and will never prompt the user - if no password is available or the password is not appropriate, the user will be denied access.
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>urllist</strong>=<em>list</em>
+</dt>
+<dd>
+<p>
+List of URL templates to be used. This is set by calling ykclient_set_url_bases.
+The list should be in the format:
+  <a href="https://api1.example.com/wsapi/2.0/verify;https://api2.example.com/wsapi/2.0/verify">https://api1.example.com/wsapi/2.0/verify;https://api2.example.com/wsapi/2.0/verify</a>
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>url</strong>=<em>url</em>
+</dt>
+<dd>
+<p>
+This option should not be used, please use the urllist option instead.  Set the URL template to use, this is set by calling ykclient_set_url_template.  The URL should be set in the format
+  <a href="https://api.example.com/wsapi/2.0/verify?id=%d&amp;otp=%s">https://api.example.com/wsapi/2.0/verify?id=%d&amp;otp=%s</a>
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>capath</strong>=<em>path</em>
+</dt>
+<dd>
+<p>
+Specify the path where X509 certificates are stored. This is required if <em>https</em> or <em>ldaps</em> are used in <em>url</em> and <em>ldap_uri</em> respectively.
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>verbose_otp</strong>
+</dt>
+<dd>
+<p>
+This argument is used to show the OTP (One Time Password) when it is entered, i.e. to enable terminal echo of entered characters.  You are advised to not use this, if you are using two factor authentication because that will display your password on the screen.  This requires the service using the PAM module to display custom fields.  For example, OpenSSH requires you to configure "ChallengeResponseAuthentication no".
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>ldap_uri</strong>=<em>uri</em>
+</dt>
+<dd>
+<p>
+Specify the LDAP server URI (e.g. ldap://localhost).
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>ldap_server</strong>=<em>server</em>
+</dt>
+<dd>
+<p>
+Specify the LDAP server host (default LDAP port is used). <strong>Deprecated.  Use "ldap_uri" instead.</strong>
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>ldapdn</strong>=<em>dn</em>
+</dt>
+<dd>
+<p>
+The dn where the users are stored (eg: ou=users,dc=domain,dc=com).
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>user_attr</strong>=<em>attr</em>
+</dt>
+<dd>
+<p>
+The LDAP attribute used to store user names (eg:cn).
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>yubi_attr</strong>=<em>attr</em>
+</dt>
+<dd>
+<p>
+The LDAP attribute used to store the Yubikey id.
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>yubi_attr_prefix</strong>=<em>prefix</em>
+</dt>
+<dd>
+<p>
+The prefix of the LDAP attribute&#8217;s value, in case of a generic attribute, used to store several types of ids.
+</p>
+</dd>
+<dt class="hdlist1">
+<strong>token_id_length</strong>=<em>length</em>
+</dt>
+<dd>
+<p>
+Length of ID prefixing the OTP (this is 12 if using the YubiCloud).
+</p>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_examples">EXAMPLES</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre><code>auth sufficient pam_yubico.so id=16 debug</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>auth required pam_yubico.so mode=challenge-response</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bugs">BUGS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Report yubico-pam bugs in the issue tracker: <a href="https://github.com/Yubico/yubico-pam/issues">https://github.com/Yubico/yubico-pam/issues</a></p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_see_also">SEE ALSO</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>ykpamcfg</strong>(1), <strong>pam</strong>(7)</p></div>
+<div class="paragraph"><p>The yubico-pam home page: <a href="https://developers.yubico.com/yubico-pam/">https://developers.yubico.com/yubico-pam/</a></p></div>
+<div class="paragraph"><p>YubiKeys can be obtained from Yubico: <a href="http://www.yubico.com/">http://www.yubico.com/</a></p></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubico-pam maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>
