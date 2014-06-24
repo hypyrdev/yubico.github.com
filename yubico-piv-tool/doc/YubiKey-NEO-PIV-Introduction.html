@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubico-piv-tool : Command line tool for the YubiKey NEO PIV applet" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubico-piv-tool</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/yubico-piv-tool/">yubico-piv-tool</a>
+          /
+          <a>YubiKey-NEO-PIV-Introduction</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubico-piv-tool">View on GitHub</a>
+<a id="travis_link" href="https://travis-ci.org/Yubico/yubico-piv-tool"><img id="travis_img" src="https://travis-ci.org/Yubico/yubico-piv-tool.svg?branch=master"/></a>
+          <h1><a id="project_title" href="/yubico-piv-tool/">yubico-piv-tool</a></h1>
+          <h2 id="project_tagline">Command line tool for the YubiKey NEO PIV applet</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>The YubiKey NEO supports the Privilege and Identification Card (PIV)
+interface specified in NIST SP 800-73 document "Cryptographic
+Algorithms and Key Sizes for PIV".  This enables you to perform RSA or
+ECC sign/decrypt operations using a private key stored on the
+smartcard, through common interfaces like PKCS#11.</p></div>
+<div class="paragraph"><p>References:
+* SP 800-73-3 <a href="http://csrc.nist.gov/publications/PubsSPs.html">http://csrc.nist.gov/publications/PubsSPs.html</a>
+* NIST SP 800-73-4 (draft)
+  <a href="http://csrc.nist.gov/publications/PubsDrafts.html#800-73-4">http://csrc.nist.gov/publications/PubsDrafts.html#800-73-4</a></p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_general_information">General information</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The default PIN code is 123456.  The default PUK code is 12345678.</p></div>
+<div class="paragraph"><p>The default 3DES management key (9B) is
+01:02:03:04:05:06:07:08:01:02:03:04:05:06:07:08:01:02:03:04:05:06:07:08.</p></div>
+<div class="paragraph"><p>The following key slots exists:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+9A, 9C, 9D, 9E: RSA 1024, RSA 2048, or ECC secp256r1 keys
+  (algorithms 6, 7, 11 respectively).
+</p>
+</li>
+<li>
+<p>
+9B: Triple-DES key (algorithm 3) for PIV management.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>The maximum size of stored objects is 2005 bytes.</p></div>
+<div class="paragraph"><p>Currently all functionality are available over both contact and
+contactless interfaces (contrary to what the specifications mandate).</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_software">Software</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Card management has been tested with the tools from the OpenSC
+project, specifically piv-tool, and Yubico&#8217;s yubico-piv-tool.  Basic
+features should work with any PIV compliant middleware.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://github.com/OpenSC/OpenSC/wiki">https://github.com/OpenSC/OpenSC/wiki</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://developers.yubico.com/yubico-piv-tool/">https://developers.yubico.com/yubico-piv-tool/</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://github.com/OpenSC/OpenSC/wiki/US-PIV">https://github.com/OpenSC/OpenSC/wiki/US-PIV</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://github.com/OpenSC/OpenSC/wiki/PivTool">https://github.com/OpenSC/OpenSC/wiki/PivTool</a>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_card_holder_unique_identifier">Card Holder Unique Identifier</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>For the applet to be usable in windows the object CHUID (Card Holder
+Unique Identifier) has to be set and unique. The card contents are
+also aggressively cached so the CHUID has to be changed if the card
+contents change.</p></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubico-piv-tool maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>
