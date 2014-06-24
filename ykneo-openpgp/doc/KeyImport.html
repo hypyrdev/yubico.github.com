@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="ykneo-openpgp : OpenPGP app for the YubiKey NEO" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>ykneo-openpgp</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/ykneo-openpgp/">ykneo-openpgp</a>
+          /
+          <a>KeyImport</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/ykneo-openpgp">View on GitHub</a>
+
+          <h1><a id="project_title" href="/ykneo-openpgp/">ykneo-openpgp</a></h1>
+          <h2 id="project_tagline">OpenPGP app for the YubiKey NEO</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This is a short description of how to setup the ykneo-openpgp applet with an
+already existing pgp key.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites">Prerequisites</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>For this procedure to work you must have GnuPG version 2.0.22 or later installed
+and the applet version must be 1.0.5 or later. To check the applet version you
+may run:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt> $ gpg-connect-agent --hex "scd apdu 00 f1 00 00" /bye
+ D[0000]  01 00 05 90 00                                     .....
+ OK</tt></pre>
+</div></div>
+<div class="paragraph"><p>Where "01 00 05" means version 1.0.5.</p></div>
+<div class="paragraph"><p>If you have an existing key you want to import, that key must be a RSA 2048
+bit key.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_generate_a_key">Generate a key</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Skip this step if you already have a key.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt> $ gnupg --gen-key
+
+ gpg (GnuPG) 2.0.22; Copyright (C) 2013 Free Software Foundation, Inc.
+ This is free software: you are free to change and redistribute it.
+ There is NO WARRANTY, to the extent permitted by law.
+
+ Please select what kind of key you want:
+    (1) RSA and RSA (default)
+    (2) DSA and Elgamal
+    (3) DSA (sign only)
+    (4) RSA (sign only)
+ Your selection?</tt></pre>
+</div></div>
+<div class="paragraph"><p>The ykneo-openpgp applet currently only supports RSA keys of 2048 bits length. So
+here we select 1, and go with the default of 2048 bits on the next question.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt> RSA keys may be between 1024 and 4096 bits long.
+ What keysize do you want? (2048)
+
+ Requested keysize is 2048 bits
+ Please specify how long the key should be valid.
+          0 = key does not expire
+       &lt;n&gt;  = key expires in n days
+       &lt;n&gt;w = key expires in n weeks
+       &lt;n&gt;m = key expires in n months
+       &lt;n&gt;y = key expires in n years
+ Key is valid for? (0)</tt></pre>
+</div></div>
+<div class="paragraph"><p>Select an expiry date if you want to. And answer that the data is correct.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>Real name:</tt></pre>
+</div></div>
+<div class="paragraph"><p>Should be the real name associated with this key.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>Email address:</tt></pre>
+</div></div>
+<div class="paragraph"><p>Should be the email adress associated with this key.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>Comment:</tt></pre>
+</div></div>
+<div class="paragraph"><p>May be a comment attached to the key if you want, or leave this empty.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt> You selected this USER-ID:
+     "Foo Bar &lt;foo@example.com&gt;"
+
+ Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit?</tt></pre>
+</div></div>
+<div class="paragraph"><p>If you&#8217;re happy with this USER-ID answer O for okay.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt> We need to generate a lot of random bytes. It is a good idea to perform
+ some other action (type on the keyboard, move the mouse, utilize the
+ disks) during the prime generation; this gives the random number
+ generator a better chance to gain enough entropy.
+ We need to generate a lot of random bytes. It is a good idea to perform
+ some other action (type on the keyboard, move the mouse, utilize the
+ disks) during the prime generation; this gives the random number
+ generator a better chance to gain enough entropy.
+ gpg: key 13AFCE85 marked as ultimately trusted
+ public and secret key created and signed.
+
+ gpg: checking the trustdb
+ gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
+ gpg: depth: 0  valid:   4  signed:   8  trust: 0-, 0q, 0n, 0m, 0f, 4u
+ gpg: depth: 1  valid:   8  signed:   2  trust: 3-, 0q, 0n, 5m, 0f, 0u
+ gpg: next trustdb check due at 2014-03-23
+ pub   2048R/13AFCE85 2014-03-07 [expires: 2014-06-15]
+       Key fingerprint = 743A 2D58 688A 9E9E B4FC  493F 70D1 D7A8 13AF CE85
+ uid                  Foo Bar &lt;foo@example.com&gt;
+ sub   2048R/D7421CDF 2014-03-07 [expires: 2014-06-15]</tt></pre>
+</div></div>
+<div class="paragraph"><p>Take note of the id of the key, in this case 13AFCE85.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_an_authentication_key">Add an authentication key</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Here we will add an authentication key to the previously generate key.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt> $ gnugp --expert --edit-key 13AFCE85
+
+ gpg (GnuPG) 2.0.22; Copyright (C) 2013 Free Software Foundation, Inc.
+ This is free software: you are free to change and redistribute it.
+ There is NO WARRANTY, to the extent permitted by law.
+
+ Secret key is available.
+
+ pub  2048R/13AFCE85  created: 2014-03-07  expires: 2014-06-15  usage: SC
+                      trust: ultimate      validity: ultimate
+ sub  2048R/D7421CDF  created: 2014-03-07  expires: 2014-06-15  usage: E
+ [ultimate] (1). Foo Bar &lt;foo@example.com&gt;
+
+ gpg&gt; addkey
+
+ 2048-bit RSA key, ID 13AFCE85, created 2014-03-07
+
+ Please select what kind of key you want:
+    (3) DSA (sign only)
+    (4) RSA (sign only)
+    (5) Elgamal (encrypt only)
+    (6) RSA (encrypt only)
+    (7) DSA (set your own capabilities)
+    (8) RSA (set your own capabilities)
+ Your selection?</tt></pre>
+</div></div>
+<div class="paragraph"><p>Here we select 8 to get another RSA key attached to our key.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt> Possible actions for a RSA key: Sign Encrypt Authenticate
+ Current allowed actions: Sign Encrypt
+
+    (S) Toggle the sign capability
+    (E) Toggle the encrypt capability
+    (A) Toggle the authenticate capability
+    (Q) Finished
+
+ Your selection?</tt></pre>
+</div></div>
+<div class="paragraph"><p>Select A, then S, then E to get a pure authentication key. Then Q to continue.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>RSA keys may be between 1024 and 4096 bits long.
+What keysize do you want? (2048)</tt></pre>
+</div></div>
+<div class="paragraph"><p>Again we want a 2048 bit key.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt> Requested keysize is 2048 bits
+ Please specify how long the key should be valid.
+          0 = key does not expire
+       &lt;n&gt;  = key expires in n days
+       &lt;n&gt;w = key expires in n weeks
+       &lt;n&gt;m = key expires in n months
+       &lt;n&gt;y = key expires in n years
+ Key is valid for? (0)</tt></pre>
+</div></div>
+<div class="paragraph"><p>Select same expiry as for the rest of the key and then answer y.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt> Is this correct? (y/N) y
+ Really create? (y/N) y
+ We need to generate a lot of random bytes. It is a good idea to perform
+ some other action (type on the keyboard, move the mouse, utilize the
+ disks) during the prime generation; this gives the random number
+ generator a better chance to gain enough entropy.
+
+ pub  2048R/13AFCE85  created: 2014-03-07  expires: 2014-06-15  usage: SC
+                      trust: ultimate      validity: ultimate
+ sub  2048R/D7421CDF  created: 2014-03-07  expires: 2014-06-15  usage: E
+ sub  2048R/B4000C55  created: 2014-03-07  expires: 2014-06-15  usage: A
+ [ultimate] (1). Foo Bar &lt;foo@example.com&gt;
+
+ gpg&gt; Save changes? (y/N) y</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_backup">Backup</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This is a good point to create a backup of your key.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ gpg --export-secret-key --armor 13AFCE85</tt></pre>
+</div></div>
+<div class="paragraph"><p>Make sure to store the backup offline in a secure place.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_importing_the_key">Importing the key</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Now it&#8217;s time to import the key into the ykneo-openpgp applet.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt> $ gpg --edit-key 13AFCE85
+
+ gpg (GnuPG) 2.0.22; Copyright (C) 2013 Free Software Foundation, Inc.
+ This is free software: you are free to change and redistribute it.
+ There is NO WARRANTY, to the extent permitted by law.
+
+ Secret key is available.
+
+ pub  2048R/13AFCE85  created: 2014-03-07  expires: 2014-06-15  usage: SC
+                      trust: ultimate      validity: ultimate
+ sub  2048R/D7421CDF  created: 2014-03-07  expires: 2014-06-15  usage: E
+ sub  2048R/B4000C55  created: 2014-03-07  expires: 2014-06-15  usage: A
+ [ultimate] (1). Foo Bar &lt;foo@example.com&gt;
+
+ gpg&gt; toggle
+
+ sec  2048R/13AFCE85  created: 2014-03-07  expires: 2014-06-15
+ ssb  2048R/D7421CDF  created: 2014-03-07  expires: never
+ ssb  2048R/B4000C55  created: 2014-03-07  expires: never
+ (1)  Foo Bar &lt;foo@example.com&gt;
+
+ gpg&gt; keytocard
+ Really move the primary key? (y/N) y
+ Signature key ....: [none]
+ Encryption key....: [none]
+ Authentication key: [none]
+
+ Please select where to store the key:
+    (1) Signature key
+    (3) Authentication key
+ Your selection? 1</tt></pre>
+</div></div>
+<div class="paragraph"><p>Here we&#8217;ve just moved the primary key to the Signature sport of the applet.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt> gpg&gt; key 1
+
+ sec  2048R/13AFCE85  created: 2014-03-07  expires: 2014-06-15
+                      card-no: 0000 00000001
+ ssb* 2048R/D7421CDF  created: 2014-03-07  expires: never
+ ssb  2048R/B4000C55  created: 2014-03-07  expires: never
+ (1)  Foo Bar &lt;foo@example.com&gt;
+
+ gpg&gt; keytocard
+ Signature key ....: 743A 2D58 688A 9E9E B4FC  493F 70D1 D7A8 13AF CE85
+ Encryption key....: [none]
+ Authentication key: [none]
+
+ Please select where to store the key:
+    (2) Encryption key
+ Your selection? 2</tt></pre>
+</div></div>
+<div class="paragraph"><p>And here we&#8217;ve moved the Encryption key.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt> gpg&gt; key 1
+
+ sec  2048R/13AFCE85  created: 2014-03-07  expires: 2014-06-15
+                      card-no: 0000 00000001
+ ssb  2048R/D7421CDF  created: 2014-03-07  expires: never
+                      card-no: 0000 00000001
+ ssb  2048R/B4000C55  created: 2014-03-07  expires: never
+ (1)  Foo Bar &lt;foo@example.com&gt;
+
+ gpg&gt; key 2
+
+ sec  2048R/13AFCE85  created: 2014-03-07  expires: 2014-06-15
+                      card-no: 0000 00000001
+ ssb  2048R/D7421CDF  created: 2014-03-07  expires: never
+                      card-no: 0000 00000001
+ ssb* 2048R/B4000C55  created: 2014-03-07  expires: never
+ (1)  Foo Bar &lt;foo@example.com&gt;
+
+ gpg&gt; keytocard
+ Signature key ....: 743A 2D58 688A 9E9E B4FC  493F 70D1 D7A8 13AF CE85
+ Encryption key....: 8D17 89A0 5C2F B804 22E5  5C04 8A68 9CC0 D742 1CDF
+ Authentication key: [none]
+
+ Please select where to store the key:
+    (3) Authentication key
+ Your selection? 3</tt></pre>
+</div></div>
+<div class="paragraph"><p>And as a last step we&#8217;ve now moved the Authentication key to the applet.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>gpg&gt; quit
+Save changes? (y/N) y</tt></pre>
+</div></div>
+<div class="paragraph"><p>After this the keyring is saved, now no longer containing the real secret key,
+only a pointer that it&#8217;s stored on a smartcard.</p></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">ykneo-openpgp maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>
