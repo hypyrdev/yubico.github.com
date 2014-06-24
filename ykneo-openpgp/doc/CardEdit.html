@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="ykneo-openpgp : OpenPGP app for the YubiKey NEO" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>ykneo-openpgp</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/ykneo-openpgp/">ykneo-openpgp</a>
+          /
+          <a>CardEdit</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/ykneo-openpgp">View on GitHub</a>
+
+          <h1><a id="project_title" href="/ykneo-openpgp/">ykneo-openpgp</a></h1>
+          <h2 id="project_tagline">OpenPGP app for the YubiKey NEO</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>To configure the OpenPGP applet on a YubiKey NEO you can use GnuPG.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites">Prerequisites</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Make sure you have a recent YubiKey NEO firmware version, 3.1.8 or
+later; use "lsusb -v" to find out.</p></div>
+<div class="paragraph"><p>Make sure the device is in OTP/CCID or CCID mode, use the YubiKey
+personalization tool "ykpersonalize -m82" to switch.</p></div>
+<div class="paragraph"><p>Check that your libccid version is 1.4.10 or later so that
+/etc/libccid_Info.plist contains the YubiKey USB PID/VID.</p></div>
+<div class="paragraph"><p>Check that your PCSCD setup is working.  Use "pcsc_scan" to check for
+card readers, it should show "Yubikey NEO" somewhere in the output.</p></div>
+<div class="paragraph"><p>You need to use the GnuPG agent with scdaemon, and we recommend using
+version 2.0.22 or later for full functionality.</p></div>
+<div class="paragraph"><p>Make sure you have the OpenPGP applet loaded properly.  (You may want
+to set a proper Application ID, see herlo&#8217;s ssh-gpg-smartcard-config
+github repository.)  To check the applet version you may run:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt> $ gpg-connect-agent --hex "scd apdu 00 f1 00 00" /bye
+ D[0000]  01 00 05 90 00                                     .....
+ OK</tt></pre>
+</div></div>
+<div class="paragraph"><p>Where "01 00 05" means version 1.0.5.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example">Example</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The following demonstrate setting all the parameters in the OpenPGP
+applet on a YubiKey NEO.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>user@debian:~$ gpg --card-edit
+
+Application ID ...: D2760001240102000060000000420000
+Version ..........: 2.0
+Manufacturer .....: unknown
+Serial number ....: 00000042
+Name of cardholder: [not set]
+Language prefs ...: [not set]
+Sex ..............: unspecified
+URL of public key : [not set]
+Login data .......: [not set]
+Signature PIN ....: forced
+Key attributes ...: 2048R 2048R 2048R
+Max. PIN lengths .: 127 127 127
+PIN retry counter : 3 3 3
+Signature counter : 0
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: [none]
+General key info..: [none]
+
+gpg/card&gt; admin
+Admin commands are allowed
+
+gpg/card&gt; passwd
+gpg: OpenPGP card no. D2760001240102000060000000420000 detected
+
+1 - change PIN
+2 - unblock PIN
+3 - change Admin PIN
+4 - set the Reset Code
+Q - quit
+
+Your selection? 3
+PIN changed.
+
+1 - change PIN
+2 - unblock PIN
+3 - change Admin PIN
+4 - set the Reset Code
+Q - quit
+
+Your selection? 1
+PIN changed.
+
+1 - change PIN
+2 - unblock PIN
+3 - change Admin PIN
+4 - set the Reset Code
+Q - quit
+
+Your selection? q
+
+gpg/card&gt; name
+Cardholder's surname: Josefsson
+Cardholder's given name: Simon
+
+gpg/card&gt; lang
+Language preferences: sv
+
+gpg/card&gt; url
+URL to retrieve public key: https://josefsson.org/1c5c4717.txt
+
+gpg/card&gt; sex
+Sex ((M)ale, (F)emale or space): m
+
+gpg/card&gt; login
+Login data (account name): jas
+
+gpg/card&gt;
+
+Application ID ...: D2760001240102000060000000420000
+Version ..........: 2.0
+Manufacturer .....: unknown
+Serial number ....: 00000042
+Name of cardholder: Simon Josefsson
+Language prefs ...: sv
+Sex ..............: male
+URL of public key : https://josefsson.org/1c5c4717.txt
+Login data .......: jas
+Signature PIN ....: forced
+Key attributes ...: 2048R 2048R 2048R
+Max. PIN lengths .: 127 127 127
+PIN retry counter : 3 3 3
+Signature counter : 0
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: [none]
+General key info..: [none]
+
+gpg/card&gt; quit
+user@debian:~$</tt></pre>
+</div></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">ykneo-openpgp maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>
