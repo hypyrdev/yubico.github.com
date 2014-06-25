@@ -50,16 +50,13 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph"><p>This project implement the OpenPGP card functionality used on the
-YubiKey NEO device that is sold by Yubico.  This project is relatively
-unmodified from the upstream project on which this project is based:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><tt>http://sourceforge.net/p/javacardopenpgp/
-Author: Joeri de Ruiter</tt></pre>
-</div></div>
-<div class="paragraph"><p>The initial modifications we have made compared to the upstream
-project are minor, but we reserve the right to make other
-changes/improvements that are specific to the YubiKey NEO hardware.</p></div>
+YubiKey NEO device that is sold by Yubico.</p></div>
+<div class="paragraph"><p>This project is based on the "Java Card OpenPGP Card" project made by
+Joeri de Ruiter.  The initial modifications we have made compared to
+the upstream project are minor, but we reserve the right to make other
+changes and improvements that are specific to the YubiKey NEO
+hardware.  For the original project homepage, see:
+<a href="http://sourceforge.net/p/javacardopenpgp/">http://sourceforge.net/p/javacardopenpgp/</a></p></div>
 </div>
 </div>
 <div class="sect1">
@@ -83,11 +80,8 @@ license.  See the file LICENSE for more information.</p></div>
 <div class="sect1">
 <h2 id="_installing_jckit">Installing JCKit</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Install the Java Card Development Kit version 2.2.2, download it from:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><tt>http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javame-419430.html#java_card_kit-2.2.2-oth-JPR</tt></pre>
-</div></div>
+<div class="paragraph"><p>Install the Java Card Development Kit version 2.2.2, download it from:
+<a href="http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javame-419430.html#java_card_kit-2.2.2-oth-JPR">http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javame-419430.html#java_card_kit-2.2.2-oth-JPR</a></p></div>
 <div class="paragraph"><p>Unpack it into a new directory called for example "jckit" folder:</p></div>
 <div class="literalblock">
 <div class="content">
@@ -118,11 +112,7 @@ JCKit.  For example:</p></div>
 <div class="sect1">
 <h2 id="_eclipe_and_eclipse_jcde">Eclipe and eclipse-jcde</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>First install Eclipse following instructions on:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><tt>http://www.eclipse.org/</tt></pre>
-</div></div>
+<div class="paragraph"><p>First install Eclipse following instructions on: <a href="http://www.eclipse.org/">http://www.eclipse.org/</a></p></div>
 <div class="paragraph"><p>On Debian/Ubuntu systems Eclipse is packaged and can be installed from
 the command line:</p></div>
 <div class="literalblock">
@@ -131,11 +121,8 @@ the command line:</p></div>
 </div></div>
 <div class="paragraph"><p>Start Eclipse once to make sure it creates a $HOME/.eclipse/
 directory.  Then quit Eclipse.</p></div>
-<div class="paragraph"><p>Download the eclipse-jcde-0.2.zip file from</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><tt>http://eclipse-jcde.sourceforge.net/</tt></pre>
-</div></div>
+<div class="paragraph"><p>Download the eclipse-jcde-0.2.zip file from:
+<a href="http://eclipse-jcde.sourceforge.net/">http://eclipse-jcde.sourceforge.net/</a></p></div>
 <div class="paragraph"><p>and unpack it like this:</p></div>
 <div class="literalblock">
 <div class="content">
@@ -167,19 +154,12 @@ CAP file will be available in your Eclipse workspace as:</p></div>
 <h2 id="_enable_ccid_mode_on_the_neo">Enable CCID mode on the NEO</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>First make sure the YubiKey NEO is in the HID/CCID or CCID mode.  You
-may use the YubiKey NEO Manager GUI:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><tt>https://developers.yubico.com/yubikey-neo-manager/</tt></pre>
-</div></div>
+may use the YubiKey NEO Manager GUI:
+<a href="https://developers.yubico.com/yubikey-neo-manager/">https://developers.yubico.com/yubikey-neo-manager/</a></p></div>
 <div class="paragraph"><p>If you prefer command line tools, you may use the <em>ykpers</em> and
-<em>ykneomgr</em> tools depending on which mode the YubiKey NEO is in.  See
-the following projects:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><tt>https://developers.yubico.com/yubikey-personalization/
-https://developers.yubico.com/libykneomgr/</tt></pre>
-</div></div>
+<em>ykneomgr</em> tools depending on which mode the YubiKey NEO is in.  See:
+<a href="https://developers.yubico.com/yubikey-personalization/">https://developers.yubico.com/yubikey-personalization/</a>
+<a href="https://developers.yubico.com/libykneomgr/">https://developers.yubico.com/libykneomgr/</a></p></div>
 <div class="paragraph"><p>Refer to the documentation of these projects on how to mode switch the
 YubiKey NEO.</p></div>
 </div>
@@ -187,11 +167,8 @@ YubiKey NEO.</p></div>
 <div class="sect1">
 <h2 id="_installing_cap_file_to_neo">Installing CAP file to NEO</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Install the gpshell tool from Global Platform:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><tt>http://sourceforge.net/projects/globalplatform/</tt></pre>
-</div></div>
+<div class="paragraph"><p>Install the gpshell tool from Global Platform:
+<a href="http://sourceforge.net/projects/globalplatform/">http://sourceforge.net/projects/globalplatform/</a></p></div>
 <div class="paragraph"><p>We have tested the combination of GlobalPlatform Library version
 6.0.0, GPShell version 1.4.4, and gppcscconnectionplugin version
 1.1.0.</p></div>
