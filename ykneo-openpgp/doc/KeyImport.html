@@ -46,16 +46,18 @@
 <div class="sect1">
 <h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>This is a short description of how to setup the ykneo-openpgp applet with an
-already existing pgp key.</p></div>
+<div class="paragraph"><p>This is a short description of how to import an already existing
+OpenPGP key to the YubiKey NEO running the ykneo-openpgp applet.</p></div>
+<div class="paragraph"><p>For more information about GnuPG, see: <a href="http://www.gnupg.org/">http://www.gnupg.org/</a></p></div>
+<div class="paragraph"><p>For more information about OpenPGP, see: <a href="http://www.openpgp.org/">http://www.openpgp.org/</a></p></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_prerequisites">Prerequisites</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>For this procedure to work you must have GnuPG version 2.0.22 or later installed
-and the applet version must be 1.0.5 or later. To check the applet version you
-may run:</p></div>
+<div class="paragraph"><p>For this procedure to work you must have GnuPG version 2.0.22 or later
+installed.  The ykneo-openpgp applet version must be 1.0.5 or later.
+To check the applet version you may run:</p></div>
 <div class="literalblock">
 <div class="content">
 <pre><tt> $ gpg-connect-agent --hex "scd apdu 00 f1 00 00" /bye
@@ -63,8 +65,8 @@ may run:</p></div>
  OK</tt></pre>
 </div></div>
 <div class="paragraph"><p>Where "01 00 05" means version 1.0.5.</p></div>
-<div class="paragraph"><p>If you have an existing key you want to import, that key must be a RSA 2048
-bit key.</p></div>
+<div class="paragraph"><p>If you have an existing key you want to import, that key must be a RSA
+2048 bit key.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -73,7 +75,7 @@ bit key.</p></div>
 <div class="paragraph"><p>Skip this step if you already have a key.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt> $ gnupg --gen-key
+<pre><tt> $ gpg --gen-key
 
  gpg (GnuPG) 2.0.22; Copyright (C) 2013 Free Software Foundation, Inc.
  This is free software: you are free to change and redistribute it.
@@ -158,7 +160,7 @@ here we select 1, and go with the default of 2048 bits on the next question.</p>
 <div class="paragraph"><p>Here we will add an authentication key to the previously generate key.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt> $ gnugp --expert --edit-key 13AFCE85
+<pre><tt> $ gpg --expert --edit-key 13AFCE85
 
  gpg (GnuPG) 2.0.22; Copyright (C) 2013 Free Software Foundation, Inc.
  This is free software: you are free to change and redistribute it.
