@@ -166,34 +166,37 @@ CAP file will be available in your Eclipse workspace as:</p></div>
 <div class="sect1">
 <h2 id="_enable_ccid_mode_on_the_neo">Enable CCID mode on the NEO</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>First make sure the YubiKey NEO is in the HID/CCID or CCID mode, using
-ykpers from the YubiKey Personalization tool:</p></div>
+<div class="paragraph"><p>First make sure the YubiKey NEO is in the HID/CCID or CCID mode.  You
+may use the YubiKey NEO Manager GUI:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>http://code.google.com/p/yubikey-personalization/
-https://github.com/Yubico/yubikey-personalization</tt></pre>
+<pre><tt>https://developers.yubico.com/yubikey-neo-manager/</tt></pre>
 </div></div>
-<div class="paragraph"><p>For example:</p></div>
+<div class="paragraph"><p>If you prefer command line tools, you may use the <em>ykpers</em> and
+<em>ykneomgr</em> tools depending on which mode the YubiKey NEO is in.  See
+the following projects:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>sudo ykpersonalize -m82</tt></pre>
+<pre><tt>https://developers.yubico.com/yubikey-personalization/
+https://developers.yubico.com/libykneomgr/</tt></pre>
 </div></div>
-<div class="paragraph"><p>Eject and re-insert the NEO to restart it in the new USB mode.  You
-should then have a USB device like 1050:0111 or 1050:0112.  The
-1050:0110 device is HID only.</p></div>
+<div class="paragraph"><p>Refer to the documentation of these projects on how to mode switch the
+YubiKey NEO.</p></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_installing_cap_file_to_neo">Installing CAP file to NEO</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Then install the gpshell tool from Global Platform:</p></div>
+<div class="paragraph"><p>Install the gpshell tool from Global Platform:</p></div>
 <div class="literalblock">
 <div class="content">
 <pre><tt>http://sourceforge.net/projects/globalplatform/</tt></pre>
 </div></div>
-<div class="paragraph"><p>The projects that are needed is the GlobalPlatform Library 6.0.0,
-GPShell 1.4.4, and gppcscconnectionplugin 1.1.0.</p></div>
-<div class="paragraph"><p>You need to whitelist the device in /etc/libccid_Info.plist.</p></div>
+<div class="paragraph"><p>We have tested the combination of GlobalPlatform Library version
+6.0.0, GPShell version 1.4.4, and gppcscconnectionplugin version
+1.1.0.</p></div>
+<div class="paragraph"><p>You need to whitelist the device in /etc/libccid_Info.plist which
+happens automatically if you have a recent libccid.</p></div>
 <div class="paragraph"><p>WARNING!  When you load a new CAP file, everything on the device for
 that app is erased.  Keep a backup of your OpenPGP keys!</p></div>
 <div class="paragraph"><p>When the CAP file has been built and is available in the path shown
