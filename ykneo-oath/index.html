@@ -81,16 +81,16 @@ along with this program.  If not, see <a href="http://www.gnu.org/licenses/">htt
 <div class="paragraph"><p>Install the Java Card Development Kit version 2.2.2, download it from:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javame-419430.html#java_card_kit-2.2.2-oth-JPR</tt></pre>
+<pre><code>http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javame-419430.html#java_card_kit-2.2.2-oth-JPR</code></pre>
 </div></div>
 <div class="paragraph"><p>Unpack it into a new directory called for example "jckit" folder:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ mkdir jckit
+<pre><code>$ mkdir jckit
 $ cd jckit
 $ unzip /path/to/java_card_kit-2_2_2-linux.zip
 $ cd java_card_kit-2_2_2/
-$ unzip java_card_kit-2_2_2-rr-bin-linux-do.zip</tt></pre>
+$ unzip java_card_kit-2_2_2-rr-bin-linux-do.zip</code></pre>
 </div></div>
 </div>
 </div>
@@ -101,12 +101,12 @@ $ unzip java_card_kit-2_2_2-rr-bin-linux-do.zip</tt></pre>
 JCKit.  For example:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>ant -DJAVACARD_HOME=/path/to/jckit/java_card_kit-2_2_2/</tt></pre>
+<pre><code>ant -DJAVACARD_HOME=/path/to/jckit/java_card_kit-2_2_2/</code></pre>
 </div></div>
 <div class="paragraph"><p>The cap file for loading on card will be at:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>applet/bin/pkgYkneoOath/javacard/pkgYkneoOath.cap</tt></pre>
+<pre><code>applet/bin/pkgYkneoOath/javacard/pkgYkneoOath.cap</code></pre>
 </div></div>
 </div>
 </div>
@@ -116,26 +116,26 @@ JCKit.  For example:</p></div>
 <div class="paragraph"><p>First install Eclipse following instructions on:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>http://www.eclipse.org/</tt></pre>
+<pre><code>http://www.eclipse.org/</code></pre>
 </div></div>
 <div class="paragraph"><p>On Debian/Ubuntu systems Eclipse is packaged and can be installed from
 the command line:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>apt-get install eclipse</tt></pre>
+<pre><code>apt-get install eclipse</code></pre>
 </div></div>
 <div class="paragraph"><p>Start Eclipse once to make sure it creates a $HOME/.eclipse/
 directory.  Then quit Eclipse.</p></div>
 <div class="paragraph"><p>Download the eclipse-jcde-0.2.zip file from</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>http://eclipse-jcde.sourceforge.net/</tt></pre>
+<pre><code>http://eclipse-jcde.sourceforge.net/</code></pre>
 </div></div>
 <div class="paragraph"><p>and unpack it like this:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ cd ~/.eclipse/*/
-$ unzip /path/to/eclipse-jcde-0.2.zip</tt></pre>
+<pre><code>$ cd ~/.eclipse/*/
+$ unzip /path/to/eclipse-jcde-0.2.zip</code></pre>
 </div></div>
 <div class="paragraph"><p>The path to unpack the file into depends on your Eclipse installation,
 on my Debien Wheezy system the directory was called
@@ -154,7 +154,7 @@ sub-directory and select "Java Card Tools" and then "Convert".  The
 CAP file will be available in your Eclipse workspace as:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>applet/bin/pkgYkneoOath/javacard/pkgYkneoOath.cap</tt></pre>
+<pre><code>applet/bin/pkgYkneoOath/javacard/pkgYkneoOath.cap</code></pre>
 </div></div>
 </div>
 </div>
@@ -165,13 +165,13 @@ CAP file will be available in your Eclipse workspace as:</p></div>
 ykpers from the YubiKey Personalization tool:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>http://code.google.com/p/yubikey-personalization/
-https://github.com/Yubico/yubikey-personalization</tt></pre>
+<pre><code>http://code.google.com/p/yubikey-personalization/
+https://github.com/Yubico/yubikey-personalization</code></pre>
 </div></div>
 <div class="paragraph"><p>For example:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>sudo ykpersonalize -m82</tt></pre>
+<pre><code>sudo ykpersonalize -m82</code></pre>
 </div></div>
 <div class="paragraph"><p>Eject and re-insert the NEO to restart it in the new USB mode.  You
 should then have a USB device like 1050:0111 or 1050:0112.  The
@@ -184,7 +184,7 @@ should then have a USB device like 1050:0111 or 1050:0112.  The
 <div class="paragraph"><p>Then install the gpshell tool from Global Platform:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>http://sourceforge.net/projects/globalplatform/</tt></pre>
+<pre><code>http://sourceforge.net/projects/globalplatform/</code></pre>
 </div></div>
 <div class="paragraph"><p>The projects that are needed is the GlobalPlatform Library 6.0.0,
 GPShell 1.4.4, and gppcscconnectionplugin 1.1.0.</p></div>
@@ -195,9 +195,17 @@ that app is erased.  Keep a backup of your OATH credentials!</p></div>
 above, you may use the gpshell tool to load it:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>$ gpshell gpinstall.txt</tt></pre>
+<pre><code>$ gpshell gpinstall.txt</code></pre>
 </div></div>
 <div class="paragraph"><p>That&#8217;s it!</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tests">Tests</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>To run the tests jcardsim is required. The jar can be fetched from
+<a href="https://github.com/licel/jcardsim/raw/jc2.2.2/jcardsim-2.2.2-all.jar">https://github.com/licel/jcardsim/raw/jc2.2.2/jcardsim-2.2.2-all.jar</a>
+and should be put into the test/lib directory.</p></div>
 </div>
 </div>
 
