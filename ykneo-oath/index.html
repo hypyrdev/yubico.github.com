@@ -45,11 +45,11 @@
       <ul>
         <li><a href="releases.html">Releases</a></li>
       </ul>
-<h3>Documentation</h3><ul><li><a href="doc/Protocol.html">Protocol</a></li></ul>
+<h3>Documentation</h3><ul><li><a href="doc/Building.html">Building</a></li><li><a href="doc/InstallCAPFile.html">InstallCAPFile</a></li><li><a href="doc/Protocol.html">Protocol</a></li></ul>
 
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>This project implement the HMAC-SHA* card functionality used on the
+<div class="paragraph"><p>This project implement the HOTP/TOTP card functionality used on the
 YubiKey NEO device that is sold by Yubico.  Its primary use is to use
 the YubiKey NEO to generate OATH HOTP/TOTP one-time-passwords.</p></div>
 </div>
@@ -57,160 +57,24 @@ the YubiKey NEO to generate OATH HOTP/TOTP one-time-passwords.</p></div>
 <div class="sect1">
 <h2 id="_license">License</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Copyright (c) 2013 Yubico AB.</p></div>
-<div class="paragraph"><p>This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.</p></div>
-<div class="paragraph"><p>This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.</p></div>
-<div class="paragraph"><p>You should have received a copy of the GNU General Public License
-along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p></div>
+<div class="paragraph"><p>This program is released under the GPLv3+ and Copyright is owned by
+Yubico.  See COPYING for more information.</p></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_building">Building</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>There are several ways to build the project:</p></div>
-<div class="paragraph"><p>1) With ant, using JCKit.</p></div>
-<div class="paragraph"><p>2) With Eclipse and eclipse-jcde, using JCKit.</p></div>
-<div class="paragraph"><p>3) Using proprietary NXP Java Card tools.</p></div>
-<div class="paragraph"><p>We usually suggest using Ant.</p></div>
+<div class="paragraph"><p>See doc/Building.txt for information on how to build the source code
+and doc/InstallCAPFile.txt on how to install it.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installing_jckit">Installing JCKit</h2>
+<h2 id="_usage">Usage</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Install the Java Card Development Kit version 2.2.2, download it from:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javame-419430.html#java_card_kit-2.2.2-oth-JPR</code></pre>
-</div></div>
-<div class="paragraph"><p>Unpack it into a new directory called for example "jckit" folder:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>$ mkdir jckit
-$ cd jckit
-$ unzip /path/to/java_card_kit-2_2_2-linux.zip
-$ cd java_card_kit-2_2_2/
-$ unzip java_card_kit-2_2_2-rr-bin-linux-do.zip</code></pre>
-</div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_ant">Ant</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>The project can now be built by invoking ant, supplying the path to
-JCKit.  For example:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>ant -DJAVACARD_HOME=/path/to/jckit/java_card_kit-2_2_2/</code></pre>
-</div></div>
-<div class="paragraph"><p>The cap file for loading on card will be at:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>applet/bin/pkgYkneoOath/javacard/pkgYkneoOath.cap</code></pre>
-</div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_eclipe_and_eclipse_jcde">Eclipe and eclipse-jcde</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>First install Eclipse following instructions on:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>http://www.eclipse.org/</code></pre>
-</div></div>
-<div class="paragraph"><p>On Debian/Ubuntu systems Eclipse is packaged and can be installed from
-the command line:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>apt-get install eclipse</code></pre>
-</div></div>
-<div class="paragraph"><p>Start Eclipse once to make sure it creates a $HOME/.eclipse/
-directory.  Then quit Eclipse.</p></div>
-<div class="paragraph"><p>Download the eclipse-jcde-0.2.zip file from</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>http://eclipse-jcde.sourceforge.net/</code></pre>
-</div></div>
-<div class="paragraph"><p>and unpack it like this:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>$ cd ~/.eclipse/*/
-$ unzip /path/to/eclipse-jcde-0.2.zip</code></pre>
-</div></div>
-<div class="paragraph"><p>The path to unpack the file into depends on your Eclipse installation,
-on my Debien Wheezy system the directory was called
-~/.eclipse/org.eclipse.platform_3.8_155965261/</p></div>
-<div class="paragraph"><p>Start Eclipse again and confirm that you have a new top-level menu
-called "Java Card".  Then in Eclipse select the "Preferences" menu
-under "Java Card" and point the "Java Card Home" directory to
-/path/to/jckit/java_card_kit-2_2_2 replacing /path/to as appropriate.</p></div>
-<div class="paragraph"><p>After that the project can be imported into the workspace.
-Right-click in the "Project Explorer" window and select "Import".
-Under "General" select "Existing Projects into Workspace".  As the
-root directory point the directory holding this file.  You need to
-select "Copy projects into workspace".</p></div>
-<div class="paragraph"><p>To build the .cap file, expand and right click on the "pkgYkneoOath"
-sub-directory and select "Java Card Tools" and then "Convert".  The
-CAP file will be available in your Eclipse workspace as:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>applet/bin/pkgYkneoOath/javacard/pkgYkneoOath.cap</code></pre>
-</div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_enable_ccid_mode_on_the_neo">Enable CCID mode on the NEO</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>First make sure the YubiKey NEO is in the HID/CCID or CCID mode, using
-ykpers from the YubiKey Personalization tool:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>http://code.google.com/p/yubikey-personalization/
-https://github.com/Yubico/yubikey-personalization</code></pre>
-</div></div>
-<div class="paragraph"><p>For example:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>sudo ykpersonalize -m82</code></pre>
-</div></div>
-<div class="paragraph"><p>Eject and re-insert the NEO to restart it in the new USB mode.  You
-should then have a USB device like 1050:0111 or 1050:0112.  The
-1050:0110 device is HID only.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_installing_cap_file_to_neo">Installing CAP file to NEO</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>Then install the gpshell tool from Global Platform:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>http://sourceforge.net/projects/globalplatform/</code></pre>
-</div></div>
-<div class="paragraph"><p>The projects that are needed is the GlobalPlatform Library 6.0.0,
-GPShell 1.4.4, and gppcscconnectionplugin 1.1.0.</p></div>
-<div class="paragraph"><p>You need to whitelist the device in /etc/libccid_Info.plist.</p></div>
-<div class="paragraph"><p>WARNING!  When you load a new CAP file, everything on the device for
-that app is erased.  Keep a backup of your OATH credentials!</p></div>
-<div class="paragraph"><p>When the CAP file has been built and is available in the path shown
-above, you may use the gpshell tool to load it:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>$ gpshell gpinstall.txt</code></pre>
-</div></div>
-<div class="paragraph"><p>That&#8217;s it!</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tests">Tests</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>To run the tests jcardsim is required. The jar can be fetched from
-<a href="https://github.com/licel/jcardsim/raw/jc2.2.2/jcardsim-2.2.2-all.jar">https://github.com/licel/jcardsim/raw/jc2.2.2/jcardsim-2.2.2-all.jar</a>
-and should be put into the test/lib directory.</p></div>
+<div class="paragraph"><p>The applet is used with the Yubico Authenticator Android&#8201;&#8212;&#8201;see
+<a href="http://opensource.yubico.com/yubioath-android/&#8201;&#8212;&#8201;or">http://opensource.yubico.com/yubioath-android/&#8201;&#8212;&#8201;or</a> the Yubico
+Authenticator Desktop, see:
+<a href="http://opensource.yubico.com/yubioath-desktop/">http://opensource.yubico.com/yubioath-desktop/</a></p></div>
 </div>
 </div>
 
