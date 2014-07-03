@@ -45,7 +45,7 @@
       <ul>
         <li><a href="releases.html">Releases</a></li>
       </ul>
-<h3>Documentation</h3><ul><li><a href="doc/CardEdit.html">CardEdit</a></li><li><a href="doc/KeyImport.html">KeyImport</a></li></ul>
+<h3>Documentation</h3><ul><li><a href="doc/Building.html">Building</a></li><li><a href="doc/CardEdit.html">CardEdit</a></li><li><a href="doc/InstallCAPFile.html">InstallCAPFile</a></li><li><a href="doc/KeyImport.html">KeyImport</a></li></ul>
 
 <div id="preamble">
 <div class="sectionbody">
@@ -70,127 +70,17 @@ license.  See the file LICENSE for more information.</p></div>
 <div class="sect1">
 <h2 id="_building">Building</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>There are several ways to build the project:</p></div>
-<div class="paragraph"><p>1) With ant, using JCKit.</p></div>
-<div class="paragraph"><p>2) With Eclipse and eclipse-jcde, using JCKit.</p></div>
-<div class="paragraph"><p>3) Using proprietary NXP Java Card tools.</p></div>
-<div class="paragraph"><p>We usually suggest using Ant.</p></div>
+<div class="paragraph"><p>See doc/Building.txt for information on how to build the source code
+and doc/InstallCAPFile.txt on how to install it.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installing_jckit">Installing JCKit</h2>
+<h2 id="_usage">Usage</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Install the Java Card Development Kit version 2.2.2, download it from:
-<a href="http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javame-419430.html#java_card_kit-2.2.2-oth-JPR">http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javame-419430.html#java_card_kit-2.2.2-oth-JPR</a></p></div>
-<div class="paragraph"><p>Unpack it into a new directory called for example "jckit" folder:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>$ mkdir jckit
-$ cd jckit
-$ unzip /path/to/java_card_kit-2_2_2-linux.zip
-$ cd java_card_kit-2_2_2/
-$ unzip java_card_kit-2_2_2-rr-bin-linux-do.zip</code></pre>
-</div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_ant">Ant</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>The project can now be built by invoking ant, supplying the path to
-JCKit.  For example:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>ant -DJAVACARD_HOME=/path/to/jckit/java_card_kit-2_2_2/</code></pre>
-</div></div>
-<div class="paragraph"><p>The cap file for loading on card will be at:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>./applet/bin/openpgpcard/javacard/openpgpcard.cap</code></pre>
-</div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_eclipe_and_eclipse_jcde">Eclipe and eclipse-jcde</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>First install Eclipse following instructions on: <a href="http://www.eclipse.org/">http://www.eclipse.org/</a></p></div>
-<div class="paragraph"><p>On Debian/Ubuntu systems Eclipse is packaged and can be installed from
-the command line:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>apt-get install eclipse</code></pre>
-</div></div>
-<div class="paragraph"><p>Start Eclipse once to make sure it creates a $HOME/.eclipse/
-directory.  Then quit Eclipse.</p></div>
-<div class="paragraph"><p>Download the eclipse-jcde-0.2.zip file from:
-<a href="http://eclipse-jcde.sourceforge.net/">http://eclipse-jcde.sourceforge.net/</a></p></div>
-<div class="paragraph"><p>and unpack it like this:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>$ cd ~/.eclipse/*/
-$ unzip /path/to/eclipse-jcde-0.2.zip</code></pre>
-</div></div>
-<div class="paragraph"><p>The path to unpack the file into depends on your Eclipse installation,
-on my Debien Wheezy system the directory was called
-~/.eclipse/org.eclipse.platform_3.8_155965261/</p></div>
-<div class="paragraph"><p>Start Eclipse again and confirm that you have a new top-level menu
-called "Java Card".  Then in Eclipse select the "Preferences" menu
-under "Java Card" and point the "Java Card Home" directory to
-/path/to/jckit/java_card_kit-2_2_2 replacing /path/to as appropriate.</p></div>
-<div class="paragraph"><p>After that the project can be imported into the workspace.
-Right-click in the "Project Explorer" window and select "Import".
-Under "General" select "Existing Projects into Workspace".  As the
-root directory point the directory holding this file.  You need to
-select "Copy projects into workspace".</p></div>
-<div class="paragraph"><p>To build the .cap file, expand and right click on the "openpgpcard"
-sub-directory and select "Java Card Tools" and then "Convert".  The
-CAP file will be available in your Eclipse workspace as:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>./applet/bin/openpgpcard/javacard/openpgpcard.cap</code></pre>
-</div></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_enable_ccid_mode_on_the_neo">Enable CCID mode on the NEO</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>First make sure the YubiKey NEO is in the HID/CCID or CCID mode.  You
-may use the YubiKey NEO Manager GUI:
-<a href="https://developers.yubico.com/yubikey-neo-manager/">https://developers.yubico.com/yubikey-neo-manager/</a></p></div>
-<div class="paragraph"><p>If you prefer command line tools, you may use the <em>ykpers</em> and
-<em>ykneomgr</em> tools depending on which mode the YubiKey NEO is in.  See:
-<a href="https://developers.yubico.com/yubikey-personalization/">https://developers.yubico.com/yubikey-personalization/</a>
-<a href="https://developers.yubico.com/libykneomgr/">https://developers.yubico.com/libykneomgr/</a></p></div>
-<div class="paragraph"><p>Refer to the documentation of these projects on how to mode switch the
-YubiKey NEO.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_installing_cap_file_to_neo">Installing CAP file to NEO</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>Install the gpshell tool from Global Platform:
-<a href="http://sourceforge.net/projects/globalplatform/">http://sourceforge.net/projects/globalplatform/</a></p></div>
-<div class="paragraph"><p>We have tested the combination of GlobalPlatform Library version
-6.0.0, GPShell version 1.4.4, and gppcscconnectionplugin version
-1.1.0.</p></div>
-<div class="paragraph"><p>You need to whitelist the device in /etc/libccid_Info.plist which
-happens automatically if you have a recent libccid.</p></div>
-<div class="paragraph"><p>WARNING!  When you load a new CAP file, everything on the device for
-that app is erased.  Keep a backup of your OpenPGP keys!</p></div>
-<div class="paragraph"><p>When the CAP file has been built and is available in the path shown
-above, you may use the gpshell tool to load it:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>$ gpshell gpinstall.txt</code></pre>
-</div></div>
-<div class="paragraph"><p>That&#8217;s it!</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tests">Tests</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>To run the tests jcardsim is required. The jar can be fetched from
-<a href="https://github.com/licel/jcardsim/raw/jc2.2.2/jcardsim-2.2.2-all.jar">https://github.com/licel/jcardsim/raw/jc2.2.2/jcardsim-2.2.2-all.jar</a>
-and should be put into the test/lib directory.</p></div>
+<div class="paragraph"><p>The OpenPGP Card applet is typically used through GnuPG so we refer to
+its documentation for the full reference: <a href="http://www.gnupg.org/">http://www.gnupg.org/</a></p></div>
+<div class="paragraph"><p>We have tutorials on specific topics in doc/, for example card editing
+and key import.</p></div>
 </div>
 </div>
 

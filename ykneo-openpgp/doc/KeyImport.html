@@ -60,9 +60,9 @@ installed.  The ykneo-openpgp applet version must be 1.0.5 or later.
 To check the applet version you may run:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> $ gpg-connect-agent --hex "scd apdu 00 f1 00 00" /bye
+<pre><tt> $ gpg-connect-agent --hex "scd apdu 00 f1 00 00" /bye
  D[0000]  01 00 05 90 00                                     .....
- OK</code></pre>
+ OK</tt></pre>
 </div></div>
 <div class="paragraph"><p>Where "01 00 05" means version 1.0.5.</p></div>
 <div class="paragraph"><p>If you have an existing key you want to import, that key must be a RSA
@@ -75,7 +75,7 @@ To check the applet version you may run:</p></div>
 <div class="paragraph"><p>Skip this step if you already have a key.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> $ gpg --gen-key
+<pre><tt> $ gpg --gen-key
 
  gpg (GnuPG) 2.0.22; Copyright (C) 2013 Free Software Foundation, Inc.
  This is free software: you are free to change and redistribute it.
@@ -86,13 +86,13 @@ To check the applet version you may run:</p></div>
     (2) DSA and Elgamal
     (3) DSA (sign only)
     (4) RSA (sign only)
- Your selection?</code></pre>
+ Your selection?</tt></pre>
 </div></div>
 <div class="paragraph"><p>The ykneo-openpgp applet currently only supports RSA keys of 2048 bits length. So
 here we select 1, and go with the default of 2048 bits on the next question.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> RSA keys may be between 1024 and 4096 bits long.
+<pre><tt> RSA keys may be between 1024 and 4096 bits long.
  What keysize do you want? (2048)
 
  Requested keysize is 2048 bits
@@ -102,35 +102,35 @@ here we select 1, and go with the default of 2048 bits on the next question.</p>
        &lt;n&gt;w = key expires in n weeks
        &lt;n&gt;m = key expires in n months
        &lt;n&gt;y = key expires in n years
- Key is valid for? (0)</code></pre>
+ Key is valid for? (0)</tt></pre>
 </div></div>
 <div class="paragraph"><p>Select an expiry date if you want to. And answer that the data is correct.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>Real name:</code></pre>
+<pre><tt>Real name:</tt></pre>
 </div></div>
 <div class="paragraph"><p>Should be the real name associated with this key.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>Email address:</code></pre>
+<pre><tt>Email address:</tt></pre>
 </div></div>
 <div class="paragraph"><p>Should be the email adress associated with this key.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>Comment:</code></pre>
+<pre><tt>Comment:</tt></pre>
 </div></div>
 <div class="paragraph"><p>May be a comment attached to the key if you want, or leave this empty.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> You selected this USER-ID:
+<pre><tt> You selected this USER-ID:
      "Foo Bar &lt;foo@example.com&gt;"
 
- Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit?</code></pre>
+ Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit?</tt></pre>
 </div></div>
 <div class="paragraph"><p>If you&#8217;re happy with this USER-ID answer O for okay.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> We need to generate a lot of random bytes. It is a good idea to perform
+<pre><tt> We need to generate a lot of random bytes. It is a good idea to perform
  some other action (type on the keyboard, move the mouse, utilize the
  disks) during the prime generation; this gives the random number
  generator a better chance to gain enough entropy.
@@ -149,7 +149,7 @@ here we select 1, and go with the default of 2048 bits on the next question.</p>
  pub   2048R/13AFCE85 2014-03-07 [expires: 2014-06-15]
        Key fingerprint = 743A 2D58 688A 9E9E B4FC  493F 70D1 D7A8 13AF CE85
  uid                  Foo Bar &lt;foo@example.com&gt;
- sub   2048R/D7421CDF 2014-03-07 [expires: 2014-06-15]</code></pre>
+ sub   2048R/D7421CDF 2014-03-07 [expires: 2014-06-15]</tt></pre>
 </div></div>
 <div class="paragraph"><p>Take note of the id of the key, in this case 13AFCE85.</p></div>
 </div>
@@ -160,7 +160,7 @@ here we select 1, and go with the default of 2048 bits on the next question.</p>
 <div class="paragraph"><p>Here we will add an authentication key to the previously generate key.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> $ gpg --expert --edit-key 13AFCE85
+<pre><tt> $ gpg --expert --edit-key 13AFCE85
 
  gpg (GnuPG) 2.0.22; Copyright (C) 2013 Free Software Foundation, Inc.
  This is free software: you are free to change and redistribute it.
@@ -184,12 +184,12 @@ here we select 1, and go with the default of 2048 bits on the next question.</p>
     (6) RSA (encrypt only)
     (7) DSA (set your own capabilities)
     (8) RSA (set your own capabilities)
- Your selection?</code></pre>
+ Your selection?</tt></pre>
 </div></div>
 <div class="paragraph"><p>Here we select 8 to get another RSA key attached to our key.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> Possible actions for a RSA key: Sign Encrypt Authenticate
+<pre><tt> Possible actions for a RSA key: Sign Encrypt Authenticate
  Current allowed actions: Sign Encrypt
 
     (S) Toggle the sign capability
@@ -197,30 +197,30 @@ here we select 1, and go with the default of 2048 bits on the next question.</p>
     (A) Toggle the authenticate capability
     (Q) Finished
 
- Your selection?</code></pre>
+ Your selection?</tt></pre>
 </div></div>
 <div class="paragraph"><p>Select A, then S, then E to get a pure authentication key. Then Q to continue.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>RSA keys may be between 1024 and 4096 bits long.
-What keysize do you want? (2048)</code></pre>
+<pre><tt>RSA keys may be between 1024 and 4096 bits long.
+What keysize do you want? (2048)</tt></pre>
 </div></div>
 <div class="paragraph"><p>Again we want a 2048 bit key.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> Requested keysize is 2048 bits
+<pre><tt> Requested keysize is 2048 bits
  Please specify how long the key should be valid.
           0 = key does not expire
        &lt;n&gt;  = key expires in n days
        &lt;n&gt;w = key expires in n weeks
        &lt;n&gt;m = key expires in n months
        &lt;n&gt;y = key expires in n years
- Key is valid for? (0)</code></pre>
+ Key is valid for? (0)</tt></pre>
 </div></div>
 <div class="paragraph"><p>Select same expiry as for the rest of the key and then answer y.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> Is this correct? (y/N) y
+<pre><tt> Is this correct? (y/N) y
  Really create? (y/N) y
  We need to generate a lot of random bytes. It is a good idea to perform
  some other action (type on the keyboard, move the mouse, utilize the
@@ -233,7 +233,7 @@ What keysize do you want? (2048)</code></pre>
  sub  2048R/B4000C55  created: 2014-03-07  expires: 2014-06-15  usage: A
  [ultimate] (1). Foo Bar &lt;foo@example.com&gt;
 
- gpg&gt; Save changes? (y/N) y</code></pre>
+ gpg&gt; Save changes? (y/N) y</tt></pre>
 </div></div>
 </div>
 </div>
@@ -243,7 +243,7 @@ What keysize do you want? (2048)</code></pre>
 <div class="paragraph"><p>This is a good point to create a backup of your key.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>$ gpg --export-secret-key --armor 13AFCE85</code></pre>
+<pre><tt>$ gpg --export-secret-key --armor 13AFCE85</tt></pre>
 </div></div>
 <div class="paragraph"><p>Make sure to store the backup offline in a secure place.</p></div>
 </div>
@@ -254,7 +254,7 @@ What keysize do you want? (2048)</code></pre>
 <div class="paragraph"><p>Now it&#8217;s time to import the key into the ykneo-openpgp applet.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> $ gpg --edit-key 13AFCE85
+<pre><tt> $ gpg --edit-key 13AFCE85
 
  gpg (GnuPG) 2.0.22; Copyright (C) 2013 Free Software Foundation, Inc.
  This is free software: you are free to change and redistribute it.
@@ -284,12 +284,12 @@ What keysize do you want? (2048)</code></pre>
  Please select where to store the key:
     (1) Signature key
     (3) Authentication key
- Your selection? 1</code></pre>
+ Your selection? 1</tt></pre>
 </div></div>
 <div class="paragraph"><p>Here we&#8217;ve just moved the primary key to the Signature sport of the applet.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> gpg&gt; key 1
+<pre><tt> gpg&gt; key 1
 
  sec  2048R/13AFCE85  created: 2014-03-07  expires: 2014-06-15
                       card-no: 0000 00000001
@@ -304,12 +304,12 @@ What keysize do you want? (2048)</code></pre>
 
  Please select where to store the key:
     (2) Encryption key
- Your selection? 2</code></pre>
+ Your selection? 2</tt></pre>
 </div></div>
 <div class="paragraph"><p>And here we&#8217;ve moved the Encryption key.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> gpg&gt; key 1
+<pre><tt> gpg&gt; key 1
 
  sec  2048R/13AFCE85  created: 2014-03-07  expires: 2014-06-15
                       card-no: 0000 00000001
@@ -334,13 +334,13 @@ What keysize do you want? (2048)</code></pre>
 
  Please select where to store the key:
     (3) Authentication key
- Your selection? 3</code></pre>
+ Your selection? 3</tt></pre>
 </div></div>
 <div class="paragraph"><p>And as a last step we&#8217;ve now moved the Authentication key to the applet.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>gpg&gt; quit
-Save changes? (y/N) y</code></pre>
+<pre><tt>gpg&gt; quit
+Save changes? (y/N) y</tt></pre>
 </div></div>
 <div class="paragraph"><p>After this the keyring is saved, now no longer containing the real secret key,
 only a pointer that it&#8217;s stored on a smartcard.</p></div>
