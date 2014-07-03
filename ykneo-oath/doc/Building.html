@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="ykneo-oath : OATH App for the YubiKey NEO" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>ykneo-oath</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/ykneo-oath/">ykneo-oath</a>
+          /
+          <a>Building</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/ykneo-oath">View on GitHub</a>
+<a id="travis_link" href="https://travis-ci.org/Yubico/ykneo-oath"><img id="travis_img" src="https://travis-ci.org/Yubico/ykneo-oath.svg?branch=master"/></a>
+          <h1><a id="project_title" href="/ykneo-oath/">ykneo-oath</a></h1>
+          <h2 id="project_tagline">OATH App for the YubiKey NEO</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div class="sect1">
+<h2 id="_building">Building</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>There are several ways to build the project:</p></div>
+<div class="paragraph"><p>1) With ant, using JCKit.</p></div>
+<div class="paragraph"><p>2) With Eclipse and eclipse-jcde, using JCKit.</p></div>
+<div class="paragraph"><p>3) Using proprietary NXP Java Card tools.</p></div>
+<div class="paragraph"><p>We usually suggest using Ant.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installing_jckit">Installing JCKit</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Install the Java Card Development Kit version 2.2.2, download it from:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javame-419430.html#java_card_kit-2.2.2-oth-JPR</tt></pre>
+</div></div>
+<div class="paragraph"><p>Unpack it into a new directory called for example "jckit" folder:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ mkdir jckit
+$ cd jckit
+$ unzip /path/to/java_card_kit-2_2_2-linux.zip
+$ cd java_card_kit-2_2_2/
+$ unzip java_card_kit-2_2_2-rr-bin-linux-do.zip</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ant">Ant</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The project can now be built by invoking ant, supplying the path to
+JCKit.  For example:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>ant -DJAVACARD_HOME=/path/to/jckit/java_card_kit-2_2_2/</tt></pre>
+</div></div>
+<div class="paragraph"><p>The cap file for loading on card will be at:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>applet/bin/pkgYkneoOath/javacard/pkgYkneoOath.cap</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_eclipe_and_eclipse_jcde">Eclipe and eclipse-jcde</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>First install Eclipse following instructions on:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>http://www.eclipse.org/</tt></pre>
+</div></div>
+<div class="paragraph"><p>On Debian/Ubuntu systems Eclipse is packaged and can be installed from
+the command line:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>apt-get install eclipse</tt></pre>
+</div></div>
+<div class="paragraph"><p>Start Eclipse once to make sure it creates a $HOME/.eclipse/
+directory.  Then quit Eclipse.</p></div>
+<div class="paragraph"><p>Download the eclipse-jcde-0.2.zip file from</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>http://eclipse-jcde.sourceforge.net/</tt></pre>
+</div></div>
+<div class="paragraph"><p>and unpack it like this:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>$ cd ~/.eclipse/*/
+$ unzip /path/to/eclipse-jcde-0.2.zip</tt></pre>
+</div></div>
+<div class="paragraph"><p>The path to unpack the file into depends on your Eclipse installation,
+on my Debien Wheezy system the directory was called
+~/.eclipse/org.eclipse.platform_3.8_155965261/</p></div>
+<div class="paragraph"><p>Start Eclipse again and confirm that you have a new top-level menu
+called "Java Card".  Then in Eclipse select the "Preferences" menu
+under "Java Card" and point the "Java Card Home" directory to
+/path/to/jckit/java_card_kit-2_2_2 replacing /path/to as appropriate.</p></div>
+<div class="paragraph"><p>After that the project can be imported into the workspace.
+Right-click in the "Project Explorer" window and select "Import".
+Under "General" select "Existing Projects into Workspace".  As the
+root directory point the directory holding this file.  You need to
+select "Copy projects into workspace".</p></div>
+<div class="paragraph"><p>To build the .cap file, expand and right click on the "pkgYkneoOath"
+sub-directory and select "Java Card Tools" and then "Convert".  The
+CAP file will be available in your Eclipse workspace as:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>applet/bin/pkgYkneoOath/javacard/pkgYkneoOath.cap</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tests">Tests</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>To run the tests jcardsim is required. The jar can be fetched from
+<a href="https://github.com/licel/jcardsim/raw/jc2.2.2/jcardsim-2.2.2-all.jar">https://github.com/licel/jcardsim/raw/jc2.2.2/jcardsim-2.2.2-all.jar</a>
+and should be put into the test/lib directory.</p></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">ykneo-oath maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>
