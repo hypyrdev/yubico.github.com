@@ -57,7 +57,7 @@ YubiKey, making it difficult for our programs to talk with it.</p></div>
 message like the following:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  Jun 29 13:17:22 lapdog vmunix: [  738.648591] usb 3-3: usbfs: process 10782 (mini) did not claim interface 0 before use</tt></pre>
+<pre><code>  Jun 29 13:17:22 lapdog vmunix: [  738.648591] usb 3-3: usbfs: process 10782 (mini) did not claim interface 0 before use</code></pre>
 </div></div>
 </div>
 </div>
@@ -86,7 +86,7 @@ in a clean way.</p></div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>sudo apt-get install libusb-1.0-0-dev</tt></pre>
+<pre><code>sudo apt-get install libusb-1.0-0-dev</code></pre>
 </div></div>
 </div>
 </div>
@@ -122,15 +122,15 @@ Get the USB device numbers with the following command:
 </ol></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt># dmesg | grep Yubi
+<pre><code># dmesg | grep Yubi
 [314508.442312] input: Yubico Yubico Yubikey Touch as /devices/pci0000:00/0000:00:1d.2/usb4/4-1/4-1:1.0/input/input119
-[314508.448287] generic-usb 0003:1050:0010.006F: input,hidraw1: USB HID v1.11 Keyboard [Yubico Yubico Yubikey Touch] on usb-0000:00:1d.2-1/input0</tt></pre>
+[314508.448287] generic-usb 0003:1050:0010.006F: input,hidraw1: USB HID v1.11 Keyboard [Yubico Yubico Yubikey Touch] on usb-0000:00:1d.2-1/input0</code></pre>
 </div></div>
 <div class="paragraph"><p>Then unbind your YubiKey by using your numbers instead of the example
 given here:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt># echo 4-1:1.0 &gt; /sys/bus/usb/drivers/usbhid/unbind</tt></pre>
+<pre><code># echo 4-1:1.0 &gt; /sys/bus/usb/drivers/usbhid/unbind</code></pre>
 </div></div>
 <div class="paragraph"><p>David Dindorp has contributed a small script that unbinds YubiKeys as
 they are plugged in, for use during personalization.  See:</p></div>
