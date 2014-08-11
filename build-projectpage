@@ -14,7 +14,7 @@ use MIME::Base64::URLSafe;
 
 use Sort::Versions;
 
-my @suffixes = (qr/\.txt$/, qr/\.asciidoc$/);
+my @suffixes = (qr/\.txt$/, qr/\.asciidoc$/, qr/\.adoc$/);
 
 my $dir = dirname($0);
 my $project = shift;
