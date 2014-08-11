@@ -53,11 +53,11 @@ servers. Client id and API key can be fetched from
 <a href="https://upgrade.yubico.com/getapikey/">https://upgrade.yubico.com/getapikey/</a></p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>Parameters :</tt></pre>
+<pre><code>Parameters :</code></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>clientId             Your Client API id for the validation service.
+<pre><code>clientId             Your Client API id for the validation service.
 clientKey            Your Client API key for the validaiton service.
 id2name_textfile     Filename with "public_id&lt;SP&gt;username" info about which
                      user owns what key.
@@ -77,61 +77,61 @@ wsapi_urls           default: the YubiCloud validation URL. A "|" delimeted
                      list of ykval wsapi 2.0 URLs to use for OTP validation.
 sync_policy          default: none, let the server decide. a value between 0
                      and 100 indicating the percentage of synchronization
-                     required by the client.</tt></pre>
+                     required by the client.</code></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>Example configuration :</tt></pre>
+<pre><code>Example configuration :</code></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>YourApplicationAuth {
+<pre><code>YourApplicationAuth {
     com.yubico.jaas.YubikeyLoginModule required
         clientId="4711";
-};</tt></pre>
+};</code></pre>
 </div></div>
 <div class="paragraph"><p>HttpOathOtpLoginModule :</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>This JAAS plugin validates OATH OTPs using HTTP. The username and password
+<pre><code>This JAAS plugin validates OATH OTPs using HTTP. The username and password
 entered in your application will be used to attempt a HTTP Basic Auth login
 to an URL you specify, and if that succeeds and the resulting response contains
-an expected string, authentication is granted.</tt></pre>
+an expected string, authentication is granted.</code></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>One tested backend solution for validation of the HOTPs is the Apache mod_authn_otp :</tt></pre>
+<pre><code>One tested backend solution for validation of the HOTPs is the Apache mod_authn_otp :</code></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>http://code.google.com/p/mod-authn-otp/</tt></pre>
+<pre><code>http://code.google.com/p/mod-authn-otp/</code></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>Parameters :</tt></pre>
+<pre><code>Parameters :</code></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>protectedUrl     (required) The URL you have protected with OATH-HOTP HTTP
+<pre><code>protectedUrl     (required) The URL you have protected with OATH-HOTP HTTP
                  Basic Auth.
 expectedOutput   Default is "Authenticated OK".
 minLength        Default is 6.
 maxLength        Default is 12 (6-8 bytes HOTP and 4 bytes PIN).
 requireAllDigits Default is "true".
 id_realm         Something to append to the username when we construct
-                 principals (e.g. "@my-validation-service.example.org").</tt></pre>
+                 principals (e.g. "@my-validation-service.example.org").</code></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>Example configuration :</tt></pre>
+<pre><code>Example configuration :</code></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>YourApplicationAuth {
+<pre><code>YourApplicationAuth {
     com.yubico.jaas.HTTPOathHotpLoginModule sufficient
         protectedUrl = "http://auth.example.com/oath-protected/"
         expectedOutput = "User authenticated OK";
-};</tt></pre>
+};</code></pre>
 </div></div>
 
 </section>

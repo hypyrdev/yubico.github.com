@@ -44,45 +44,42 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 <div class="paragraph"><p>This is a validation client for use with the Yubico validation API version 2. To
-pull in the dependency in a maven project do:</p></div>
+pull in the dependency in a Maven project, add this to pom.xml:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>&lt;dependency&gt;
+<pre><code>&lt;dependency&gt;
   &lt;groupId&gt;com.yubico&lt;/groupId&gt;
   &lt;artifactId&gt;yubico-validation-client2&lt;/artifactId&gt;
-  &lt;version&gt;2.0RC4&lt;/version&gt;
-&lt;/dependency&gt;</tt></pre>
+  &lt;version&gt;2.0.1&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
 </div></div>
-<div class="paragraph"><p>A simplified implementation would be:</p></div>
+<div class="paragraph"><p>A simple implementation would be:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>// otp is the modhex otp from the yubikey
-// client_id is the clientId from https://upgrade.yubico.com/getapikey/
-boolean validate(String otp, int client_id) {
-   YubicoClient client = YubicoClient.getClient(client_id);
+<pre><code>// otp is the OTP from the Yubikey
+// clientId is the client ID from https://upgrade.yubico.com/getapikey/
+boolean validate(String otp, int clientId) {
+   YubicoClient client = YubicoClient.getClient(clientId);
    YubicoResponse response = client.verify(otp);
-   if(response != null &amp;&amp; response.getStatus() == YubicoResponseStatus.OK) {
-     return true;
-   }
-   return false;
-}</tt></pre>
+   return response.getStatus() == YubicoResponseStatus.OK;
+}</code></pre>
 </div></div>
 <div class="paragraph"><p>After verifying the OTP you should make sure that the publicId part belongs to
 the correct user. This can be done by keeping a mapping of username to
 public id, for instance as the JAAS module does with it&#8217;s user map
-funcitonality.</p></div>
+functionality.</p></div>
 <div class="paragraph"><p>For generic login cases the JAAS module can be easier to implement than using
 the client API directly.</p></div>
 <div class="paragraph"><p>The validation client depends on slf4j-api for logging, to get the actual logs
-and not receive warnings on STDOUT you will need to depend on a slf4j logger
+and not receive warnings on System.out you will need to depend on a slf4j logger
 binding, for example slf4j-log4j with the following maven configuration:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>&lt;dependency&gt;
+<pre><code>&lt;dependency&gt;
  &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
  &lt;artifactId&gt;slf4j-log4j&lt;/artifactId&gt;
  &lt;version&gt;1.6.1&lt;/version&gt;
-&lt;/dependency&gt;</tt></pre>
+&lt;/dependency&gt;</code></pre>
 </div></div>
 <div class="paragraph"><p>For more complete descriptions of methods and failure states, please see
 the javadoc.</p></div>
