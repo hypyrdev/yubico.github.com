@@ -130,9 +130,10 @@ the response is the same as the "otp" supplied in the request.</p></div>
 <h2 id="_request">Request</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Construct an HTTP GET call to</p></div>
-<div class="paragraph"><p>```
-<a href="http://api.yubico.com/wsapi/2.0/verify">http://api.yubico.com/wsapi/2.0/verify</a>
-```</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>http://api.yubico.com/wsapi/2.0/verify</code></pre>
+</div></div>
 <div class="paragraph"><p>with the following parameters (note that this request need not be signed):</p></div>
 <div class="tableblock">
 <table rules="all"
@@ -143,13 +144,15 @@ cellspacing="0" cellpadding="4">
 <col width="25%" />
 <col width="25%" />
 <col width="25%" />
-<tbody>
+<thead>
 <tr>
-<td align="left" valign="top"><p class="table">parameter</p></td>
-<td align="left" valign="top"><p class="table">type</p></td>
-<td align="left" valign="top"><p class="table">required</p></td>
-<td align="left" valign="top"><p class="table">purpose</p></td>
+<th align="left" valign="top"> parameter </th>
+<th align="left" valign="top"> type </th>
+<th align="left" valign="top"> required </th>
+<th align="left" valign="top"> purpose</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td align="left" valign="top"><p class="table">id</p></td>
 <td align="left" valign="top"><p class="table">string</p></td>
