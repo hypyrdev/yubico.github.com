@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubikey-val : YubiKey OTP validation server in PHP" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubikey-val</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/yubikey-val/">yubikey-val</a>
+          /
+          <a>SyncMonitor.adoc</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-val">View on GitHub</a>
+<a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-val"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-val.svg?branch=master"/></a>
+          <h1><a id="project_title" href="/yubikey-val/">yubikey-val</a></h1>
+          <h2 id="project_tagline">YubiKey OTP validation server in PHP</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>If you deploy multiple YK-VAL instances, it is important to monitor
+them to make sure the data they have is synchronized.  While there are
+many mechanisms to achieve this, we provide a simple yet flexible
+approach.  The <em>ykval-checksum-clients</em> tool reads out the important
+fields from the database and computes a SHA-1 hash of it, and
+truncates the hash to 10 hex characters and prints them to stdout.</p></div>
+<div class="paragraph"><p>The "important fields" are currently considered to be the id, active,
+and secret columns of the clients table.</p></div>
+<div class="paragraph"><p>The typical way to use this is either manually or to run it in a cron
+job and output the hash to a file that can be downloaded by a remote
+monitor system such as Nagios.</p></div>
+<div class="paragraph"><p>```sh
+<a href="mailto:user@val">user@val</a>:<sub>$ sudo sh -c <em>cat &gt; /etc/cron.hourly/run-ykval-checksum-clients</em>
+#!/bin/sh
+FILE=/var/www/checksum-clients.txt
+(date --utc +%s; ykval-checksum-clients) &gt; $FILE.tmp
+mv $FILE.tmp $FILE
+<a href="mailto:user@val">user@val</a>:</sub>$ sudo chmod +x /etc/cron.hourly/run-ykval-checksum-clients
+```</p></div>
+<div class="paragraph"><p>If you notice mismatches, you may want to run ykval-checksum-clients
+with the <em>-v</em> parameter on the different hosts and then use <em>diff -ur</em>
+or similar tool to compare the outputs.  This should make it possible
+to identify the missmatching entries easily.</p></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>

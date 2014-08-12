@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubikey-val : YubiKey OTP validation server in PHP" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubikey-val</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/yubikey-val/">yubikey-val</a>
+          /
+          <a>ImportExportData.adoc</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-val">View on GitHub</a>
+<a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-val"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-val.svg?branch=master"/></a>
+          <h1><a id="project_title" href="/yubikey-val/">yubikey-val</a></h1>
+          <h2 id="project_tagline">YubiKey OTP validation server in PHP</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>The yubikey-val database holds client data as well as yubikey counter data
+which you can import and export using the provided tools. As it is important
+to protect the data, we will show you how to encrypt and decrypt these files
+using GnuPG. You will therefor require a private key for both importing as
+well as exporting (these can be the same keys, or differnent ones, depending
+on if you are importing on the same system as you have exported from).</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_client_info_data">Client Info Data</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The client data holds information about the clients that are able to use the
+validation service, such as their ID and secret key. This data is stored in
+the <strong>clients</strong> table of the database.</p></div>
+<div class="paragraph"><p>The infomation here covers exporting existing clients to a file, and importing
+the clients from that file into another database. For generating clients, see
+<a id="GeneratingClients|Generating Clients"></a>.</p></div>
+<div class="paragraph"><p>To export client data, you can use the following command (Replace C5B8D4EA with
+the key of the recipient of the data):</p></div>
+<div class="paragraph"><p>```sh
+<a href="mailto:user@val">user@val</a>:~$ sudo ykval-export-clients | gpg -a --encrypt -r C5B8D4EA -s &gt; yk-client-info.asc</p></div>
+<div class="paragraph"><p>You need a passphrase to unlock the secret key for
+user: "YK-KSM import key"
+2048-bit RSA key, ID C5B8D4EA, created 2013-01-28
+<a href="mailto:user@val">user@val</a>:~$
+```</p></div>
+<div class="paragraph"><p>To import the client data exported above, you can use:
+```sh
+<a href="mailto:user@val">user@val</a>:~$ gpg &lt; yk-client-info.asc | sudo ykval-import-clients</p></div>
+<div class="paragraph"><p>You need a passphrase to unlock the secret key for
+user: "YK-KSM import key"
+2048-bit RSA key, ID 9372DC00, created 2013-01-28 (main key ID C5B8D4EA)</p></div>
+<div class="paragraph"><p>gpg: encrypted with 2048-bit RSA key, ID 9372DC00, created 2013-01-28
+      "YK-KSM import key"
+gpg: Signature made Tue 29 Jan 2013 04:18:21 PM CET using RSA key ID C5B8D4EA
+gpg: Good signature from "YK-KSM import key"
+Successfully imported clients to database
+<a href="mailto:user@val">user@val</a>:~$
+```</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_yubikey_counter_data">Yubikey Counter Data</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The Yubikey counter data holds information about the state of the known
+Yubikeys, such as their various counter values. This data is stored in the
+<strong>yubikeys</strong> table of the database.</p></div>
+<div class="paragraph"><p>To export Yubikey counter data, you can use the following command (Replace
+C5B8D4EA with the key of the recipient of the data):</p></div>
+<div class="paragraph"><p>```sh
+<a href="mailto:user@val">user@val</a>:~$ sudo ykval-export | gpg -a --encrypt -r C5B8D4EA -s &gt; yk-counter-data.asc</p></div>
+<div class="paragraph"><p>You need a passphrase to unlock the secret key for
+user: "YK-KSM import key"
+2048-bit RSA key, ID C5B8D4EA, created 2013-01-28
+<a href="mailto:user@val">user@val</a>:~$
+```</p></div>
+<div class="paragraph"><p>To import the counter data exported above, you can use:
+```sh
+<a href="mailto:user@val">user@val</a>:~$ gpg &lt; yk-counter-data.asc | sudo ykval-import</p></div>
+<div class="paragraph"><p>You need a passphrase to unlock the secret key for
+user: "YK-KSM import key"
+2048-bit RSA key, ID 9372DC00, created 2013-01-28 (main key ID C5B8D4EA)</p></div>
+<div class="paragraph"><p>gpg: encrypted with 2048-bit RSA key, ID 9372DC00, created 2013-01-28
+      "YK-KSM import key"
+gpg: Signature made Tue 29 Jan 2013 04:18:21 PM CET using RSA key ID C5B8D4EA
+gpg: Good signature from "YK-KSM import key"
+Successfully imported yubikeys to database
+<a href="mailto:user@val">user@val</a>:~$
+```</p></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>

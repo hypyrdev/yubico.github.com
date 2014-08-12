@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubikey-val : YubiKey OTP validation server in PHP" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubikey-val</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/yubikey-val/">yubikey-val</a>
+          /
+          <a>RevocationService.adoc</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-val">View on GitHub</a>
+<a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-val"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-val.svg?branch=master"/></a>
+          <h1><a id="project_title" href="/yubikey-val/">yubikey-val</a></h1>
+          <h2 id="project_tagline">YubiKey OTP validation server in PHP</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>The YK-VAL server has an optional interface that can be used to
+enable/disable validation of particular YubiKeys from a remote server.
+This document explains how to configure and set up that service.</p></div>
+<div class="paragraph"><p>Currently authorization is based on IP address of client, which may
+not be secure unless you take additional pre-cautions.</p></div>
+</div>
+</div>
+<h1 id="_installation">Installation</h1>
+<div class="paragraph"><p>```sh
+<a href="mailto:user@val">user@val</a>:<sub>/yubikey-val$ sudo make revoke
+<a href="mailto:user@val">user@val</a>:</sub>/yubikey-val$
+```</p></div>
+<h1 id="_configuration">Configuration</h1>
+<div class="paragraph"><p>Add the following to your /etc/yubico/val/ykval-config.php:</p></div>
+<div class="paragraph"><p>```php
+# For the revoke service.
+$baseParams[<em><em>YKREV_IPS</em></em>] = array(<em>10.0.0.1</em>, <em>2000:1:2:3::4</em>);
+```</p></div>
+<div class="paragraph"><p>Obviously you need to modify the IP address.</p></div>
+<div class="paragraph"><p>You also need to grant additional rights to the database, for MySQL:</p></div>
+<div class="paragraph"><p>```
+<a href="mailto:user@val">user@val</a>:<sub>$ mysql --silent ykval
+mysql&gt; GRANT UPDATE(active) ON ykval.yubikeys to <em>ykval_verifier</em>@<em>localhost</em>; \
+FLUSH PRIVILEGES;
+mysql&gt; \q
+<a href="mailto:user@val">user@val</a>:</sub>$
+```</p></div>
+<div class="paragraph"><p>For PostgreSQL this should already be working, through this command:</p></div>
+<div class="paragraph"><p>```
+<a href="mailto:postgres@val">postgres@val</a>:<sub>$ psql ykval -q
+ykval=# GRANT UPDATE ON yubikeys TO ykval_verifier;
+ykval=# \q
+<a href="mailto:postgres@val">postgres@val</a>:</sub>$
+```</p></div>
+<h1 id="_testing">Testing</h1>
+<div class="paragraph"><p>Test the installation like this:</p></div>
+<div class="paragraph"><p>```sh
+<a href="mailto:user@revoke">user@revoke</a>:<sub>$ wget -q -O - <em>http://api.example.com/wsapi/revoke?yk=dteffujehknh&amp;do=enable</em>
+OK Processed dteffujehknh with enable
+<a href="mailto:user@revoke">user@revoke</a>:</sub>$
+```</p></div>
+<div class="paragraph"><p>Use <em>disable</em> instead of <em>enable</em> to test disabling of the YubiKey.</p></div>
+<h1 id="_the_end">The End</h1>
+<div class="paragraph"><p>You now have the YK-VAL Revocation Service up and running.</p></div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>

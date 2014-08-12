@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubikey-val : YubiKey OTP validation server in PHP" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubikey-val</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/yubikey-val/">yubikey-val</a>
+          /
+          <a>GeneratingClients.adoc</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-val">View on GitHub</a>
+<a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-val"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-val.svg?branch=master"/></a>
+          <h1><a id="project_title" href="/yubikey-val/">yubikey-val</a></h1>
+          <h2 id="project_tagline">YubiKey OTP validation server in PHP</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>For a client to be able to authenticate a YubiKey OTP with the Validation
+service, a client ID and matching secret is needed (the secret is only
+required for authenticated verification). To create a new client in the
+database with a new generated secret, the ykval-gen-clients command can be
+used. This document describes step by step instructions on generating and
+using clients. For more information regarding the various fields of the
+client database, see <a id="ClientInfoFormat|Client Info Format"></a>.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_client_generation">Client generation</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Use the command below to generate 5 clients. Note the usage of the --urandom
+flag, which speeds up generation, but is less secure! The command is run
+as root (using sudo), since it needs to be able to read the database
+configuration stored in /etc/yubico/val/config-db.php.</p></div>
+<div class="paragraph"><p>```sh
+<a href="mailto:user@val">user@val</a>:~$ sudo ykval-gen-clients --urandom 5</p></div>
+<div class="paragraph"><p>1,l+/c/XfDPDHsaNKrpjwL+bf/Hgs=
+2,LPGHqukoIAUGgDuOs7O0e1f8xD0=
+3,K+gWRE0euOjVOiLD4Nm0wyHrHY8=
+4,+8LF+ADANTAHnwB82xkBb+mNEFs=
+5,URc6oabcuRV8OWW1Hs1cYym3ba4=
+<a href="mailto:user@val">user@val</a>:~$
+```</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_testing_the_clients">Testing the clients</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The above clients can now be used with the validation server. If you have
+a YubiKey validation client, you can easily test this now. For example,
+using the ykclient command (available in the ykclient-dev package, which is
+in Debian as well as Ubuntu):</p></div>
+<div class="paragraph"><p>```sh
+<a href="mailto:user@val">user@val</a>:<sub>$ ykclient --url "http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s" --apikey LPGHqukoIAUGgDuOs7O0e1f8xD0= 2 cccccccccccdutfiljtbignbgckhgdtfigbdricugdrv
+Input:
+  validation URL: <a href="http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s">http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s</a>
+  client id: 2
+  token: cccccccccccdutfiljtbignbgckhgdtfigbdricugdrv
+  api key: LPGHqukoIAUGgDuOs7O0e1f8xD0=
+Verification output (1): Yubikey OTP was bad (BAD_OTP)
+<a href="mailto:user@val">user@val</a>:</sub>$
+```</p></div>
+<div class="paragraph"><p>Note that even though the response was BAD_OTP (since the key used is in fact
+a bad OTP), the verification worked as expected. Compare it to the next example:</p></div>
+<div class="paragraph"><p>```sh
+<a href="mailto:user@val">user@val</a>:<sub>$ ykclient --url "http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s" --apikey not_a_real_secret 3 cccccccccccdutfiljtbignggckhgdtfigbdricugdrvInput:
+  validation URL: <a href="http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s">http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s</a>
+  client id: 3
+  token: cccccccccccdutfiljtbignggckhgdtfigbdricugdrv
+  api key: not_a_real_secret
+Verification output (106): Server response signature was invalid (BAD_SERVER_SIGNATURE)
+<a href="mailto:user@val">user@val</a>:</sub>$
+```</p></div>
+<div class="paragraph"><p>In the above example, the server actually noticed that the client secret was
+incorrect, and responded as it should. The response is signed with the correct
+secret, which the client then interprets as invalid (since it thinks the
+correct key is the dummy key we just gave it).</p></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+</footer>
+</div></body></html>
