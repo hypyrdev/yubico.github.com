@@ -14,7 +14,7 @@ use MIME::Base64::URLSafe;
 
 use Sort::Versions;
 
-my @suffixes = (qr/\.txt$/, qr/\.asciidoc$/, qr/\.adoc$/);
+my @suffixes = (qw/\.txt$/, qw/\.asciidoc$/, qw/\.adoc$/);
 
 my $dir = dirname($0);
 my $project = shift;
@@ -130,8 +130,9 @@ if($docs_raw) {
       my $doc_name = $doc->{path};
       my $found = 0;
       foreach my $suffix (@suffixes) {
-        if($doc_name =~ $suffix) {
+        if($doc_name =~ m/$suffix/) {
           $found++;
+          $doc_name =~ s/$suffix//;
           last;
         }
       }
@@ -147,8 +148,6 @@ if($docs_raw) {
         warn "tried to get " . $url . ".";
         next;
       }
-      $doc_name =~ s/\.asciidoc$//;
-      $doc_name =~ s/\.txt$//;
       my $short_name = basename($doc_name);
       my $content = decode_json($raw_content);
       my $doc_content = urlsafe_b64decode($content->{content});
