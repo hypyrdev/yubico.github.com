@@ -31,7 +31,7 @@
           /
           <a href="/yubikey-val/">yubikey-val</a>
           /
-          <a>MakeRelease.adoc</a>
+          <a>SyncMonitor</a>
           </span>
           <a id="forkme_banner" href="https://github.com/Yubico/yubikey-val">View on GitHub</a>
 <a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-val"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-val.svg?branch=master"/></a>
@@ -45,54 +45,29 @@
       <section id="main_content" class="inner">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>## Introduction</p></div>
-<div class="paragraph"><p>The point of this document is to describe all steps required to make a
-proper release of the yubikey-personalization project.</p></div>
-<div class="paragraph"><p>## Dependencies</p></div>
-<div class="paragraph"><p>Making a release requires the following packages:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>make, git, gnupg, git2cl</code></pre>
-</div></div>
-<div class="paragraph"><p>which can be installed (under Ubuntu) by running:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>sudo apt-get install make git gnupg git2cl</code></pre>
-</div></div>
-<div class="paragraph"><p>## Details</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-Make sure the doc/ sub-directory uses the latest revision.  Confirm with:
-  cd doc &amp;&amp; git checkout master &amp;&amp; git pull &amp;&amp; git diff
-</p>
-</li>
-<li>
-<p>
-Make sure the version number in Makefile has been incremented.
-</p>
-</li>
-<li>
-<p>
-Make sure NEWS describes all changes since the last release.  Use <a href="https://github.com/Yubico/yubikey-val/commits/master">https://github.com/Yubico/yubikey-val/commits/master</a> to review.
-</p>
-</li>
-<li>
-<p>
-Change the <em>(unreleased)</em> part in NEWS to <em>(released 20XX-YY-ZZ)</em> and commit that with a note <em>Version Q.P</em>.
-</p>
-</li>
-<li>
-<p>
-Run <em>make release</em>.
-</p>
-</li>
-<li>
-<p>
-Increment version number in Makefile and add a NEWS template for the next release.
-</p>
-</li>
-</ul></div>
+<div class="paragraph"><p>If you deploy multiple YK-VAL instances, it is important to monitor
+them to make sure the data they have is synchronized.  While there are
+many mechanisms to achieve this, we provide a simple yet flexible
+approach.  The <em>ykval-checksum-clients</em> tool reads out the important
+fields from the database and computes a SHA-1 hash of it, and
+truncates the hash to 10 hex characters and prints them to stdout.</p></div>
+<div class="paragraph"><p>The "important fields" are currently considered to be the id, active,
+and secret columns of the clients table.</p></div>
+<div class="paragraph"><p>The typical way to use this is either manually or to run it in a cron
+job and output the hash to a file that can be downloaded by a remote
+monitor system such as Nagios.</p></div>
+<div class="paragraph"><p>```sh
+<a href="mailto:user@val">user@val</a>:<sub>$ sudo sh -c <em>cat &gt; /etc/cron.hourly/run-ykval-checksum-clients</em>
+#!/bin/sh
+FILE=/var/www/checksum-clients.txt
+(date --utc +%s; ykval-checksum-clients) &gt; $FILE.tmp
+mv $FILE.tmp $FILE
+<a href="mailto:user@val">user@val</a>:</sub>$ sudo chmod +x /etc/cron.hourly/run-ykval-checksum-clients
+```</p></div>
+<div class="paragraph"><p>If you notice mismatches, you may want to run ykval-checksum-clients
+with the <em>-v</em> parameter on the different hosts and then use <em>diff -ur</em>
+or similar tool to compare the outputs.  This should make it possible
+to identify the missmatching entries easily.</p></div>
 </div>
 </div>
 
