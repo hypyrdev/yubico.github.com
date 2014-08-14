@@ -76,35 +76,41 @@ ykval_queuelength: Monitor the size of the YK-VAL queue.
 before they can be used.  First create a Munin configuration file to
 make sure the plugins can access the YK-VAL ykval-config.php
 configuration file:</p></div>
-<div class="paragraph"><p>```sh
-<a href="mailto:user@val">user@val</a>:~$ sudo sh -c <em>cat &gt; /etc/munin/plugin-conf.d/ykval</em></p></div>
-<div class="paragraph"><p>group www-data</p></div>
-<div class="paragraph"><p>group www-data</p></div>
-<div class="paragraph"><p>group www-data
-<a href="mailto:user@val">user@val</a>:~$
-```</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>user@val:~$ sudo sh -c 'cat &gt; /etc/munin/plugin-conf.d/ykval'
+[ykval_ksmlatency]
+group www-data
+[ykval_vallatency]
+group www-data
+[ykval_queuelength]
+group www-data
+user@val:~$</code></pre>
+</div></div>
 <div class="paragraph"><p>Then check that they are working properly:</p></div>
-<div class="paragraph"><p>```sh
-<a href="mailto:user@val">user@val</a>:<sub>$ sudo /usr/sbin/munin-run --servicedir /usr/share/munin/plugins ykval_queuelength autoconf
+<div class="literalblock">
+<div class="content">
+<pre><code>user@val:~$ sudo /usr/sbin/munin-run --servicedir /usr/share/munin/plugins ykval_queuelength autoconf
 yes
-<a href="mailto:user@val">user@val</a>:</sub>$ sudo /usr/sbin/munin-run --servicedir /usr/share/munin/plugins ykval_queuelength config
+user@val:~$ sudo /usr/sbin/munin-run --servicedir /usr/share/munin/plugins ykval_queuelength config
 graph_title YK-VAL queue size
 graph_vlabel sync requests in queue
 graph_category ykval
 queuelength.label sync requests
 queuelength.draw AREA
-<a href="mailto:user@val">user@val</a>:<sub>$ sudo /usr/sbin/munin-run --servicedir /usr/share/munin/plugins ykval_queuelength
+user@val:~$ sudo /usr/sbin/munin-run --servicedir /usr/share/munin/plugins ykval_queuelength
 queuelength.value 0
-<a href="mailto:user@val">user@val</a>:</sub>$
-```</p></div>
+user@val:~$</code></pre>
+</div></div>
 <div class="paragraph"><p>Enable the plugin as follows:</p></div>
-<div class="paragraph"><p>```sh
-<a href="mailto:user@val">user@val</a>:<sub>$ sudo munin-node-configure --shell | sudo sh
-<a href="mailto:user@val">user@val</a>:</sub>$ sudo /etc/init.d/munin-node restart
+<div class="literalblock">
+<div class="content">
+<pre><code>user@val:~$ sudo munin-node-configure --shell | sudo sh
+user@val:~$ sudo /etc/init.d/munin-node restart
 Stopping Munin-Node: done.
 Starting Munin-Node: done.
-<a href="mailto:user@val">user@val</a>:~$
-```</p></div>
+user@val:~$</code></pre>
+</div></div>
 <div class="paragraph"><p>After some time, you should see new graphs on your Munin master.</p></div>
 </div>
 </div>

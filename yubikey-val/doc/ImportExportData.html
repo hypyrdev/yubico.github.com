@@ -61,29 +61,34 @@ validation service, such as their ID and secret key. This data is stored in
 the <strong>clients</strong> table of the database.</p></div>
 <div class="paragraph"><p>The infomation here covers exporting existing clients to a file, and importing
 the clients from that file into another database. For generating clients, see
-<a id="GeneratingClients|Generating Clients"></a>.</p></div>
+<a href="GeneratingClients.html">GeneratingClients</a></p></div>
 <div class="paragraph"><p>To export client data, you can use the following command (Replace C5B8D4EA with
 the key of the recipient of the data):</p></div>
-<div class="paragraph"><p>```sh
-<a href="mailto:user@val">user@val</a>:~$ sudo ykval-export-clients | gpg -a --encrypt -r C5B8D4EA -s &gt; yk-client-info.asc</p></div>
-<div class="paragraph"><p>You need a passphrase to unlock the secret key for
-user: "YK-KSM import key"
-2048-bit RSA key, ID C5B8D4EA, created 2013-01-28
-<a href="mailto:user@val">user@val</a>:~$
-```</p></div>
-<div class="paragraph"><p>To import the client data exported above, you can use:
-```sh
-<a href="mailto:user@val">user@val</a>:~$ gpg &lt; yk-client-info.asc | sudo ykval-import-clients</p></div>
-<div class="paragraph"><p>You need a passphrase to unlock the secret key for
-user: "YK-KSM import key"
-2048-bit RSA key, ID 9372DC00, created 2013-01-28 (main key ID C5B8D4EA)</p></div>
-<div class="paragraph"><p>gpg: encrypted with 2048-bit RSA key, ID 9372DC00, created 2013-01-28
-      "YK-KSM import key"
-gpg: Signature made Tue 29 Jan 2013 04:18:21 PM CET using RSA key ID C5B8D4EA
-gpg: Good signature from "YK-KSM import key"
-Successfully imported clients to database
-<a href="mailto:user@val">user@val</a>:~$
-```</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code> user@val:~$ sudo ykval-export-clients | gpg -a --encrypt -r C5B8D4EA -s &gt; yk-client-info.asc
+
+ You need a passphrase to unlock the secret key for
+ user: "YK-KSM import key"
+ 2048-bit RSA key, ID C5B8D4EA, created 2013-01-28
+ user@val:~$</code></pre>
+</div></div>
+<div class="paragraph"><p>To import the client data exported above, you can use:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code> user@val:~$ gpg &lt; yk-client-info.asc | sudo ykval-import-clients
+
+ You need a passphrase to unlock the secret key for
+ user: "YK-KSM import key"
+ 2048-bit RSA key, ID 9372DC00, created 2013-01-28 (main key ID C5B8D4EA)
+
+ gpg: encrypted with 2048-bit RSA key, ID 9372DC00, created 2013-01-28
+       "YK-KSM import key"
+ gpg: Signature made Tue 29 Jan 2013 04:18:21 PM CET using RSA key ID C5B8D4EA
+ gpg: Good signature from "YK-KSM import key"
+ Successfully imported clients to database
+ user@val:~$</code></pre>
+</div></div>
 </div>
 </div>
 <div class="sect1">
@@ -94,26 +99,31 @@ Yubikeys, such as their various counter values. This data is stored in the
 <strong>yubikeys</strong> table of the database.</p></div>
 <div class="paragraph"><p>To export Yubikey counter data, you can use the following command (Replace
 C5B8D4EA with the key of the recipient of the data):</p></div>
-<div class="paragraph"><p>```sh
-<a href="mailto:user@val">user@val</a>:~$ sudo ykval-export | gpg -a --encrypt -r C5B8D4EA -s &gt; yk-counter-data.asc</p></div>
-<div class="paragraph"><p>You need a passphrase to unlock the secret key for
-user: "YK-KSM import key"
-2048-bit RSA key, ID C5B8D4EA, created 2013-01-28
-<a href="mailto:user@val">user@val</a>:~$
-```</p></div>
-<div class="paragraph"><p>To import the counter data exported above, you can use:
-```sh
-<a href="mailto:user@val">user@val</a>:~$ gpg &lt; yk-counter-data.asc | sudo ykval-import</p></div>
-<div class="paragraph"><p>You need a passphrase to unlock the secret key for
-user: "YK-KSM import key"
-2048-bit RSA key, ID 9372DC00, created 2013-01-28 (main key ID C5B8D4EA)</p></div>
-<div class="paragraph"><p>gpg: encrypted with 2048-bit RSA key, ID 9372DC00, created 2013-01-28
-      "YK-KSM import key"
-gpg: Signature made Tue 29 Jan 2013 04:18:21 PM CET using RSA key ID C5B8D4EA
-gpg: Good signature from "YK-KSM import key"
-Successfully imported yubikeys to database
-<a href="mailto:user@val">user@val</a>:~$
-```</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code> user@val:~$ sudo ykval-export | gpg -a --encrypt -r C5B8D4EA -s &gt; yk-counter-data.asc
+
+ You need a passphrase to unlock the secret key for
+ user: "YK-KSM import key"
+ 2048-bit RSA key, ID C5B8D4EA, created 2013-01-28
+ user@val:~$</code></pre>
+</div></div>
+<div class="paragraph"><p>To import the counter data exported above, you can use:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code> user@val:~$ gpg &lt; yk-counter-data.asc | sudo ykval-import
+
+ You need a passphrase to unlock the secret key for
+ user: "YK-KSM import key"
+ 2048-bit RSA key, ID 9372DC00, created 2013-01-28 (main key ID C5B8D4EA)
+
+ gpg: encrypted with 2048-bit RSA key, ID 9372DC00, created 2013-01-28
+       "YK-KSM import key"
+ gpg: Signature made Tue 29 Jan 2013 04:18:21 PM CET using RSA key ID C5B8D4EA
+ gpg: Good signature from "YK-KSM import key"
+ Successfully imported yubikeys to database
+ user@val:~$</code></pre>
+</div></div>
 </div>
 </div>
 

@@ -52,9 +52,10 @@ validation servers.</p></div>
 validation server can talk to any of the other validation server using
 the Server Replication Protocol.  The validation servers are
 authenticated by the use of certificates.</p></div>
-<div class="paragraph"><p>```
-val A  &lt;&#8594;  val B &lt;&#8594; val C &lt;&#8594; val A
-```</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>val A  &lt;-&gt;  val B &lt;-&gt; val C &lt;-&gt; val A</code></pre>
+</div></div>
 <div class="paragraph"><p>See the ValidationProtocolV20 for definition of the client to server
 protocol.  The protocol described here is the server to server
 protocol.  See ValidationServerAlgorithm for a description of the
@@ -65,60 +66,139 @@ implementation algorithm that uses this protocol.</p></div>
 <h2 id="_sync_request_specification">Sync request specification</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>A sync request is issued with a HTTP get call, like this:</p></div>
-<div class="paragraph"><p>```
-<a href="https://apiX.yubico.com/wsapi/sync?otp=xyz&amp;modified=1264430686&amp;nonce=foobar&amp;yk_identity=foo&amp;yk_counter=42&amp;yk_use=17&amp;yk_high=10&amp;yk_low=5">https://apiX.yubico.com/wsapi/sync?otp=xyz&amp;modified=1264430686&amp;nonce=foobar&amp;yk_identity=foo&amp;yk_counter=42&amp;yk_use=17&amp;yk_high=10&amp;yk_low=5</a>
-```</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>https://apiX.yubico.com/wsapi/sync?otp=xyz&amp;modified=1264430686&amp;nonce=foobar&amp;yk_identity=foo&amp;yk_counter=42&amp;yk_use=17&amp;yk_high=10&amp;yk_low=5</code></pre>
+</div></div>
 <div class="paragraph"><p>The following parameters are used</p></div>
-<div class="paragraph"><p>{|
-! parameter !! type !! values
-|-
-| otp || string || one-time password (for logging purposes)
-|-
-| modified || integer || unix timestamp of when OTP was received
-|-
-| nonce || string || nonce from client request
-|-
-| yk_identity || modhex || !YubiKey OTP identity in question
-|-
-| yk_counter || integer || last seen session counter by sender
-|-
-| yk_use || integer || last seen session use by sender
-|-
-| yk_high || integer || OTP internal high time value
-|-
-| yk_low || integer || OTP internal low time value
-|}</p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="left" valign="top"> parameter </th>
+<th align="left" valign="top">type </th>
+<th align="left" valign="top">values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">otp</p></td>
+<td align="left" valign="top"><p class="table">string</p></td>
+<td align="left" valign="top"><p class="table">one-time password (for logging purposes)</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">modified</p></td>
+<td align="left" valign="top"><p class="table">integer</p></td>
+<td align="left" valign="top"><p class="table">unix timestamp of when OTP was received</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">nonce</p></td>
+<td align="left" valign="top"><p class="table">string</p></td>
+<td align="left" valign="top"><p class="table">nonce from client request</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">yk_identity</p></td>
+<td align="left" valign="top"><p class="table">modhex</p></td>
+<td align="left" valign="top"><p class="table">YubiKey OTP identity in question</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">yk_counter</p></td>
+<td align="left" valign="top"><p class="table">integer</p></td>
+<td align="left" valign="top"><p class="table">last seen session counter by sender</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">yk_use</p></td>
+<td align="left" valign="top"><p class="table">integer</p></td>
+<td align="left" valign="top"><p class="table">last seen session use by sender</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">yk_high</p></td>
+<td align="left" valign="top"><p class="table">integer</p></td>
+<td align="left" valign="top"><p class="table">OTP internal high time value</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">yk_low</p></td>
+<td align="left" valign="top"><p class="table">integer</p></td>
+<td align="left" valign="top"><p class="table">OTP internal low time value</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="paragraph"><p>Input values for yk_counter, yk_use, yk_high and yk_low are always
 positive except for -1 which indicates that the requesting server did
 not have any earlier information about the !YubiKey.</p></div>
 <div class="paragraph"><p>An example response is</p></div>
-<div class="paragraph"><p>```sh
-modified=1264430686
+<div class="literalblock">
+<div class="content">
+<pre><code>modified=1264430686
 nonce=aspodkaaspdokas
 yk_identity=cccccccccccf
 yk_counter=api2 session counter
 yk_use=api2 session use counter
 yk_high=value
-yk_low=value
-```</p></div>
+yk_low=value</code></pre>
+</div></div>
 <div class="paragraph"><p>The values returned are:</p></div>
-<div class="paragraph"><p>{|
-! parameter !! type !! values
-|-
-| modified || integer || timestamp of when last OTP was received
-|-
-| nonce || string || nonce from client for last OTP
-|-
-| yk_identity || modhex || !YubiKey OTP identity in question
-|-
-| yk_counter || integer || last seen session counter
-|-
-| yk_use || integer || last seen session use
-|-
-| yk_high || integer || last seen high time value
-|-
-| yk_low || integer || last seen low time value
-|}</p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="left" valign="top"> parameter </th>
+<th align="left" valign="top">type </th>
+<th align="left" valign="top">values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">modified</p></td>
+<td align="left" valign="top"><p class="table">integer</p></td>
+<td align="left" valign="top"><p class="table">timestamp of when last OTP was received</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">nonce</p></td>
+<td align="left" valign="top"><p class="table">string</p></td>
+<td align="left" valign="top"><p class="table">nonce from client for last OTP</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">yk_identity</p></td>
+<td align="left" valign="top"><p class="table">modhex</p></td>
+<td align="left" valign="top"><p class="table">YubiKey OTP identity in question</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">yk_counter</p></td>
+<td align="left" valign="top"><p class="table">integer</p></td>
+<td align="left" valign="top"><p class="table">last seen session counter</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">yk_use</p></td>
+<td align="left" valign="top"><p class="table">integer</p></td>
+<td align="left" valign="top"><p class="table">last seen session use</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">yk_high</p></td>
+<td align="left" valign="top"><p class="table">integer</p></td>
+<td align="left" valign="top"><p class="table">last seen high time value</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">yk_low</p></td>
+<td align="left" valign="top"><p class="table">integer</p></td>
+<td align="left" valign="top"><p class="table">last seen low time value</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="paragraph"><p>Output values for modified, yk_counter, yk_use, yk_high and yk_low are
 always positive except for -1 which indicates that the server did not
 have any earlier information about the !YubiKey.  In this case, nonce

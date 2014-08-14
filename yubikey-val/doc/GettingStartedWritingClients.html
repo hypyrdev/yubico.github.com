@@ -43,9 +43,9 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-<div id="preamble">
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>## Introduction</p></div>
 <div class="paragraph"><p>While the canonical description of the validation protocol is
 documented in <a href="ValidationProtocolV20">ValidationProtocolV20</a>, it may be difficult to grasp the
 high level of how a client typically works.  The intention with this
@@ -53,7 +53,11 @@ page is to illustrate one simple case.  Note that this does not cover
 the replicated protocol.</p></div>
 <div class="paragraph"><p>If you want to make your own client implementation, here is the
 quickest way to get started:</p></div>
-<div class="paragraph"><p>## API key</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_api_key">API key</h2>
+<div class="sectionbody">
 <div class="paragraph"><p>API key is used to optionally sign the OTP validation request and to
 verify the OTP validation response. We recommend all production
 deployments use either API key or HTTPS.</p></div>
@@ -65,24 +69,37 @@ requests using this API key.</p></div>
 <div class="paragraph"><p>To get an API key, first use our online API key generator. It will
 assign you an ID and create a shared key. You can use the shared key
 to authenticate that the API responses do come from Yubico.</p></div>
-<div class="paragraph"><p>## Capture an OTP</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_capture_an_otp">Capture an OTP</h2>
+<div class="sectionbody">
 <div class="paragraph"><p>Capture an OTP output from your YubiKey. You can do that by opening
 a text editor and simply pressing the button on the YubiKey. The OTP is a
 simple string of characters, like this:</p></div>
-<div class="paragraph"><p>```
-vvvvvvcurikvhjcvnlnbecbkubjvuittbifhndhn
-```</p></div>
-<div class="paragraph"><p>## Validate OTP format</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>vvvvvvcurikvhjcvnlnbecbkubjvuittbifhndhn</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_validate_otp_format">Validate OTP format</h2>
+<div class="sectionbody">
 <div class="paragraph"><p>Prudent clients should validate the data entered by the user so that
 it is what the software expects.  YubiKey OTPs consists of 32-48
 characters in the ModHex alphabet <code>cbdefghijklnrtuv</code>.  Unfortunately,
-this has turned to be over-aggresive because if the keyboard layout is
+this has turned out to be over-aggresive because if the keyboard layout is
 Dvorak-based, it will look differently.  For example, the modhex
 alphabet in the US Dvorak layout is <code>jxe.uidchtnbpygk</code>.  There are
 other Dvorak layouts as well.  For this reason, our recommendation is
 that clients only check that the input consists of 32-48 printable
 characters.</p></div>
-<div class="paragraph"><p>## Send OTP to our server</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_send_otp_to_our_server">Send OTP to our server</h2>
+<div class="sectionbody">
 <div class="paragraph"><p>Send the authentication request to our servers following the protocol
 specified below. Your request should include the verifier ID (a number
 that identifies the signature key), the OTP you captured in the
@@ -90,38 +107,53 @@ previous instruction, and a random looking string of characters to
 make the request unique. The request is part of the HTTP GET URL,
 encoded using normal parameter/value pairs. For example (broken into
 two lines for legibility):</p></div>
-<div class="paragraph"><p>```
-<a href="http://api2.yubico.com/wsapi/2.0/verify?id=1&amp;otp=cccccccbcjdifc">http://api2.yubico.com/wsapi/2.0/verify?id=1&amp;otp=cccccccbcjdifc</a>\
-trndncchkftchjlnbhvhtugdljibej&amp;nonce=aef3a7835277a28da831005c2ae3b919e2076a62
-```</p></div>
-<div class="paragraph"><p>The servers that we provide are:</p></div>
-<div class="paragraph"><p>```
-api.yubico.com
+<div class="literalblock">
+<div class="content">
+<pre><code>http://api2.yubico.com/wsapi/2.0/verify?id=1&amp;otp=cccccccbcjdifc\
+trndncchkftchjlnbhvhtugdljibej&amp;nonce=aef3a7835277a28da831005c2ae3b919e2076a62</code></pre>
+</div></div>
+<div class="paragraph"><p>The servers that Yubico provides are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>api.yubico.com
 api2.yubico.com
 api3.yubico.com
 api4.yubico.com
-api5.yubico.com
-```</p></div>
+api5.yubico.com</code></pre>
+</div></div>
 <div class="paragraph"><p>These servers are hosted in different places and by different organizations.</p></div>
-<div class="paragraph"><p>## Parse response</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_parse_response">Parse response</h2>
+<div class="sectionbody">
 <div class="paragraph"><p>You will recieve a response back from the server, a string of text
 that resembles the following:</p></div>
-<div class="paragraph"><p>```
-h=vjhFxZrNHB5CjI6vhuSeF2n46a8=
+<div class="literalblock">
+<div class="content">
+<pre><code>h=vjhFxZrNHB5CjI6vhuSeF2n46a8=
 t=2010-04-23T20:34:51Z0678
 otp=cccccccbcjdifctrndncchkftchjlnbhvhtugdljibej
 nonce=aef3a7835277a28da831005c2ae3b919e2076a62
 sl=75
-status=OK
-```</p></div>
+status=OK</code></pre>
+</div></div>
 <div class="paragraph"><p>You can check the authenticity of this response by checking that the
 OTP and nonce was the same as the one you requested validation for and
 verify the HMAC-SHA-1 signature.</p></div>
-<div class="paragraph"><p>## Make a decision</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_make_a_decision">Make a decision</h2>
+<div class="sectionbody">
 <div class="paragraph"><p>Use the <code>status=</code> codes to make a decision whether to authenticate
 your user or not. All the status codes and their meanings are
 described by the protocol specification, see below.</p></div>
-<div class="paragraph"><p>## Binding an OTP to an Identity</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_binding_an_otp_to_an_identity">Binding an OTP to an Identity</h2>
+<div class="sectionbody">
 <div class="paragraph"><p>Since a valid OTP on its own is not terribly useful, you need to
 connect it to a user in some way.  This is normally not something the
 client needs to do, it belongs elsewhere in the application, however
@@ -142,7 +174,11 @@ lower-case the string in order to avoid caps lock resulting in
 different identities with the only differ being case of the prefix.</p></div>
 <div class="paragraph"><p>Typically you would store the association between the user and the
 YubiKey prefix in a database.</p></div>
-<div class="paragraph"><p>## The End</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_end">The End</h2>
+<div class="sectionbody">
 <div class="paragraph"><p>There are some more subtle matters that can be important, so please
 read the entire protocol specification for all the details.  Further,
 for added reliability, you may send the request in parallel to more

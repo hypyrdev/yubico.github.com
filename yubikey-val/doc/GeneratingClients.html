@@ -61,15 +61,17 @@ client database, see <a id="ClientInfoFormat|Client Info Format"></a>.</p></div>
 flag, which speeds up generation, but is less secure! The command is run
 as root (using sudo), since it needs to be able to read the database
 configuration stored in /etc/yubico/val/config-db.php.</p></div>
-<div class="paragraph"><p>```sh
-<a href="mailto:user@val">user@val</a>:~$ sudo ykval-gen-clients --urandom 5</p></div>
-<div class="paragraph"><p>1,l+/c/XfDPDHsaNKrpjwL+bf/Hgs=
-2,LPGHqukoIAUGgDuOs7O0e1f8xD0=
-3,K+gWRE0euOjVOiLD4Nm0wyHrHY8=
-4,+8LF+ADANTAHnwB82xkBb+mNEFs=
-5,URc6oabcuRV8OWW1Hs1cYym3ba4=
-<a href="mailto:user@val">user@val</a>:~$
-```</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code> user@val:~$ sudo ykval-gen-clients --urandom 5
+
+ 1,l+/c/XfDPDHsaNKrpjwL+bf/Hgs=
+ 2,LPGHqukoIAUGgDuOs7O0e1f8xD0=
+ 3,K+gWRE0euOjVOiLD4Nm0wyHrHY8=
+ 4,+8LF+ADANTAHnwB82xkBb+mNEFs=
+ 5,URc6oabcuRV8OWW1Hs1cYym3ba4=
+ user@val:~$</code></pre>
+</div></div>
 </div>
 </div>
 <div class="sect1">
@@ -79,27 +81,29 @@ configuration stored in /etc/yubico/val/config-db.php.</p></div>
 a YubiKey validation client, you can easily test this now. For example,
 using the ykclient command (available in the ykclient-dev package, which is
 in Debian as well as Ubuntu):</p></div>
-<div class="paragraph"><p>```sh
-<a href="mailto:user@val">user@val</a>:<sub>$ ykclient --url "http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s" --apikey LPGHqukoIAUGgDuOs7O0e1f8xD0= 2 cccccccccccdutfiljtbignbgckhgdtfigbdricugdrv
-Input:
-  validation URL: <a href="http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s">http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s</a>
-  client id: 2
-  token: cccccccccccdutfiljtbignbgckhgdtfigbdricugdrv
-  api key: LPGHqukoIAUGgDuOs7O0e1f8xD0=
-Verification output (1): Yubikey OTP was bad (BAD_OTP)
-<a href="mailto:user@val">user@val</a>:</sub>$
-```</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code> user@val:~$ ykclient --url "http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s" --apikey LPGHqukoIAUGgDuOs7O0e1f8xD0= 2 cccccccccccdutfiljtbignbgckhgdtfigbdricugdrv
+ Input:
+   validation URL: http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s
+   client id: 2
+   token: cccccccccccdutfiljtbignbgckhgdtfigbdricugdrv
+   api key: LPGHqukoIAUGgDuOs7O0e1f8xD0=
+ Verification output (1): Yubikey OTP was bad (BAD_OTP)
+ user@val:~$</code></pre>
+</div></div>
 <div class="paragraph"><p>Note that even though the response was BAD_OTP (since the key used is in fact
 a bad OTP), the verification worked as expected. Compare it to the next example:</p></div>
-<div class="paragraph"><p>```sh
-<a href="mailto:user@val">user@val</a>:<sub>$ ykclient --url "http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s" --apikey not_a_real_secret 3 cccccccccccdutfiljtbignggckhgdtfigbdricugdrvInput:
-  validation URL: <a href="http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s">http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s</a>
-  client id: 3
-  token: cccccccccccdutfiljtbignggckhgdtfigbdricugdrv
-  api key: not_a_real_secret
-Verification output (106): Server response signature was invalid (BAD_SERVER_SIGNATURE)
-<a href="mailto:user@val">user@val</a>:</sub>$
-```</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code> user@val:~$ ykclient --url "http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s" --apikey not_a_real_secret 3 cccccccccccdutfiljtbignggckhgdtfigbdricugdrvInput:
+   validation URL: http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s
+   client id: 3
+   token: cccccccccccdutfiljtbignggckhgdtfigbdricugdrv
+   api key: not_a_real_secret
+ Verification output (106): Server response signature was invalid (BAD_SERVER_SIGNATURE)
+ user@val:~$</code></pre>
+</div></div>
 <div class="paragraph"><p>In the above example, the server actually noticed that the client secret was
 incorrect, and responded as it should. The response is signed with the correct
 secret, which the client then interprets as invalid (since it thinks the
