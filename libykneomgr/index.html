@@ -143,6 +143,16 @@ using the PCSC backend.</p></div>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_troubleshooting">Troubleshooting</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>If you get a generic error from the library (like
+YKNEOMGR_BACKEND_ERROR) or "Backend error" from the command line tool,
+it indicates a problem in the lower-level PCSC backend.  On GNU and
+Mac, check that pcscd is indeed running, and that the command line
+tool "pcsc_scan" finds your smartcard.</p></div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_namespaces">Namespaces</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Project full name: Yubico YubiKey NEO Manager C Library
