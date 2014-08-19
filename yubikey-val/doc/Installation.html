@@ -95,12 +95,12 @@ upgrades if prompted.</p></div>
 <div class="paragraph"><p>First you should download and install the latest YK-VAL release:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> user@val:~$ sudo apt-get install git make
+<pre><tt> user@val:~$ sudo apt-get install git make
  ...
  user@val:~$ git clone git://github.com/Yubico/yubikey-val.git
  ...
  user@val:~$ cd yubikey-val
- user@val:~/yubikey-val$ sudo make install</code></pre>
+ user@val:~/yubikey-val$ sudo make install</tt></pre>
 </div></div>
 <div class="paragraph"><p>The rest of this documentation will assume you have YK-VAL available
 in the default installation targets.  You can override the paths, see
@@ -111,7 +111,7 @@ the Makefile.</p></div>
 <div class="paragraph"><p>You also need to install a web server with PHP5, php5-curl and php-pear.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo apt-get install apache2 php5 php5-curl php-pear</code></pre>
+<pre><tt>user@val:~$ sudo apt-get install apache2 php5 php5-curl php-pear</tt></pre>
 </div></div>
 <div class="paragraph"><p>Any web server with PHP support should work.</p></div>
 </div>
@@ -125,7 +125,7 @@ PostgreSQL or MySQL here.</p></div>
 <div class="paragraph"><p>Install the required packages:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo apt-get install mysql-server php5-mysql</code></pre>
+<pre><tt>user@val:~$ sudo apt-get install mysql-server php5-mysql</tt></pre>
 </div></div>
 <div class="paragraph"><p>The installation asks you for a MySQL "root" password, and I recommend
 to specify one. To avoid having to specify a password when using the
@@ -133,26 +133,26 @@ to specify one. To avoid having to specify a password when using the
 see /usr/share/doc/mysql-server-5.0/README.Debian.gz.  For example:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ cat &gt; .my.cnf
+<pre><tt>user@val:~$ cat &gt; .my.cnf
 [client]
 user = root
 password = YOURPASSWORD
 user@val:~$ chmod go-r .my.cnf
-user@val:~$</code></pre>
+user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>Note the <em>chmod</em> to protect your password from non-root users.</p></div>
 <div class="paragraph"><p>The database needs to be initialized as follows:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ echo 'create database ykval' | mysql
+<pre><tt>user@val:~$ echo 'create database ykval' | mysql
 user@val:~$ mysql ykval &lt; /usr/share/doc/yubikey-val/ykval-db.sql
-user@val:~$</code></pre>
+user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>You also need to create a database user for the verifier interface,
 normally called <em>ykval_verifier</em>:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ mysql --silent ykval
+<pre><tt>user@val:~$ mysql --silent ykval
 mysql&gt; CREATE USER 'ykval_verifier'@'localhost'; \
 GRANT SELECT,INSERT,UPDATE(modified, yk_counter, yk_low, yk_high, yk_use, nonce) ON ykval.yubikeys TO 'ykval_verifier'@'localhost'; \
 GRANT SELECT(id, secret, active) ON ykval.clients TO 'ykval_verifier'@'localhost'; \
@@ -160,7 +160,7 @@ GRANT SELECT,INSERT,UPDATE,DELETE ON ykval.queue TO 'ykval_verifier'@'localhost'
 SET PASSWORD FOR 'ykval_verifier'@'localhost' = PASSWORD('yourpassword'); \
 FLUSH PRIVILEGES;
 mysql&gt; \q
-user@val:~$</code></pre>
+user@val:~$</tt></pre>
 </div></div>
 </div>
 <div class="sect3">
@@ -168,41 +168,41 @@ user@val:~$</code></pre>
 <div class="paragraph"><p>Install the required packages:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo apt-get install postgresql php5-pgsql
+<pre><tt>user@val:~$ sudo apt-get install postgresql php5-pgsql
 ...
-user@val:~$</code></pre>
+user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>The database needs to be initialized as follows:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo su postgres
+<pre><tt>user@val:~$ sudo su postgres
 postgres@val:~$ createdb ykval
 postgres@val:~$ psql ykval &lt; /usr/share/doc/yubikey-val/ykval-db.sql
-postgres@val:~$</code></pre>
+postgres@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>You also need to create a database user for the verifier interface,
 normally called <em>ykval_verifier</em>:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>postgres@val:~$ psql ykval -q
+<pre><tt>postgres@val:~$ psql ykval -q
 ykval=# CREATE USER ykval_verifier PASSWORD 'yourpassword';
 ykval=# GRANT SELECT,INSERT,UPDATE ON yubikeys TO ykval_verifier;
 ykval=# GRANT SELECT ON clients TO ykval_verifier;
 ykval=# GRANT SELECT, INSERT, UPDATE, DELETE ON queue TO ykval_verifier;
 ykval=# \q
-postgres@val:~$</code></pre>
+postgres@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>Don&#8217;t forget to switch back to your normal user</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>postgres@val:~$ exit
-user@val:~$</code></pre>
+<pre><tt>postgres@val:~$ exit
+user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>During installation and debugging it may be useful to watch the
 database log entries:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo tail -F /var/log/postgresql/postgresql-*-main.log &amp;</code></pre>
+<pre><tt>user@val:~$ sudo tail -F /var/log/postgresql/postgresql-*-main.log &amp;</tt></pre>
 </div></div>
 </div>
 </div>
@@ -215,11 +215,11 @@ the symlinks is to invoke <em>make symlink</em> in your YK-VAL source tree.
 Like this:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~/yubikey-val$ sudo make symlink
+<pre><tt>user@val:~/yubikey-val$ sudo make symlink
 install -d /var/www/wsapi/2.0
 ln -sf /usr/share/yubikey-val/ykval-verify.php /var/www/wsapi/2.0/verify.php
 ln -sf /usr/share/yubikey-val/ykval-sync.php /var/www/wsapi/2.0/sync.php
-user@val:~/yubikey-val$</code></pre>
+user@val:~/yubikey-val$</tt></pre>
 </div></div>
 <div class="paragraph"><p>If you want to do it manually, you can invoke the above commands
 manually.</p></div>
@@ -230,22 +230,22 @@ manually.</p></div>
 /etc/default/ykval-queue with the following content:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo sh -c 'cat &gt; /etc/default/ykval-queue'
+<pre><tt>user@val:~$ sudo sh -c 'cat &gt; /etc/default/ykval-queue'
 DAEMON_ARGS="/etc/yubico/val:/usr/share/yubikey-val"
-user@val:~$</code></pre>
+user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>You also need to set the include path for the PHP scripts running via
 Apache, using a .htaccess file:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo sh -c 'cat &gt; /var/www/wsapi/2.0/.htaccess'
+<pre><tt>user@val:~$ sudo sh -c 'cat &gt; /var/www/wsapi/2.0/.htaccess'
 RewriteEngine on
 RewriteRule ^([^/\.\?]+)(\?.*)?$ $1.php$2 [L]
 &lt;IfModule mod_php5.c&gt;
  php_value include_path ".:/etc/yubico/val:/usr/share/yubikey-val"
 &lt;/IfModule&gt;
 user@val:~$ sudo ln -s 2.0/.htaccess /var/www/wsapi/.htaccess
-user@val:~$</code></pre>
+user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>The .htaccess file also sets up rewriting from the non-.PHP suffix URL
 name to the right script.</p></div>
@@ -259,8 +259,8 @@ included in YK-VAL package as ykval-config.php</p></div>
 <div class="paragraph"><p>A template is typically installed in /etc/yubico/val/ykval-config.php-template.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo cp /etc/yubico/val/ykval-config.php-template /etc/yubico/val/ykval-config.php
-user@val:~$ sudo emacs -nw /etc/yubico/val/ykval-config.php</code></pre>
+<pre><tt>user@val:~$ sudo cp /etc/yubico/val/ykval-config.php-template /etc/yubico/val/ykval-config.php
+user@val:~$ sudo emacs -nw /etc/yubico/val/ykval-config.php</tt></pre>
 </div></div>
 <div class="paragraph"><p>Be careful about the user permissions and ownership so that unrelated
 users on the system cannot read the database password.</p></div>
@@ -271,25 +271,25 @@ otp2ksmurls function.</p></div>
 <div class="paragraph"><p>An example DSN for a MySQL setup:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>$baseParams['__YKVAL_DB_DSN__'] = "mysql:dbname=ykval;host=127.0.0.1";</code></pre>
+<pre><tt>$baseParams['__YKVAL_DB_DSN__'] = "mysql:dbname=ykval;host=127.0.0.1";</tt></pre>
 </div></div>
 <div class="paragraph"><p>An example DSN for a PostgreSQL setup:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>$baseParams['__YKVAL_DB_DSN__'] = "pgsql:dbname=ykval;host=127.0.0.1";</code></pre>
+<pre><tt>$baseParams['__YKVAL_DB_DSN__'] = "pgsql:dbname=ykval;host=127.0.0.1";</tt></pre>
 </div></div>
 <div class="paragraph"><p>We recommend to add the hosts in YKVAL_SYNC_POOL as entries in <em>/etc/hosts</em> to avoid network delays caused by DNS-lookups. For example:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo sh -c 'cat &gt;&gt; /etc/hosts'
+<pre><tt>user@val:~$ sudo sh -c 'cat &gt;&gt; /etc/hosts'
 1.2.3.4 api1.example.com
 2.3.4.5 api2.example.com
-user@val:~$</code></pre>
+user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>To improve database performance you can use persistent database connection so that each request doesn&#8217;t require a new connection to be setup. To enable this modify <em><em>YKVAL_DB_OPTIONS</em></em> as follows:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>$baseParams['__YKVAL_DB_OPTIONS__'] = array(PDO::ATTR_PERSISTENT =&gt; true);</code></pre>
+<pre><tt>$baseParams['__YKVAL_DB_OPTIONS__'] = array(PDO::ATTR_PERSISTENT =&gt; true);</tt></pre>
 </div></div>
 </div>
 <div class="sect2">
@@ -298,7 +298,7 @@ user@val:~$</code></pre>
 like this:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> user@val:~$ sudo sh -c 'cat &gt; /etc/apache2/sites-available/ykval'
+<pre><tt> user@val:~$ sudo sh -c 'cat &gt; /etc/apache2/sites-available/ykval'
  &lt;VirtualHost *:80&gt;
         ServerName api.example.com
         ServerAdmin support@example.com
@@ -322,7 +322,7 @@ like this:</p></div>
         ServerSignature On
 
  &lt;/VirtualHost&gt;
- user@val:~$</code></pre>
+ user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>HTTPS is strictly speaking not required, but we strongly recommend it.</p></div>
 <div class="paragraph"><p>You need to install a TLS stack for Apache, there are two popular
@@ -337,11 +337,11 @@ from
 <div class="paragraph"><p>First install and enable the mod_gnutls module:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo apt-get install libapache2-mod-gnutls
+<pre><tt>user@val:~$ sudo apt-get install libapache2-mod-gnutls
 user@val:~$ sudo a2enmod gnutls
 Enabling module gnutls.
 Run '/etc/init.d/apache2 restart' to activate new configuration!
-user@val:~$</code></pre>
+user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>You will need to place the private key in
 /etc/ssl/private/api.example.com-key.pem and the certificate chain in
@@ -349,7 +349,7 @@ user@val:~$</code></pre>
 <div class="paragraph"><p>Create Apache web configuration files:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> user@val:~$ sudo sh -c 'cat &gt; /etc/apache2/sites-available/ykval-ssl'
+<pre><tt> user@val:~$ sudo sh -c 'cat &gt; /etc/apache2/sites-available/ykval-ssl'
  Listen 443
  &lt;VirtualHost *:443&gt;
         ServerName api.example.com
@@ -379,7 +379,7 @@ user@val:~$</code></pre>
         ServerSignature On
 
  &lt;/VirtualHost&gt;
- user@val:~$</code></pre>
+ user@val:~$</tt></pre>
 </div></div>
 </div>
 <div class="sect3">
@@ -388,17 +388,17 @@ user@val:~$</code></pre>
 enable it.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo a2enmod ssl
+<pre><tt>user@val:~$ sudo a2enmod ssl
 Enabling module ssl.
 Run '/etc/init.d/apache2 restart' to activate new configuration!
-user@val:~$</code></pre>
+user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>You will need to place the private key in
 /etc/ssl/private/api.example.com-key.pem and the certificate chain in
 /etc/ssl/private/api.example.com-chain.pem.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> user@val:~$ sudo sh -c 'cat &gt; /etc/apache2/sites-available/ykval-ssl'
+<pre><tt> user@val:~$ sudo sh -c 'cat &gt; /etc/apache2/sites-available/ykval-ssl'
  &lt;VirtualHost *:443&gt;
         ServerName api.example.com
         ServerAdmin support@example.com
@@ -427,7 +427,7 @@ user@val:~$</code></pre>
         ServerSignature On
 
  &lt;/VirtualHost&gt;
- user@val:~$</code></pre>
+ user@val:~$</tt></pre>
 </div></div>
 </div>
 <div class="sect3">
@@ -435,7 +435,7 @@ user@val:~$</code></pre>
 <div class="paragraph"><p>This step is the same for both mod_gnutls and mod_ssl.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo a2enmod rewrite
+<pre><tt>user@val:~$ sudo a2enmod rewrite
 Enabling module rewrite.
 Run '/etc/init.d/apache2 restart' to activate new configuration!
 user@val:~$ sudo a2dissite default
@@ -446,7 +446,7 @@ Enabling site ykval.
 Enabling site ykval-ssl.
 Run '/etc/init.d/apache2 reload' to activate new configuration!
 user@val:~$ sudo /etc/init.d/apache2 restart
-user@val:~$</code></pre>
+user@val:~$</tt></pre>
 </div></div>
 </div>
 </div>
@@ -458,11 +458,11 @@ you can add the following to /etc/syslog.conf, or if you use rsyslog,
 create a file /etc/rsyslog.d/ykval.conf with this content:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo sh -c 'cat &gt; /etc/rsyslog.d/ykval.conf'
+<pre><tt>user@val:~$ sudo sh -c 'cat &gt; /etc/rsyslog.d/ykval.conf'
 local0.* -/var/log/ykval.log
 user@val:~$ sudo /etc/init.d/rsyslog restart
 ...
-user@val:~$</code></pre>
+user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>The <em>-</em> before the filename avoids syncing the file after each write,
 which is recommended for performance.</p></div>
@@ -471,7 +471,7 @@ rotation of log files.  Here is an example that rotates the log file
 weekly.  Create a file /etc/logrotate.d/ykval like this:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo sh -c 'cat &gt; /etc/logrotate.d/ykval'
+<pre><tt>user@val:~$ sudo sh -c 'cat &gt; /etc/logrotate.d/ykval'
 /var/log/ykval.log {
        weekly
        dateext
@@ -483,7 +483,7 @@ weekly.  Create a file /etc/logrotate.d/ykval like this:</p></div>
                invoke-rc.d rsyslog reload &gt; /dev/null
        endscript
 }
-user@val:~$</code></pre>
+user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>You may want to modify the default /etc/logrotate.d/apache2, useful
 things to add are <em>dateext</em> and <em>compress</em> and change <em>rotate</em> to
@@ -500,19 +500,19 @@ modify the default rules.  For example, edit the following lines of
 /etc/rsyslog.conf (or /etc/syslog.conf if you don&#8217;t use rsyslog):</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> *.=debug;\
+<pre><tt> *.=debug;\
         auth,authpriv.none;\
         news.none;mail.none     -/var/log/debug
  *.*;auth,authpriv.none          -/var/log/syslog
  *.=info;*.=notice;*.=warn;\
         auth,authpriv.none;\
         cron,daemon.none;\
-        mail,news.none          -/var/log/messages</code></pre>
+        mail,news.none          -/var/log/messages</tt></pre>
 </div></div>
 <div class="paragraph"><p>Change them into:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> *.=debug;\
+<pre><tt> *.=debug;\
         auth,authpriv.none;\
         news.none;mail.none;local0.none     -/var/log/debug
  *.*;auth,authpriv.none,local0.none              -/var/log/syslog
@@ -520,15 +520,15 @@ modify the default rules.  For example, edit the following lines of
         auth,authpriv.none;\
         cron,daemon.none;\
         local0.none;\
-        mail,news.none          -/var/log/messages</code></pre>
+        mail,news.none          -/var/log/messages</tt></pre>
 </div></div>
 <div class="paragraph"><p>Idempotent commands to speed this up:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@host:~$ sudo perl -pi -e 's/;auth,authpriv.none/;auth,local0.none,authpriv.none/' /etc/rsyslog.conf
+<pre><tt>user@host:~$ sudo perl -pi -e 's/;auth,authpriv.none/;auth,local0.none,authpriv.none/' /etc/rsyslog.conf
 user@host:~$ sudo perl -pi -e 's/news.none;mail.none/news.none;local0.none;mail.none/' /etc/rsyslog.conf
 user@host:~$ sudo perl -pi -e 's/cron,daemon.none/cron,daemon.none;local0.none/' /etc/rsyslog.conf
-user@host:~$ sudo /etc/init.d/rsyslog restart</code></pre>
+user@host:~$ sudo /etc/init.d/rsyslog restart</tt></pre>
 </div></div>
 </div>
 <div class="sect2">
@@ -539,7 +539,7 @@ the pool. The easiest way of running this is to simply invoke ykval-queue
 in a shell:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ sudo ykval-queue</code></pre>
+<pre><tt>user@val:~$ sudo ykval-queue</tt></pre>
 </div></div>
 <div class="paragraph"><p>However, the recommended approach is to automate running this process in
 the background, by use of an init script or similar. Instructions on doing
@@ -559,7 +559,7 @@ address(es) to <em>YKVAL_ALLOWED_SYNC_POOL</em>.</p></div>
 by running the following command from the new server:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>user@val:~$ ykval-synchronize http://&lt;IP or hostname of existing server&gt;/wsapi/2.0/resync all</code></pre>
+<pre><tt>user@val:~$ ykval-synchronize http://&lt;IP or hostname of existing server&gt;/wsapi/2.0/resync all</tt></pre>
 </div></div>
 </div>
 <div class="sect2">
@@ -568,14 +568,14 @@ by running the following command from the new server:</p></div>
 example:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> user@val:~$ wget -q -O - 'http://localhost/wsapi/2.0/verify?id=1&amp;nonce=asdmalksdmlkasmdlkasmdlakmsdaasklmdlak&amp;otp=dteffujehknhfjbrjnlnldnhcujvddbikngjrtgh'
+<pre><tt> user@val:~$ wget -q -O - 'http://localhost/wsapi/2.0/verify?id=1&amp;nonce=asdmalksdmlkasmdlkasmdlakmsdaasklmdlak&amp;otp=dteffujehknhfjbrjnlnldnhcujvddbikngjrtgh'
  h=/QVWkl5VlcX+Or1A2b3vOeoLEwI=
  t=2010-05-17T14:48:15Z0355
  otp=dteffujehknhfjbrjnlnldnhcujvddbikngjrtgh
  nonce=asdmalksdmlkasmdlkasmdlakmsdaasklmdlak
  status=NO_SUCH_CLIENT
 
- user@val:~$</code></pre>
+ user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>Naturally, you will need to import client keys into the database for
 the verify function to work properly.</p></div>

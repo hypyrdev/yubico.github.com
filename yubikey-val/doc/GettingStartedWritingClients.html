@@ -79,7 +79,7 @@ a text editor and simply pressing the button on the YubiKey. The OTP is a
 simple string of characters, like this:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>vvvvvvcurikvhjcvnlnbecbkubjvuittbifhndhn</code></pre>
+<pre><tt>vvvvvvcurikvhjcvnlnbecbkubjvuittbifhndhn</tt></pre>
 </div></div>
 </div>
 </div>
@@ -88,10 +88,10 @@ simple string of characters, like this:</p></div>
 <div class="sectionbody">
 <div class="paragraph"><p>Prudent clients should validate the data entered by the user so that
 it is what the software expects.  YubiKey OTPs consists of 32-48
-characters in the ModHex alphabet <code>cbdefghijklnrtuv</code>.  Unfortunately,
+characters in the ModHex alphabet <tt>cbdefghijklnrtuv</tt>.  Unfortunately,
 this has turned out to be over-aggresive because if the keyboard layout is
 Dvorak-based, it will look differently.  For example, the modhex
-alphabet in the US Dvorak layout is <code>jxe.uidchtnbpygk</code>.  There are
+alphabet in the US Dvorak layout is <tt>jxe.uidchtnbpygk</tt>.  There are
 other Dvorak layouts as well.  For this reason, our recommendation is
 that clients only check that the input consists of 32-48 printable
 characters.</p></div>
@@ -109,17 +109,17 @@ encoded using normal parameter/value pairs. For example (broken into
 two lines for legibility):</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>http://api2.yubico.com/wsapi/2.0/verify?id=1&amp;otp=cccccccbcjdifc\
-trndncchkftchjlnbhvhtugdljibej&amp;nonce=aef3a7835277a28da831005c2ae3b919e2076a62</code></pre>
+<pre><tt>http://api2.yubico.com/wsapi/2.0/verify?id=1&amp;otp=cccccccbcjdifc\
+trndncchkftchjlnbhvhtugdljibej&amp;nonce=aef3a7835277a28da831005c2ae3b919e2076a62</tt></pre>
 </div></div>
 <div class="paragraph"><p>The servers that Yubico provides are:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>api.yubico.com
+<pre><tt>api.yubico.com
 api2.yubico.com
 api3.yubico.com
 api4.yubico.com
-api5.yubico.com</code></pre>
+api5.yubico.com</tt></pre>
 </div></div>
 <div class="paragraph"><p>These servers are hosted in different places and by different organizations.</p></div>
 </div>
@@ -131,12 +131,12 @@ api5.yubico.com</code></pre>
 that resembles the following:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>h=vjhFxZrNHB5CjI6vhuSeF2n46a8=
+<pre><tt>h=vjhFxZrNHB5CjI6vhuSeF2n46a8=
 t=2010-04-23T20:34:51Z0678
 otp=cccccccbcjdifctrndncchkftchjlnbhvhtugdljibej
 nonce=aef3a7835277a28da831005c2ae3b919e2076a62
 sl=75
-status=OK</code></pre>
+status=OK</tt></pre>
 </div></div>
 <div class="paragraph"><p>You can check the authenticity of this response by checking that the
 OTP and nonce was the same as the one you requested validation for and
@@ -146,7 +146,7 @@ verify the HMAC-SHA-1 signature.</p></div>
 <div class="sect1">
 <h2 id="_make_a_decision">Make a decision</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Use the <code>status=</code> codes to make a decision whether to authenticate
+<div class="paragraph"><p>Use the <tt>status=</tt> codes to make a decision whether to authenticate
 your user or not. All the status codes and their meanings are
 described by the protocol specification, see below.</p></div>
 </div>

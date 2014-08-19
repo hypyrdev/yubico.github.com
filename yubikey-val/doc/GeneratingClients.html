@@ -63,14 +63,14 @@ as root (using sudo), since it needs to be able to read the database
 configuration stored in /etc/yubico/val/config-db.php.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> user@val:~$ sudo ykval-gen-clients --urandom 5
+<pre><tt> user@val:~$ sudo ykval-gen-clients --urandom 5
 
  1,l+/c/XfDPDHsaNKrpjwL+bf/Hgs=
  2,LPGHqukoIAUGgDuOs7O0e1f8xD0=
  3,K+gWRE0euOjVOiLD4Nm0wyHrHY8=
  4,+8LF+ADANTAHnwB82xkBb+mNEFs=
  5,URc6oabcuRV8OWW1Hs1cYym3ba4=
- user@val:~$</code></pre>
+ user@val:~$</tt></pre>
 </div></div>
 </div>
 </div>
@@ -83,26 +83,26 @@ using the ykclient command (available in the ykclient-dev package, which is
 in Debian as well as Ubuntu):</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> user@val:~$ ykclient --url "http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s" --apikey LPGHqukoIAUGgDuOs7O0e1f8xD0= 2 cccccccccccdutfiljtbignbgckhgdtfigbdricugdrv
+<pre><tt> user@val:~$ ykclient --url "http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s" --apikey LPGHqukoIAUGgDuOs7O0e1f8xD0= 2 cccccccccccdutfiljtbignbgckhgdtfigbdricugdrv
  Input:
    validation URL: http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s
    client id: 2
    token: cccccccccccdutfiljtbignbgckhgdtfigbdricugdrv
    api key: LPGHqukoIAUGgDuOs7O0e1f8xD0=
  Verification output (1): Yubikey OTP was bad (BAD_OTP)
- user@val:~$</code></pre>
+ user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>Note that even though the response was BAD_OTP (since the key used is in fact
 a bad OTP), the verification worked as expected. Compare it to the next example:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> user@val:~$ ykclient --url "http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s" --apikey not_a_real_secret 3 cccccccccccdutfiljtbignggckhgdtfigbdricugdrvInput:
+<pre><tt> user@val:~$ ykclient --url "http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s" --apikey not_a_real_secret 3 cccccccccccdutfiljtbignggckhgdtfigbdricugdrvInput:
    validation URL: http://127.0.0.1/wsapi/2.0/verify?id=%d&amp;otp=%s
    client id: 3
    token: cccccccccccdutfiljtbignggckhgdtfigbdricugdrv
    api key: not_a_real_secret
  Verification output (106): Server response signature was invalid (BAD_SERVER_SIGNATURE)
- user@val:~$</code></pre>
+ user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>In the above example, the server actually noticed that the client secret was
 incorrect, and responded as it should. The response is signed with the correct

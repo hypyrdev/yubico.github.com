@@ -154,7 +154,7 @@ by a background daemon which re-sends them at regular intervals
 <h3 id="_verification_algorithm">Verification algorithm</h3>
 <div class="literalblock">
 <div class="content">
-<pre><code> Input:
+<pre><tt> Input:
    otp - the otp
    nonce - the nonce from the request
    yk:counter - the session counter
@@ -164,7 +164,7 @@ by a background daemon which re-sends them at regular intervals
    modified - when the counters were last modified
 
  Output:
-   Error code.</code></pre>
+   Error code.</tt></pre>
 </div></div>
 <div class="paragraph"><p>Val X requires that SL % of the sent sync requests gives a response
 marking the OTP as valid, and that none of the responses indicate the

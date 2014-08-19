@@ -54,7 +54,7 @@ the Server Replication Protocol.  The validation servers are
 authenticated by the use of certificates.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>val A  &lt;-&gt;  val B &lt;-&gt; val C &lt;-&gt; val A</code></pre>
+<pre><tt>val A  &lt;-&gt;  val B &lt;-&gt; val C &lt;-&gt; val A</tt></pre>
 </div></div>
 <div class="paragraph"><p>See the ValidationProtocolV20 for definition of the client to server
 protocol.  The protocol described here is the server to server
@@ -68,7 +68,7 @@ implementation algorithm that uses this protocol.</p></div>
 <div class="paragraph"><p>A sync request is issued with a HTTP get call, like this:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>https://apiX.yubico.com/wsapi/sync?otp=xyz&amp;modified=1264430686&amp;nonce=foobar&amp;yk_identity=foo&amp;yk_counter=42&amp;yk_use=17&amp;yk_high=10&amp;yk_low=5</code></pre>
+<pre><tt>https://apiX.yubico.com/wsapi/sync?otp=xyz&amp;modified=1264430686&amp;nonce=foobar&amp;yk_identity=foo&amp;yk_counter=42&amp;yk_use=17&amp;yk_high=10&amp;yk_low=5</tt></pre>
 </div></div>
 <div class="paragraph"><p>The following parameters are used</p></div>
 <div class="tableblock">
@@ -136,13 +136,13 @@ not have any earlier information about the !YubiKey.</p></div>
 <div class="paragraph"><p>An example response is</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>modified=1264430686
+<pre><tt>modified=1264430686
 nonce=aspodkaaspdokas
 yk_identity=cccccccccccf
 yk_counter=api2 session counter
 yk_use=api2 session use counter
 yk_high=value
-yk_low=value</code></pre>
+yk_low=value</tt></pre>
 </div></div>
 <div class="paragraph"><p>The values returned are:</p></div>
 <div class="tableblock">

@@ -49,13 +49,13 @@
 <div class="paragraph"><p>Each of the lines in the file follows the following format:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>active,created,modified,yk_publicname,yk_counter,yk_use,yk_low,yk_high,nonce,notes</code></pre>
+<pre><tt>active,created,modified,yk_publicname,yk_counter,yk_use,yk_low,yk_high,nonce,notes</tt></pre>
 </div></div>
 <div class="paragraph"><p>Any empty line, or a line beginning with a # is ignored.</p></div>
 <div class="paragraph"><p>The meaning are as follows:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> active
+<pre><tt> active
   the YubiKey state, 1 if active, 0 if not
  created
   unix timestamp of when the YubiKey entry was created, decimal integer
@@ -74,12 +74,12 @@
  nonce
   the nonce used for the last validation request, ascii printable string
  notes
-  not used, printable ascii string</code></pre>
+  not used, printable ascii string</tt></pre>
 </div></div>
 <div class="paragraph"><p>An example of a valid data line:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>1,1359470658,1359470658,cccccccccccb,2,1,32729,4,aoincuhfuahs</code></pre>
+<pre><tt>1,1359470658,1359470658,cccccccccccb,2,1,32729,4,aoincuhfuahs</tt></pre>
 </div></div>
 <div class="paragraph"><p>For an example of importing and exporting YubiKey Info data, please see
 <a href="ImportExportData.html">ImportExportData</a></p></div>

@@ -66,17 +66,17 @@ the clients from that file into another database. For generating clients, see
 the key of the recipient of the data):</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> user@val:~$ sudo ykval-export-clients | gpg -a --encrypt -r C5B8D4EA -s &gt; yk-client-info.asc
+<pre><tt> user@val:~$ sudo ykval-export-clients | gpg -a --encrypt -r C5B8D4EA -s &gt; yk-client-info.asc
 
  You need a passphrase to unlock the secret key for
  user: "YK-KSM import key"
  2048-bit RSA key, ID C5B8D4EA, created 2013-01-28
- user@val:~$</code></pre>
+ user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>To import the client data exported above, you can use:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> user@val:~$ gpg &lt; yk-client-info.asc | sudo ykval-import-clients
+<pre><tt> user@val:~$ gpg &lt; yk-client-info.asc | sudo ykval-import-clients
 
  You need a passphrase to unlock the secret key for
  user: "YK-KSM import key"
@@ -87,7 +87,7 @@ the key of the recipient of the data):</p></div>
  gpg: Signature made Tue 29 Jan 2013 04:18:21 PM CET using RSA key ID C5B8D4EA
  gpg: Good signature from "YK-KSM import key"
  Successfully imported clients to database
- user@val:~$</code></pre>
+ user@val:~$</tt></pre>
 </div></div>
 </div>
 </div>
@@ -101,17 +101,17 @@ Yubikeys, such as their various counter values. This data is stored in the
 C5B8D4EA with the key of the recipient of the data):</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> user@val:~$ sudo ykval-export | gpg -a --encrypt -r C5B8D4EA -s &gt; yk-counter-data.asc
+<pre><tt> user@val:~$ sudo ykval-export | gpg -a --encrypt -r C5B8D4EA -s &gt; yk-counter-data.asc
 
  You need a passphrase to unlock the secret key for
  user: "YK-KSM import key"
  2048-bit RSA key, ID C5B8D4EA, created 2013-01-28
- user@val:~$</code></pre>
+ user@val:~$</tt></pre>
 </div></div>
 <div class="paragraph"><p>To import the counter data exported above, you can use:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> user@val:~$ gpg &lt; yk-counter-data.asc | sudo ykval-import
+<pre><tt> user@val:~$ gpg &lt; yk-counter-data.asc | sudo ykval-import
 
  You need a passphrase to unlock the secret key for
  user: "YK-KSM import key"
@@ -122,7 +122,7 @@ C5B8D4EA with the key of the recipient of the data):</p></div>
  gpg: Signature made Tue 29 Jan 2013 04:18:21 PM CET using RSA key ID C5B8D4EA
  gpg: Good signature from "YK-KSM import key"
  Successfully imported yubikeys to database
- user@val:~$</code></pre>
+ user@val:~$</tt></pre>
 </div></div>
 </div>
 </div>
