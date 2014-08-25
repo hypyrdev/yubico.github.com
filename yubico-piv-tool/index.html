@@ -87,9 +87,9 @@ for the parts of OpenSSL used as well as that of the covered work.</p></div>
 follows.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>./configure
+<pre><code>./configure
 make
-sudo make install</tt></pre>
+sudo make install</code></pre>
 </div></div>
 <div class="paragraph"><p>The backend to use is decided at compile time, see the summary at the
 end of the ./configure output.  Use --with-backend=foo to chose
@@ -111,7 +111,7 @@ is needed for command line parameter handling.</p></div>
 <div class="paragraph"><p>Generate the build system using:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>autoreconf --install</tt></pre>
+<pre><code>autoreconf --install</code></pre>
 </div></div>
 <div class="paragraph"><p>Then you follow the normal build instructions, see above.
 To turn on all warnings add --enable-gcc-warnings to ./configure</p></div>
@@ -135,44 +135,44 @@ output --verbose or --verbose=2 may be added.</p></div>
 key on stdout:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>yubico-piv-tool -s 9a -A ECCP256 -a generate</tt></pre>
+<pre><code>yubico-piv-tool -s 9a -A ECCP256 -a generate</code></pre>
 </div></div>
 <div class="paragraph"><p>Generate a certificate request with public key from stdin, will print
 the resulting request on stdout:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>yubico-piv-tool -s 9a -S '/CN=foo/OU=test/O=example.com/' -P 123456 \
-  -a verify -a request</tt></pre>
+<pre><code>yubico-piv-tool -s 9a -S '/CN=foo/OU=test/O=example.com/' -P 123456 \
+  -a verify -a request</code></pre>
 </div></div>
 <div class="paragraph"><p>Generate a self-signed certificate with public key from stdin, will print
 the certificate, for later import, on stdout:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>yubico-piv-tool -s 9a -S '/CN=bar/OU=test/O=example.com/' -P 123456 \
-  -a verify -a selfsign</tt></pre>
+<pre><code>yubico-piv-tool -s 9a -S '/CN=bar/OU=test/O=example.com/' -P 123456 \
+  -a verify -a selfsign</code></pre>
 </div></div>
 <div class="paragraph"><p>Import a certificate from stdin:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>yubico-piv-tool -s 9a -a import-certificate</tt></pre>
+<pre><code>yubico-piv-tool -s 9a -a import-certificate</code></pre>
 </div></div>
 <div class="paragraph"><p>Set a random chuid, import a key and import a certificate from a PKCS12
 file with password test, into slot 9c:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>yubico-piv-tool -s 9c -i test.pfx -K PKCS12 -p test -a set-chuid \
-  -a import-key -a import-cert</tt></pre>
+<pre><code>yubico-piv-tool -s 9c -i test.pfx -K PKCS12 -p test -a set-chuid \
+  -a import-key -a import-cert</code></pre>
 </div></div>
 <div class="paragraph"><p>Change the management key used for administrative authentication:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>yubico-piv-tool -n 0807605403020108070605040302010807060504030201 \
-  -a set-mgm-key</tt></pre>
+<pre><code>yubico-piv-tool -n 0807605403020108070605040302010807060504030201 \
+  -a set-mgm-key</code></pre>
 </div></div>
 <div class="paragraph"><p>Delete a certificate in slot 9a:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>yubico-piv-tool -a delete-certificate -s 9a</tt></pre>
+<pre><code>yubico-piv-tool -a delete-certificate -s 9a</code></pre>
 </div></div>
 </div>
 </div>

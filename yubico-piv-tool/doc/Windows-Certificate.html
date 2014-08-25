@@ -83,7 +83,7 @@ Generate the key:
 </p>
 <div class="literalblock">
 <div class="content">
-<pre><tt>yubico-piv-tool -s 9a -a generate -o public.pem</tt></pre>
+<pre><code>yubico-piv-tool -s 9a -a generate -o public.pem</code></pre>
 </div></div>
 </li>
 <li>
@@ -92,8 +92,8 @@ Request a certificate:
 </p>
 <div class="literalblock">
 <div class="content">
-<pre><tt>yubico-piv-tool -a verify-pin -P 123456 -s 9a -a request-certificate \
-      -S "/CN=example/O=test/" -i public.pem -o request.csr</tt></pre>
+<pre><code>yubico-piv-tool -a verify-pin -P 123456 -s 9a -a request-certificate \
+      -S "/CN=example/O=test/" -i public.pem -o request.csr</code></pre>
 </div></div>
 </li>
 <li>
@@ -103,7 +103,7 @@ Submit the request to the Windows CA:
 </p>
 <div class="literalblock">
 <div class="content">
-<pre><tt>certreq -submit -attrib "CertificateTemplate:User" request.csr cert.crt</tt></pre>
+<pre><code>certreq -submit -attrib "CertificateTemplate:User" request.csr cert.crt</code></pre>
 </div></div>
 </li>
 <li>
@@ -112,7 +112,7 @@ Load the certificate in the Neo:
 </p>
 <div class="literalblock">
 <div class="content">
-<pre><tt>yubico-piv-tool -s 9a -a import-certificate -i cert.crt</tt></pre>
+<pre><code>yubico-piv-tool -s 9a -a import-certificate -i cert.crt</code></pre>
 </div></div>
 </li>
 <li>
@@ -122,7 +122,7 @@ For it to be useful in windows a chuid must be set as well:
 </p>
 <div class="literalblock">
 <div class="content">
-<pre><tt>yubico-piv-tool -a set-chuid</tt></pre>
+<pre><code>yubico-piv-tool -a set-chuid</code></pre>
 </div></div>
 </li>
 </ol></div>
