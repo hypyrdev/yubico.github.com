@@ -3,9 +3,6 @@
 use strict;
 use warnings;
 
-use LWP::Simple;
-use LWP::UserAgent;
-
 use File::Basename;
 use File::Temp qw/tempfile/;
 
@@ -13,6 +10,13 @@ use JSON;
 use MIME::Base64::URLSafe;
 
 use Sort::Versions;
+
+sub get ($_) {
+    my $url = shift;
+    my $txt = `wget -O - -q $url`;
+
+    return $txt;
+}
 
 my @suffixes = (qw/\.txt$/, qw/\.asciidoc$/, qw/\.adoc$/);
 
