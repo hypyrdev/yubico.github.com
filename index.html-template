@@ -54,8 +54,7 @@ REPLACEME
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">Copyright 2013 <a href="http://www.yubico.com">Yubico</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+        <p class="copyright">Copyright 2013-2014 <a href="http://www.yubico.com">Yubico</a></p>
       </footer>
     </div>
 
