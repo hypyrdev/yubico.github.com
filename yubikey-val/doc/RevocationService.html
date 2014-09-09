@@ -58,8 +58,8 @@ not be secure unless you take additional pre-cautions.</p></div>
 <div class="sectionbody">
 <div class="literalblock">
 <div class="content">
-<pre><tt>user@val:~/yubikey-val$ sudo make revoke
-user@val:~/yubikey-val$</tt></pre>
+<pre><code>user@val:~/yubikey-val$ sudo make revoke
+user@val:~/yubikey-val$</code></pre>
 </div></div>
 </div>
 </div>
@@ -69,26 +69,26 @@ user@val:~/yubikey-val$</tt></pre>
 <div class="paragraph"><p>Add the following to your /etc/yubico/val/ykval-config.php:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt># For the revoke service.
-$baseParams['__YKREV_IPS__'] = array('10.0.0.1', '2000:1:2:3::4');</tt></pre>
+<pre><code># For the revoke service.
+$baseParams['__YKREV_IPS__'] = array('10.0.0.1', '2000:1:2:3::4');</code></pre>
 </div></div>
 <div class="paragraph"><p>Obviously you need to modify the IP address.</p></div>
 <div class="paragraph"><p>You also need to grant additional rights to the database, for MySQL:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>user@val:~$ mysql --silent ykval
+<pre><code>user@val:~$ mysql --silent ykval
 mysql&gt; GRANT UPDATE(active) ON ykval.yubikeys to 'ykval_verifier'@'localhost'; \
 FLUSH PRIVILEGES;
 mysql&gt; \q
-user@val:~$</tt></pre>
+user@val:~$</code></pre>
 </div></div>
 <div class="paragraph"><p>For PostgreSQL this should already be working, through this command:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>postgres@val:~$ psql ykval -q
+<pre><code>postgres@val:~$ psql ykval -q
 ykval=# GRANT UPDATE ON yubikeys TO ykval_verifier;
 ykval=# \q
-postgres@val:~$</tt></pre>
+postgres@val:~$</code></pre>
 </div></div>
 </div>
 </div>
@@ -98,9 +98,9 @@ postgres@val:~$</tt></pre>
 <div class="paragraph"><p>Test the installation like this:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>user@revoke:~$ wget -q -O - 'http://api.example.com/wsapi/revoke?yk=dteffujehknh&amp;do=enable'
+<pre><code>user@revoke:~$ wget -q -O - 'http://api.example.com/wsapi/revoke?yk=dteffujehknh&amp;do=enable'
 OK Processed dteffujehknh with enable
-user@revoke:~$</tt></pre>
+user@revoke:~$</code></pre>
 </div></div>
 <div class="paragraph"><p>Use <em>disable</em> instead of <em>enable</em> to test disabling of the YubiKey.</p></div>
 </div>
@@ -119,6 +119,5 @@ user@revoke:~$</tt></pre>
 <div id="footer_wrap" class="outer">
 <footer class="inner">
 <p class="copyright">yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
 </footer>
 </div></body></html>

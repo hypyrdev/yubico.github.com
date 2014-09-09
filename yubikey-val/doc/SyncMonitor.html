@@ -58,12 +58,12 @@ job and output the hash to a file that can be downloaded by a remote
 monitor system such as Nagios.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>user@val:~$ sudo sh -c 'cat &gt; /etc/cron.hourly/run-ykval-checksum-clients'
+<pre><code>user@val:~$ sudo sh -c 'cat &gt; /etc/cron.hourly/run-ykval-checksum-clients'
 #!/bin/sh
 FILE=/var/www/checksum-clients.txt
 (date --utc +%s; ykval-checksum-clients) &gt; $FILE.tmp
 mv $FILE.tmp $FILE
-user@val:~$ sudo chmod +x /etc/cron.hourly/run-ykval-checksum-clients</tt></pre>
+user@val:~$ sudo chmod +x /etc/cron.hourly/run-ykval-checksum-clients</code></pre>
 </div></div>
 <div class="paragraph"><p>If you notice mismatches, you may want to run ykval-checksum-clients
 with the <em>-v</em> parameter on the different hosts and then use <em>diff -ur</em>
@@ -79,6 +79,5 @@ to identify the missmatching entries easily.</p></div>
 <div id="footer_wrap" class="outer">
 <footer class="inner">
 <p class="copyright">yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
 </footer>
 </div></body></html>

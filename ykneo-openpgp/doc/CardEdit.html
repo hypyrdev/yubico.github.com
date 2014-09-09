@@ -67,9 +67,9 @@ to set a proper Application ID, see herlo&#8217;s ssh-gpg-smartcard-config
 github repository.)  To check the applet version you may run:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt> $ gpg-connect-agent --hex "scd apdu 00 f1 00 00" /bye
+<pre><code> $ gpg-connect-agent --hex "scd apdu 00 f1 00 00" /bye
  D[0000]  01 00 05 90 00                                     .....
- OK</tt></pre>
+ OK</code></pre>
 </div></div>
 <div class="paragraph"><p>Where "01 00 05" means version 1.0.5.</p></div>
 </div>
@@ -81,7 +81,7 @@ github repository.)  To check the applet version you may run:</p></div>
 applet on a YubiKey NEO.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>user@debian:~$ gpg --card-edit
+<pre><code>user@debian:~$ gpg --card-edit
 
 Application ID ...: D2760001240102000060000000420000
 Version ..........: 2.0
@@ -172,7 +172,7 @@ Authentication key: [none]
 General key info..: [none]
 
 gpg/card&gt; quit
-user@debian:~$</tt></pre>
+user@debian:~$</code></pre>
 </div></div>
 </div>
 </div>
@@ -184,6 +184,5 @@ user@debian:~$</tt></pre>
 <div id="footer_wrap" class="outer">
 <footer class="inner">
 <p class="copyright">ykneo-openpgp maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
 </footer>
 </div></body></html>

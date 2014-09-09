@@ -58,11 +58,11 @@ ykneo-openpgp applet version 1.0.6 or later installed.  To check the
 applet version run the following.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt> $ gpg2 --version
+<pre><code> $ gpg2 --version
  ...
  $ gpg-connect-agent --hex "scd apdu 00 f1 00 00" /bye
  D[0000]  01 00 06 90 00                                     .....
- OK</tt></pre>
+ OK</code></pre>
 </div></div>
 <div class="paragraph"><p>The string "01 00 06" means version 1.0.6.</p></div>
 </div>
@@ -75,7 +75,7 @@ applet version run the following.</p></div>
 multiple times.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt> C:\Users\Foo&gt;gpg-connect-agent --hex
+<pre><code> C:\Users\Foo&gt;gpg-connect-agent --hex
  &gt; scd apdu 00 20 00 81 08 40 40 40 40 40 40 40 40
  D[0000]  63 C2                                              c.
  OK
@@ -99,19 +99,19 @@ multiple times.</p></div>
  OK
  scd apdu 00 20 00 83 08 40 40 40 40 40 40 40 40
  D[0000]  63 C0                                              c.
- OK</tt></pre>
+ OK</code></pre>
 </div></div>
-<div class="paragraph"><p>Make sure the response goes down to C0, it is possible to have other
-retry counters than the default of 3.  Then, the card is terminated
-and reactivated as follows.</p></div>
+<div class="paragraph"><p>Make sure the response goes down to C0, indicating zero remaining
+retries for that PIN.</p></div>
+<div class="paragraph"><p>Then, the card is terminated and reactivated as follows.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt> &gt; scd apdu 00 e6 00 00
+<pre><code> &gt; scd apdu 00 e6 00 00
  D[0000]  90 00                                              ..
  OK
  &gt; scd apdu 00 44 00 00
  D[0000]  90 00                                              ..
- OK</tt></pre>
+ OK</code></pre>
 </div></div>
 <div class="paragraph"><p>After this, close the connection, remove the card and reinsert it
 again. The applet should be reset.</p></div>
@@ -120,7 +120,7 @@ the following into a script file and run it using gpg-connect-agent
 (gpg-connect-agent -r FILE).</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt> /hex
+<pre><code> /hex
  scd serialno
  scd apdu 00 20 00 81 08 40 40 40 40 40 40 40 40
  scd apdu 00 20 00 81 08 40 40 40 40 40 40 40 40
@@ -132,7 +132,7 @@ the following into a script file and run it using gpg-connect-agent
  scd apdu 00 20 00 83 08 40 40 40 40 40 40 40 40
  scd apdu 00 e6 00 00
  scd apdu 00 44 00 00
- /echo Card has been successfully reset.</tt></pre>
+ /echo Card has been successfully reset.</code></pre>
 </div></div>
 </div>
 </div>
@@ -144,6 +144,5 @@ the following into a script file and run it using gpg-connect-agent
 <div id="footer_wrap" class="outer">
 <footer class="inner">
 <p class="copyright">ykneo-openpgp maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
 </footer>
 </div></body></html>

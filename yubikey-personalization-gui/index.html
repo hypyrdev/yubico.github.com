@@ -109,13 +109,13 @@ Checking type and firmware version of the YubiKey
 <div class="paragraph"><p>You may check out the sources using Git with the following command:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  $ git clone git://github.com/Yubico/yubikey-personalization-gui.git</tt></pre>
+<pre><code>  $ git clone git://github.com/Yubico/yubikey-personalization-gui.git</code></pre>
 </div></div>
 <div class="paragraph"><p>This will create a directory <em>yubikey-personalization-gui</em>. Enter the
 directory:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  $ cd yubikey-personalization-gui</tt></pre>
+<pre><code>  $ cd yubikey-personalization-gui</code></pre>
 </div></div>
 </div>
 </div>
@@ -131,8 +131,8 @@ respectively.</p></div>
 <div class="paragraph"><p>For building on linux pkg-config is used to find these dependencies.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  $ sudo apt-get install libusb-1.0-0-dev qt4-qmake libykpers-1-dev \
-      libyubikey-dev libqt4-dev</tt></pre>
+<pre><code>  $ sudo apt-get install libusb-1.0-0-dev qt4-qmake libykpers-1-dev \
+      libyubikey-dev libqt4-dev</code></pre>
 </div></div>
 </div>
 </div>
@@ -142,7 +142,7 @@ respectively.</p></div>
 <div class="paragraph"><p>Run these commands:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  $ qmake &amp;&amp; make</tt></pre>
+<pre><code>  $ qmake &amp;&amp; make</code></pre>
 </div></div>
 </div>
 </div>
@@ -156,7 +156,7 @@ you want mingw-w64.</p></div>
 from <a href="http://qt-project.org/">http://qt-project.org/</a>.</p></div>
 <div class="paragraph"><p>You can then do (for windows):
 TARGET_ARCH=i686-w64-mingw32 QTDIR=&lt;qt location&gt; qmake \
-  -spec win32-g+<tt>-4.6 "CONFIG</tt>=cross"</p></div>
+  -spec win32-g+<code>-4.6 "CONFIG</code>=cross"</p></div>
 <div class="paragraph"><p>To build installers you can add build_installer to the CONFIG variable
 for qmake. This requires makensis to be in path for windows and
 genisoimage and dmg (from libhfs-dmg) for mac.</p></div>
@@ -189,7 +189,7 @@ To run the YubiKey Personalization Tool, open the command shell and
 execute the following command:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>  $ build/release/yubikey-personalization-gui</tt></pre>
+<pre><code>  $ build/release/yubikey-personalization-gui</code></pre>
 </div></div>
 </div>
 </div>
@@ -208,6 +208,5 @@ execute the following command:</p></div>
 <div id="footer_wrap" class="outer">
 <footer class="inner">
 <p class="copyright">yubikey-personalization-gui maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
 </footer>
 </div></body></html>

@@ -73,7 +73,7 @@ Alphabetically sort the set of key/value pairs by key order.
 </li>
 <li>
 <p>
-Construct a single line with each ordered key/value pair concatenated using <em>&amp;</em>, and each key and value contatenated with <em>=</em>. Do not add any linebreaks. Do not add whitespace. For example: <tt>a=2&amp;b=1&amp;c=3</tt>.
+Construct a single line with each ordered key/value pair concatenated using <em>&amp;</em>, and each key and value contatenated with <em>=</em>. Do not add any linebreaks. Do not add whitespace. For example: <code>a=2&amp;b=1&amp;c=3</code>.
 </p>
 </li>
 <li>
@@ -83,7 +83,7 @@ Apply the HMAC-SHA-1 algorithm on the line as an octet string using the API key 
 </li>
 <li>
 <p>
-Base 64 encode the resulting value according to RFC 4648, for example, <tt>t2ZMtKeValdA+H0jVpj3LIichn4=</tt>.
+Base 64 encode the resulting value according to RFC 4648, for example, <code>t2ZMtKeValdA+H0jVpj3LIichn4=</code>.
 </p>
 </li>
 <li>
@@ -105,12 +105,12 @@ signature itself from the values you generate the signature over for
 verification. If the incoming message is</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>b=1&amp;a=2&amp;c=3&amp;h=V5FkMYr9GCG9tQA9ihuuybWl99U=</tt></pre>
+<pre><code>b=1&amp;a=2&amp;c=3&amp;h=V5FkMYr9GCG9tQA9ihuuybWl99U=</code></pre>
 </div></div>
 <div class="paragraph"><p>make sure to remove h before verifying:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>b=1&amp;a=2&amp;c=3</tt></pre>
+<pre><code>b=1&amp;a=2&amp;c=3</code></pre>
 </div></div>
 <div class="paragraph"><p>Don&#8217;t forget to sort the key/value pairs.</p></div>
 </div>
@@ -132,7 +132,7 @@ the response is the same as the "otp" supplied in the request.</p></div>
 <div class="paragraph"><p>Construct an HTTP GET call to</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>http://api.yubico.com/wsapi/2.0/verify</tt></pre>
+<pre><code>http://api.yubico.com/wsapi/2.0/verify</code></pre>
 </div></div>
 <div class="paragraph"><p>with the following parameters (note that this request need not be signed):</p></div>
 <div class="tableblock">
@@ -201,13 +201,13 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>An example request:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>http://api.yubico.com/wsapi/2.0/verify?otp=vvvvvvcucrlcietctckflvnncdgckubflugerlnr&amp;id=87&amp;timeout=8&amp;sl=50&amp;nonce=askjdnkajsndjkasndkjsnad</tt></pre>
+<pre><code>http://api.yubico.com/wsapi/2.0/verify?otp=vvvvvvcucrlcietctckflvnncdgckubflugerlnr&amp;id=87&amp;timeout=8&amp;sl=50&amp;nonce=askjdnkajsndjkasndkjsnad</code></pre>
 </div></div>
 <div class="paragraph"><p>And if you require additional information on timestamp and session
 counters:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>http://api.yubico.com/wsapi/2.0/verify?id=87&amp;otp=vvvvvvcucrlcietctckflvnncdgckubflugerlnr&amp;timeout=8&amp;sl=50&amp;nonce=askjdnkajsndjkasndkjsnad&amp;timestamp=1</tt></pre>
+<pre><code>http://api.yubico.com/wsapi/2.0/verify?id=87&amp;otp=vvvvvvcucrlcietctckflvnncdgckubflugerlnr&amp;timeout=8&amp;sl=50&amp;nonce=askjdnkajsndjkasndkjsnad&amp;timestamp=1</code></pre>
 </div></div>
 </div>
 </div>
@@ -362,6 +362,5 @@ may support both version 1.x and version 2.0 clients at the same time.</p></div>
 <div id="footer_wrap" class="outer">
 <footer class="inner">
 <p class="copyright">yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
 </footer>
 </div></body></html>

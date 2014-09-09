@@ -78,19 +78,19 @@ make sure the plugins can access the YK-VAL ykval-config.php
 configuration file:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>user@val:~$ sudo sh -c 'cat &gt; /etc/munin/plugin-conf.d/ykval'
+<pre><code>user@val:~$ sudo sh -c 'cat &gt; /etc/munin/plugin-conf.d/ykval'
 [ykval_ksmlatency]
 group www-data
 [ykval_vallatency]
 group www-data
 [ykval_queuelength]
 group www-data
-user@val:~$</tt></pre>
+user@val:~$</code></pre>
 </div></div>
 <div class="paragraph"><p>Then check that they are working properly:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>user@val:~$ sudo /usr/sbin/munin-run --servicedir /usr/share/munin/plugins ykval_queuelength autoconf
+<pre><code>user@val:~$ sudo /usr/sbin/munin-run --servicedir /usr/share/munin/plugins ykval_queuelength autoconf
 yes
 user@val:~$ sudo /usr/sbin/munin-run --servicedir /usr/share/munin/plugins ykval_queuelength config
 graph_title YK-VAL queue size
@@ -100,16 +100,16 @@ queuelength.label sync requests
 queuelength.draw AREA
 user@val:~$ sudo /usr/sbin/munin-run --servicedir /usr/share/munin/plugins ykval_queuelength
 queuelength.value 0
-user@val:~$</tt></pre>
+user@val:~$</code></pre>
 </div></div>
 <div class="paragraph"><p>Enable the plugin as follows:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>user@val:~$ sudo munin-node-configure --shell | sudo sh
+<pre><code>user@val:~$ sudo munin-node-configure --shell | sudo sh
 user@val:~$ sudo /etc/init.d/munin-node restart
 Stopping Munin-Node: done.
 Starting Munin-Node: done.
-user@val:~$</tt></pre>
+user@val:~$</code></pre>
 </div></div>
 <div class="paragraph"><p>After some time, you should see new graphs on your Munin master.</p></div>
 </div>
@@ -122,6 +122,5 @@ user@val:~$</tt></pre>
 <div id="footer_wrap" class="outer">
 <footer class="inner">
 <p class="copyright">yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
 </footer>
 </div></body></html>

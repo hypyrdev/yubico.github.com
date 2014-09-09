@@ -79,8 +79,8 @@ binary your are building).</p></div>
 branch):</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>git clone https://github.com/Yubico/yubioath-desktop.git
-cd yubico-authenticator</tt></pre>
+<pre><code>git clone https://github.com/Yubico/yubioath-desktop.git
+cd yubico-authenticator</code></pre>
 </div></div>
 <div class="paragraph"><p>To sign the executable, copy the pfx file to yubicoauth.pfx and place
 it in the root of the project folder. You will need signtool.exe (from
@@ -105,13 +105,30 @@ codesign -s <em>Developer ID Application</em> /path/to/directory/project.app --d
 <div class="sect1">
 <h2 id="_running_from_linux_osx">Running from Linux / OSX</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Install Python 2.7.5</p></div>
+<div class="paragraph"><p>Install Python 2.7.x</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>cd yubicoauthenticator/
-Run "python ui_systray.py"</tt></pre>
+<pre><code>cd yubicoauthenticator/
+Run "python yubico_authenticator.py --help"
+Run "python yubico_authenticator.py"</code></pre>
 </div></div>
 <div class="paragraph"><p>The application will start and sit on the system&#8217;s systray.</p></div>
+<div class="paragraph"><p>On Ubuntu 14.04 you need the following packages first.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>sudo apt-get install pcscd python-pyscard python-pbkdf2 python-pyside.qtgui</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_no_systray_mode">No systray mode</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>For users without a systrabar or running desktop envinronment with non standard Qt behaviour</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>cd yubicoauthenticator/
+Run "python yubico_authenticator.py --disable-systray"</code></pre>
+</div></div>
 </div>
 </div>
 <div class="sect1">
@@ -134,6 +151,5 @@ Run "python ui_systray.py"</tt></pre>
 <div id="footer_wrap" class="outer">
 <footer class="inner">
 <p class="copyright">Yubico Authenticator maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
 </footer>
 </div></body></html>

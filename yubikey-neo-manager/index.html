@@ -47,15 +47,9 @@
       </ul>
 
 <div class="sect1">
-<h2 id="_yubikey_neo_manager">YubiKey NEO Manager</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>Tool for managing your YubiKey NEO configuration.</p></div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_dependencies">Dependencies</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>YubiKey NEO Manager requires PySide, libykneomgr and libykpers-1.</p></div>
+<div class="paragraph"><p>YubiKey NEO Manager requires PySide, libykneomgr, libykpers-1 and libu2f-host.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -70,15 +64,16 @@ to be compiled from source, requiring the python-dev package.</p></div>
 <h2 id="_building_binaries">Building binaries</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Binaries for Windows and OSX are built using PyInstaller.</p></div>
-<div class="paragraph"><p>Windows:
-For Windows you will need python, PySide, PyCrypto, PyInstaller and Pywin32 installed
+<div class="sect2">
+<h3 id="_windows">Windows</h3>
+<div class="paragraph"><p>For Windows you will need python, PySide, PyCrypto, PyInstaller and Pywin32 installed
 (32 or 64-bit versions depending on the architecture of the binary your are
 building).</p></div>
 <div class="paragraph"><p>Clone the git repository and checkout the desired release tag (or branch):</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>git clone https://github.com/Yubico/yubikey-neo-manager.git
-cd yubikey-neo-manager</tt></pre>
+<pre><code>git clone https://github.com/Yubico/yubikey-neo-manager.git
+cd yubikey-neo-manager</code></pre>
 </div></div>
 <div class="paragraph"><p>Copy any required DLL files into a "lib" subdirectory, which you will need
 to manually create.</p></div>
@@ -87,21 +82,32 @@ root of the project folder. You will need signtool.exe (from the Windows
 SDK) either copied into the root as well or in a location in your PATH.</p></div>
 <div class="paragraph"><p>Run "pyinstaller.exe neoman.spec" from the main project folder.</p></div>
 <div class="paragraph"><p>With NSIS installed, a Windows installer will be built as well.</p></div>
-<div class="paragraph"><p>OSX:
-For OSX you need python, pyside, pycrypto, and pyinstaller installed. One way to install
-these dependencies is by using Homebrew:</p></div>
+</div>
+<div class="sect2">
+<h3 id="_osx">OSX</h3>
+<div class="paragraph"><p>For OSX you need python, pyside, pycrypto, and pyinstaller installed. One way
+to install these dependencies is by using Homebrew:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>brew install python
+<pre><code>brew install python
 brew install pyside
 pip install PyInstaller
-pip install pycrypto</tt></pre>
+pip install pycrypto</code></pre>
 </div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Homebrew will build backwards-incompatible binaries, so the resulting
+build will not run on an older version of OSX.</td>
+</tr></table>
+</div>
 <div class="paragraph"><p>Clone the git repository and checkout the desired release tag (or branch):</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><tt>git clone https://github.com/Yubico/yubikey-neo-manager.git
-cd yubikey-neo-manager</tt></pre>
+<pre><code>git clone https://github.com/Yubico/yubikey-neo-manager.git
+cd yubikey-neo-manager</code></pre>
 </div></div>
 <div class="paragraph"><p>Copy any required dylib files into a "lib" subdirectory, which you will need
 to manually create.</p></div>
@@ -113,6 +119,7 @@ This can be used to create an installer for distribution, though you may want
 to sign the build prior to this using signtool.</p></div>
 </div>
 </div>
+</div>
 
 </section>
 </div>
@@ -121,6 +128,5 @@ to sign the build prior to this using signtool.</p></div>
 <div id="footer_wrap" class="outer">
 <footer class="inner">
 <p class="copyright">YubiKey NEO Manager maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
 </footer>
 </div></body></html>

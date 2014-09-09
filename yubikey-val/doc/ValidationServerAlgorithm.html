@@ -154,7 +154,7 @@ by a background daemon which re-sends them at regular intervals
 <h3 id="_verification_algorithm">Verification algorithm</h3>
 <div class="literalblock">
 <div class="content">
-<pre><tt> Input:
+<pre><code> Input:
    otp - the otp
    nonce - the nonce from the request
    yk:counter - the session counter
@@ -164,7 +164,7 @@ by a background daemon which re-sends them at regular intervals
    modified - when the counters were last modified
 
  Output:
-   Error code.</tt></pre>
+   Error code.</code></pre>
 </div></div>
 <div class="paragraph"><p>Val X requires that SL % of the sent sync requests gives a response
 marking the OTP as valid, and that none of the responses indicate the
@@ -554,6 +554,5 @@ cellspacing="0" cellpadding="4">
 <div id="footer_wrap" class="outer">
 <footer class="inner">
 <p class="copyright">yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
 </footer>
 </div></body></html>
