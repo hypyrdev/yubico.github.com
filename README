@@ -3,7 +3,7 @@ Used to statically generate http://opensource.yubico.com from the Github README'
 == Dependencies
 
 [source,bash]
-sudo apt-get install libsort-versions-perl libmime-base64-urlsafe-perl libjson-perl asciidoc libwww-perl 
+sudo apt-get install libsort-versions-perl libmime-base64-urlsafe-perl libjson-perl asciidoc libwww-perl source-highlight
 
 == Building
 Run `./build-projectpage <ProjectName>`
