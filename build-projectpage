@@ -202,9 +202,6 @@ if($docs_raw) {
 if($doc_links ne '') {
   $extra_links .= "<h3>Documentation</h3><ul>$doc_links</ul>\n";
 }
-if($man_links ne '') {
-    $extra_links .= "<h3>Manual pages</h3><ul>$man_links</ul>\n";
-}
 if(-d "$dir/$project/releases/") {
     $releases_link = '<li><a href="releases.html">Releases</a></li>';
 }
