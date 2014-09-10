@@ -205,6 +205,9 @@ if($doc_links ne '') {
 if($man_links ne '') {
     $extra_links .= "<h3>Manual pages</h3><ul>$man_links</ul>\n";
 }
+if(-d "$dir/$project/releases/") {
+    $releases_link = '<li><a href="releases.html">Releases</a></li>';
+}
 
 my $template = "project-index.html-template";
 if(-f "$dir/$project/$template") {
@@ -251,8 +254,6 @@ if($project eq 'yubico-java-client') {
       s/PROJECT_SUMMARY/$summary/g;
       s/PROJECT_CONTENT/$massaged_content/g;
       s/PROJECT_TRAVIS_LINK/$travis_link/g;
-      s/PROJECT_MAVEN_LINK/$maven_link/g;
-      s/PROJECT_JAVADOC_LINK/$javadoc_link/g;
       s/DOCUMENT_NAME/$sub/g;
       print($out $_);
     }
@@ -311,8 +312,6 @@ EOH
   }
   close $rel;
   close $rel_out;
-
-  $releases_link = '<li><a href="releases.html">Releases</a></li>';
 }
 
 sub version {
