@@ -26,7 +26,7 @@ my $project = shift;
 # strip trailing /
 $project =~ s/\/$//;
 
-my ($homepage, $license, $summary, $name, $travis);
+my ($homepage, $license, $summary, $name, $travis, $maven, $javadoc);
 my $blurb = "https://raw.github.com/Yubico/$project/master/BLURB";
 my $content = get($blurb);
 
@@ -36,6 +36,8 @@ $name = $1 if $content =~ m,Name: (.+),g;
 $project = $1 if $content =~ m,Project: (.+),g;
 $summary = $1 if $content =~ m,Summary: (.+),g;
 $travis = $1 if $content =~ m,Travis: (.+),g;
+$maven = $1 if $content =~ m,Maven: (.+),g;
+$javadoc = $1 if $content =~ m,Javadoc: (.+),g;
 
 die "could not parse blurb: $content ($blurb)" if !$project || !$summary || !$license;
 $name = $project unless $name;
@@ -44,6 +46,9 @@ my $extra_links = '';
 my $man_links = '';
 my $doc_links = '';
 my $travis_link = '';
+my $maven_link = '';
+my $javadoc_link = '';
+my $releases_link = '';
 $content = get("https://raw.github.com/Yubico/$project/master/README");
 my ($temphandle,$temp) = tempfile("$project.XXXXXX");
 print $temphandle $content;
@@ -58,6 +63,12 @@ unlink $temp;
 
 if($travis) {
   $travis_link = '<a id="travis_link" href="' . $travis . '"><img id="travis_img" src="' . $travis . '.svg?branch=master"/></a>';
+}
+if($maven) {
+    $maven_link = '<li><a id="maven_link" href="' . $maven . '">Maven repository</a></li>';
+}
+if($javadoc) {
+    $javadoc_link = '<li><a id="javadoc_link" href="' . $javadoc . '">Javadoc</a></li>';
 }
 
 my $makefile = get("https://raw.github.com/Yubico/$project/master/Makefile.am");
@@ -191,6 +202,9 @@ if($docs_raw) {
 if($doc_links ne '') {
   $extra_links .= "<h3>Documentation</h3><ul>$doc_links</ul>\n";
 }
+if($man_links ne '') {
+    $extra_links .= "<h3>Manual pages</h3><ul>$man_links</ul>\n";
+}
 
 my $template = "project-index.html-template";
 if(-f "$dir/$project/$template") {
@@ -205,6 +219,9 @@ while(<$templ>) {
   s/PROJECT_CONTENT/$massaged_content/g;
   s/EXTRA_LINKS/$extra_links/g;
   s/PROJECT_TRAVIS_LINK/$travis_link/g;
+  s/PROJECT_MAVEN_LINK/$maven_link/g;
+  s/PROJECT_JAVADOC_LINK/$javadoc_link/g;
+  s/RELEASES_LINK/$releases_link/g;
   print($out $_);
 }
 close $templ;
@@ -234,6 +251,8 @@ if($project eq 'yubico-java-client') {
       s/PROJECT_SUMMARY/$summary/g;
       s/PROJECT_CONTENT/$massaged_content/g;
       s/PROJECT_TRAVIS_LINK/$travis_link/g;
+      s/PROJECT_MAVEN_LINK/$maven_link/g;
+      s/PROJECT_JAVADOC_LINK/$javadoc_link/g;
       s/DOCUMENT_NAME/$sub/g;
       print($out $_);
     }
@@ -292,6 +311,8 @@ EOH
   }
   close $rel;
   close $rel_out;
+
+  $releases_link = '<li><a href="releases.html">Releases</a></li>';
 }
 
 sub version {

@@ -43,7 +43,9 @@ PROJECT_TRAVIS_LINK
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
       <ul>
-        <li><a href="releases.html">Releases</a></li>
+	PROJECT_MAVEN_LINK
+	PROJECT_JAVADOC_LINK
+        RELEASES_LINK
       </ul>
 EXTRA_LINKS
 PROJECT_CONTENT
