@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
-<book xmlns="http://www.devhelp.net/book" title="Yubico YubiKey NEO Manager C Library" link="index.html" author="" name="libykneomgr" version="2" language="c">
+<book xmlns="http://www.devhelp.net/book" title="Yubico YubiKey NEO CCID Manager C Library" link="index.html" author="" name="libykneomgr" version="2" language="c">
   <chapters>
-    <sub name="Yubico YubiKey NEO Manager C Library" link="intro.html">
+    <sub name="Yubico YubiKey NEO CCID Manager C Library" link="intro.html">
       <sub name="ykneomgr" link="libykneomgr-ykneomgr.html"/>
       <sub name="ykneomgr-types" link="libykneomgr-ykneomgr-types.html"/>
       <sub name="ykneomgr-version" link="libykneomgr-ykneomgr-version.html"/>

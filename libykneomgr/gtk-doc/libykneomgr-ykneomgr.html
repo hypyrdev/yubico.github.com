@@ -2,21 +2,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Yubico YubiKey NEO Manager C Library: ykneomgr</title>
+<title>Yubico YubiKey NEO CCID Manager C Library: ykneomgr</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-<link rel="home" href="index.html" title="Yubico YubiKey NEO Manager C Library">
-<link rel="up" href="intro.html" title="Yubico YubiKey NEO Manager C Library">
-<link rel="prev" href="intro.html" title="Yubico YubiKey NEO Manager C Library">
+<link rel="home" href="index.html" title="Yubico YubiKey NEO CCID Manager C Library">
+<link rel="up" href="intro.html" title="Yubico YubiKey NEO CCID Manager C Library">
+<link rel="prev" href="intro.html" title="Yubico YubiKey NEO CCID Manager C Library">
 <link rel="next" href="libykneomgr-ykneomgr-types.html" title="ykneomgr-types">
-<meta name="generator" content="GTK-Doc V1.20 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="10"><tr valign="middle">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
 <td width="100%" align="left" class="shortcuts">
-<a href="#" class="shortcut">Top</a><span id="nav_description"> <span class="dim">|</span> 
-                  <a href="#libykneomgr-ykneomgr.description" class="shortcut">Description</a></span><span id="nav_hierarchy"> <span class="dim">|</span> 
-                  <a href="#libykneomgr-ykneomgr.object-hierarchy" class="shortcut">Object Hierarchy</a></span>
+<a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
+                  <a href="#libykneomgr-ykneomgr.description" class="shortcut">Description</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
 <td><a accesskey="u" href="intro.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
@@ -210,11 +209,6 @@
 </table></div>
 </div>
 <div class="refsect1">
-<a name="libykneomgr-ykneomgr.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">
-</pre>
-</div>
-<div class="refsect1">
 <a name="libykneomgr-ykneomgr.description"></a><h2>Description</h2>
 <p>
 </p>
@@ -228,7 +222,7 @@ ykneomgr_global_init (<em class="parameter"><code><a class="link" href="libykneo
 <p>Initialize the library.  This function is not guaranteed to be
 thread safe and must be invoked on application startup.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.2.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.2.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -243,7 +237,7 @@ thread safe and must be invoked on application startup.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.2.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.2.6"></a><h4>Returns</h4>
 <p> On success <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-OK:CAPS"><code class="literal">YKNEOMGR_OK</code></a> (integer 0) is returned, and on errors
 an <a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-rc" title="enum ykneomgr_rc"><span class="type">ykneomgr_rc</span></a> error code.</p>
 <p></p>
@@ -268,7 +262,7 @@ reason for the particular error code.</p>
 <p>This function is one of few in the library that can be used without
 a successful call to <a class="link" href="libykneomgr-ykneomgr.html#ykneomgr-global-init" title="ykneomgr_global_init ()"><code class="function">ykneomgr_global_init()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.4.7"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.4.7"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -283,7 +277,7 @@ a successful call to <a class="link" href="libykneomgr-ykneomgr.html#ykneomgr-gl
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.4.8"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.4.8"></a><h4>Returns</h4>
 <p> Returns a pointer to a statically allocated string
 containing an explanation of the error code <em class="parameter"><code>err</code></em>
 .</p>
@@ -302,7 +296,7 @@ returns the string "YKNEOMGR_OK".</p>
 <p>This function is one of few in the library that can be used without
 a successful call to <a class="link" href="libykneomgr-ykneomgr.html#ykneomgr-global-init" title="ykneomgr_global_init ()"><code class="function">ykneomgr_global_init()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.5.7"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.5.7"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -317,7 +311,7 @@ a successful call to <a class="link" href="libykneomgr-ykneomgr.html#ykneomgr-gl
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.5.8"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.5.8"></a><h4>Returns</h4>
 <p> Returns a pointer to a statically allocated string
 containing a string version of the error code <em class="parameter"><code>err</code></em>
 , or NULL if
@@ -333,7 +327,7 @@ ykneomgr_init (<em class="parameter"><code><a class="link" href="libykneomgr-ykn
 <p>Create a YubiKey NEO device handle.  The handle must be deallocated
 using <a class="link" href="libykneomgr-ykneomgr.html#ykneomgr-done" title="ykneomgr_done ()"><code class="function">ykneomgr_done()</code></a> when you no longer need it.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.6.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.6.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -348,7 +342,7 @@ using <a class="link" href="libykneomgr-ykneomgr.html#ykneomgr-done" title="ykne
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.6.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.6.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-OK:CAPS"><code class="literal">YKNEOMGR_OK</code></a> (integer 0) is returned, or
 another <a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-rc" title="enum ykneomgr_rc"><span class="type">ykneomgr_rc</span></a> error code.</p>
 <p></p>
@@ -361,7 +355,7 @@ another <a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-rc" title
 ykneomgr_done (<em class="parameter"><code><a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-dev" title="ykneomgr_dev"><span class="type">ykneomgr_dev</span></a> *dev</code></em>);</pre>
 <p>Release all resources allocated to a YubiKey NEO device handle.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.7.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.7.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -385,7 +379,7 @@ ykneomgr_list_devices (<em class="parameter"><code><a class="link" href="libykne
                        <em class="parameter"><code><span class="type">size_t</span> *len</code></em>);</pre>
 <p>List devices.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.8.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.8.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -413,7 +407,7 @@ buffer, on output holds output length</p></td>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.8.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.8.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-OK:CAPS"><code class="literal">YKNEOMGR_OK</code></a> (integer 0) is returned, or
 another <a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-rc" title="enum ykneomgr_rc"><span class="type">ykneomgr_rc</span></a> error code.</p>
 <p></p>
@@ -431,7 +425,7 @@ the YubiKey OTP applet.  The <em class="parameter"><code>name</code></em>
 name; you can use <a class="link" href="libykneomgr-ykneomgr.html#ykneomgr-list-devices" title="ykneomgr_list_devices ()"><code class="function">ykneomgr_list_devices()</code></a> to list connected
 devices.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.9.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.9.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -453,7 +447,7 @@ devices.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.9.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.9.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-OK:CAPS"><code class="literal">YKNEOMGR_OK</code></a> (integer 0) is returned, when no
 device could be found <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-NO-DEVICE:CAPS"><code class="literal">YKNEOMGR_NO_DEVICE</code></a> is returned, or another
 <a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-rc" title="enum ykneomgr_rc"><span class="type">ykneomgr_rc</span></a> error code.</p>
@@ -470,7 +464,7 @@ A YubiKey NEO is identified by having the YubiKey OTP applet
 installed, i.e., a connect followed by attempting to select the
 YubiKey OTP applet.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.10.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.10.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -485,7 +479,7 @@ YubiKey OTP applet.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.10.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.10.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-OK:CAPS"><code class="literal">YKNEOMGR_OK</code></a> (integer 0) is returned, when no
 device could be found <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-NO-DEVICE:CAPS"><code class="literal">YKNEOMGR_NO_DEVICE</code></a> is returned, otherwise
 another <a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-rc" title="enum ykneomgr_rc"><span class="type">ykneomgr_rc</span></a> error code is returned.</p>
@@ -507,7 +501,7 @@ If <em class="parameter"><code>match</code></em>
  is NULL, then the first YubiKey NEO device detected will
 be used.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.11.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.11.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -529,7 +523,7 @@ be used.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.11.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.11.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-OK:CAPS"><code class="literal">YKNEOMGR_OK</code></a> (integer 0) is returned, when no
 device could be found <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-NO-DEVICE:CAPS"><code class="literal">YKNEOMGR_NO_DEVICE</code></a> is returned, or another
 <a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-rc" title="enum ykneomgr_rc"><span class="type">ykneomgr_rc</span></a> error code.</p>
@@ -546,7 +540,7 @@ ykneomgr_get_version_major (<em class="parameter"><code><a class="link" href="li
 MAJOR.MINOR.BUILD, for example 3.0.4, in which case this function
 would return 3.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.12.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.12.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -561,7 +555,7 @@ would return 3.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.12.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.12.6"></a><h4>Returns</h4>
 <p> the YubiKey NEO major version number.</p>
 <p></p>
 </div>
@@ -575,7 +569,7 @@ ykneomgr_get_version_minor (<em class="parameter"><code><a class="link" href="li
 MINOR.MINOR.BUILD, for example 3.0.4, in which case this function
 would return 0.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.13.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.13.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -590,7 +584,7 @@ would return 0.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.13.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.13.6"></a><h4>Returns</h4>
 <p> the YubiKey NEO minor version number.</p>
 <p></p>
 </div>
@@ -604,7 +598,7 @@ ykneomgr_get_version_build (<em class="parameter"><code><a class="link" href="li
 BUILD.MINOR.BUILD, for example 3.0.4, in which case this function
 would return 4.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.14.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.14.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -619,7 +613,7 @@ would return 4.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.14.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.14.6"></a><h4>Returns</h4>
 <p> the YubiKey NEO build version number.</p>
 <p></p>
 </div>
@@ -631,7 +625,7 @@ would return 4.</p>
 ykneomgr_get_mode (<em class="parameter"><code><a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-dev" title="ykneomgr_dev"><span class="type">ykneomgr_dev</span></a> *dev</code></em>);</pre>
 <p>Get mode of a YubiKey NEO.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.15.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.15.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -646,7 +640,7 @@ ykneomgr_get_mode (<em class="parameter"><code><a class="link" href="libykneomgr
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.15.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.15.6"></a><h4>Returns</h4>
 <p> the YubiKey NEO device mode.</p>
 <p></p>
 </div>
@@ -658,7 +652,7 @@ ykneomgr_get_mode (<em class="parameter"><code><a class="link" href="libykneomgr
 ykneomgr_get_serialno (<em class="parameter"><code><a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-dev" title="ykneomgr_dev"><span class="type">ykneomgr_dev</span></a> *dev</code></em>);</pre>
 <p>Get serial number of a YubiKey NEO, if visible.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.16.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.16.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -673,7 +667,7 @@ ykneomgr_get_serialno (<em class="parameter"><code><a class="link" href="libykne
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.16.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.16.6"></a><h4>Returns</h4>
 <p> the YubiKey NEO serial number, or 0 if not visible.</p>
 <p></p>
 </div>
@@ -686,7 +680,7 @@ ykneomgr_modeswitch (<em class="parameter"><code><a class="link" href="libykneom
                      <em class="parameter"><code><span class="type">uint8_t</span> mode</code></em>);</pre>
 <p>Mode switch a YubiKey NEO.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.17.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.17.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -708,7 +702,7 @@ ykneomgr_modeswitch (<em class="parameter"><code><a class="link" href="libykneom
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.17.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.17.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-OK:CAPS"><code class="literal">YKNEOMGR_OK</code></a> (integer 0) is returned, or
 another <a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-rc" title="enum ykneomgr_rc"><span class="type">ykneomgr_rc</span></a> error code.</p>
 <p></p>
@@ -723,7 +717,7 @@ ykneomgr_authenticate (<em class="parameter"><code><a class="link" href="libykne
 <p>Authenticate to the device, to prepare for privileged function
 access.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.18.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.18.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -745,7 +739,7 @@ access.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.18.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.18.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-OK:CAPS"><code class="literal">YKNEOMGR_OK</code></a> (integer 0) is returned, or
 another <a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-rc" title="enum ykneomgr_rc"><span class="type">ykneomgr_rc</span></a> error code.</p>
 <p></p>
@@ -760,7 +754,7 @@ ykneomgr_applet_list (<em class="parameter"><code><a class="link" href="libykneo
                       <em class="parameter"><code><span class="type">size_t</span> *len</code></em>);</pre>
 <p>List installed applets.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.19.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.19.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -788,7 +782,7 @@ buffer, on output holds output length</p></td>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.19.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.19.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-OK:CAPS"><code class="literal">YKNEOMGR_OK</code></a> (integer 0) is returned, or
 another <a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-rc" title="enum ykneomgr_rc"><span class="type">ykneomgr_rc</span></a> error code.</p>
 <p></p>
@@ -803,7 +797,7 @@ ykneomgr_applet_delete (<em class="parameter"><code><a class="link" href="libykn
                         <em class="parameter"><code><span class="type">size_t</span> aidlen</code></em>);</pre>
 <p>Delete specified applet.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.20.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.20.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -831,7 +825,7 @@ buffer.</p></td>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.20.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.20.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-OK:CAPS"><code class="literal">YKNEOMGR_OK</code></a> (integer 0) is returned, or
 another <a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-rc" title="enum ykneomgr_rc"><span class="type">ykneomgr_rc</span></a> error code.</p>
 <p></p>
@@ -845,7 +839,7 @@ ykneomgr_applet_install (<em class="parameter"><code><a class="link" href="libyk
                          <em class="parameter"><code>const <span class="type">char</span> *capfile</code></em>);</pre>
 <p>Install specified applet.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.21.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.21.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -867,7 +861,7 @@ ykneomgr_applet_install (<em class="parameter"><code><a class="link" href="libyk
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.21.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.21.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-OK:CAPS"><code class="literal">YKNEOMGR_OK</code></a> (integer 0) is returned, or
 another <a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-rc" title="enum ykneomgr_rc"><span class="type">ykneomgr_rc</span></a> error code.</p>
 <p></p>
@@ -884,7 +878,7 @@ ykneomgr_send_apdu (<em class="parameter"><code><a class="link" href="libykneomg
                     <em class="parameter"><code><span class="type">size_t</span> *recvlen</code></em>);</pre>
 <p>Send an arbitrary apdu to the device.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.22.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.5.22.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -921,7 +915,7 @@ ykneomgr_send_apdu (<em class="parameter"><code><a class="link" href="libykneomg
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.22.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.5.22.6"></a><h4>Returns</h4>
 <p> On success, <a class="link" href="libykneomgr-ykneomgr-types.html#YKNEOMGR-OK:CAPS"><code class="literal">YKNEOMGR_OK</code></a> (integer 0) is returned, or
 another <a class="link" href="libykneomgr-ykneomgr-types.html#ykneomgr-rc" title="enum ykneomgr_rc"><span class="type">ykneomgr_rc</span></a> error code.
 <em class="parameter"><code>recvlen</code></em>
@@ -937,6 +931,6 @@ will be set to the length of the data in <em class="parameter"><code>recv</code>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.20</div>
+          Generated by GTK-Doc V1.21</div>
 </body>
 </html>
