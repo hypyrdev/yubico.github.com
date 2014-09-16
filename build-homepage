@@ -87,8 +87,9 @@ foreach my $category (keys %categories) {
 	$html .= "<td><a href=\"http://spdx.org/licenses/$license\">" .
 	    "$license</a></td>\n";
 	$html .= "<td>$summary</td></tr>\n\n";
-	if($homepage =~ m,opensource\.yubico\.com,) {
-    system(dirname($0) . "/build-projectpage $project");
+	if($homepage =~ m,opensource\.yubico\.com, ||
+		$homepage =~ m,developers\.yubico\.com,) {
+		system(dirname($0) . "/build-projectpage $project");
 	}
     }
     $html .= "</table></p>\n";
