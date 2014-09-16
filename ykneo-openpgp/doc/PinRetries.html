@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -30,7 +29,9 @@
         <span class="breadcrumb">
           <a href="/">Software listing</a>
           /
-          <a>ykneo-openpgp</a>
+          <a href="/ykneo-openpgp/">ykneo-openpgp</a>
+          /
+          <a>PinRetries</a>
           </span>
           <a id="forkme_banner" href="https://github.com/Yubico/ykneo-openpgp">View on GitHub</a>
 <a id="travis_link" href="https://travis-ci.org/Yubico/ykneo-openpgp"><img id="travis_img" src="https://travis-ci.org/Yubico/ykneo-openpgp.svg?branch=master"/></a>
@@ -42,47 +43,42 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-      <ul>
-	
-	
-        <li><a href="releases.html">Releases</a></li>
-      </ul>
-<h3>Documentation</h3><ul><li><a href="doc/Building.html">Building</a></li><li><a href="doc/CardEdit.html">CardEdit</a></li><li><a href="doc/InstallCAPFile.html">InstallCAPFile</a></li><li><a href="doc/KeyImport.html">KeyImport</a></li><li><a href="doc/PinRetries.html">PinRetries</a></li><li><a href="doc/ResetApplet.html">ResetApplet</a></li></ul>
-
-<div id="preamble">
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>This project implement the OpenPGP card functionality used on the
-YubiKey NEO device that is sold by Yubico.</p></div>
-<div class="paragraph"><p>This project is based on the "Java Card OpenPGP Card" project made by
-Joeri de Ruiter.  The initial modifications we have made compared to
-the upstream project are minor, but we reserve the right to make other
-changes and improvements that are specific to the YubiKey NEO
-hardware.  For the original project homepage, see:
-<a href="http://sourceforge.net/p/javacardopenpgp/">http://sourceforge.net/p/javacardopenpgp/</a></p></div>
+<div class="paragraph"><p>This is an instruction for changing the number of retries possible for a PIN code
+with the ykneo-openpgp applet.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_license">License</h2>
+<h2 id="_prerequisites">Prerequisites</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>The upstream project was released under the GPLv2+ and our fork uses
-the same license.  All of our changes are released under the same
-license.  See the file LICENSE for more information.</p></div>
+<div class="paragraph"><p>For this procedure, you must have ykneo-openpgp applet version 1.0.7 or later
+installed.  To check the applet version run the following.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code> $ gpg-connect-agent --hex "scd apdu 00 f1 00 00" /bye
+ D[0000]  01 00 07 90 00                                     .....
+ OK</code></pre>
+</div></div>
+<div class="paragraph"><p>The string "01 00 07" means version 1.0.7.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_building">Building</h2>
+<h2 id="_setting_the_pin_retries">Setting the PIN retries</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>See doc/Building.txt for information on how to build the source code
-and doc/InstallCAPFile.txt on how to install it.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_usage">Usage</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>The OpenPGP Card applet is typically used through GnuPG so we refer to
-its documentation for the full reference: <a href="http://www.gnupg.org/">http://www.gnupg.org/</a></p></div>
-<div class="paragraph"><p>We have tutorials on specific topics in doc/, for example card editing
-and key import.</p></div>
+<div class="paragraph"><p>When the retry counter is changed the all PIN codes will be reset to default
+(123456 for user PIN and 12345678 for admin PIN).</p></div>
+<div class="paragraph"><p>For the command to be available the admin PIN must first be validated.</p></div>
+<div class="paragraph"><p>The command consists of the instruction (f2) and three values as data, those are in
+order: retries for user PIN, retries for reset code and retries for admin PIN.</p></div>
+<div class="paragraph"><p>In this example the admin PIN is first validated, then all three values are set to
+5 retries:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code> $ gpg-connect-agent --hex "scd apdu 00 20 00 83 08 31 32 33 34 35 36 37 38" \
+   "scd apdu scd apdu 00 f2 00 00 03 05 05 05"</code></pre>
+</div></div>
 </div>
 </div>
 
