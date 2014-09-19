@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubikey-ksm : YubiKey Key Storage Module" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubikey-ksm</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/yubikey-ksm/">yubikey-ksm</a>
+          /
+          <a>DecryptionProtocol</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-ksm">View on GitHub</a>
+<a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-ksm"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-ksm.svg?branch=master"/></a>
+          <h1><a id="project_title" href="/yubikey-ksm/">yubikey-ksm</a></h1>
+          <h2 id="project_tagline">YubiKey Key Storage Module</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div class="sect1">
+<h2 id="_yubikey_ksm_decryption_protocol">Yubikey KSM Decryption Protocol</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The protocol for asking the Yubikey Key Storage Module to decrypt an
+OTP is to request a HTTP resource as follows:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>http://ykksm.example.com/wsapi/decrypt/?otp=dteffujehknhfjbrjnlnldnhcujvddbikngjrtgh</code></pre>
+</div></div>
+<div class="paragraph"><p>On success, the response will follow this format:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>^OK .*</code></pre>
+</div></div>
+<div class="paragraph"><p>For example:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>OK counter=000f low=c541 high=a7 use=04</code></pre>
+</div></div>
+<div class="paragraph"><p>The content of the various fields are as follows:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>''counter</em>'': 16-bit hex integer, counting upwards on each powerup&amp;touch
+</p>
+</li>
+<li>
+<p>
+<em>''low</em>'': 16-bit hex integer, low part of time-stamp of OTP
+</p>
+</li>
+<li>
+<p>
+<em>''high</em>'': 8-bit hex integer, high part of time-stamp of OTP
+</p>
+</li>
+<li>
+<p>
+<em>''use</em>'': 8-bit hex integer, counting upwards on each touch
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>On soft errors, the response will follow this format:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>^ERR .*</code></pre>
+</div></div>
+<div class="paragraph"><p>For example:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>ERR Invalid OTP format</code></pre>
+</div></div>
+<div class="paragraph"><p>The data matching .* will be a english error message in one line.</p></div>
+<div class="paragraph"><p>Any other kind of response means a hard error occured.</p></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubikey-ksm maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+</footer>
+</div></body></html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubikey-ksm : YubiKey Key Storage Module" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubikey-ksm</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/yubikey-ksm/">yubikey-ksm</a>
+          /
+          <a>GenerateKeys</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-ksm">View on GitHub</a>
+<a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-ksm"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-ksm.svg?branch=master"/></a>
+          <h1><a id="project_title" href="/yubikey-ksm/">yubikey-ksm</a></h1>
+          <h2 id="project_tagline">YubiKey Key Storage Module</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div class="sect1">
+<h2 id="_generate_keys">Generate Keys</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>To generate some AES keys for your !YubiKeys served via your YK-KSM,
+you use the <em>ykksm-gen-keys</em> tool.  The tool is useful for generating
+large sets of test keys, for performance testing of the database and
+web interface.  It can also be used to produce keying material that
+are intended to used for programming real keys.</p></div>
+<div class="paragraph"><p>As you should never store encryption keys in plaintext, you typically
+use the tool by piping it directly to GnuPG.  So the first step will
+always be to create a OpenPGP key for your KSM host, see
+<a id="GenerateKSMKey"></a>.  Below we will both sign the data from and encrypt
+it to the same key id <em>8B88A11B</em>.  Here is how you would generate 5
+keys for test purposes:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>user@ksm:~$ ykksm-gen-keys --urandom 1 5 | gpg -a --encrypt -r 8B88A11B -s &gt; keys.txt
+user@ksm:~$</code></pre>
+</div></div>
+<div class="paragraph"><p>Note the flag --urandom will cause the tool to use /dev/urandom rather
+than /dev/random, which speed things up but is considered by some to
+have weaker security.</p></div>
+<div class="paragraph"><p>After this step you may want to import the keys into your KSM, see
+<a id="ImportKeysToKSM"></a>.</p></div>
+<div class="paragraph"><p>In production, you may want to separate the key generation facility
+into a separate machine with a separate OpenPGP key.</p></div>
+<div class="paragraph"><p>To display the test keys above, you can decrypt them using GnuPG:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;nowiki&gt;user@ksm:~$ gpg &lt; keys.txt</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>You need a passphrase to unlock the secret key for
+user: "YK-KSM crater Import Key"
+2048-bit ELG-E key, ID 140A17F1, created 2009-12-14 (main key ID 8B88A11B)</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>gpg: encrypted with 2048-bit ELG-E key, ID 140A17F1, created 2009-12-14
+      "YK-KSM crater Import Key"
+# ykksm 1
+# serialnr,identity,internaluid,aeskey,lockpw,created,accessed[,progflags]
+1,cccccccccccb,d74fbdf6a890,82211e0854e7369e83d941f24761a84e,881ae7bee927,2009-12-14T16:40:57,
+2,cccccccccccd,7a5ad1886b70,3091a8048524ab8407ae816457d764e5,8e5ab609e346,2009-12-14T16:40:57,
+3,ccccccccccce,981abbbeafb8,91be4bfd2f40e24ebd39386868aa9619,037b6f6ae73c,2009-12-14T16:40:57,
+4,cccccccccccf,c1f33c17f77b,a2389839d7b80bfe4c80258184aff4ce,abf92cbbdab3,2009-12-14T16:40:57,
+5,cccccccccccg,c55773192393,7387b5f6bede83f64a9cd75b2023826a,d70c937bbbff,2009-12-14T16:40:57,
+gpg: Signature made Mon 14 Dec 2009 04:40:57 PM CET using DSA key ID 8B88A11B
+gpg: Good signature from "YK-KSM crater Import Key"
+user@ksm:~$&lt;/nowiki&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>The format is documented in the KeyProvisioningFormat wiki page.</p></div>
+<div class="paragraph"><p>To generate many small files each containing just one key, you can use
+a small wrapper like this:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;nowiki&gt;#!/bin/sh</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>set -e</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>start=$1
+stop=$2
+key=$3
+urandom=$4</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>if test -z "$start" || test -z "$stop" || test -z "$key"; then
+    echo "Usage: run-gen-keys START STOP KEY [--urandom]"
+    echo ""
+    echo "Example usage:"
+    echo "  run-gen-keys 4711 11147 A1296239 --urandom"
+    echo ""
+    exit 0
+fi</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>cur=$start
+while test $cur -le $stop; do
+    ykksm-gen-keys $urandom $cur | gpg -a --sign --encrypt -r $key &gt; $cur.asc
+    cur=`expr $cur + 1`
+done&lt;/nowiki&gt;</code></pre>
+</div></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubikey-ksm maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+</footer>
+</div></body></html>
