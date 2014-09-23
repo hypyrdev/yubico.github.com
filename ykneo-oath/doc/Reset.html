@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -30,7 +29,9 @@
         <span class="breadcrumb">
           <a href="/">Software listing</a>
           /
-          <a>ykneo-oath</a>
+          <a href="/ykneo-oath/">ykneo-oath</a>
+          /
+          <a>Reset</a>
           </span>
           <a id="forkme_banner" href="https://github.com/Yubico/ykneo-oath">View on GitHub</a>
 <a id="travis_link" href="https://travis-ci.org/Yubico/ykneo-oath"><img id="travis_img" src="https://travis-ci.org/Yubico/ykneo-oath.svg?branch=master"/></a>
@@ -42,41 +43,31 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-      <ul>
-	
-	
-        <li><a href="releases.html">Releases</a></li>
-      </ul>
-<h3>Documentation</h3><ul><li><a href="doc/Building.html">Building</a></li><li><a href="doc/InstallCAPFile.html">InstallCAPFile</a></li><li><a href="doc/Protocol.html">Protocol</a></li><li><a href="doc/Reset.html">Reset</a></li></ul>
-
-<div id="preamble">
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>This project implement the HOTP/TOTP card functionality used on the
-YubiKey NEO device that is sold by Yubico.  Its primary use is to use
-the YubiKey NEO to generate OATH HOTP/TOTP one-time-passwords.</p></div>
+<div class="paragraph"><p>This is a set of instructions that will allow you to reset your
+ykneo-oath applet.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_license">License</h2>
+<h2 id="_prerequisites">Prerequisites</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>This program is released under the GPLv3+ and Copyright is owned by
-Yubico.  See COPYING for more information.</p></div>
+<div class="paragraph"><p>For this prodedure to work you must have the YubiKey Neo in a ccid
+mode where you can send APDUs to it.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_building">Building</h2>
+<h2 id="_reset_the_applet">Reset the applet</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>See doc/Building.txt for information on how to build the source code
-and doc/InstallCAPFile.txt on how to install it.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_usage">Usage</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>The applet is used with the Yubico Authenticator Android&#8201;&#8212;&#8201;see
-<a href="https://developers.yubico.com/yubioath-android/&#8201;&#8212;&#8201;or">https://developers.yubico.com/yubioath-android/&#8201;&#8212;&#8201;or</a> the Yubico
-Authenticator Desktop, see:
-<a href="https://developers.yubico.com/yubioath-desktop/">https://developers.yubico.com/yubioath-desktop/</a></p></div>
+<div class="paragraph"><p>Here we will use the command-line tool to first select the applet and then
+send a reset APDU. The reset is instruction 0x04, p1 0xde and p2 0xad.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code> $ opensc-tool -s opensc-tool -s '00a40400a000000527210101' -s '0004dead'</code></pre>
+</div></div>
+<div class="paragraph"><p>After this, close the connection, remove the card and reinsert it
+again. The applet should be reset.</p></div>
 </div>
 </div>
 
