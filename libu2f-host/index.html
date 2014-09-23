@@ -179,21 +179,27 @@ follows.</p></div>
 <div class="paragraph"><p>You may check out the sources using Git with the following command:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>  $ git clone git://github.com/Yubico/libu2f-host.git</code></pre>
+<pre><code>$ git clone git://github.com/Yubico/libu2f-host.git</code></pre>
 </div></div>
 <div class="paragraph"><p>This will create a directory <em>libu2f-host</em>.  Enter the directory:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>  $ cd libu2f-host</code></pre>
+<pre><code>$ cd libu2f-host</code></pre>
 </div></div>
 <div class="paragraph"><p>Autoconf, automake and libtool must be installed.  Help2man is used to
-generate the manpages.</p></div>
+generate the manpages.  GTK-DOC is used to generated API
+documentation.  Gengetopt is needed for command line parameter
+handling.  HIDAPI developer files are also required.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Debian:   apt-get install gtk-doc-tools libhidapi-dev gengetopt help2man</code></pre>
+</div></div>
 <div class="paragraph"><p>Generate the build system using:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>  $ autoreconf --install</code></pre>
+<pre><code>$ make</code></pre>
 </div></div>
-<div class="paragraph"><p>Then build as usual, see above under "Building".</p></div>
+<div class="paragraph"><p>See cfg.mk for some settings.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -206,13 +212,13 @@ support them fully as well.</p></div>
 binaries have been tested successfully on Mac OS X 10.7 and 10.9.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>  $ make -f macosx.mk VERSION=0.0</code></pre>
+<pre><code>$ make -f macosx.mk VERSION=0.0</code></pre>
 </div></div>
 <div class="paragraph"><p>Building Windows binaries can be done using windows.mk.  The resulting
 binaries have been tested successfully on Windows 7 Pro 32-bit.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>  $ make -f windows.mk VERSION=0.0</code></pre>
+<pre><code>$ make -f windows.mk VERSION=0.0</code></pre>
 </div></div>
 </div>
 </div>

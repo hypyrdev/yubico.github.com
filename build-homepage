@@ -57,8 +57,8 @@ my %categories = (
      "https://raw.github.com/Yubico/yubico-perl-client/master/BLURB",
      "https://raw.github.com/Yubico/yubico-dotnet-client/master/BLURB"],
     'U2F projects' =>
-    ["https://raw.githubusercontent.com/Yubico/python-u2f-server/master/BLURB",
-     "https://raw.githubusercontent.com/Yubico/python-u2f-host/master/BLURB",
+    ["https://raw.githubusercontent.com/Yubico/python-u2flib-server/master/BLURB",
+     "https://raw.githubusercontent.com/Yubico/python-u2flib-host/master/BLURB",
      "https://raw.githubusercontent.com/Yubico/libu2f-host/master/BLURB"],
     );
 
