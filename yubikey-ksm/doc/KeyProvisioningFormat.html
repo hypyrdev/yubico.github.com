@@ -68,50 +68,103 @@ the following format:</p></div>
 </div></div>
 <div class="paragraph"><p>are also treated as comments.</p></div>
 <div class="paragraph"><p>The meaning are as follows:</p></div>
-<div class="paragraph"><p>;serialNr:
-: the serial number of the device used for the barcode, decimal integer
-;publicName:
-: encoding of the "external" yubikey prefix, 0-16 modhex characters, typically 12
-: modhex encoded data
-;internalName:
-: encoding of the "internal" yubikey identity, always 6 binary bytes = 12 hex,
-: hex encoded data
-;aesKey:
-: an aes key used for the device, length decides whether it is a 128, 192, or 256 bit keys.
-: hex encoded data
-;lockCode:
-: the locking code, always 6 binary bytes = 12 hex,
-: hex encoded data
-;created:
-: timestamp of when the key was created
-: for example 2009-02-24T17:41:57 or empty
-;accessed:
-: timestamp of when the key was last accessed
-: for example 2009-02-24T17:41:57 or empty
-;progflags:
-: optional field, integer with flags used during personalization
-: to enable, e.g., static key mode or cr output</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+serialNr:
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>the serial number of the device used for the barcode, decimal integer</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+publicName:
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>encoding of the "external" yubikey prefix, 0-16 modhex characters, typically 12
+modhex encoded data</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+internalName:
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>encoding of the "internal" yubikey identity, always 6 binary bytes = 12 hex,
+hex encoded data</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+aesKey:
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>an aes key used for the device, length decides whether it is a 128, 192, or 256 bit keys.
+hex encoded data</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+lockCode:
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>the locking code, always 6 binary bytes = 12 hex,
+hex encoded data</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+created:
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>timestamp of when the key was created
+for example 2009-02-24T17:41:57 or empty</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+accessed:
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>timestamp of when the key was last accessed
+for example 2009-02-24T17:41:57 or empty</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+progflags:
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>optional field, integer with flags used during personalization
+to enable, e.g., static key mode or cr output</code></pre>
+</div></div>
+</li>
+</ul></div>
 <div class="paragraph"><p>Examples of valid data lines:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> &lt;nowiki&gt;
- 4711,dlcfffckrcde,ca62baca62ba,ecde18dbe76fbd0c33330f1c354871db,be70aeca62ba,2009-01-22 00:25:11,
- 4712,,ca62baca62ba,ecde18dbe76fbd0c33330f1c354871db,be70aeca62ba,2009-01-22 00:25:11,2009-02-13 00:05:40
- 4713,dlcfffckrcdedlcf,ca62baca62ba,ecde18dbe76fbd0c33330f1c354871db,be70aeca62ba,2009-01-22 00:25:11,2009-02-13 00:05:40,0
- 4714,dlcfffckrcdedlcf,ca62baca62ba,ecde18dbe76fbd0c33330f1c354871db,be70aeca62ba,2009-01-22 00:25:11,2009-02-13 00:05:40,4711
-&lt;/nowiki&gt;</code></pre>
+<pre><code>4711,dlcfffckrcde,ca62baca62ba,ecde18dbe76fbd0c33330f1c354871db,be70aeca62ba,2009-01-22 00:25:11,
+4712,,ca62baca62ba,ecde18dbe76fbd0c33330f1c354871db,be70aeca62ba,2009-01-22 00:25:11,2009-02-13 00:05:40
+4713,dlcfffckrcdedlcf,ca62baca62ba,ecde18dbe76fbd0c33330f1c354871db,be70aeca62ba,2009-01-22 00:25:11,2009-02-13 00:05:40,0
+4714,dlcfffckrcdedlcf,ca62baca62ba,ecde18dbe76fbd0c33330f1c354871db,be70aeca62ba,2009-01-22 00:25:11,2009-02-13 00:05:40,4711</code></pre>
 </div></div>
 <div class="paragraph"><p>Example of actual data using the password <em>foobar</em> (normally it would
 be encrypted to a particular OpenPGP key id):</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>&lt;nowiki&gt;
------BEGIN PGP MESSAGE-----
-Version: GnuPG v1.4.9 (GNU/Linux)</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code> jA0EAwMClfljrWYVfm5gycDMIpZXLnzKtUfeEsqXRp63IdAghBzAfdIt4aeJ2kdV
+<pre><code> -----BEGIN PGP MESSAGE-----
+ Version: GnuPG v1.4.9 (GNU/Linux)
+
+ jA0EAwMClfljrWYVfm5gycDMIpZXLnzKtUfeEsqXRp63IdAghBzAfdIt4aeJ2kdV
  x8uvvHKeHfytjEo/U9Wg4NYqYoDnMeb4zXBmrRqWu558ldW75e5R2kPImuQnZIBQ
  3WKRbElrLpQTlbdyDDAzlOnVLvTrmekZ8ByUrED3tyZKJw7OW5YsHi3z5N+QNFbZ
  hpMWfDBiJRksQEXv3BbiWVojSS+ZlCBiDjqnbIGuk0nZlJSe3F3Jwdz22Y05aU2h
@@ -121,8 +174,7 @@ Version: GnuPG v1.4.9 (GNU/Linux)</code></pre>
  paFvFOjybJ2V5GYc7pfdZAM2ySEhnS6PaxYAQXfrEhhtTTCCg1eCqKh4Yamv3u0v
  DAkppMqXeprjpC4cNvrQsVOKGx7HissA5x4rECLC
  =d54w
- -----END PGP MESSAGE-----
-&lt;/nowiki&gt;</code></pre>
+ -----END PGP MESSAGE-----</code></pre>
 </div></div>
 <div class="sect2">
 <h3 id="_naming_scheme">Naming Scheme</h3>
@@ -131,21 +183,19 @@ Version: GnuPG v1.4.9 (GNU/Linux)</code></pre>
 suggest to create files named after the serial number.  For example:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> &lt;nowiki&gt;
- 0.asc
- 1.asc
- 2.asc
- 3.asc
- 4.asc
- 5.asc
- 6.asc
- 7.asc
- 8.asc
- 9.asc
- 10.asc
- 11.asc
- ...
-&lt;/nowiki&gt;</code></pre>
+<pre><code>0.asc
+1.asc
+2.asc
+3.asc
+4.asc
+5.asc
+6.asc
+7.asc
+8.asc
+9.asc
+10.asc
+11.asc
+...</code></pre>
 </div></div>
 </div>
 </div>
