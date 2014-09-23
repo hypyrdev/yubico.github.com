@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="yubikey-val : YubiKey OTP validation server in PHP" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>yubikey-val</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/yubikey-val/">yubikey-val</a>
+          /
+          <a>ClientInfoFormat</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-val">View on GitHub</a>
+<a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-val"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-val.svg?branch=master"/></a>
+          <h1><a id="project_title" href="/yubikey-val/">yubikey-val</a></h1>
+          <h2 id="project_tagline">YubiKey OTP validation server in PHP</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div class="sect1">
+<h2 id="_format_of_client_info_data">Format of Client Info Data</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This file holds data used in the YubiKey OTP validation phase.</p></div>
+<div class="paragraph"><p>Each of the lines in the file follows the following format:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>id,active,created,secret,email,notes,otp</code></pre>
+</div></div>
+<div class="paragraph"><p>Any empty line, or a line beginning with a # is ignored.</p></div>
+<div class="paragraph"><p>The meaning are as follows:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+id:
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>the client identity, decimal integer</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+active
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>the client state, 1 if active, 0 if not</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+created
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>unix timestamp of when the client was created, decimal integer</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+secret
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>printable ascii string with shared HMAC secret for client id</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+email
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>the email address used by the client, printable ascii string</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+notes
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>not used, printable ascii string</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+otp
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>the YubiKey OTP used to create the client, modhex string</code></pre>
+</div></div>
+</li>
+</ul></div>
+<div class="paragraph"><p>An examples of a valid data line:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>1,1,1359550387,foobar,user@example.com,,cccccccccccbubfncnklbknnkrfvfkbubftlfliikdrt</code></pre>
+</div></div>
+<div class="paragraph"><p>For an example of importing and exporting Client Info data, please see ImportExportData.</p></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+</footer>
+</div></body></html>
