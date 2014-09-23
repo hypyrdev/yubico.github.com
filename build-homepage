@@ -22,43 +22,45 @@ use File::Basename;
 use File::Temp qw/tempfile/;
 
 my %categories = (
-	'YubiCloud Servers' =>
-	["https://raw.github.com/Yubico/yubikey-ksm/master/BLURB",
-		"https://raw.github.com/Yubico/yubikey-val/master/BLURB"],
-	'YubiKey Low-level Library' =>
-	["https://raw.github.com/Yubico/yubico-c/master/BLURB",
-		"https://raw.github.com/Yubico/yubico-j/master/BLURB"],
-	'YubiKey NEO' =>
-	["https://raw.github.com/Yubico/yubico-bitcoin-java/master/BLURB",
-		"https://raw.github.com/Yubico/yubico-bitcoin-python/master/BLURB",
-		"https://raw.github.com/Yubico/yubioath-android/master/BLURB",
-		"https://raw.github.com/Yubico/ykneo-oath/master/BLURB",
-		"https://raw.github.com/Yubico/yubitotp-android/master/BLURB",
-		"https://raw.github.com/Yubico/yubioath-desktop/master/BLURB",
-		"https://raw.github.com/Yubico/ykneo-openpgp/master/BLURB",
-		"https://raw.github.com/Yubico/yubico-piv-tool/master/BLURB", ],
-	'YubiKey Personalization' =>
-	["https://raw.github.com/Yubico/yubikey-personalization/master/BLURB",
-		"https://raw.github.com/Yubico/yubikey-personalization-gui/master/BLURB",
-		"https://raw.github.com/Yubico/libykneomgr/master/BLURB",
-		"https://raw.github.com/Yubico/yubikey-neo-manager/master/BLURB"],
-	'YubiKey Integration' =>
-	["https://raw.github.com/Yubico/yubico-pam/master/BLURB",
-		"https://raw.github.com/Yubico/rlm-yubico/master/BLURB",
-		"https://raw.github.com/Yubico/yubiauth/master/BLURB",
-		"https://raw.github.com/Yubico/yubix/master/BLURB",
-		"https://raw.github.com/Yubico/yubico-windows-auth/master/BLURB"],
-	'YubiHSM projects' =>
-	["https://raw.github.com/Yubico/python-pyhsm/master/BLURB"],
-	'YubiCloud Clients' =>
-	["https://raw.github.com/Yubico/yubico-java-client/master/BLURB",
-	"https://raw.github.com/Yubico/yubico-c-client/master/BLURB",
-	"https://raw.github.com/Yubico/php-yubico/master/BLURB",
-	"https://raw.github.com/Yubico/yubico-perl-client/master/BLURB",
-	"https://raw.github.com/Yubico/yubico-dotnet-client/master/BLURB"],
-	'U2F projects' =>
-	["https://raw.githubusercontent.com/Yubico/libu2f-host/master/BLURB"],
-   );
+    'YubiCloud Servers' =>
+    ["https://raw.github.com/Yubico/yubikey-ksm/master/BLURB",
+     "https://raw.github.com/Yubico/yubikey-val/master/BLURB"],
+    'YubiKey Low-level Library' =>
+    ["https://raw.github.com/Yubico/yubico-c/master/BLURB",
+     "https://raw.github.com/Yubico/yubico-j/master/BLURB"],
+    'YubiKey NEO' =>
+    ["https://raw.github.com/Yubico/yubico-bitcoin-java/master/BLURB",
+     "https://raw.github.com/Yubico/yubico-bitcoin-python/master/BLURB",
+     "https://raw.github.com/Yubico/yubioath-android/master/BLURB",
+     "https://raw.github.com/Yubico/ykneo-oath/master/BLURB",
+     "https://raw.github.com/Yubico/yubitotp-android/master/BLURB",
+     "https://raw.github.com/Yubico/yubioath-desktop/master/BLURB",
+     "https://raw.github.com/Yubico/ykneo-openpgp/master/BLURB",
+     "https://raw.github.com/Yubico/yubico-piv-tool/master/BLURB", ],
+    'YubiKey Personalization' =>
+    ["https://raw.github.com/Yubico/yubikey-personalization/master/BLURB",
+     "https://raw.github.com/Yubico/yubikey-personalization-gui/master/BLURB",
+     "https://raw.github.com/Yubico/libykneomgr/master/BLURB",
+     "https://raw.github.com/Yubico/yubikey-neo-manager/master/BLURB"],
+    'YubiKey Integration' =>
+    ["https://raw.github.com/Yubico/yubico-pam/master/BLURB",
+     "https://raw.github.com/Yubico/rlm-yubico/master/BLURB",
+     "https://raw.github.com/Yubico/yubiauth/master/BLURB",
+     "https://raw.github.com/Yubico/yubix/master/BLURB",
+     "https://raw.github.com/Yubico/yubico-windows-auth/master/BLURB"],
+    'YubiHSM projects' =>
+    ["https://raw.github.com/Yubico/python-pyhsm/master/BLURB"],
+    'YubiCloud Clients' =>
+    ["https://raw.github.com/Yubico/yubico-java-client/master/BLURB",
+     "https://raw.github.com/Yubico/yubico-c-client/master/BLURB",
+     "https://raw.github.com/Yubico/php-yubico/master/BLURB",
+     "https://raw.github.com/Yubico/yubico-perl-client/master/BLURB",
+     "https://raw.github.com/Yubico/yubico-dotnet-client/master/BLURB"],
+    'U2F projects' =>
+    ["https://raw.githubusercontent.com/Yubico/python-u2f-server/master/BLURB",
+     "https://raw.githubusercontent.com/Yubico/python-u2f-host/master/BLURB",
+     "https://raw.githubusercontent.com/Yubico/libu2f-host/master/BLURB"],
+    );
 
 sub get ($_) {
     my $url = shift;
