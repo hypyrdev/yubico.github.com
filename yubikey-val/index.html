@@ -15,7 +15,7 @@
 </script>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="yubikey-val : YubiKey OTP validation server in PHP" />
+    <meta name="description" content="yubikey-val : YubiKey OTP Validation Server" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
 
@@ -35,7 +35,7 @@
           <a id="forkme_banner" href="https://github.com/Yubico/yubikey-val">View on GitHub</a>
 <a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-val"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-val.svg?branch=master"/></a>
           <h1><a id="project_title" href="/yubikey-val/">yubikey-val</a></h1>
-          <h2 id="project_tagline">YubiKey OTP validation server in PHP</h2>
+          <h2 id="project_tagline">YubiKey OTP Validation Server</h2>
         </header>
     </div>
 
@@ -52,22 +52,32 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph"><p>The YubiKey Validation Server (YK-VAL) is a server that validates
-Yubikey OTPs.  YK-VAL is written in PHP, for use with web servers such
-as Apache.</p></div>
+Yubikey One-Time Passwords (OTPs).  YK-VAL is written in PHP, for use
+behind web servers such as Apache.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_license">License</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The project is licensed under a BSD license.  See the file COPYING for
+exact wording.  For any copyright year range specified as YYYY-ZZZZ in
+this package note that the range specifies every single year in that
+closed interval.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_general">General</h2>
+<div class="sectionbody">
 <div class="paragraph"><p>The server implements the Yubico API protocol as defined in
-doc/ValidationProtocol*.</p></div>
-<div class="paragraph"><p>This server talks to another service for decrypting the OTPs, to avoid
-storing any AES keys within the validation server. One implementation
-of this service is YKKSM:</p></div>
-<div class="paragraph"><p><a href="https://github.com/Yubico/yubikey-ksm">https://github.com/Yubico/yubikey-ksm</a></p></div>
-<div class="paragraph"><p>Another implementation of a KSM using the YubiHSM hardware is
-Python-PyHSM:</p></div>
-<div class="paragraph"><p><a href="https://github.com/Yubico/python-pyhsm">https://github.com/Yubico/python-pyhsm</a></p></div>
+doc/ValidationProtocol* and further documentation is also available in
+the doc/ subdirectory.</p></div>
+<div class="paragraph"><p>This server talks to a KSM service for decrypting the OTPs, to avoid
+storing any AES keys on the validation server.  One implementation of
+this service is the YubiKey-KSM&#8201;&#8212;&#8201;https://developers.yubico.com/yubikey-ksm/&#8201;&#8212;&#8201;and another
+implementation using the YubiHSM hardware is PyHSM:
+<a href="https://developers.yubico.com/python-pyhsm/">https://developers.yubico.com/python-pyhsm/</a></p></div>
 <div class="paragraph"><p>Note that version 1.x is a minimal centralized server. Version 2.x is
 a replicated system that uses multiple machines.</p></div>
-<div class="paragraph"><p>Releases are available from:</p></div>
-<div class="paragraph"><p><a href="http://yubico.github.com/yubikey-val/releases.html">http://yubico.github.com/yubikey-val/releases.html</a></p></div>
-<div class="paragraph"><p>Documentation is in doc/</p></div>
 </div>
 </div>
 
