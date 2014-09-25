@@ -52,24 +52,60 @@ libu2f-host by sending some non-standardized commands.</p></div>
 <div class="content">
 <pre><code>echo -e '\x06\x00\x00\x00' | u2f-host -d -a sendrecv -c c0</code></pre>
 </div></div>
+<div class="paragraph"><p>The <em>\x06</em> corresponds to mode 6 and the following modes are known:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+0 OTP device only.
+</p>
+</li>
+<li>
+<p>
+1 CCID device only.
+</p>
+</li>
+<li>
+<p>
+2 OTP/CCID composite device.
+</p>
+</li>
+<li>
+<p>
+3 U2F device only.
+</p>
+</li>
+<li>
+<p>
+4 OTP/U2F composite device.
+</p>
+</li>
+<li>
+<p>
+5 U2F/CCID composite device.
+</p>
+</li>
+<li>
+<p>
+6 OTP/U2F/CCID composite device.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Add 80 to set MODE_FLAG_EJECT, for example: 81 is mode 1 (CCID-only)
+with MODE_FLAG_EJECT.  To select another mode, replace \x06 with what
+you wish.  For example, if you want to put the NEO into pure OTP-mode
+use the following:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>echo -e '\x01\x00\x00\x00' | u2f-host -d -a sendrecv -c c0</code></pre>
+</div></div>
 <div class="paragraph"><p>For mode-switching in other modes (OTP, CCID or combo modes), we
 recommend the following libraries and command line tools instead:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>For OTP-modes: YubiKey Personalization
-https://developers.yubico.com/yubikey-personalization/</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>For CCID-modes: YubiKey NEO CCID Manager C Library
-https://developers.yubico.com/libykneomgr/</code></pre>
-</div></div>
-<div class="paragraph"><p>If you prefer a GUI that supports all modes we recommend:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>YubiKey NEO Manager
-https://developers.yubico.com/yubikey-neo-manager/</code></pre>
-</div></div>
+<div class="paragraph"><p>For OTP-modes: YubiKey Personalization
+<a href="https://developers.yubico.com/yubikey-personalization/">https://developers.yubico.com/yubikey-personalization/</a></p></div>
+<div class="paragraph"><p>For CCID-modes: YubiKey NEO CCID Manager C Library
+<a href="https://developers.yubico.com/libykneomgr/">https://developers.yubico.com/libykneomgr/</a></p></div>
+<div class="paragraph"><p>If you prefer a GUI for all modes we recommend: YubiKey NEO Manager
+<a href="https://developers.yubico.com/yubikey-neo-manager/">https://developers.yubico.com/yubikey-neo-manager/</a></p></div>
 </div>
 </div>
 
