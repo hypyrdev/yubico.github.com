@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-6195355-4', 'yubico.com');
+  ga('send', 'pageview');
+
+</script>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="libu2f-host : Yubico Universal 2nd Factor (U2F) Host C Library" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>libu2f-host</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+        <span class="breadcrumb">
+          <a href="/">Software listing</a>
+          /
+          <a href="/libu2f-host/">libu2f-host</a>
+          /
+          <a>ModeSwitchYubiKeyNEO</a>
+          </span>
+          <a id="forkme_banner" href="https://github.com/Yubico/libu2f-host">View on GitHub</a>
+<a id="travis_link" href="https://travis-ci.org/Yubico/libu2f-host"><img id="travis_img" src="https://travis-ci.org/Yubico/libu2f-host.svg?branch=master"/></a>
+          <h1><a id="project_title" href="/libu2f-host/">libu2f-host</a></h1>
+          <h2 id="project_tagline">Yubico Universal 2nd Factor (U2F) Host C Library</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<div class="sect1">
+<h2 id="_yubikey_neo_mode_switch">YubiKey NEO Mode Switch</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The YubiKey NEO can be mode-switched from the U2F-only mode using
+libu2f-host by sending some non-standardized commands.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>echo -e '\x06\x00\x00\x00' | u2f-host -d -a sendrecv -c c0</code></pre>
+</div></div>
+<div class="paragraph"><p>For mode-switching in other modes (OTP, CCID or combo modes), we
+recommend the following libraries and command line tools instead:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>For OTP-modes: YubiKey Personalization
+https://developers.yubico.com/yubikey-personalization/</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>For CCID-modes: YubiKey NEO CCID Manager C Library
+https://developers.yubico.com/libykneomgr/</code></pre>
+</div></div>
+<div class="paragraph"><p>If you prefer a GUI that supports all modes we recommend:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>YubiKey NEO Manager
+https://developers.yubico.com/yubikey-neo-manager/</code></pre>
+</div></div>
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+<footer class="inner">
+<p class="copyright">libu2f-host maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+</footer>
+</div></body></html>
