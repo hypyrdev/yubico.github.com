@@ -236,6 +236,11 @@ Sub-CA used to sign the EE, so set it first:</p></div>
 <pre><code>host=munin
 user=Simon</code></pre>
 </div></div>
+<div class="paragraph"><p>We first need to load the PIN code from the previous section.</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>pin=`cat yubico-internal-https-$user-pin.txt`</code></pre>
+</div></div>
 <div class="paragraph"><p>Then generate a new private key and certificate request:</p></div>
 <div class="literalblock">
 <div class="content">
