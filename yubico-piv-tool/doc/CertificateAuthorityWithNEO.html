@@ -68,8 +68,10 @@ this CA.  This is not fully supported by all environments, but it
 should do no harm, and may be useful in some environments.</p></div>
 <div class="paragraph"><p>The root also has a path length constraint of 1 to prevent the Sub-CAs
 from issuing further Sub-Sub-CAs.</p></div>
-<div class="paragraph"><p>We&#8217;ll also set a short lifelength on the root CA to signal that expiry
-dates on root CAs are not relevant.</p></div>
+<div class="paragraph"><p>We also set a expiry date far away in the future on the root CA
+(expiring in 1000000 days) and use datefudge to set an arbitrary start
+date for the CA, to avoid leaking the time of CA creation which would
+leak some bits if information going into the randomness generation.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -114,9 +116,9 @@ prompt = no
 CN=Yubico Internal HTTPS CA
 [ v3_ca ]
 subjectKeyIdentifier=hash
-basicConstraints = CA:true, pathlen:1
-keyUsage=critical, keyCertSign, cRLSign
-nameConstraints=@nc
+basicConstraints=critical,CA:true,pathlen:1
+keyUsage=critical,keyCertSign,cRLSign
+nameConstraints=critical,@nc
 [ nc ]
 permitted;otherName=1.3.6.1.5.5.7.8.7;IA5:yubico.com
 permitted;email.0=yubico.com
@@ -127,7 +129,7 @@ permitted;URI.1=.yubico.com
 permitted;IP.0=0.0.0.0/255.255.255.255
 permitted;IP.1=::/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
 EOF
-openssl req -new -sha256 -x509 -set_serial 1 -days 1 -config yubico-internal-https-ca.conf -key yubico-internal-https-ca-key.pem -out yubico-internal-https-ca-crt.pem
+datefudge "2014-01-01 UTC" openssl req -new -sha256 -x509 -set_serial 1 -days 1000000 -config yubico-internal-https-ca.conf -key yubico-internal-https-ca-key.pem -out yubico-internal-https-ca-crt.pem
 echo 01 &gt; yubico-internal-https-ca-crt.srl</code></pre>
 </div></div>
 <div class="paragraph"><p>You may inspect the newly generated root CA with:</p></div>
@@ -203,7 +205,7 @@ openssl req -sha256 -new -config yubico-internal-https-subca-$user-csr.conf -key
 <div class="literalblock">
 <div class="content">
 <pre><code>cat&gt;yubico-internal-https-subca-$user-crt.conf&lt;&lt;EOF
-basicConstraints = CA:true, pathlen:0
+basicConstraints = critical, CA:true, pathlen:0
 keyUsage=critical, keyCertSign
 EOF
 openssl x509 -sha256 -CA yubico-internal-https-ca-crt.pem -CAkey yubico-internal-https-ca-key.pem -req -in yubico-internal-https-subca-$user-csr.pem -extfile yubico-internal-https-subca-$user-crt.conf -out yubico-internal-https-subca-$user-crt.pem
@@ -258,6 +260,8 @@ openssl req -sha256 -new -config yubico-internal-https-ee-$host-csr.conf -key yu
 <div class="literalblock">
 <div class="content">
 <pre><code>cat&gt;yubico-internal-https-ee-$host-crt.conf&lt;&lt;EOF
+keyUsage=critical,digitalSignature,keyEncipherment
+extendedKeyUsage=critical,serverAuth
 EOF
 openssl &lt;&lt; EOF
 engine dynamic -pre SO_PATH:/usr/lib/engines/engine_pkcs11.so -pre ID:pkcs11 -pre NO_VCHECK:1 -pre LIST_ADD:1 -pre LOAD -pre MODULE_PATH:/usr/lib/x86_64-linux-gnu/opensc-pkcs11.so -pre VERBOSE
