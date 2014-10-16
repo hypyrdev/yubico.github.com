@@ -43,11 +43,16 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-<div class="paragraph"><p>==Maintainer instructions for making releases==</p></div>
-<div class="paragraph"><p>===Introduction===</p></div>
+<div class="sect1">
+<h2 id="_maintainer_instructions_for_making_releases">Maintainer instructions for making releases</h2>
+<div class="sectionbody">
 <div class="paragraph"><p>The point of this document is to describe all steps required to make a
 proper release of the yubikey-personalization project.</p></div>
-<div class="paragraph"><p>===Dependencies===</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dependencies">Dependencies</h2>
+<div class="sectionbody">
 <div class="paragraph"><p>Making a release requires the following packages:</p></div>
 <div class="literalblock">
 <div class="content">
@@ -58,14 +63,12 @@ proper release of the yubikey-personalization project.</p></div>
 <div class="content">
 <pre><code>sudo apt-get install make git gnupg help2man git2cl</code></pre>
 </div></div>
-<div class="paragraph"><p>===Details===</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_details">Details</h2>
+<div class="sectionbody">
 <div class="ulist"><ul>
-<li>
-<p>
-Make sure the doc/ sub-directory uses the latest revision.  Confirm with:
-  cd doc &amp;&amp; git checkout master &amp;&amp; git pull &amp;&amp; git diff
-</p>
-</li>
 <li>
 <p>
 Make sure the version number in Makefile has been incremented.
@@ -73,12 +76,14 @@ Make sure the version number in Makefile has been incremented.
 </li>
 <li>
 <p>
-Make sure NEWS describes all changes since the last release.  Use <a href="https://github.com/Yubico/yubikey-ksm/commits/master">https://github.com/Yubico/yubikey-ksm/commits/master</a> to review.
+Make sure NEWS describes all changes since the last release.  Use
+  <em>git log -p</em> to review.
 </p>
 </li>
 <li>
 <p>
-Change the <em>(unreleased)</em> part in NEWS to <em>(released 20XX-YY-ZZ)</em> and commit that with a note <em>Version Q.P</em>.
+Change the <em>(unreleased)</em> part in NEWS to <em>(released 20XX-YY-ZZ)</em>
+  and commit that with a note <em>Version Q.P</em>.
 </p>
 </li>
 <li>
@@ -88,10 +93,13 @@ Run <em>make release</em>.
 </li>
 <li>
 <p>
-Increment version number in Makefile and add a NEWS template for the next release.
+Increment version number in Makefile and add a NEWS template for the
+  next release.
 </p>
 </li>
 </ul></div>
+</div>
+</div>
 
 </section>
 </div>

@@ -72,7 +72,7 @@ into a separate machine with a separate OpenPGP key.</p></div>
 <div class="paragraph"><p>To display the test keys above, you can decrypt them using GnuPG:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>&lt;nowiki&gt;user@ksm:~$ gpg &lt; keys.txt</code></pre>
+<pre><code>user@ksm:~$ gpg &lt; keys.txt</code></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
@@ -93,14 +93,14 @@ user: "YK-KSM crater Import Key"
 5,cccccccccccg,c55773192393,7387b5f6bede83f64a9cd75b2023826a,d70c937bbbff,2009-12-14T16:40:57,
 gpg: Signature made Mon 14 Dec 2009 04:40:57 PM CET using DSA key ID 8B88A11B
 gpg: Good signature from "YK-KSM crater Import Key"
-user@ksm:~$&lt;/nowiki&gt;</code></pre>
+user@ksm:~$</code></pre>
 </div></div>
 <div class="paragraph"><p>The format is documented in the KeyProvisioningFormat wiki page.</p></div>
 <div class="paragraph"><p>To generate many small files each containing just one key, you can use
 a small wrapper like this:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code>&lt;nowiki&gt;#!/bin/sh</code></pre>
+<pre><code>#!/bin/sh</code></pre>
 </div></div>
 <div class="literalblock">
 <div class="content">
@@ -130,7 +130,7 @@ fi</code></pre>
 while test $cur -le $stop; do
     ykksm-gen-keys $urandom $cur | gpg -a --sign --encrypt -r $key &gt; $cur.asc
     cur=`expr $cur + 1`
-done&lt;/nowiki&gt;</code></pre>
+done</code></pre>
 </div></div>
 </div>
 </div>

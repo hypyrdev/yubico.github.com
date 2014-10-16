@@ -58,19 +58,15 @@ and AES key.</p></div>
 freshness) and then is the truncated hash value.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> &lt;nowiki&gt;
- 1284488221
- 50f5649b80
-&lt;/nowiki&gt;</code></pre>
+<pre><code>1284488221
+50f5649b80</code></pre>
 </div></div>
 <div class="paragraph"><p>The script requires the Perl SHA-1 package.  Install it like this:</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> &lt;nowiki&gt;
- user@ksm:~$ sudo apt-get install libdigest-sha1-perl
- ...
- user@ksm:~$
-&lt;/nowiki&gt;</code></pre>
+<pre><code>user@ksm:~$ sudo apt-get install libdigest-sha1-perl
+...
+user@ksm:~$</code></pre>
 </div></div>
 <div class="paragraph"><p>The typical way to use this is either manually or to run it in a cron
 job and output the hash to a file that can be downloaded by a remote
@@ -80,14 +76,12 @@ verify that all values are 1) fresh (Unix time is not too old) and 2)
 that the truncated hash value is identical on all KSMs.</p></div>
 <div class="literalblock">
 <div class="content">
-<pre><code> &lt;nowiki&gt;
- user@ksm:~$ sudo sh -c 'cat &gt; /etc/cron.hourly/run-ykksm-checksum'
- #!/bin/sh
- FILE=/var/www/checksum.txt
- (date --utc +%s; ykksm-checksum --db-user ykksmreader --db-passwd `grep password /etc/yubico/ksm/ykksm-config.php|cut -d\  -f3|cut -d\" -f2`) &gt; $FILE.tmp
- mv $FILE.tmp $FILE
- user@ksm:~$ sudo chmod +x /etc/cron.hourly/run-ykksm-checksum
-&lt;/nowiki&gt;</code></pre>
+<pre><code>user@ksm:~$ sudo sh -c 'cat &gt; /etc/cron.hourly/run-ykksm-checksum'
+#!/bin/sh
+FILE=/var/www/checksum.txt
+(date --utc +%s; ykksm-checksum --db-user ykksmreader --db-passwd `grep passwo rd /etc/yubico/ksm/ykksm-config.php|cut -d\  -f3|cut -d\" -f2`) &gt; $FILE.tmp
+mv $FILE.tmp $FILE
+user@ksm:~$ sudo chmod +x /etc/cron.hourly/run-ykksm-checksum</code></pre>
 </div></div>
 <div class="paragraph"><p>If you notice mismatches, you may want to run ykksm-checksum with the
 <em>-v</em> parameter on the different hosts and then use <em>diff -ur</em> or
