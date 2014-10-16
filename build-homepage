@@ -59,7 +59,8 @@ my %categories = (
     'U2F projects' =>
     ["https://raw.githubusercontent.com/Yubico/python-u2flib-server/master/BLURB",
      "https://raw.githubusercontent.com/Yubico/python-u2flib-host/master/BLURB",
-     "https://raw.githubusercontent.com/Yubico/libu2f-host/master/BLURB"],
+     "https://raw.githubusercontent.com/Yubico/libu2f-host/master/BLURB",
+     "https://raw.githubusercontent.com/Yubico/php-u2flib-server/master/BLURB"],
     );
 
 sub get ($_) {
