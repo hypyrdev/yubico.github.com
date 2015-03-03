@@ -1,9 +1,1 @@
-Used to statically generate http://opensource.yubico.com from the Github README's.
-
-== Dependencies
-
-[source,bash]
-sudo apt-get install libsort-versions-perl libmime-base64-urlsafe-perl libjson-perl asciidoc libwww-perl source-highlight
-
-== Building
-Run `./build-projectpage <ProjectName>`
+Release artifacts for all projects. The releases are presented on https://developers.yubico.com
