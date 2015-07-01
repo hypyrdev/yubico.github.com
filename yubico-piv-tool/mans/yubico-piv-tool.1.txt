@@ -1,0 +1,121 @@
+= YUBICO-PIV-TOOL(1)
+:doctype:	manpage
+:man source:	yubico-piv-tool
+
+== NAME
+yubico-piv-tool - Yubico PIV Tool
+
+== SYNOPSIS
+*yubico-piv-tool* [OPTIONS]...
+
+== OPTIONS
+*-h, --help*::
+Print help and exit
+
+*--full-help*::
+Print help, including hidden options, and exit
+
+*-V, --version*::
+Print version and exit
+
+*-v, --verbose[=INT]*::
+Print more information  (default=`0')
+
+*-r, --reader=STRING*::
+Only use a matching reader  (default=`Yubikey')
+
+*-k, --key=STRING*::
+Authentication key to use
+(default=`010203040506070801020304050607080102030405060708')
+
+*-a, --action=ENUM*::
+Action to take  (possible values="version",
+"generate", "set", "reset",
+"pin", "import",
+"import", "set",
+"request", "verify",
+"change", "change", "unblock",
+"selfsign", "delete",
+"read", "status",
+"test", "test")
+
+Multiple actions may be given at once and will be executed in order
+for example  
+
+
+*-s, --slot=ENUM*::
+What key slot to operate on  (possible
+values="9a", "9c", "9d", "9e", "82",
+"83", "84", "85", "86", "87", "88",
+"89", "8a", "8b", "8c", "8d", "8e",
+"8f", "90", "91", "92", "93", "94",
+"95")
+
+9a is for PIV Authentication
+9c is for Digital Signature (PIN always checked)
+9d is for Key Management
+9e is for Card Authentication (PIN never checked)
+82 is for Retired Key Management
+
+
+*-A, --algorithm=ENUM*::
+What algorithm to use  (possible values="RSA1024",
+"RSA2048", "ECCP256", "ECCP384"
+default=`RSA2048')
+
+*-H, --hash=ENUM*::
+Hash to use for signatures  (possible
+values="SHA1", "SHA256", "SHA384",
+"SHA512" default=`SHA256')
+
+*-n, --new-key=STRING*::
+New authentication key to use
+
+*--pin-retries=INT*::
+Number of retries before the pin code is blocked
+
+*--puk-retries=INT*::
+Number of retries before the puk code is blocked
+
+*-i, --input=STRING*::
+Filename to use as input, - for stdin  (default=`-')
+
+*-o, --output=STRING*::
+Filename to use as output, - for stdout
+(default=`-')
+
+*-K, --key-format=ENUM*::
+Format of the key being read/written  (possible
+values="PEM", "PKCS12", "GZIP", "DER"
+default=`PEM')
+
+*-p, --password=STRING*::
+Password for decryption of private key file
+
+*-S, --subject=STRING*::
+The subject to use for certificate request
+
+The subject must be written as:
+/CN=host.example.com/OU=test/O=example.com/
+
+
+*-P, --pin=STRING*::
+Pin/puk code for verification
+
+*-N, --new-pin=STRING*::
+New pin/puk code for changing
+
+*--pin-policy=ENUM*::
+Set pin policy for action generate or import
+(possible values="never", "once", "always")
+
+*--touch-policy=ENUM*::
+Set touch policy for action generate, import or
+set  (possible values="never",
+"always")
+
+*--padding=ENUM*::
+Set what padding scheme to use for RSA operations
+(possible values="PKCS1v15", "OAEP", "PSS"
+default=`PKCS1v15')
+
