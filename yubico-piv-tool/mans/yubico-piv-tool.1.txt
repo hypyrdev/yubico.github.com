@@ -40,7 +40,7 @@ Action to take  (possible values="version",
 "test-signature", "test-decipher")
 
 Multiple actions may be given at once and will be executed in order
-for example
+for example --action=verify-pin --action=request-certificate
 
 
 *-s, --slot=ENUM*::
