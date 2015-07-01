@@ -30,17 +30,17 @@ Authentication key to use
 
 *-a, --action=ENUM*::
 Action to take  (possible values="version",
-"generate", "set", "reset",
-"pin", "import",
-"import", "set",
-"request", "verify",
-"change", "change", "unblock",
-"selfsign", "delete",
-"read", "status",
-"test", "test")
+"generate", "set-mgm-key", "reset",
+"pin-retries", "import-key",
+"import-certificate", "set-chuid",
+"request-certificate", "verify-pin",
+"change-pin", "change-puk", "unblock-pin",
+"selfsign-certificate", "delete-certificate",
+"read-certificate", "status",
+"test-signature", "test-decipher")
 
 Multiple actions may be given at once and will be executed in order
-for example  
+for example
 
 
 *-s, --slot=ENUM*::
