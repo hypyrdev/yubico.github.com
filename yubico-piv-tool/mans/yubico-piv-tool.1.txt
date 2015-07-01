@@ -38,20 +38,20 @@ Action to take  (possible values="version",
 "selfsign-certificate", "delete-certificate",
 "read-certificate", "status",
 "test-signature", "test-decipher")
-
++
 Multiple actions may be given at once and will be executed in order
 for example --action=verify-pin --action=request-certificate
-
++
 
 *-s, --slot=ENUM*::
 What key slot to operate on  (possible values="9a",
 "9c", "9d", "9e")
-
++
 9a is for PIV Authentication
 9c is for Digital Signature (PIN always checked)
 9d is for Key Management
 9e is for Card Authentication (PIN never checked)
-
++
 
 *-A, --algorithm=ENUM*::
 What algorithm to use  (possible values="RSA1024",
@@ -86,10 +86,10 @@ Password for decryption of private key file
 
 *-S, --subject=STRING*::
 The subject to use for certificate request
-
++
 The subject must be written as:
 /CN=host.example.com/OU=test/O=example.com/
-
++
 
 *-P, --pin=STRING*::
 Pin/puk code for verification
