@@ -1,7 +1,7 @@
 = U2F-HOST(1)
 :doctype:	manpage
 :man source:	u2f-host
-:man version:	0.0.5
+:man version:	1.0.0
 
 == NAME
 u2f-host - Yubico Universal 2nd Factor (U2F) Host Tool
