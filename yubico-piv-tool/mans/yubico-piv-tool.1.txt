@@ -1,7 +1,7 @@
 = YUBICO-PIV-TOOL(1)
 :doctype:	manpage
 :man source:	yubico-piv-tool
-:man version:	1.0.2
+:man version:	1.0.3
 
 == NAME
 yubico-piv-tool - Yubico PIV Tool
