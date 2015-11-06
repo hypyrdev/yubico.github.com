@@ -1,7 +1,7 @@
 = YUBICO-PIV-TOOL(1)
 :doctype:	manpage
 :man source:	yubico-piv-tool
-:man version:	1.0.3
+:man version:	1.1.0
 
 == NAME
 yubico-piv-tool - Yubico PIV Tool
@@ -25,7 +25,7 @@ Print more information  (default=`0')
 *-r, --reader=STRING*::
 Only use a matching reader  (default=`Yubikey')
 
-*-k, --key=STRING*::
+*-k, --key[=STRING]*::
 Authentication key to use
 (default=`010203040506070801020304050607080102030405060708')
 
@@ -38,27 +38,35 @@ Action to take  (possible values="version",
 "change-pin", "change-puk", "unblock-pin",
 "selfsign-certificate", "delete-certificate",
 "read-certificate", "status",
-"test-signature", "test-decipher")
+"test-signature", "test-decipher",
+"list-readers")
 
 Multiple actions may be given at once and will be executed in order
 for example --action=verify-pin --action=request-certificate
 
 *-s, --slot=ENUM*::
-What key slot to operate on  (possible values="9a",
-"9c", "9d", "9e")
+What key slot to operate on  (possible
+values="9a", "9c", "9d", "9e", "82",
+"83", "84", "85", "86", "87", "88",
+"89", "8a", "8b", "8c", "8d", "8e",
+"8f", "90", "91", "92", "93", "94",
+"95")
 
 9a is for PIV Authentication
 9c is for Digital Signature (PIN always checked)
 9d is for Key Management
 9e is for Card Authentication (PIN never checked)
+82-95 is for Retired Key Management
 
 *-A, --algorithm=ENUM*::
 What algorithm to use  (possible values="RSA1024",
-"RSA2048", "ECCP256" default=`RSA2048')
+"RSA2048", "ECCP256", "ECCP384"
+default=`RSA2048')
 
 *-H, --hash=ENUM*::
-Hash to use for signatures  (possible values="SHA1",
-"SHA256", "SHA512" default=`SHA256')
+Hash to use for signatures  (possible
+values="SHA1", "SHA256", "SHA384",
+"SHA512" default=`SHA256')
 
 *-n, --new-key=STRING*::
 New authentication key to use
@@ -73,7 +81,8 @@ Number of retries before the puk code is blocked
 Filename to use as input, - for stdin  (default=`-')
 
 *-o, --output=STRING*::
-Filename to use as output, - for stdout  (default=`-')
+Filename to use as output, - for stdout
+(default=`-')
 
 *-K, --key-format=ENUM*::
 Format of the key being read/written  (possible
@@ -94,6 +103,15 @@ Pin/puk code for verification
 
 *-N, --new-pin=STRING*::
 New pin/puk code for changing
+
+*--pin-policy=ENUM*::
+Set pin policy for action generate or import-key
+(possible values="never", "once", "always")
+
+*--touch-policy=ENUM*::
+Set touch policy for action generate, import-key or
+set-mgm-key  (possible values="never",
+"always")
 
 // Copyright (c) 2014, 2015 Yubico AB
 // All rights reserved.
@@ -127,7 +145,7 @@ New pin/puk code for changing
 For more information about what's happening --verbose can be added
 to any command. For much more information --verbose=2 may be used.
 
-Display what version of the applet is running on the YubiKey Neo:
+Display what version of the application is running on the YubiKey:
 
    yubico-piv-tool -a version
 
