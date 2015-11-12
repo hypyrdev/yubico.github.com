@@ -34,15 +34,20 @@ verify the peer with
 *--apikey*::
 Key   API key for HMAC validation of request/response
 
+*--proxy*::
+ip:port  Connect to validation service through a proxy,
+e.g., "socks5h://user:pass@127.0.0.1:1080"
 
 == OTHER
 Validate the YUBIKEYOTP one-time-password against the YubiCloud
 using CLIENTID as the client identifier.
  +
+
 Mandatory arguments to long options are mandatory for short options too.
 Exit status is 0 on success, 1 if there is a hard failure, 2 if the
 OTP was replayed, 3 for other soft OTP-related failures.
  +
+
 
 == REPORTING BUGS
 Report bugs at <https://github.com/Yubico/yubico-c-client>.
