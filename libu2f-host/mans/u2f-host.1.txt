@@ -1,7 +1,7 @@
 = U2F-HOST(1)
 :doctype:	manpage
 :man source:	u2f-host
-:man version:	1.0.0
+:man version:	1.1.0
 
 == NAME
 u2f-host - Yubico Universal 2nd Factor (U2F) Host Tool
@@ -24,7 +24,7 @@ Action to take.  (possible values="register",
 "authenticate", "sendrecv")
 
 *-t, --touch*::
-Invert user-precense flag (on by default)
+Invert user-presence flag (on by default)
 (default=off)
 
 *-d, --debug*::
