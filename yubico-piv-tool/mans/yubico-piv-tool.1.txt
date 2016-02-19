@@ -1,7 +1,7 @@
 = YUBICO-PIV-TOOL(1)
 :doctype:	manpage
 :man source:	yubico-piv-tool
-:man version:	1.1.3
+:man version:	1.3.0
 
 == NAME
 yubico-piv-tool - Yubico PIV Tool
@@ -39,7 +39,8 @@ Action to take  (possible values="version",
 "selfsign-certificate", "delete-certificate",
 "read-certificate", "status",
 "test-signature", "test-decipher",
-"list-readers", "set-ccc")
+"list-readers", "set-ccc", "write-object",
+"read-object")
 
 Multiple actions may be given at once and will be executed in order
 for example --action=verify-pin --action=request-certificate
@@ -98,6 +99,14 @@ The subject to use for certificate request
 The subject must be written as:
 /CN=host.example.com/OU=test/O=example.com/
 
+*--serial=INT*::
+Serial number of the self-signed certificate
+(default=`1')
+
+*--valid-days=INT*::
+Time (in days) until the self-signed certificate
+expires  (default=`365')
+
 *-P, --pin=STRING*::
 Pin/puk code for verification
 
@@ -112,6 +121,14 @@ Set pin policy for action generate or import-key
 Set touch policy for action generate, import-key or
 set-mgm-key  (possible values="never",
 "always")
+
+*--id=INT*::
+Id of object for write/read object
+
+*-f, --format=ENUM*::
+Format of data for write/read object  (possible
+values="hex", "base64", "binary"
+default=`hex')
 
 // Copyright (c) 2014, 2015 Yubico AB
 // All rights reserved.
