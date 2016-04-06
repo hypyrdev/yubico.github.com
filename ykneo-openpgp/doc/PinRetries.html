@@ -1,93 +1,10 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-  <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-6195355-4', 'yubico.com');
-  ga('send', 'pageview');
-
-</script>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="ykneo-openpgp : OpenPGP app for the YubiKey NEO" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
-
-    <title>ykneo-openpgp</title>
+  <meta http-equiv="refresh" content="0; url=https://developers.yubico.com/ykneo-openpgp/doc/PinRetries.html">
   </head>
 
   <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-        <span class="breadcrumb">
-          <a href="/">Software listing</a>
-          /
-          <a href="/ykneo-openpgp/">ykneo-openpgp</a>
-          /
-          <a>PinRetries</a>
-          </span>
-          <a id="forkme_banner" href="https://github.com/Yubico/ykneo-openpgp">View on GitHub</a>
-<a id="travis_link" href="https://travis-ci.org/Yubico/ykneo-openpgp"><img id="travis_img" src="https://travis-ci.org/Yubico/ykneo-openpgp.svg?branch=master"/></a>
-          <h1><a id="project_title" href="/ykneo-openpgp/">ykneo-openpgp</a></h1>
-          <h2 id="project_tagline">OpenPGP app for the YubiKey NEO</h2>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-<div class="sect1">
-<h2 id="_introduction">Introduction</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>This is an instruction for changing the number of retries possible for a PIN code
-with the ykneo-openpgp applet.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_prerequisites">Prerequisites</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>For this procedure, you must have ykneo-openpgp applet version 1.0.7 or later
-installed.  To check the applet version run the following.</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code> $ gpg-connect-agent --hex "scd apdu 00 f1 00 00" /bye
- D[0000]  01 00 07 90 00                                     .....
- OK</code></pre>
-</div></div>
-<div class="paragraph"><p>The string "01 00 07" means version 1.0.7.</p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_setting_the_pin_retries">Setting the PIN retries</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>When the retry counter is changed the all PIN codes will be reset to default
-(123456 for user PIN and 12345678 for admin PIN).</p></div>
-<div class="paragraph"><p>For the command to be available the admin PIN must first be validated.</p></div>
-<div class="paragraph"><p>The command consists of the instruction (f2) and three values as data, those are in
-order: retries for user PIN, retries for reset code and retries for admin PIN.</p></div>
-<div class="paragraph"><p>In this example the admin PIN is first validated, then all three values are set to
-5 retries:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code> $ gpg-connect-agent --hex "scd apdu 00 20 00 83 08 31 32 33 34 35 36 37 38" \
-   "scd apdu scd apdu 00 f2 00 00 03 05 05 05"</code></pre>
-</div></div>
-</div>
-</div>
-
-</section>
-</div>
-
-<!-- FOOTER  -->
-<div id="footer_wrap" class="outer">
-<footer class="inner">
-<p class="copyright">ykneo-openpgp maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-</footer>
-</div></body></html>
+  <p>This page has moved to <a href="https://developers.yubico.com/ykneo-openpgp/doc/PinRetries.html">https://developers.yubico.com/ykneo-openpgp/doc/PinRetries.html</a>.</p>
+</body>
+</html>

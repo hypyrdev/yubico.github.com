@@ -1,101 +1,10 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-  <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-6195355-4', 'yubico.com');
-  ga('send', 'pageview');
-
-</script>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="yubikey-ksm : YubiKey Key Storage Module" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
-
-    <title>yubikey-ksm</title>
+  <meta http-equiv="refresh" content="0; url=https://developers.yubico.com/yubikey-ksm/doc/SyncMonitor.html">
   </head>
 
   <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-        <span class="breadcrumb">
-          <a href="/">Software listing</a>
-          /
-          <a href="/yubikey-ksm/">yubikey-ksm</a>
-          /
-          <a>SyncMonitor</a>
-          </span>
-          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-ksm">View on GitHub</a>
-<a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-ksm"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-ksm.svg?branch=master"/></a>
-          <h1><a id="project_title" href="/yubikey-ksm/">yubikey-ksm</a></h1>
-          <h2 id="project_tagline">YubiKey Key Storage Module</h2>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-<div class="sect1">
-<h2 id="_yk_ksm_synchronization_monitor">YK-KSM Synchronization Monitor</h2>
-<div class="sectionbody">
-<div class="paragraph"><p>If you deploy multiple redundant YK-KSM instances, it is important to
-monitor them to make sure the data they have is synchronized.  While
-there are many mechanisms to achieve this, we provide a simple yet
-flexible approach.  The <em>ykksm-checksum</em> script reads out the
-important fields from the database and computes a SHA-1 hash of it,
-and truncates the hash to 10 hex characters and prints them to stdout.</p></div>
-<div class="paragraph"><p>The "important fields" are serial number, public name, internal name
-and AES key.</p></div>
-<div class="paragraph"><p>Sample output looks like this, first there is a Unix time (for
-freshness) and then is the truncated hash value.</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>1284488221
-50f5649b80</code></pre>
-</div></div>
-<div class="paragraph"><p>The script requires the Perl SHA-1 package.  Install it like this:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>user@ksm:~$ sudo apt-get install libdigest-sha1-perl
-...
-user@ksm:~$</code></pre>
-</div></div>
-<div class="paragraph"><p>The typical way to use this is either manually or to run it in a cron
-job and output the hash to a file that can be downloaded by a remote
-monitor system such as Nagios.  The intention is that you run a check
-that downloads this file from all of your KSMs, and the Nagios check
-verify that all values are 1) fresh (Unix time is not too old) and 2)
-that the truncated hash value is identical on all KSMs.</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>user@ksm:~$ sudo sh -c 'cat &gt; /etc/cron.hourly/run-ykksm-checksum'
-#!/bin/sh
-FILE=/var/www/checksum.txt
-(date --utc +%s; ykksm-checksum --db-user ykksmreader --db-passwd `grep passwo rd /etc/yubico/ksm/ykksm-config.php|cut -d\  -f3|cut -d\" -f2`) &gt; $FILE.tmp
-mv $FILE.tmp $FILE
-user@ksm:~$ sudo chmod +x /etc/cron.hourly/run-ykksm-checksum</code></pre>
-</div></div>
-<div class="paragraph"><p>If you notice mismatches, you may want to run ykksm-checksum with the
-<em>-v</em> parameter on the different hosts and then use <em>diff -ur</em> or
-similar tool to compare the outputs.  This should make it possible to
-identify the missmatching entries easily.</p></div>
-</div>
-</div>
-
-</section>
-</div>
-
-<!-- FOOTER  -->
-<div id="footer_wrap" class="outer">
-<footer class="inner">
-<p class="copyright">yubikey-ksm maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-</footer>
-</div></body></html>
+  <p>This page has moved to <a href="https://developers.yubico.com/yubikey-ksm/doc/SyncMonitor.html">https://developers.yubico.com/yubikey-ksm/doc/SyncMonitor.html</a>.</p>
+</body>
+</html>

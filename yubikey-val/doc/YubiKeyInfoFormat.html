@@ -1,97 +1,10 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-  <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-6195355-4', 'yubico.com');
-  ga('send', 'pageview');
-
-</script>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="yubikey-val : YubiKey OTP Validation Server" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
-
-    <title>yubikey-val</title>
+  <meta http-equiv="refresh" content="0; url=https://developers.yubico.com/yubikey-val/doc/YubiKeyInfoFormat.html">
   </head>
 
   <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-        <span class="breadcrumb">
-          <a href="/">Software listing</a>
-          /
-          <a href="/yubikey-val/">yubikey-val</a>
-          /
-          <a>YubiKeyInfoFormat</a>
-          </span>
-          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-val">View on GitHub</a>
-<a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-val"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-val.svg?branch=master"/></a>
-          <h1><a id="project_title" href="/yubikey-val/">yubikey-val</a></h1>
-          <h2 id="project_tagline">YubiKey OTP Validation Server</h2>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph"><p>This file holds data used in the YubiKey OTP validation phase.</p></div>
-<div class="paragraph"><p>Each of the lines in the file follows the following format:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>active,created,modified,yk_publicname,yk_counter,yk_use,yk_low,yk_high,nonce,notes</code></pre>
-</div></div>
-<div class="paragraph"><p>Any empty line, or a line beginning with a # is ignored.</p></div>
-<div class="paragraph"><p>The meaning are as follows:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code> active
-  the YubiKey state, 1 if active, 0 if not
- created
-  unix timestamp of when the YubiKey entry was created, decimal integer
- modified
-  unix timestamp of when the YubiKey entry was last modified, decimal integer
- yk_publicname
-  the public id of the YubiKey, modhex string
- yk_counter
-  the YubiKey session counter, decimal integer
- yk_use
-  the YubiKey use counter, decimal integer
- yk_low
-  the low part of the YubiKey timestamp counter, decimal integer
- yk_high
-  the high part of the YubiKey timestamp counter, decimal integer
- nonce
-  the nonce used for the last validation request, ascii printable string
- notes
-  not used, printable ascii string</code></pre>
-</div></div>
-<div class="paragraph"><p>An example of a valid data line:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>1,1359470658,1359470658,cccccccccccb,2,1,32729,4,aoincuhfuahs</code></pre>
-</div></div>
-<div class="paragraph"><p>For an example of importing and exporting YubiKey Info data, please see
-<a href="ImportExportData.html">ImportExportData</a></p></div>
-</div>
-</div>
-
-</section>
-</div>
-
-<!-- FOOTER  -->
-<div id="footer_wrap" class="outer">
-<footer class="inner">
-<p class="copyright">yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-</footer>
-</div></body></html>
+  <p>This page has moved to <a href="https://developers.yubico.com/yubikey-val/doc/YubiKeyInfoFormat.html">https://developers.yubico.com/yubikey-val/doc/YubiKeyInfoFormat.html</a>.</p>
+</body>
+</html>

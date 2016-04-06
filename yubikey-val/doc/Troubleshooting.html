@@ -1,76 +1,10 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-  <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-6195355-4', 'yubico.com');
-  ga('send', 'pageview');
-
-</script>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="yubikey-val : YubiKey OTP Validation Server" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
-
-    <title>yubikey-val</title>
+  <meta http-equiv="refresh" content="0; url=https://developers.yubico.com/yubikey-val/doc/Troubleshooting.html">
   </head>
 
   <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-        <span class="breadcrumb">
-          <a href="/">Software listing</a>
-          /
-          <a href="/yubikey-val/">yubikey-val</a>
-          /
-          <a>Troubleshooting</a>
-          </span>
-          <a id="forkme_banner" href="https://github.com/Yubico/yubikey-val">View on GitHub</a>
-<a id="travis_link" href="https://travis-ci.org/Yubico/yubikey-val"><img id="travis_img" src="https://travis-ci.org/Yubico/yubikey-val.svg?branch=master"/></a>
-          <h1><a id="project_title" href="/yubikey-val/">yubikey-val</a></h1>
-          <h2 id="project_tagline">YubiKey OTP Validation Server</h2>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph"><p>First check if the web server is working.</p></div>
-<div class="paragraph"><p>Check that PHP is working.  Create a foo.php script containing <em>&lt;?php
-phpinfo(); ?&gt;</em> to debug PHP configuration.</p></div>
-<div class="paragraph"><p>Next make sure you serve the YK-VAL code under the URL you want, and
-that accesssing the URL reaches the YK-VAL code.  PHP error log in the
-file set by php.ini error_log, by default /var/log/apache2/error.log.
-Database errors will also be logged into it.</p></div>
-<div class="paragraph"><p>The database needs to be started.  Make sure you can access it and the
-tables.</p></div>
-<div class="paragraph"><p>If <em>ykval-export</em> crashes, you may be running into a compatibility
-problem between PHP, curl and libpq.  See
-<a href="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=411982">http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=411982</a> for more
-information.  The workaround is simple:</p></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>user@val:~$ sudo mv /etc/php5/conf.d/curl.ini /etc/php5/conf.d/z_curl.ini</code></pre>
-</div></div>
-</div>
-</div>
-
-</section>
-</div>
-
-<!-- FOOTER  -->
-<div id="footer_wrap" class="outer">
-<footer class="inner">
-<p class="copyright">yubikey-val maintained by <a href="https://github.com/Yubico">Yubico</a></p>
-</footer>
-</div></body></html>
+  <p>This page has moved to <a href="https://developers.yubico.com/yubikey-val/doc/Troubleshooting.html">https://developers.yubico.com/yubikey-val/doc/Troubleshooting.html</a>.</p>
+</body>
+</html>
