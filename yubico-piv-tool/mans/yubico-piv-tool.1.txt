@@ -1,7 +1,7 @@
 = YUBICO-PIV-TOOL(1)
 :doctype:	manpage
 :man source:	yubico-piv-tool
-:man version:	1.3.0
+:man version:	1.3.1
 
 == NAME
 yubico-piv-tool - Yubico PIV Tool
@@ -26,7 +26,7 @@ Print more information  (default=`0')
 Only use a matching reader  (default=`Yubikey')
 
 *-k, --key[=STRING]*::
-Authentication key to use
+Management key to use
 (default=`010203040506070801020304050607080102030405060708')
 
 *-a, --action=ENUM*::
@@ -70,7 +70,7 @@ values="SHA1", "SHA256", "SHA384",
 "SHA512" default=`SHA256')
 
 *-n, --new-key=STRING*::
-New authentication key to use
+New management key to use for action set-mgm-key
 
 *--pin-retries=INT*::
 Number of retries before the pin code is blocked
